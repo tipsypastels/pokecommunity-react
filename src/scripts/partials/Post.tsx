@@ -14,6 +14,7 @@ class Post extends Component<PostInterface> {
           username={this.props.username}
         />
         <PostContent 
+          content={this.props.content}
           dateline={this.props.dateline}
           postid={this.props.postid}
         />

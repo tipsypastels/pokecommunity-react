@@ -3,11 +3,12 @@ import React from 'react';
 interface IProps {
   postid: number;
   dateline: number;
+  content: string;
 }
 
-const PostContent = ({ postid , dateline }: IProps) => (
+const PostContent = ({ postid , content, dateline }: IProps) => (
   <div className="PostContent">
-    I am a the content.
+    {content}
     this is post {postid}
     was posted on {(new Date(dateline)).toDateString()}
   </div>

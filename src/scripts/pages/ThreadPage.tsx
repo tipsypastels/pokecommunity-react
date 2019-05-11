@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { RouteComponentProps } from 'react-router-dom';
 
+import Page from './Page';
 import Post from '../partials/Post';
 import ThreadHeader from '../partials/Thread/ThreadHeader';
 
@@ -44,10 +45,10 @@ export default class ThreadPage extends Component<IProps, IState> {
 
   render() {
     return (
-      <div className="ThreadPage">
+      <Page name="Thread">
         {this.getHeader()}
         {this.getPosts()}
-      </div>
+      </Page>
     )
   }
 
