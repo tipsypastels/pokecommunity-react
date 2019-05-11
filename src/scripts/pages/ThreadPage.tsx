@@ -21,7 +21,16 @@ export default class ThreadPage extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      thread: {
+      thread: undefined,
+      
+    }
+  }
+
+  // this is just for testing the loading message
+  // obviously make this an api request later
+  componentWillMount() {
+    setTimeout(() => {
+      const thread = {
         threadid: 1,
         postuserid: 1,
         forumid: 1,
@@ -39,13 +48,14 @@ export default class ThreadPage extends Component<IProps, IState> {
             dateline: (new Date()).getTime(),
           }
         ]
-      },
-    }
+      };
+      this.setState({ thread });
+    }, 1000);
   }
 
   render() {
     return (
-      <Page name="Thread" banner={this.getBanner()}>
+      <Page name="Thread" loading={!this.state.thread} banner={this.getBanner()}>
         {this.getHeader()}
         {this.getPosts()}
       </Page>
