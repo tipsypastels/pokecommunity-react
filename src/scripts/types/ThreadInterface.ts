@@ -11,5 +11,7 @@ export default interface ThreadInterface {
   open: boolean;
   views: number;
 
+  banner?: string;
+
   posts: PostInterface[];
 }

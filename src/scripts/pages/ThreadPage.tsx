@@ -14,7 +14,7 @@ interface IParams {
 type IProps = RouteComponentProps<IParams>;
 
 interface IState {
-  thread: undefined | ThreadInterface;
+  thread?: ThreadInterface;
 }
 
 export default class ThreadPage extends Component<IProps, IState> {
@@ -45,11 +45,19 @@ export default class ThreadPage extends Component<IProps, IState> {
 
   render() {
     return (
-      <Page name="Thread">
+      <Page name="Thread" banner={this.getBanner()}>
         {this.getHeader()}
         {this.getPosts()}
       </Page>
     )
+  }
+
+  getBanner() {
+    if (!this.state.thread) {
+      return null;
+    }
+
+    return this.state.thread.banner;
   }
 
   getHeader() {
