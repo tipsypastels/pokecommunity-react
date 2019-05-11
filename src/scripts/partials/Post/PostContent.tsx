@@ -8,9 +8,17 @@ interface IProps {
 
 const PostContent = ({ postid , content, dateline }: IProps) => (
   <div className="PostContent">
-    {content}
-    this is post {postid}
-    was posted on {(new Date(dateline)).toDateString()}
+    <div className="post-date align-right text-small">
+      {(new Date(dateline)).toDateString()}
+    </div>
+    <main className="post-main flex">
+      <div className="post-content grows">
+        {content}
+      </div>
+      <div className="post-id">
+        <input type="checkbox" name="todo"/> #{postid}
+      </div>
+    </main>
   </div>
 );
 

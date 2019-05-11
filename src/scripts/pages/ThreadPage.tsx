@@ -22,8 +22,7 @@ export default class ThreadPage extends Component<IProps, IState> {
     super(props);
     this.state = {
       thread: undefined,
-      
-    }
+    };
   }
 
   // this is just for testing the loading message
@@ -82,7 +81,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         title={this.state.thread.title}
         views={this.state.thread.views}
       />
-    )
+    );
   }
 
   getPosts() {

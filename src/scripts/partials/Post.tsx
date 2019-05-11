@@ -6,10 +6,12 @@ import PostFooter from './Post/PostFooter';
 
 import PostInterface from '../types/PostInterface';
 
+import '../../styles/modules/Post.scss';
+
 class Post extends Component<PostInterface> {
   render() {
     return (
-      <div>
+      <div className="Post">
         <PostHeader
           username={this.props.username}
         />

@@ -1,0 +1,19 @@
+.flex {
+  display: flex;
+}
+
+.grows {
+  flex-grow: 1;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.text-small {
+  font-size: 0.8rem;
+}
