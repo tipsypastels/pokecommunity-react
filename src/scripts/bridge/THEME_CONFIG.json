@@ -1,0 +1,19 @@
+{
+  "themes": {
+    "the-vast-quack": {
+      "name": "The Vast Quack"
+    },
+    "sky-high": {
+      "name": "Sky High"
+    }
+  },
+
+  "defaultTheme": "the-vast-quack",
+
+  "themeLocalstorageKey": "POKECOMMUNITY_THEME",
+  "themeBridgeCookie": "bbstyleid",
+
+  "vbThemeBridge": {
+    "312": "sky-high"
+  }
+}

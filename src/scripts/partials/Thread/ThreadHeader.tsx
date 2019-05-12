@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Dropdown } from 'react-bootstrap';
+import { When } from 'react-if';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWrench } from '@fortawesome/pro-solid-svg-icons';
@@ -9,10 +10,12 @@ import Block from '../Block';
 import '../../../styles/modules/ThreadHeader.scss';
 
 interface IProps {
-  threadid: number,
-  title: string,
-  views: number,
-  repliesCount: number,
+  threadid: number;
+  title: string;
+  views: number;
+  repliesCount: number;
+  canReply: boolean;
+  openEditor: () => void;
 }
 
 export default class ThreadHeader extends Component<IProps> {
@@ -21,7 +24,10 @@ export default class ThreadHeader extends Component<IProps> {
     return (
       <Block className="ThreadHeader">
         <Block.Header>
-          <h2 className="flex-grows">{title} #{threadid}</h2>
+          <h2 className="flex-grows">
+            {title}
+          </h2>
+
           <div className="thread-stats flex">
             <small className="text-small">
               <h4>{views}</h4> Views
@@ -33,9 +39,11 @@ export default class ThreadHeader extends Component<IProps> {
         </Block.Header>
 
         <Block.Content className="flex v-center">
-          <Button color="primary">
-            Reply to Thread
-          </Button>
+          <When condition={this.props.canReply}>
+            <Button color="primary" onClick={this.props.openEditor}>
+              Reply to Thread
+            </Button>
+          </When>
 
           <div className="flex-grows" />
 
@@ -43,7 +51,9 @@ export default class ThreadHeader extends Component<IProps> {
             <Dropdown.Toggle variant="link" id="thread-tools">
               <FontAwesomeIcon icon={faWrench} />
 
-              Tools
+              <span>
+                Tools
+              </span>
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
