@@ -4,6 +4,8 @@ import { RouteComponentProps } from 'react-router-dom';
 import Page from './Page';
 import Post from '../partials/Post';
 import ThreadHeader from '../partials/Thread/ThreadHeader';
+import Viewing from '../partials/Viewing';
+import QuickReply from '../partials/Thread/QuickReply';
 
 import ThreadInterface from '../types/ThreadInterface';
 
@@ -57,6 +59,8 @@ export default class ThreadPage extends Component<IProps, IState> {
       <Page name="Thread" loading={!this.state.thread} banner={this.getBanner()}>
         {this.getHeader()}
         {this.getPosts()}
+        {this.getViewing()}
+        <QuickReply />
       </Page>
     )
   }
@@ -75,13 +79,26 @@ export default class ThreadPage extends Component<IProps, IState> {
     }
 
     return (
-      <ThreadHeader 
+      <ThreadHeader
         threadid={this.state.thread.threadid}
-        forumid={this.state.thread.forumid}
         title={this.state.thread.title}
         views={this.state.thread.views}
       />
     );
+  }
+
+  getViewing() {
+    if (!this.state.thread) {
+      return null;
+    }
+
+    return (
+      <Viewing
+        users={[{ username: 'Nina' }, { username: 'Rainbow' }]}
+        guests={[{}, {}, {}]}
+        viewing={'thread'}
+      />
+    )
   }
 
   getPosts() {

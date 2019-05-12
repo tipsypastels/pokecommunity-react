@@ -1,5 +1,5 @@
 @mixin box-shadow($shadow-color: rgb(117,110,117), $opacity: 0.5) {
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(117,110,117,0.5);
-  -moz-box-shadow: 0px 0px 10px 0px rgba(117,110,117,0.5);
-  box-shadow: 0px 0px 10px 0px rgba(117,110,117,0.5);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba($shadow-color, $opacity);
+  -moz-box-shadow: 0px 0px 5px 0px rgba($shadow-color, $opacity);
+  box-shadow: 0px 0px 5px 0px rgba($shadow-color, $opacity);
 }
