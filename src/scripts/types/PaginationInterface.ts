@@ -9,7 +9,7 @@ export interface PaginationInterface {
 // also look into named routes
 export const threadPagination = (thread: ThreadInterface) => (
   [
-    { name: 'Forum Name', path: '/' },
+    { name: thread.forum.title, path: `/forum/${thread.forumid}` },
     { name: thread.title, path: `/thread/${thread.threadid}`}
   ]
 );

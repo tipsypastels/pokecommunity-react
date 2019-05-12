@@ -56,6 +56,12 @@ export default class ThreadPage extends Component<IProps, IState> {
         canModerate: true,
         canReactToPosts: true,
         canSharePosts: true,
+
+        forum: {
+          forumid: 1,
+          title: 'A Forum',
+        },
+
         posts: [
           {
             postid: 1,
