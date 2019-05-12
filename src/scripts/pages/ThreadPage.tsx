@@ -57,6 +57,12 @@ export default class ThreadPage extends Component<IProps, IState> {
         canModerate: true,
         canReactToPosts: true,
         canSharePosts: true,
+
+        forum: {
+          forumid: 1,
+          title: 'A Forum',
+        },
+
         posts: [
           {
             postid: 1,
@@ -91,7 +97,6 @@ export default class ThreadPage extends Component<IProps, IState> {
         banner={this.getBanner()}
         pagination={this.getPagination()}
       >
-        You are on page {this.state.page}
         {this.getEditor()}
         {this.getHeader()}
         {this.getPosts()}

@@ -1,4 +1,5 @@
 import PostInterface from './PostInterface';
+import ForumInterface from './ForumInterface';
 
 export default interface ThreadInterface {
   threadid: number;
@@ -13,6 +14,7 @@ export default interface ThreadInterface {
 
   banner?: string;
 
+  forum: ForumInterface;
   posts: PostInterface[];
   repliesCount: number;
 
