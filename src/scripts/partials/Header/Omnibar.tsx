@@ -6,7 +6,6 @@ import { faCoffee } from '@fortawesome/pro-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
 import { PaginationInterface } from '../../types/PaginationInterface';
-import { IfPropsPresent } from '../../helpers/ComponentHelpers';
 
 import logo from '../../../images/common/brand-transparent.png';
 import '../../../styles/modules/Omnibar.scss';
@@ -30,7 +29,7 @@ export default class Omnibar extends Component<IProps> {
           </span>
         </Navbar.Brand>
 
-        {this.getPagination()}
+        {this.props.pagination && this.getPagination()}
 
         <Navbar id="basic-navbar-nav">
           <Nav className="navbar-breadcrumb mr-auto">
@@ -50,7 +49,6 @@ export default class Omnibar extends Component<IProps> {
     );
   }
 
-  @IfPropsPresent('pagination')
   getPagination() {
     const paginationItems = this.props.pagination.map(({ name, path }) => (
       <li key={name} className="nav-item">
