@@ -10,18 +10,22 @@ interface IProps {
 
 const PostContent = ({ postid , content, dateline, canModerate }: IProps) => (
   <div className="PostContent">
-    <div className="post-date align-right text-small">
-      {(new Date(dateline)).toDateString()}
-    </div>
-    <main className="post-main flex">
-      <div className="post-content grows">
-        {content}
+    <div className="post-content-meta flex">
+      <div className="time flex-grows">
+        {(new Date(dateline)).toDateString()}
       </div>
-      <div className="post-id">
+
+      <div className="postid">
+        #{postid}
+
         <When condition={canModerate}>
-          <input type="checkbox" name="todo"/> #{postid}
+          <input type="checkbox" name="todo" />
         </When>
       </div>
+    </div>
+
+    <main className="post-content flex">
+      {content}
     </main>
   </div>
 );

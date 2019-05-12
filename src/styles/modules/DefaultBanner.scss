@@ -1,0 +1,24 @@
+// TODO themes should set their own banners
+
+.DefaultBanner {
+  display: block;
+  background-position: center;
+  background-size: cover;
+  background-image: url(https://www.pokecommunity.com/styles/default/pokecommunity-cloudspace.jpg);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .brand {
+    height: 7.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .brand-text {
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+    height: 2.5rem;
+  }
+}

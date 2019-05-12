@@ -7,6 +7,8 @@ import Viewing from '../partials/Viewing';
 import QuickReply from '../partials/Thread/QuickReply';
 
 import ThreadInterface from '../types/ThreadInterface';
+import { threadPagination } from '../types/PaginationInterface';
+import { IfStatePresent } from '../helpers/ComponentHelpers';
 
 import Post from '../partials/Post';
 
@@ -42,7 +44,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         postusername: 'Rainbow',
         repliesCount: 1,
         canReply: true,
-        canModerate: false,
+        canModerate: true,
         canReactToPosts: true,
         canSharePosts: true,
         posts: [
@@ -73,7 +75,12 @@ export default class ThreadPage extends Component<IProps, IState> {
 
   render() {
     return (
-      <Page name="Thread" loading={!this.state.thread} banner={this.getBanner()}>
+      <Page 
+        name="Thread" 
+        loading={!this.state.thread} 
+        banner={this.getBanner()}
+        pagination={this.getPagination()}
+      >
         {this.getHeader()}
         {this.getPosts()}
         {this.getViewing()}
@@ -82,19 +89,18 @@ export default class ThreadPage extends Component<IProps, IState> {
     )
   }
 
-  getBanner() {
-    if (!this.state.thread) {
-      return null;
-    }
+  @IfStatePresent('thread')
+  getPagination() {
+    return threadPagination(this.state.thread);
+  }
 
+  @IfStatePresent('thread')
+  getBanner() {
     return this.state.thread.banner;
   }
 
+  @IfStatePresent('thread')
   getHeader() {
-    if (!this.state.thread) {
-      return null;
-    }
-
     return (
       <ThreadHeader
         threadid={this.state.thread.threadid}
@@ -105,11 +111,8 @@ export default class ThreadPage extends Component<IProps, IState> {
     );
   }
 
+  @IfStatePresent('thread')
   getViewing() {
-    if (!this.state.thread) {
-      return null;
-    }
-
     return (
       <Viewing
         users={[{ userid: 1, username: 'Dakota' }]}
@@ -119,16 +122,14 @@ export default class ThreadPage extends Component<IProps, IState> {
     )
   }
 
+  @IfStatePresent('thread')
   getPosts() {
-    if (!this.state.thread) {
-      return null;
-    }
-
     return this.state.thread.posts.map(post => (
       <Post key={post.postid} thread={this.state.thread} {...post} />
     ));
   }
 
+  @IfStatePresent('thread')
   getQuickReply() {
     if (this.state.thread && this.state.thread.canReply) {
       return (

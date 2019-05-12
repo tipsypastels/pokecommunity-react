@@ -1,2 +1,6 @@
 .Page {
+  & > .container, 
+  & > .container-fluid {
+    margin-top: 10px;
+  }
 }

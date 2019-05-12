@@ -3,12 +3,19 @@ import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-boots
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee } from '@fortawesome/pro-solid-svg-icons';
+import { Link } from 'react-router-dom';
+
+import { PaginationInterface } from '../../types/PaginationInterface';
+import { IfPropsPresent } from '../../helpers/ComponentHelpers';
 
 import logo from '../../../images/common/brand-transparent.png';
-
 import '../../../styles/modules/Omnibar.scss';
 
-export default class Omnibar extends Component {
+interface IProps {
+  pagination?: PaginationInterface[];
+}
+
+export default class Omnibar extends Component<IProps> {
   render() {
     return (
       <Navbar className="Omnibar" bg="light">
@@ -22,6 +29,9 @@ export default class Omnibar extends Component {
             />
           </span>
         </Navbar.Brand>
+
+        {this.getPagination()}
+
         <Navbar id="basic-navbar-nav">
           <Nav className="navbar-breadcrumb mr-auto">
             
@@ -38,5 +48,23 @@ export default class Omnibar extends Component {
         </Navbar>
       </Navbar>
     );
+  }
+
+  @IfPropsPresent('pagination')
+  getPagination() {
+    const paginationItems = this.props.pagination.map(({ name, path }) => (
+      <li key={name} className="nav-item">
+        <Link to={path} className="nav-link">
+          {name}
+        </Link>
+      </li>
+    ));
+
+    return (
+      // TODO bs component?
+      <ul className="navbar navbar-nav nav-breadcrumb">
+        {paginationItems}
+      </ul>
+    )
   }
 }
