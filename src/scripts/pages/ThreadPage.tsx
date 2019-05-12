@@ -8,7 +8,6 @@ import QuickReply from '../partials/Thread/QuickReply';
 
 import ThreadInterface from '../types/ThreadInterface';
 import { threadPagination } from '../types/PaginationInterface';
-import { IfStatePresent } from '../helpers/ComponentHelpers';
 
 import Post from '../partials/Post';
 
@@ -75,31 +74,32 @@ export default class ThreadPage extends Component<IProps, IState> {
 
   render() {
     return (
-      <Page 
-        name="Thread" 
-        loading={!this.state.thread} 
-        banner={this.getBanner()}
-        pagination={this.getPagination()}
+      <Page
+        name="Thread"
+        loading={!this.state.thread}
+        banner={this.state.thread && this.getBanner()}
+        pagination={this.state.thread && this.getPagination()}
       >
-        {this.getHeader()}
-        {this.getPosts()}
-        {this.getViewing()}
-        {this.getQuickReply()}
+        {this.state.thread &&
+          <div>
+            {this.getHeader()}
+            {this.getPosts()}
+            {this.getViewing()}
+            {this.getQuickReply()}
+          </div>
+        }
       </Page>
     )
   }
 
-  @IfStatePresent('thread')
   getPagination() {
     return threadPagination(this.state.thread);
   }
 
-  @IfStatePresent('thread')
   getBanner() {
     return this.state.thread.banner;
   }
 
-  @IfStatePresent('thread')
   getHeader() {
     return (
       <ThreadHeader
@@ -111,7 +111,6 @@ export default class ThreadPage extends Component<IProps, IState> {
     );
   }
 
-  @IfStatePresent('thread')
   getViewing() {
     return (
       <Viewing
@@ -122,14 +121,12 @@ export default class ThreadPage extends Component<IProps, IState> {
     )
   }
 
-  @IfStatePresent('thread')
   getPosts() {
     return this.state.thread.posts.map(post => (
       <Post key={post.postid} thread={this.state.thread} {...post} />
     ));
   }
 
-  @IfStatePresent('thread')
   getQuickReply() {
     if (this.state.thread && this.state.thread.canReply) {
       return (
