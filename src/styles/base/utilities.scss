@@ -1,3 +1,5 @@
+@import '../base/mixins';
+
 .flex {
   display: flex;
 }
@@ -16,4 +18,11 @@
 
 .text-small {
   font-size: 0.8rem;
+}
+
+.block {
+  @include box-shadow();
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid lightgrey;
 }
