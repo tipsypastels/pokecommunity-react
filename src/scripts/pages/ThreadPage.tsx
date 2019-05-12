@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { RouteComponentProps } from 'react-router-dom';
+import { Alert } from 'react-bootstrap';
 
 import Page from './Page';
 import Post from '../partials/Post';
@@ -55,6 +56,10 @@ export default class ThreadPage extends Component<IProps, IState> {
   render() {
     return (
       <Page name="Thread" loading={!this.state.thread} banner={this.getBanner()}>
+        <Alert variant="primary">
+          hello world
+        </Alert>
+
         {this.getHeader()}
         {this.getPosts()}
       </Page>
