@@ -1,0 +1,28 @@
+// TODO move this
+$app-color: rgba(227, 66, 26, 0.9);
+
+.Omnibar {
+  padding: 0;
+  .navbar-brand {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    .brand-logo {
+      background: rgba($app-color, 0.9) url('https://www.pokecommunity.com/images/pc-logo-e3421a.svg') no-repeat center;
+      background-image: url('https://www.pokecommunity.com/images/pc-logo-fff.svg');
+      background-size: cover;
+      img {
+        height: 3.1rem;
+        width: 3.1rem;
+        visibility: hidden;
+      }
+    }
+    .brand-text {
+      padding-left: 0.65rem;
+      padding-right: 0.65rem;
+      font-weight: 300;
+      font-size: 1.3rem;
+    }
+  }
+}

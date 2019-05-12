@@ -5,6 +5,7 @@ import ThreadPage from './pages/ThreadPage';
 import Spheal from './pages/Spheal';
 
 import '../styles/base/utilities.scss';
+import '../styles/base/buttons.scss';
 
 class App extends Component {
   render() {

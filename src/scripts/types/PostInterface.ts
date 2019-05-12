@@ -6,4 +6,6 @@ export default interface PostInterface {
   username: string;
   content: string;
   dateline: number;
+
+  canEdit: boolean;
 }

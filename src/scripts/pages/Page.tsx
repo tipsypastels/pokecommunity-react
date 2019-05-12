@@ -1,4 +1,9 @@
 import React, { ReactNode, Component } from 'react'
+import { Container } from 'react-bootstrap';
+
+import Omnibar from '../partials/Header/Omnibar';
+
+import '../../styles/modules/Page.scss';
 
 interface IProps {
   name: string;
@@ -8,20 +13,25 @@ interface IProps {
 }
 
 export default class Page extends Component<IProps> {
-  constructor(props) {
-    super(props);
-    console.log(props);
+  render() {
+    return (
+      <div className={`Page ${this.props.name}Page`}>
+        <Omnibar />
+
+        {this.getContent()}
+      </div>
+    )
   }
 
-  render() {
+  getContent() {
     if (this.props.loading) {
       return 'Loading...';
     }
-    
+
     return (
-      <div className={`${this.props.name}Page`}>
+      <Container fluid>
         {this.props.children}
-      </div>
+      </Container>
     )
   }
 }

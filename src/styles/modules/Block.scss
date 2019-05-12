@@ -1,0 +1,20 @@
+.Block {
+  // TODO move colours to themes etc 
+  box-shadow: 0 0.625rem 0.625rem 0.125rem rgba(0, 0, 0, 0.05), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.12), 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.24);
+
+  padding: 0;
+  background-color: white;
+  margin-bottom: 1.25rem;
+
+  & > header {
+    background-color: #f9f9f9;
+    border-bottom: 2px solid #444;
+    padding: 0.625rem;
+    display: flex;
+    align-items: center;
+  }
+
+  & > .BlockContent {
+    padding: 0.625rem;
+  }
+}

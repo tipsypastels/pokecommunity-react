@@ -14,4 +14,10 @@ export default interface ThreadInterface {
   banner?: string;
 
   posts: PostInterface[];
+  repliesCount: number;
+
+  canReactToPosts: boolean;
+  canSharePosts: boolean;
+  canReply: boolean;
+  canModerate: boolean;
 }

@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { RouteComponentProps } from 'react-router-dom';
-import { Alert } from 'react-bootstrap';
 
 import Page from './Page';
-import Post from '../partials/Post';
 import ThreadHeader from '../partials/Thread/ThreadHeader';
 import Viewing from '../partials/Viewing';
 import QuickReply from '../partials/Thread/QuickReply';
 
 import ThreadInterface from '../types/ThreadInterface';
+
+import Post from '../partials/Post';
 
 interface IParams {
   threadid: string;
@@ -40,6 +40,11 @@ export default class ThreadPage extends Component<IProps, IState> {
         views: 1,
         title: 'xxx',
         postusername: 'Rainbow',
+        repliesCount: 1,
+        canReply: true,
+        canModerate: false,
+        canReactToPosts: true,
+        canSharePosts: true,
         posts: [
           {
             postid: 1,
@@ -48,6 +53,17 @@ export default class ThreadPage extends Component<IProps, IState> {
             username: 'Rainbow',
             content: 'yyy',
             dateline: (new Date()).getTime(),
+            canEdit: true,
+          },
+
+          {
+            postid: 2,
+            threadid: 1,
+            userid: 2,
+            username: 'Nina',
+            content: 'bluh',
+            dateline: (new Date()).getTime(),
+            canEdit: true,
           }
         ]
       };
@@ -58,14 +74,10 @@ export default class ThreadPage extends Component<IProps, IState> {
   render() {
     return (
       <Page name="Thread" loading={!this.state.thread} banner={this.getBanner()}>
-        <Alert variant="primary">
-          hello world
-        </Alert>
-
         {this.getHeader()}
         {this.getPosts()}
         {this.getViewing()}
-        <QuickReply />
+        {this.getQuickReply()}
       </Page>
     )
   }
@@ -88,6 +100,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         threadid={this.state.thread.threadid}
         title={this.state.thread.title}
         views={this.state.thread.views}
+        repliesCount={this.state.thread.repliesCount}
       />
     );
   }
@@ -99,9 +112,9 @@ export default class ThreadPage extends Component<IProps, IState> {
 
     return (
       <Viewing
-        users={[{ username: 'Nina' }, { username: 'Rainbow' }]}
-        guests={[{}, {}, {}]}
-        viewing={'thread'}
+        users={[{ userid: 1, username: 'Dakota' }]}
+        guests={3}
+        viewing="thread"
       />
     )
   }
@@ -112,7 +125,15 @@ export default class ThreadPage extends Component<IProps, IState> {
     }
 
     return this.state.thread.posts.map(post => (
-      <Post key={post.postid} {...post} />
+      <Post key={post.postid} thread={this.state.thread} {...post} />
     ));
+  }
+
+  getQuickReply() {
+    if (this.state.thread && this.state.thread.canReply) {
+      return (
+        <QuickReply />
+      )
+    }
   }
 }

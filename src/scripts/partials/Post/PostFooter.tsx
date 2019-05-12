@@ -1,12 +1,59 @@
 import React from 'react';
+import { ButtonToolbar, Button } from 'react-bootstrap';
+import { When } from 'react-if';
 
-const PostFooter = (props) => (
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faThumbsUp, 
+  faShareSquare,
+  faEdit,
+  faCommentDots
+} from '@fortawesome/pro-solid-svg-icons';
+
+interface IProps {
+  canEdit: boolean;
+  canSharePost: boolean;
+  canRespond: boolean;
+  canReactToPosts: boolean;
+}
+
+const PostFooter = ({ canEdit, canSharePosts, canReply, canReactToPosts }) => (
   <div className="PostFooter flex">
-    <div className="post-right-actions grows">
-      Like Share
-    </div>
-    <div className="post-left-actions">
-      Edit Respond
+    <ButtonToolbar className="post-left-actions flex-grows">
+      <When condition={canReactToPosts}>
+        <Button variant="link">
+          <FontAwesomeIcon icon={faThumbsUp}/>
+          <span>
+            Like
+          </span>
+        </Button>
+      </When>
+      <When condition={canSharePosts}>
+        <Button variant="link">
+          <FontAwesomeIcon icon={faShareSquare} />
+          <span>
+            Share
+          </span>
+        </Button>
+      </When>
+    </ButtonToolbar>
+    <div className="post-right-actions">
+      <When condition={canEdit}>
+        <Button variant="link">
+          <FontAwesomeIcon icon={faEdit}/>
+          <span>
+            Edit
+          </span>
+        </Button>
+      </When>
+      <When condition={canReply}>
+        <Button variant="link">
+          <FontAwesomeIcon icon={faCommentDots}/>
+          <span>
+            Respond
+          </span>
+        </Button>
+      </When>
     </div>
   </div>
 );

@@ -1,12 +1,14 @@
 import React from 'react';
+import { When } from 'react-if';
 
 interface IProps {
   postid: number;
   dateline: number;
   content: string;
+  canModerate: boolean;
 }
 
-const PostContent = ({ postid , content, dateline }: IProps) => (
+const PostContent = ({ postid , content, dateline, canModerate }: IProps) => (
   <div className="PostContent">
     <div className="post-date align-right text-small">
       {(new Date(dateline)).toDateString()}
@@ -16,7 +18,9 @@ const PostContent = ({ postid , content, dateline }: IProps) => (
         {content}
       </div>
       <div className="post-id">
-        <input type="checkbox" name="todo"/> #{postid}
+        <When condition={canModerate}>
+          <input type="checkbox" name="todo"/> #{postid}
+        </When>
       </div>
     </main>
   </div>
