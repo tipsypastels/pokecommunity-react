@@ -1,0 +1,38 @@
+// TODO replace with variables
+$theme-light-color: rgb(229, 238, 236);
+$theme-light-text-color: #444;
+
+.UserList {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
+  a {
+    text-decoration: none;
+    border-radius: 8px;
+    &:hover {
+      background-color: $theme-light-color;
+      color: $theme-light-text-color;
+    }
+  }
+
+  .user {
+    padding: 3px;
+    .avatar {
+      height: 36px;
+      width: 36px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      margin-right: 3px;
+    }
+
+    .username {
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 1.25rem;
+      width: 200px;
+    }
+  }
+}
