@@ -20,7 +20,7 @@ interface IProps {
 
 export default class ThreadHeader extends Component<IProps> {
   render() {
-    const { threadid, title, views, repliesCount } = this.props;
+    const { title, views, repliesCount } = this.props;
     return (
       <Block className="ThreadHeader">
         <Block.Header>
