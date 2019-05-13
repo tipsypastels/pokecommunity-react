@@ -23,7 +23,8 @@ class UserList extends Component<IProps> {
       let avatarIMG = {
         backgroundImage: `url(${user.avatarURL})`
       }
-      return <div
+      return <a
+        href="#"
         className="user flex flex-v-center"
         key={`user-${user}`}
       >
@@ -36,7 +37,7 @@ class UserList extends Component<IProps> {
         <div className={`username`}>
           {user.username}
         </div>
-      </div>
+      </a>
     });
   }
 }
