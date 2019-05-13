@@ -8,6 +8,7 @@ import Viewing from '../partials/Viewing';
 import QuickReply from '../partials/Thread/QuickReply';
 
 import ThreadInterface from '../types/ThreadInterface';
+import UserInterface from '../types/UserInterface';
 import { threadPagination } from '../types/PaginationInterface';
 import { pageNumber } from '../helpers/PageHelpers';
 
@@ -116,10 +117,10 @@ export default class ThreadPage extends Component<IProps, IState> {
     }
 
     return (
-      <Editor 
-        show={this.state.editorOpen} 
+      <Editor
+        show={this.state.editorOpen}
         thread={this.state.thread}
-        closeEditor={this.closeEditor} 
+        closeEditor={this.closeEditor}
       />
     )
   }
@@ -148,7 +149,7 @@ export default class ThreadPage extends Component<IProps, IState> {
   getViewing() {
     return (
       <Viewing
-        users={[{ userid: 1, username: 'Dakota' }]}
+        users={[{ userid: 1, username: 'Hiroshi Sotomura AAAAAAAARUN', avatarURL: 'https://i.imgur.com/VOyJwKi.jpg' }, { userid: 2, username: 'Nina', avatarURL: 'https://i.imgur.com/S6YJfHc.png' }, { userid: 2, username: 'Nina', avatarURL: 'https://i.imgur.com/S6YJfHc.png' }, { userid: 2, username: 'Nina', avatarURL: 'https://i.imgur.com/S6YJfHc.png' }, { userid: 2, username: 'Nina', avatarURL: 'https://i.imgur.com/S6YJfHc.png' }, { userid: 2, username: 'Nina', avatarURL: 'https://i.imgur.com/S6YJfHc.png' }, { userid: 2, username: 'Nina', avatarURL: 'https://i.imgur.com/S6YJfHc.png' }]}
         guests={3}
         viewing="thread"
       />
@@ -172,7 +173,7 @@ export default class ThreadPage extends Component<IProps, IState> {
   openEditor = () => {
     this.setState({ editorOpen: true });
   }
-  
+
   closeEditor = () => {
     this.setState({ editorOpen: false });
   }
