@@ -8,7 +8,7 @@ import Viewing from '../partials/Viewing';
 import QuickReply from '../partials/Thread/QuickReply';
 
 import ThreadInterface from '../types/ThreadInterface';
-import { threadPagination } from '../types/PaginationInterface';
+import { threadBreadcrumbs } from '../types/BreadcrumbInterface';
 import { pageNumber } from '../helpers/PageHelpers';
 
 import Post from '../partials/Post';
@@ -94,7 +94,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         name="Thread"
         loading={!this.state.thread}
         banner={this.state.thread && this.getBanner()}
-        pagination={this.state.thread && this.getPagination()}
+        breadcrumbs={this.state.thread && this.getBreadcrumbs()}
       >
         {this.state.thread &&
           <div>
@@ -124,8 +124,8 @@ export default class ThreadPage extends Component<IProps, IState> {
     )
   }
 
-  getPagination() {
-    return threadPagination(this.state.thread);
+  getBreadcrumbs() {
+    return threadBreadcrumbs(this.state.thread);
   }
 
   getBanner() {

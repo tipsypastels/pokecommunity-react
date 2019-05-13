@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 import DefaultBanner from '../partials/Header/DefaultBanner';
 import Omnibar from '../partials/Header/Omnibar';
 
-import { PaginationInterface } from '../types/PaginationInterface';
+import { BreadcrumbInterface } from '../types/BreadcrumbInterface';
 
 import '../../styles/modules/Page.scss';
 
@@ -13,14 +13,14 @@ interface IProps {
   loading: boolean;
   children: ReactNode;
   banner?: string;
-  pagination?: PaginationInterface[];
+  breadcrumbs?: BreadcrumbInterface[];
 }
 
 export default class Page extends Component<IProps> {
   render() {
     return (
       <div className={`Page ${this.props.name}Page`}>
-        <Omnibar pagination={this.props.pagination} />
+        <Omnibar breadcrumbs={this.props.breadcrumbs} />
         {this.getBanner()}
         {this.getContent()}
       </div>

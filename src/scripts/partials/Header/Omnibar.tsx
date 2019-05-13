@@ -5,13 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee } from '@fortawesome/pro-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-import { PaginationInterface } from '../../types/PaginationInterface';
+import { BreadcrumbInterface } from '../../types/BreadcrumbInterface';
 
 import logo from '../../../images/common/brand-transparent.png';
 import '../../../styles/modules/Omnibar.scss';
 
 interface IProps {
-  pagination?: PaginationInterface[];
+  breadcrumbs?: BreadcrumbInterface[];
 }
 
 export default class Omnibar extends Component<IProps> {
@@ -29,7 +29,7 @@ export default class Omnibar extends Component<IProps> {
           </span>
         </Navbar.Brand>
 
-        {this.props.pagination && this.getPagination()}
+        {this.props.breadcrumbs && this.getBreadcrumbs()}
 
         <Navbar id="basic-navbar-nav">
           <Nav className="navbar-breadcrumb mr-auto">
@@ -49,8 +49,8 @@ export default class Omnibar extends Component<IProps> {
     );
   }
 
-  getPagination() {
-    const paginationItems = this.props.pagination.map(({ name, path }) => (
+  getBreadcrumbs() {
+    const crumbs = this.props.breadcrumbs.map(({ name, path }) => (
       <li key={name} className="nav-item">
         <Link to={path} className="nav-link">
           {name}
@@ -61,7 +61,7 @@ export default class Omnibar extends Component<IProps> {
     return (
       // TODO bs component?
       <ul className="navbar navbar-nav nav-breadcrumb">
-        {paginationItems}
+        {crumbs}
       </ul>
     )
   }
