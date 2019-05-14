@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import UserInterface from '../types/UserInterface';
 
+import vBRoute from '../bridge/vBRoute';
+
 import '../../styles/modules/UserList.scss';
 
 interface IProps {
@@ -24,16 +26,15 @@ class UserList extends Component<IProps> {
         backgroundImage: `url(${user.avatarURL})`
       }
       return <a
-        href="#"
+        href={vBRoute('profile', user.userid)}
         className="user flex flex-v-center"
-        key={`user-${user}`}
+        key={user.userid}
       >
         <div
           className="avatar"
           title={`${user.username}'s Avatar`}
           style={avatarIMG}
-        >
-        </div>
+        />
         <div className={`username`}>
           {user.username}
         </div>

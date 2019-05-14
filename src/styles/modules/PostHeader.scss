@@ -1,0 +1,43 @@
+.PostHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  .avatar-container {
+    margin-right: 5px;
+
+    .avatar {
+      max-width: 140px;
+      max-height: 140px;
+    }
+  }
+
+  .username-usertitle {
+    flex-grow: 1;
+
+    h1 {
+      font-size: 140%;
+      font-weight: 700;
+      margin: 1px;
+    }
+
+    h2 {
+      font-size: 90%;
+      margin: 2px;
+    }
+  }
+
+  .statistics {
+    display: flex;
+  }
+
+  .minibio {
+    margin-left: 20px;
+    font-size: 80%;
+
+    svg {
+      margin-right: 6px;
+      width: 12.8px;
+    }
+  }
+}

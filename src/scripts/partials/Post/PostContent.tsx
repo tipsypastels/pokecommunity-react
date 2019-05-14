@@ -1,27 +1,16 @@
 import React from 'react';
-import { When } from 'react-if';
 
 interface IProps {
   postid: number;
   dateline: number;
   content: string;
-  canModerate: boolean;
+  canModerate: boolean; // TODO add the checkbox somewhere
 }
 
 const PostContent = ({ postid , content, dateline, canModerate }: IProps) => (
   <div className="PostContent">
-    <div className="post-content-meta flex">
-      <div className="time flex-grows">
-        {(new Date(dateline)).toDateString()}
-      </div>
-
-      <div className="postid">
-        #{postid}
-
-        <When condition={canModerate}>
-          <input type="checkbox" name="todo" />
-        </When>
-      </div>
+    <div className="time text-small flex-grows">
+      {(new Date(dateline)).toDateString()}, Post #{postid}
     </div>
 
     <main className="post-content flex">

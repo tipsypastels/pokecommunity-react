@@ -1,3 +1,5 @@
+import UserInterface from './UserInterface';
+
 export default interface PostInterface {
   postid: number;
   threadid: number;
@@ -8,4 +10,6 @@ export default interface PostInterface {
   dateline: number;
 
   canEdit: boolean;
+
+  user: UserInterface;
 }

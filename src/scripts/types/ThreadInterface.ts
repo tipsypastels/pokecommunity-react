@@ -1,5 +1,6 @@
 import PostInterface from './PostInterface';
 import ForumInterface from './ForumInterface';
+import UserInterface from './UserInterface';
 
 export default interface ThreadInterface {
   threadid: number;
@@ -14,6 +15,7 @@ export default interface ThreadInterface {
 
   banner?: string;
 
+  user: UserInterface;
   forum: ForumInterface;
   posts: PostInterface[];
   repliesCount: number;
@@ -22,4 +24,7 @@ export default interface ThreadInterface {
   canSharePosts: boolean;
   canReply: boolean;
   canModerate: boolean;
+
+  totalPages: number;
+
 }

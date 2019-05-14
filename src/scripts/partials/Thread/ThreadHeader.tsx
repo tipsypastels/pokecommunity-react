@@ -4,8 +4,10 @@ import { When } from 'react-if';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWrench } from '@fortawesome/pro-solid-svg-icons';
+import { faClock } from '@fortawesome/pro-regular-svg-icons';
 
 import Block from '../Block';
+import Stat from '../Stat';
 
 import '../../../styles/modules/ThreadHeader.scss';
 
@@ -15,30 +17,47 @@ interface IProps {
   views: number;
   repliesCount: number;
   canReply: boolean;
+  postusername: string;
   openEditor: () => void;
 }
 
 export default class ThreadHeader extends Component<IProps> {
   render() {
-    const { title, views, repliesCount } = this.props;
+    const { title, views, repliesCount, postusername } = this.props;
     return (
       <Block className="ThreadHeader">
         <Block.Header>
-          <h2 className="flex-grows">
-            {title}
-          </h2>
+          <div className="thread-info flex-grows">
+            <h2>
+              {title}
+            </h2>
+
+            <div className="thread-starter-and-dateline text-small">
+              <span className="thread-starter">
+                Started by {postusername}
+              </span>
+
+              <span className="thread-dateline">
+                <FontAwesomeIcon icon={faClock} /> Date goes here
+              </span>
+            </div>
+          </div>
 
           <div className="thread-stats flex">
-            <small className="text-small">
-              <h4>{views}</h4> Views
-            </small>
-            <small className="text-small">
-              <h4>{repliesCount}</h4> Replies
-            </small>
+            <Stat
+              name="views"
+              number={views}
+              inline
+            />
+            <Stat
+              name="replies"
+              number={repliesCount}
+              inline
+            />
           </div>
         </Block.Header>
 
-        <Block.Content className="flex v-center">
+        <Block.Content className="flex v-center flex-v-center">
           <When condition={this.props.canReply}>
             <Button color="primary" onClick={this.props.openEditor}>
               Reply to Thread

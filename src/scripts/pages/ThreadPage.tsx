@@ -6,10 +6,10 @@ import Page from './Page';
 import ThreadHeader from '../partials/Thread/ThreadHeader';
 import Viewing from '../partials/Viewing';
 import QuickReply from '../partials/Thread/QuickReply';
+import Pagination from '../partials/Pagination';
 
 import ThreadInterface from '../types/ThreadInterface';
-import UserInterface from '../types/UserInterface';
-import { threadPagination } from '../types/PaginationInterface';
+
 import { threadBreadcrumbs } from '../types/BreadcrumbInterface';
 import { pageNumber } from '../helpers/PageHelpers';
 
@@ -26,7 +26,7 @@ type IProps = RouteComponentProps<IParams>;
 interface IState {
   thread?: ThreadInterface;
   editorOpen: boolean;
-  page: number;
+  currentPage: number;
 }
 
 export default class ThreadPage extends Component<IProps, IState> {
@@ -37,7 +37,7 @@ export default class ThreadPage extends Component<IProps, IState> {
     this.state = {
       thread: undefined,
       editorOpen: false,
-      page: pageNumber(queryParams.page),
+      currentPage: pageNumber(queryParams.page),
     };
   }
 
@@ -58,6 +58,15 @@ export default class ThreadPage extends Component<IProps, IState> {
         canModerate: true,
         canReactToPosts: true,
         canSharePosts: true,
+        totalPages: 10,
+
+        user: {
+          userid: 1,
+          username: 'Rainbow',
+          postCount: 1,
+          yearCount: 1,
+          miniBiography: {},
+        },
 
         forum: {
           forumid: 1,
@@ -73,6 +82,21 @@ export default class ThreadPage extends Component<IProps, IState> {
             content: 'yyy',
             dateline: (new Date()).getTime(),
             canEdit: true,
+
+            user: {
+              userid: 1,
+              username: 'Rainbow',
+              avatarURL: 'https://www.pokecommunity.com/customavatars/avatar210532_681.gif',
+              postCount: 1,
+              yearCount: 1,
+              miniBiography: {
+                age: 20,
+                gender: 'Female',
+                location: 'Skaia',
+                lastOnline: 'Online now',
+                lastPosted: 'Posted today',
+              },
+            },
           },
 
           {
@@ -83,6 +107,15 @@ export default class ThreadPage extends Component<IProps, IState> {
             content: 'bluh',
             dateline: (new Date()).getTime(),
             canEdit: true,
+
+            user: {
+              userid: 2,
+              username: 'Nina',
+              avatarURL: 'https://www.pokecommunity.com/images/avatars/b2w2-trainers/Lady.gif',
+              postCount: 2,
+              yearCount: 2,
+              miniBiography: {},
+            },
           }
         ]
       };
@@ -100,9 +133,9 @@ export default class ThreadPage extends Component<IProps, IState> {
       >
         {this.state.thread &&
           <div>
-            You are on page {this.state.page}
             {this.getEditor()}
             {this.getHeader()}
+            {this.getPagination()}
             {this.getPosts()}
             {this.getViewing()}
             {this.getQuickReply()}
@@ -126,6 +159,15 @@ export default class ThreadPage extends Component<IProps, IState> {
     )
   }
 
+  getPagination() {
+    return (
+      <Pagination 
+        currentPage={this.state.currentPage}
+        totalPages={this.state.thread.totalPages}
+      />
+    );
+  }
+
   getBreadcrumbs() {
     return threadBreadcrumbs(this.state.thread);
   }
@@ -142,6 +184,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         views={this.state.thread.views}
         repliesCount={this.state.thread.repliesCount}
         canReply={this.state.thread.canReply}
+        postusername={this.state.thread.postusername}
         openEditor={this.openEditor}
       />
     );
@@ -150,7 +193,7 @@ export default class ThreadPage extends Component<IProps, IState> {
   getViewing() {
     return (
       <Viewing
-        users={[{ userid: 1, username: 'Hiroshi Sotomura AAAAAAAARUN', avatarURL: 'https://i.imgur.com/VOyJwKi.jpg' }, { userid: 2, username: 'Nina', avatarURL: 'https://i.imgur.com/S6YJfHc.png' }, { userid: 2, username: 'Nina', avatarURL: 'https://i.imgur.com/S6YJfHc.png' }, { userid: 2, username: 'Nina', avatarURL: 'https://i.imgur.com/S6YJfHc.png' }, { userid: 2, username: 'Nina', avatarURL: 'https://i.imgur.com/S6YJfHc.png' }, { userid: 2, username: 'Nina', avatarURL: 'https://i.imgur.com/S6YJfHc.png' }, { userid: 2, username: 'Nina', avatarURL: 'https://i.imgur.com/S6YJfHc.png' }]}
+        users={[]}
         guests={3}
         viewing="thread"
       />
