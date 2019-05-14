@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, Form, FormControl, Button, Dropdown, NavItem } from 'react-bootstrap';
+import { When } from 'react-if';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faToolbox, faUser, faBell, faQuestionCircle, faEnvelope, faDonate, faSearch } from '@fortawesome/pro-light-svg-icons';
@@ -18,6 +19,7 @@ export default class Omnibar extends Component<IProps> {
   render() {
     return (
       <Navbar className="Omnibar" variant="dark" fixed="top" expand>
+        
         <Navbar.Brand href="#home">
           <span className="brand-logo">
             <img 
@@ -27,9 +29,12 @@ export default class Omnibar extends Component<IProps> {
               title="PokéCommunity" 
             />
           </span>
-          <span className="brand-text d-none d-sm-inline app-title">
-            PokéCommunity
-          </span>
+
+          <When condition={typeof this.props.breadcrumbs === 'undefined'}>
+            <span className="brand-text d-none d-sm-inline app-title">
+              PokéCommunity
+            </span>
+          </When>
         </Navbar.Brand>
 
         <Navbar.Collapse id="basic-navbar-nav">
@@ -84,13 +89,25 @@ export default class Omnibar extends Component<IProps> {
   }
 
   getBreadcrumbs() {
-    const crumbs = this.props.breadcrumbs.map(({ name, path }) => (
-      <li key={name} className="nav-item">
-        <Link to={path} className="nav-link">
-          {name}
-        </Link>
-      </li>
-    ));
+    const crumbs = this.props.breadcrumbs.map(({ name, path }) => {
+      /* if the link includes a php extension, then
+         this is a link to a vB page and we use <a href>
+         otherwise, <Link to>
+      */
+
+      let link;
+      if (path.includes('.php')) {
+        link = <a href={path} className="nav-link">{name}</a>
+      } else {
+        link = <Link to={path} className="nav-link">{name}</Link>
+      }
+
+      return (
+        <li key={name} className="nav-item">
+          {link}
+        </li>
+      );
+    });
 
     return (
       // TODO bs component?

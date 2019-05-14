@@ -9,7 +9,7 @@ export interface BreadcrumbInterface {
 // also look into named routes
 export const threadBreadcrumbs = (thread: ThreadInterface) => (
   [
-    { name: thread.forum.title, path: `/forum/${thread.forumid}` },
+    { name: thread.forum.title, path: `/forumdisplay.php?f=${thread.forumid}` },
     { name: thread.title, path: `/thread/${thread.threadid}`}
   ]
 );
