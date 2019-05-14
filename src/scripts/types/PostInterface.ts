@@ -1,4 +1,4 @@
-import UserInterface from './UserInterface';
+import PostUserInterface from './PostUserInterface';
 
 export default interface PostInterface {
   postid: number;
@@ -12,5 +12,5 @@ export default interface PostInterface {
 
   canEdit: boolean;
 
-  user: UserInterface;
+  user: PostUserInterface;
 }
