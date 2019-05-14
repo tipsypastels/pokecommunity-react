@@ -1,0 +1,29 @@
+.Stat {
+  display: flex;
+  font-weight: 300;
+  text-transform: uppercase;
+  padding: 5px 10px;
+
+  &.inline {
+    flex-direction: row;
+    align-items: flex-end;
+
+    .number {
+      margin-right: 4px;
+    }
+  }
+
+  &.not-inline {
+    flex-direction: column;
+
+    .name {
+      text-align: center;
+    }
+  }
+
+  .number {
+    text-align: center;
+    font-size: 24px;
+  }
+
+}

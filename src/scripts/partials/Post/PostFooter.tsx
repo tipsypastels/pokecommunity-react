@@ -2,13 +2,15 @@ import React from 'react';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import { When } from 'react-if';
 
+import '../../../styles/modules/Post/PostFooter.scss';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faThumbsUp, 
   faShareSquare,
   faEdit,
   faCommentDots
-} from '@fortawesome/pro-solid-svg-icons';
+} from '@fortawesome/pro-light-svg-icons';
 
 interface IProps {
   canEdit: boolean;
@@ -21,7 +23,7 @@ const PostFooter = ({ canEdit, canSharePosts, canReply, canReactToPosts }) => (
   <div className="PostFooter flex">
     <ButtonToolbar className="post-left-actions flex-grows">
       <When condition={canReactToPosts}>
-        <Button variant="link">
+        <Button className="menu-button" variant="link">
           <FontAwesomeIcon icon={faThumbsUp}/>
           <span>
             Like
@@ -29,7 +31,7 @@ const PostFooter = ({ canEdit, canSharePosts, canReply, canReactToPosts }) => (
         </Button>
       </When>
       <When condition={canSharePosts}>
-        <Button variant="link">
+        <Button className="menu-button" variant="link">
           <FontAwesomeIcon icon={faShareSquare} />
           <span>
             Share
@@ -39,7 +41,7 @@ const PostFooter = ({ canEdit, canSharePosts, canReply, canReactToPosts }) => (
     </ButtonToolbar>
     <div className="post-right-actions">
       <When condition={canEdit}>
-        <Button variant="link">
+        <Button className="menu-button" variant="link">
           <FontAwesomeIcon icon={faEdit}/>
           <span>
             Edit
@@ -47,7 +49,7 @@ const PostFooter = ({ canEdit, canSharePosts, canReply, canReactToPosts }) => (
         </Button>
       </When>
       <When condition={canReply}>
-        <Button variant="link">
+        <Button className="menu-button" variant="link">
           <FontAwesomeIcon icon={faCommentDots}/>
           <span>
             Respond

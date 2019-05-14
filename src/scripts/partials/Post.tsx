@@ -15,26 +15,43 @@ interface IProps extends PostInterface {
 
 class Post extends Component<IProps> {
   render() {
+    const {
+      user,
+      username,
+      content,
+      dateline,
+      indexInThread,
+      thread,
+      canEdit,
+    } = this.props;
+    
     return (
       <Block className="Post">
-        <Block.Header>
+        <Block.Header noPadding noBorderBottom>
           <PostHeader
-            username={this.props.username}
+            userid={user.userid}
+            username={username}
+            avatarURL={user.avatarURL}
+            usertitleHTML={user.usertitleHTML}
+            postCount={user.postCount}
+            yearCount={user.yearCount}
+            miniBiography={user.miniBiography}
+            postFlair={user.postFlair}
           />
         </Block.Header>
 
         <Block.Content>
           <PostContent
-            content={this.props.content}
-            dateline={this.props.dateline}
-            postid={this.props.postid}
-            canModerate={this.props.thread.canModerate}
+            content={content}
+            dateline={dateline}
+            indexInThread={indexInThread}
+            canModerate={thread.canModerate}
           />
           <PostFooter 
-            canEdit={this.props.canEdit}
-            canSharePosts={this.props.thread.canSharePosts}
-            canReply={this.props.thread.canReply}
-            canReactToPosts={this.props.thread.canReactToPosts}
+            canEdit={canEdit}
+            canSharePosts={thread.canSharePosts}
+            canReply={thread.canReply}
+            canReactToPosts={thread.canReactToPosts}
           />
         </Block.Content>
       </Block>
