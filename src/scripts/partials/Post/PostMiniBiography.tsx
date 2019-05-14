@@ -1,5 +1,4 @@
-import React from 'react';
-import { When } from 'react-if';
+import React, { CSSProperties } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -23,7 +22,11 @@ const onlineToIcon = (lastOnline) => (
   lastOnline === 'Online now' ? faCircleSolid : faCircleHollow
 );
 
-const PostMiniBiography = (props: MiniBiographyInterface) => {
+interface IProps extends MiniBiographyInterface {
+  style?: CSSProperties; // post flair
+}
+
+const PostMiniBiography = (props: IProps) => {
   let age         = null;
   let gender      = null; 
   let location    = null;
@@ -76,7 +79,7 @@ const PostMiniBiography = (props: MiniBiographyInterface) => {
   }
 
   return (
-    <div className="minibio">
+    <div className="minibio" style={props.style}>
       {age}
       {gender}
       {location}

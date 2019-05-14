@@ -14,7 +14,7 @@ interface IProps {
 const Stat = (props: IProps) => (
   <div className={`Stat ${props.inline ? 'inline' : 'not-inline'} ${props.className || ''}`}>
     <div className="number">
-      {props.number}
+      {props.number.toLocaleString()}
     </div>
 
     <div className="name">

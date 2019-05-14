@@ -16,7 +16,12 @@ export default interface ThreadInterface {
 
   banner?: string;
 
-  user: UserInterface;
+  // User is optional, as most of the important data like username and id is cached in the thread table.
+  // This maybe isn't the best way to work this out..
+  // split user interface into User (minimal) and UserWithMetadata?
+  // TODO consider this
+  user?: UserInterface;
+
   forum: ForumInterface;
   posts: PostInterface[];
   repliesCount: number;

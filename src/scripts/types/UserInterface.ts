@@ -1,4 +1,5 @@
 import MiniBiographyInterface from './MiniBiographyInterface';
+import PostFlairInterface from './PostFlairInterface';
 
 export default interface UserInterface {
   userid: number;
@@ -10,4 +11,5 @@ export default interface UserInterface {
   yearCount: number;
 
   miniBiography: MiniBiographyInterface;
+  postFlair: PostFlairInterface;
 }

@@ -16,6 +16,10 @@
   &.not-inline {
     flex-direction: column;
     justify-content: center;
+
+    .name {
+      text-align: center;
+    }
   }
 
   .number {

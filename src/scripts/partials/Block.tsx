@@ -9,10 +9,13 @@ interface IProps {
 
 interface HeaderProps extends IProps {
   noBorderBottom?: boolean;
+  noPadding?: boolean;
 }
 
 const Header = (props: HeaderProps) => (
-  <header className={`BlockHeader ${props.className || ''} ${props.noBorderBottom ? 'no-border-bottom' : ''}`}>
+  <header className={
+    `BlockHeader ${props.className || ''} ${props.noBorderBottom ? 'no-border-bottom' : ''} ${props.noPadding ? 'no-padding' : ''}`
+  }>
     {props.children}
   </header>
 );

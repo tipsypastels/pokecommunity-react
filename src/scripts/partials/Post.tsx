@@ -20,21 +20,22 @@ class Post extends Component<IProps> {
       username,
       content,
       dateline,
-      postid,
+      indexInThread,
       thread,
       canEdit,
     } = this.props;
     
     return (
       <Block className="Post">
-        <Block.Header noBorderBottom>
+        <Block.Header noPadding noBorderBottom>
           <PostHeader
             username={username}
             avatarURL={user.avatarURL}
             usertitleHTML={user.usertitleHTML}
             postCount={user.postCount}
-            yearCount={user.postCount}
+            yearCount={user.yearCount}
             miniBiography={user.miniBiography}
+            postFlair={user.postFlair}
           />
         </Block.Header>
 
@@ -42,7 +43,7 @@ class Post extends Component<IProps> {
           <PostContent
             content={content}
             dateline={dateline}
-            postid={postid}
+            indexInThread={indexInThread}
             canModerate={thread.canModerate}
           />
           <PostFooter 
