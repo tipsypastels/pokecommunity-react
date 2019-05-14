@@ -29,6 +29,7 @@ class Post extends Component<IProps> {
       <Block className="Post">
         <Block.Header noPadding noBorderBottom>
           <PostHeader
+            userid={user.userid}
             username={username}
             avatarURL={user.avatarURL}
             usertitleHTML={user.usertitleHTML}

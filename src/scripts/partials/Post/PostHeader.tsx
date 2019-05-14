@@ -7,9 +7,12 @@ import Stat from '../Stat';
 import MiniBiographyInterface from '../../types/MiniBiographyInterface';
 import PostFlairInterface from '../../types/PostFlairInterface';
 
+import vBRoute from '../../bridge/vBRoute';
+
 import '../../../styles/modules/Post/PostHeader.scss';
 
 interface IProps {
+  userid: number;
   username: string;
   avatarURL?: string;
   usertitleHTML?: string;
@@ -23,18 +26,22 @@ const PostHeader = (props: IProps) => (
   <div className="PostHeader" style={props.postFlair.main}>
     <When condition={typeof props.avatarURL !== 'undefined'}>
       <div className="avatar-container">
-        <img
-          src={props.avatarURL} 
-          alt={`${props.username}'s Avatar`}
-          className="avatar"
-          style={props.postFlair.avatar}
-        />
+        <a href={vBRoute('profile', props.userid)}>
+          <img
+            src={props.avatarURL} 
+            alt={`${props.username}'s Avatar`}
+            className="avatar"
+            style={props.postFlair.avatar}
+          />
+        </a>
       </div>
     </When>
 
     <div className="username-usertitle">
       <h1 style={props.postFlair.username}>
-        {props.username}
+        <a href={vBRoute('profile', props.userid)}>
+          {props.username}
+        </a>
       </h1>
 
       {(() => {

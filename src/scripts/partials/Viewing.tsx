@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import pluralize from 'pluralize';
 
 import Block from './Block';
 
@@ -19,11 +20,11 @@ class Viewing extends Component<IProps> {
       <Block className="Viewing">
         <Block.Header>
           <h4>
-            {users.length} people viewing this {viewing}
+            {users.length} {pluralize('people', users.length)} viewing this {viewing}
           </h4>
 
           <small className="text-small">
-            ({guests} guests)
+            ({guests} {pluralize('guests', guests)})
           </small>
         </Block.Header>
 
