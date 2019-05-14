@@ -1,8 +1,29 @@
 // TODO move this
 $app-color: rgba(227, 66, 26, 0.9);
+$omnibar-color: rgba(64, 64, 64, 0.9);
+$omnibar-box-shadow: 0 1px rgba(0, 0, 0, 0.15);
+$omnibar-height: 4.875rem; /* Baseline height to determine how content is shifted - only use if content is covered by Omnibar. Should always be 4.875rem, sized to elements inside it. */
+$omnibar-badge-color: #db3c12;
+$omnibar-user-menu-background-color: rgba(255, 255, 255, 0.95);
+$omnibar-user-menu-text: #222;
+$omnibar-breadcrumb-background-color: #f0f0f0;
+$omnibar-breadcrumb-text: #555;
+$community-nav-color: rgba(0,0,0,0.3);
+$community-nav-height: 1.8125rem; /* Links above Omnibar. This is added to the Omnibar height in-code to determine default shift of content. */
+$community-nav-item-color: #fff;
 
 .Omnibar {
   padding: 0;
+  background: $omnibar-color;
+	-webkit-backdrop-filter: blur(5px);
+	backdrop-filter: blur(5px);
+  box-shadow: $omnibar-box-shadow;
+  align-items: stretch;
+	will-change: transform;
+    transition: transform 200ms linear;
+	&.nav-unfixed {
+		transform: translateY(-$community-nav-height);
+	}
   .navbar-brand {
     padding: 0;
     display: flex;
@@ -23,6 +44,232 @@ $app-color: rgba(227, 66, 26, 0.9);
       padding-right: 0.65rem;
       font-weight: 300;
       font-size: 1.3rem;
+    }
+  }
+  .navbar-collapse {
+    align-items: stretch;
+  }
+  .navbar-nav {
+    align-items: stretch;
+    .nav-item {
+      display: flex;
+      align-items: stretch;
+      .nav-link {
+        align-items: stretch;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        &.dropdown-toggle {
+          &::after {
+            display: none;
+          }
+        }
+        .nav-link-label {
+          display: none;
+          font-weight: 300;
+          font-size: 95%;
+          padding-left: 0.3rem;
+          
+        }
+        .badge {
+          position: absolute;
+          right: 0.2rem;
+          bottom: 0.3rem;
+          background: $omnibar-badge-color;
+          padding: 0.2rem 0.2rem;
+          color: white;
+        }
+      }
+      .dropdown-menu {
+        margin-top: -1px;
+        border-radius: 0 0 .25rem .25rem;
+      }
+      @media (max-width: 374px) {
+        &.nav-item-donations {
+          display: none;
+        }
+      }
+      @media (max-width: 767px) {
+        position: static;
+        .dropdown-menu {
+          left: 0;
+          right: 0;
+        }
+      }
+      @media (min-width: 768px) {
+        .dropdown-menu {
+          &.wide-menu {
+            min-width: 350px;
+            max-width: 100%;
+          }
+        }
+      }
+    }
+    .nav-item#user-menu {
+      .nav-link {
+        padding: .1rem .5rem;
+        &.dropdown-toggle {
+          background: $omnibar-user-menu-background-color;
+          color: $omnibar-user-menu-text;
+          &::after {
+            display: none;
+          }
+        }
+        .nav-link-label {
+          padding-right: 0.3rem;
+          @media (min-width: 576px) {
+            display: block;
+          }
+        }
+        .useravatar {
+          display: none;
+          max-height: 40px;
+          max-width: 90px;
+          height: auto;
+          width: auto;
+        }
+      }
+      &.has-avatar {
+        .nav-link {
+          @media (min-width: 576px) {
+            .menu-icon {
+              display: none;
+            }
+            .useravatar {
+              display: block;
+            }
+          }
+        }
+      }
+      &:hover {
+        .nav-link {
+          &.dropdown-toggle {
+            background: darken($omnibar-user-menu-background-color,4%);
+          }
+        }
+      }
+      &.show, &:active, &:focus {
+        .nav-link {
+          &.dropdown-toggle {
+            background: darken($omnibar-user-menu-background-color,10%);
+          }
+        }
+      }
+      .dropdown-menu {
+        .user-account-box {
+          display: flex;
+          .user-menu-avatar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .useravatar {
+              max-height: 3rem;
+              max-width: 7rem;
+            }
+          }
+          .user-menu-greeting {
+            h1.account-name {
+              font-size: 1.3rem;
+              font-weight: 300;
+              margin-bottom: 0.25rem;
+            }
+            .actions {
+              .action {
+                font-size: 0.8rem;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.navbar-breadcrumb {
+      /* breadcrumb */
+      .nav-item {
+        .nav-link {
+          font-weight: 400;
+          font-size: 0.95em;
+          display: none;
+          color: $omnibar-breadcrumb-text;
+          text-overflow: ellipsis;
+          overflow-x: hidden;
+          white-space: nowrap;
+          transition-property: max-width;
+          transition-duration: 0.5s;
+          transition-timing-function: ease;
+          .breadcrumb-node-home, .breadcrumb-node-label, .breadcrumb-node-label-back {
+            margin-left: 0.2em;
+          }
+          .breadcrumb-node-label {
+            @media (max-width: 374px) {
+              display: none;
+            }
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          @media (min-width: 375px) {
+            .breadcrumb-node-label-back {
+              display: none;
+            }
+          }
+          @media (min-width: 768px) {
+            padding-left: .75rem; padding-right: .75rem;
+            .breadcrumb-node-label-back {
+              display: none;
+            }
+            &:hover, &:focus {
+              max-width: 15rem;
+            }
+          }
+          @media (min-width: 1200px) {
+            display: flex;
+          }
+        }
+        &:nth-last-of-type(7) a {
+          background-color: darken($omnibar-breadcrumb-background-color, 8.5%);
+        }
+        &:nth-last-of-type(6) a {
+          background-color: darken($omnibar-breadcrumb-background-color, 8%);
+        }
+        &:nth-last-of-type(5) a {
+          background-color: darken($omnibar-breadcrumb-background-color, 7.5%);
+        }
+        &:nth-last-of-type(4) a {
+          background-color: darken($omnibar-breadcrumb-background-color, 7%);
+        }
+        &:nth-last-of-type(3) a {
+          background-color: darken($omnibar-breadcrumb-background-color, 6%);
+        }
+        &:nth-last-of-type(2) a {
+          background-color: darken($omnibar-breadcrumb-background-color, 3%);
+        }
+        &:first-of-type a {
+          background-color: darken($omnibar-breadcrumb-background-color, 9%);
+        }
+        &:nth-last-of-type(1) a {
+          display: flex;
+          background-color: $omnibar-breadcrumb-background-color;
+          letter-spacing: -0.07rem;
+          max-width: 7rem;
+          @media (min-width: 768px) {
+            letter-spacing: 0;
+            max-width: 10rem;
+          }	
+          @media (min-width: 1200px) {
+            max-width: 13rem;
+          }	
+        }
+        @media (min-width: 1200px) {
+          &.nav-home {
+            .nav-link {
+              display: none;
+            }
+            &:last-of-type .nav-link {
+              display: flex;
+            }
+          }
+        }
+      }
     }
   }
 }
