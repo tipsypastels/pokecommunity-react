@@ -27,10 +27,11 @@ class Post extends Component<IProps> {
     
     return (
       <Block className="Post">
-        <Block.Header>
+        <Block.Header noBorderBottom>
           <PostHeader
             username={username}
             avatarURL={user.avatarURL}
+            usertitleHTML={user.usertitleHTML}
             postCount={user.postCount}
             yearCount={user.postCount}
             miniBiography={user.miniBiography}

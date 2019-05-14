@@ -6,11 +6,12 @@ import Stat from '../Stat';
 
 import MiniBiographyInterface from '../../types/MiniBiographyInterface';
 
-import '../../../styles/modules/PostHeader.scss';
+import '../../../styles/modules/Post/PostHeader.scss';
 
 interface IProps {
   username: string;
   avatarURL?: string;
+  usertitleHTML?: string;
   postCount: number;
   yearCount: number;
   miniBiography: MiniBiographyInterface;
@@ -33,9 +34,14 @@ const PostHeader = (props: IProps) => (
         {props.username}
       </h1>
 
-      <h2>
-        usertitle here
-      </h2>
+      {(() => {
+        if (typeof props.usertitleHTML !== 'undefined') {
+          return (
+            <h2 dangerouslySetInnerHTML={{ __html: props.usertitleHTML }} />
+          )
+        }
+      })()}
+    
     </div>
 
     <div className="statistics">

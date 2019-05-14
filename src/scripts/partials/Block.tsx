@@ -7,8 +7,12 @@ interface IProps {
   className?: string;
 }
 
-const Header = (props: IProps) => (
-  <header className={`BlockHeader ${props.className || ''}`}>
+interface HeaderProps extends IProps {
+  noBorderBottom?: boolean;
+}
+
+const Header = (props: HeaderProps) => (
+  <header className={`BlockHeader ${props.className || ''} ${props.noBorderBottom ? 'no-border-bottom' : ''}`}>
     {props.children}
   </header>
 );

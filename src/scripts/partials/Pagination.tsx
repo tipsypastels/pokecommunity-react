@@ -12,6 +12,10 @@ const PAGE_RANGE = 3;
 
 class Pagination extends Component<IProps> {
   render() {
+    if (this.props.currentPage <= 1 && this.props.totalPages <= 1) {
+      return null;
+    }
+
     return (
       <div className="Pagination">
         {this.buildBackwards()}

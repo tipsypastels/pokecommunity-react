@@ -1,5 +1,7 @@
 import React from 'react';
 
+import '../../../styles/modules/Post/PostContent.scss';
+
 interface IProps {
   postid: number;
   dateline: number;
@@ -13,7 +15,7 @@ const PostContent = ({ postid , content, dateline, canModerate }: IProps) => (
       {(new Date(dateline)).toDateString()}, Post #{postid}
     </div>
 
-    <main className="post-content flex">
+    <main className="post-message">
       {content}
     </main>
   </div>

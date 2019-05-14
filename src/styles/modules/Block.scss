@@ -8,10 +8,13 @@
 
   & > header {
     background-color: #f9f9f9;
-    border-bottom: 2px solid #444;
     padding: 0.625rem;
     display: flex;
     align-items: center;
+    
+    &:not(.no-border-bottom) {
+      border-bottom: 2px solid #444;
+    }
   }
 
   & > .BlockContent {

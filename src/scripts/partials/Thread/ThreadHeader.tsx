@@ -18,6 +18,7 @@ interface IProps {
   repliesCount: number;
   canReply: boolean;
   postusername: string;
+  dateline: number;
   openEditor: () => void;
 }
 
@@ -38,7 +39,8 @@ export default class ThreadHeader extends Component<IProps> {
               </span>
 
               <span className="thread-dateline">
-                <FontAwesomeIcon icon={faClock} /> Date goes here
+                <FontAwesomeIcon className="fa-fw" icon={faClock} />
+                {(new Date(this.props.dateline)).toDateString()}
               </span>
             </div>
           </div>

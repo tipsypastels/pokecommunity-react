@@ -51,6 +51,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         forumid: 1,
         open: true,
         views: 1,
+        dateline: (new Date().getTime()),
         title: 'xxx',
         postusername: 'Rainbow',
         repliesCount: 1,
@@ -58,7 +59,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         canModerate: true,
         canReactToPosts: true,
         canSharePosts: true,
-        totalPages: 10,
+        totalPages: 1,
 
         user: {
           userid: 1,
@@ -89,6 +90,7 @@ export default class ThreadPage extends Component<IProps, IState> {
               avatarURL: 'https://www.pokecommunity.com/customavatars/avatar210532_681.gif',
               postCount: 1,
               yearCount: 1,
+              usertitleHTML: `<strong><font color="red">shine</font></strong>`,
               miniBiography: {
                 age: 20,
                 gender: 'Female',
@@ -185,6 +187,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         repliesCount={this.state.thread.repliesCount}
         canReply={this.state.thread.canReply}
         postusername={this.state.thread.postusername}
+        dateline={this.state.thread.dateline}
         openEditor={this.openEditor}
       />
     );

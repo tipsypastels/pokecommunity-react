@@ -9,6 +9,7 @@ export default interface ThreadInterface {
 
   title: string;
   postusername: string;
+  dateline: number;
 
   open: boolean;
   views: number;
@@ -26,5 +27,4 @@ export default interface ThreadInterface {
   canModerate: boolean;
 
   totalPages: number;
-
 }
