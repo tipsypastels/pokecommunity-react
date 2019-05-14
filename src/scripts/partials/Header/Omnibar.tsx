@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, Button, Dropdown, NavItem } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee } from '@fortawesome/pro-solid-svg-icons';
+import { faToolbox, faUser, faBell, faQuestionCircle, faEnvelope, faDonate, faSearch } from '@fortawesome/pro-light-svg-icons';
 import { Link } from 'react-router-dom';
 
 import { BreadcrumbInterface } from '../../types/BreadcrumbInterface';
@@ -17,7 +17,7 @@ interface IProps {
 export default class Omnibar extends Component<IProps> {
   render() {
     return (
-      <Navbar className="Omnibar" bg="light">
+      <Navbar className="Omnibar" variant="dark" fixed="top" expand>
         <Navbar.Brand href="#home">
           <span className="brand-logo">
             <img 
@@ -27,24 +27,58 @@ export default class Omnibar extends Component<IProps> {
               title="PokéCommunity" 
             />
           </span>
+          <span className="brand-text d-none d-sm-inline app-title">
+            PokéCommunity
+          </span>
         </Navbar.Brand>
 
-        {this.props.breadcrumbs && this.getBreadcrumbs()}
-
-        <Navbar id="basic-navbar-nav">
-          <Nav className="navbar-breadcrumb mr-auto">
-            
-          </Nav>
+        <Navbar.Collapse id="basic-navbar-nav">
+          {this.props.breadcrumbs && this.getBreadcrumbs()}
           <Nav className="navbar-user-tools">
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Hello</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-            </NavDropdown>
+            <Dropdown id="help-menu" alignRight as={NavItem}>
+              <Dropdown.Toggle id="help-menu-toggle" as={Nav.Link}><FontAwesomeIcon icon={faQuestionCircle} size="lg" /></Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item>Hello there!</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown id="supporters-menu" alignRight as={NavItem}>
+              <Dropdown.Toggle id="supporters-menu-toggle" as={Nav.Link}><FontAwesomeIcon icon={faDonate} size="lg" /></Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item>Hello there!</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown id="admin-tools-menu" alignRight as={NavItem}>
+              <Dropdown.Toggle id="admin-tools-menu-toggle" as={Nav.Link}><FontAwesomeIcon icon={faToolbox} size="lg" /></Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item>Hello there!</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown id="search-menu" alignRight as={NavItem}>
+              <Dropdown.Toggle id="search-menu-toggle" as={Nav.Link}><FontAwesomeIcon icon={faSearch} size="lg" /></Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item>Hello there!</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown id="messages-menu" alignRight as={NavItem}>
+              <Dropdown.Toggle id="messages-menu-toggle" as={Nav.Link}><FontAwesomeIcon icon={faEnvelope} size="lg" /></Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item>Hello there!</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown id="notifications-menu" alignRight as={NavItem}>
+              <Dropdown.Toggle id="notifications-menu-toggle" as={Nav.Link}><FontAwesomeIcon icon={faBell} size="lg" /></Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item>Hello there!</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown id="user-menu" alignRight as={NavItem}>
+              <Dropdown.Toggle id="user-menu-toggle" as={Nav.Link}><FontAwesomeIcon icon={faUser} size="lg" /></Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item>Hello there!</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </Nav>
-        </Navbar>
+        </Navbar.Collapse>
       </Navbar>
     );
   }
@@ -60,7 +94,7 @@ export default class Omnibar extends Component<IProps> {
 
     return (
       // TODO bs component?
-      <ul className="navbar navbar-nav nav-breadcrumb">
+      <ul className="navbar-nav nav-breadcrumb mr-auto">
         {crumbs}
       </ul>
     )
