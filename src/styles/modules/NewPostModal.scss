@@ -7,4 +7,15 @@
 
     width: 75%;
   }
+
+  .modal-footer {
+    display: block;
+
+    .Preview {
+      strong {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
 }

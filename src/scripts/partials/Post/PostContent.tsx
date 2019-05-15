@@ -1,4 +1,5 @@
 import React from 'react';
+import BBCode from 'pokecommunity-bbcode';
 
 import '../../../styles/modules/Post/PostContent.scss';
 
@@ -15,9 +16,10 @@ const PostContent = ({ indexInThread , content, dateline, canModerate }: IProps)
       {(new Date(dateline)).toDateString()}, Post #{indexInThread}
     </div>
 
-    <main className="post-message">
-      {content}
-    </main>
+    <main 
+      className="post-message"
+      dangerouslySetInnerHTML={{ __html: BBCode.process({ text: content }).html}}
+    />
   </div>
 );
 
