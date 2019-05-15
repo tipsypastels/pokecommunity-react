@@ -41,7 +41,6 @@ export default class Editor extends Component<IProps, IState> {
   }
 
   onChange = (e: any) => {
-    console.log(e);
     this.props.setContent(e.target.value, () => {
       const textarea = this.state.textareaRef.current;
       // have to change it to inherit first so it can recalculate
