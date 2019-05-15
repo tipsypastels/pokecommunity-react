@@ -1,0 +1,30 @@
+.ThreadPoll {
+  ul {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      padding: 10px;
+
+      .option-title {
+        width: 200px;
+        word-wrap: wrap;
+      }
+
+      //TODO use mobile variable
+      @media (max-width: 768px) {
+        display: inline;
+      }
+
+      &:nth-of-type(even) {
+        //TODO change color variable
+        background-color: rgb(243, 240, 240);
+      }
+
+      //TODO make variable poll colors
+      .progress {
+        flex-grow: 1;
+      }
+    }
+  }
+}

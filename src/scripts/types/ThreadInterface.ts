@@ -1,6 +1,7 @@
 import PostInterface from './PostInterface';
 import ForumInterface from './ForumInterface';
 import UserInterface from './UserInterface';
+import PollInterface from './PollInterface';
 
 export default interface ThreadInterface {
   threadid: number;
@@ -15,6 +16,8 @@ export default interface ThreadInterface {
   views: number;
 
   banner?: string;
+
+  poll?: PollInterface;
 
   // User is optional, as most of the important data like username and id is cached in the thread table.
   // This maybe isn't the best way to work this out..
