@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Modal, Button } from 'react-bootstrap';
 
 import Editor from './Editor';
+import Preview from './Editor/Preview';
 
 import ThreadInterface from '../types/ThreadInterface';
 
@@ -29,11 +30,21 @@ export default class NewPostModal extends Component<IProps, IState> {
   }
 
   render() {
+    let preview = null;
+
+    if (this.state.content) {
+      preview = (
+        <Modal.Footer>
+          <Preview content={this.state.content} />
+        </Modal.Footer>
+      );
+    }
+
     return (
       <Modal dialogClassName="NewPostModal" show={this.props.show} onHide={this.props.closeModal}>
         <Modal.Header className="flex">
           <Modal.Title className="flex-grows">
-            Reply to {this.props.thread.title}
+            Reply to "{this.props.thread.title}"
           </Modal.Title>
 
           <Button variant="primary" disabled={!this.canSubmitPost()}>
@@ -47,6 +58,8 @@ export default class NewPostModal extends Component<IProps, IState> {
             setContent={this.setContent}
           />
         </Modal.Body>
+
+        {preview}
       </Modal>
     )
   }

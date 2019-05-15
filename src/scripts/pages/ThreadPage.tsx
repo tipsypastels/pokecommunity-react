@@ -52,7 +52,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         open: true,
         views: 1,
         dateline: (new Date().getTime()),
-        title: 'xxx',
+        title: 'On Ducks and Spacetime',
         postusername: 'Rainbow',
         repliesCount: 1,
         canReply: true,
