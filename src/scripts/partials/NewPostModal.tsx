@@ -41,10 +41,10 @@ export default class NewPostModal extends Component<IProps, IState> {
     }
 
     return (
-      <Modal dialogClassName="NewPostModal" show={this.props.show} onHide={this.props.closeModal}>
+      <Modal dialogClassName="NewPostModal modal-dialog-centered" show={this.props.show} onHide={this.props.closeModal}>
         <Modal.Header className="flex">
           <Modal.Title className="flex-grows">
-            Reply to "{this.props.thread.title}"
+            Reply <span className="d-none d-md-inline">to "{this.props.thread.title}"</span>
           </Modal.Title>
 
           <Button variant="primary" disabled={!this.canSubmitPost()}>

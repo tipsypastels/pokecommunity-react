@@ -29,7 +29,12 @@
     resize: none;
     border: none;
     outline: none;
-    min-height: 5rem;
-    max-height: 75vh;
+    min-height: 20rem;
+    max-height: 100vh;
+
+    @media screen and (min-width: 768px) {
+      min-height: 5rem;
+      max-height: 75rem;
+    }
   }
 }
