@@ -14,9 +14,20 @@ interface IProps {
   children: ReactNode;
   banner?: string;
   breadcrumbs?: BreadcrumbInterface[];
+  htmlTitle?: string;
 }
 
+export const baseTitle = 'The PokéCommunity Forums';
+
 export default class Page extends Component<IProps> {
+  componentDidMount() {
+    this.setTitle();
+  }
+  
+  componentDidUpdate() {
+    this.setTitle();
+  }
+  
   render() {
     return (
       <div className={`Page ${this.props.name}Page`}>
@@ -25,6 +36,14 @@ export default class Page extends Component<IProps> {
         {this.getContent()}
       </div>
     )
+  }
+  
+  setTitle() {
+    if (this.props.htmlTitle) {
+      document.title = [this.props.htmlTitle, baseTitle].join(' - ');
+    } else {
+      document.title = baseTitle;
+    }
   }
 
   getBanner() {

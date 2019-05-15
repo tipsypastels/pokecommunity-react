@@ -270,6 +270,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         loading={!this.state.thread}
         banner={this.state.thread && this.getBanner()}
         breadcrumbs={this.state.thread && this.getBreadcrumbs()}
+        htmlTitle={this.getHtmlTitle()}
       >
         {this.state.thread &&
           <div>
@@ -283,6 +284,12 @@ export default class ThreadPage extends Component<IProps, IState> {
         }
       </Page>
     )
+  }
+
+  getHtmlTitle(): string | undefined {
+    if (this.state.thread) {
+      return this.state.thread.title;
+    }
   }
 
   getNewPostModal() {
