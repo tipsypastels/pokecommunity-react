@@ -14,7 +14,7 @@ import { threadBreadcrumbs } from '../types/BreadcrumbInterface';
 import { pageNumber } from '../helpers/PageHelpers';
 
 import Post from '../partials/Post';
-import Editor from '../partials/Editor';
+import NewPostModal from '../partials/NewPostModal';
 
 interface IParams {
   threadid: string;
@@ -273,7 +273,7 @@ export default class ThreadPage extends Component<IProps, IState> {
       >
         {this.state.thread &&
           <div>
-            {this.getEditor()}
+            {this.getNewPostModal()}
             {this.getHeader()}
             {this.getPagination()}
             {this.getPosts()}
@@ -285,16 +285,16 @@ export default class ThreadPage extends Component<IProps, IState> {
     )
   }
 
-  getEditor() {
+  getNewPostModal() {
     if (!this.state.thread.canReply) {
       return null;
     }
 
     return (
-      <Editor
+      <NewPostModal
         show={this.state.editorOpen}
         thread={this.state.thread}
-        closeEditor={this.closeEditor}
+        closeModal={this.closeNewPostModal}
       />
     )
   }
@@ -326,8 +326,8 @@ export default class ThreadPage extends Component<IProps, IState> {
         canReply={this.state.thread.canReply}
         postusername={this.state.thread.postusername}
         dateline={this.state.thread.dateline}
-        openEditor={this.openEditor}
         poll={this.state.thread.poll}
+        openEditor={this.openNewPostModal}
       />
     );
   }
@@ -356,11 +356,11 @@ export default class ThreadPage extends Component<IProps, IState> {
     }
   }
 
-  openEditor = () => {
+  openNewPostModal = () => {
     this.setState({ editorOpen: true });
   }
 
-  closeEditor = () => {
+  closeNewPostModal = () => {
     this.setState({ editorOpen: false });
   }
 }

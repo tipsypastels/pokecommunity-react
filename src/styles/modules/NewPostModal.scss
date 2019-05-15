@@ -1,0 +1,10 @@
+.NewPostModal {
+  width: 100%;
+  max-width: none !important;
+
+  @media screen and (min-width: 768px) {
+    // todo variable size ^
+
+    width: 75%;
+  }
+}
