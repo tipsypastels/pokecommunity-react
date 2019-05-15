@@ -1,64 +1,53 @@
 import React, { Component } from 'react'
-import { Modal, Button } from 'react-bootstrap';
 
-import ThreadInterface from '../types/ThreadInterface';
+import Toolbar from './Editor/Toolbar';
 
-// TODO allow this to be nil or work in other contexts
-// like creating new thread, all that stuff
-// support min post length on the client that disables the button
-// if not met
+import '../../styles/modules/Editor.scss';
 
 interface IProps {
-  thread: ThreadInterface;
-  show: boolean;
-  closeEditor: () => void;
+  content: string;
+  setContent: (content: string, callback?: () => void) => void;
 }
 
 interface IState {
-  content: string;
+  textareaRef: React.RefObject<HTMLTextAreaElement>;
 }
 
 export default class Editor extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      content: '',
-    }
+      textareaRef: React.createRef<HTMLTextAreaElement>(),
+    };
   }
 
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.props.closeEditor}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            Reply to {this.props.thread.title}
-          </Modal.Title>
-        </Modal.Header>
+      <div className="Editor">
+        <Toolbar 
+          content={this.props.content}
+          setContent={this.props.setContent}
+          textareaRef={this.state.textareaRef}
+        />
 
-        <Modal.Body>
-          <textarea 
-            onChange={this.setContent}
-          />
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="primary" disabled={!this.canSubmitPost()}>
-            Reply
-          </Button>
-
-          <Button variant="secondary" onClick={this.props.closeEditor}>
-            Cancel
-          </Button>
-        </Modal.Footer>
-      </Modal>
+        <textarea 
+          className="Content"
+          value={this.props.content}
+          onChange={this.onChange}
+          ref={this.state.textareaRef}
+        />
+      </div>
     )
   }
 
-  setContent = (e) => {
-    this.setState({ content: e.target.value });
-  }
-
-  canSubmitPost() {
-    return this.state.content.length > 0; // TODO get from api
+  onChange = (e: any) => {
+    console.log(e);
+    this.props.setContent(e.target.value, () => {
+      const textarea = this.state.textareaRef.current;
+      // have to change it to inherit first so it can recalculate
+      // otherwise it will never shrink
+      textarea.style.height = 'inherit';
+      textarea.style.height = textarea.scrollHeight + 'px';
+    });
   }
 }
