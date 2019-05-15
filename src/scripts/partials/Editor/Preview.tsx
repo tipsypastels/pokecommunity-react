@@ -14,7 +14,7 @@ export default class Preview extends Component<IProps> {
         <strong>
           Preview
         </strong>
-        
+
         <div
           dangerouslySetInnerHTML={{ __html }}
         />

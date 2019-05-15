@@ -32,7 +32,7 @@ export default class NewPostModal extends Component<IProps, IState> {
   render() {
     let preview = null;
 
-    if (this.state.content) {
+    if (!this.state.content.match(/^\s*$/)) {
       preview = (
         <Modal.Footer>
           <Preview content={this.state.content} />

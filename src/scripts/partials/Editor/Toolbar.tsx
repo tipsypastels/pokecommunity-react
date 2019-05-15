@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faBold, 
   faItalic, 
+  faStrikethrough,
   faEyeSlash,
 } from '@fortawesome/pro-solid-svg-icons';
 
@@ -24,6 +25,10 @@ export default class Toolbar extends Component<IProps> {
 
           <button title="Make text italic" onClick={() => this.insertTag('i')}>
             <FontAwesomeIcon icon={faItalic} />
+          </button>
+
+          <button title="Make text crossed out" onClick={() => this.insertTag('s')}>
+            <FontAwesomeIcon icon={faStrikethrough} />
           </button>
         </div>
 
@@ -51,7 +56,6 @@ export default class Toolbar extends Component<IProps> {
     textarea.focus();
 
     const { selectionStart, selectionEnd } = textarea;
-
     let { content } = this.props;
 
     const openTag = `[${tag}]`;

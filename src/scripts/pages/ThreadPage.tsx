@@ -72,7 +72,7 @@ export default class ThreadPage extends Component<IProps, IState> {
             threadid: 1,
             userid: 1,
             username: 'Rainbow',
-            content: 'yyy',
+            content: '[b]bold text![/b]',
             dateline: (new Date()).getTime(),
             canEdit: true,
             indexInThread: 1,

@@ -4,6 +4,13 @@ import Toolbar from './Editor/Toolbar';
 
 import '../../styles/modules/Editor.scss';
 
+const KEYBINDS = {
+  9: /* tab */ function(e) {
+    e.preventDefault();
+    document.execCommand('insertText', false, '  ');
+  },
+}
+
 interface IProps {
   content: string;
   setContent: (content: string, callback?: () => void) => void;
@@ -34,6 +41,7 @@ export default class Editor extends Component<IProps, IState> {
           className="Content"
           value={this.props.content}
           onChange={this.onChange}
+          onKeyDown={this.onKeyDown}
           ref={this.state.textareaRef}
         />
       </div>
@@ -41,6 +49,8 @@ export default class Editor extends Component<IProps, IState> {
   }
 
   onChange = (e: any) => {
+    e.preventDefault();
+
     this.props.setContent(e.target.value, () => {
       const textarea = this.state.textareaRef.current;
       // have to change it to inherit first so it can recalculate
@@ -48,5 +58,12 @@ export default class Editor extends Component<IProps, IState> {
       textarea.style.height = 'inherit';
       textarea.style.height = textarea.scrollHeight + 'px';
     });
+  }
+
+  onKeyDown = (e: any) => {
+    const keybind = KEYBINDS[e.keyCode];
+    if (keybind) {
+      keybind.call(this, e);
+    }
   }
 }
