@@ -32,6 +32,8 @@
 .ThreadPoll {
   .children h2 {
     font-weight: 200;
+
+    margin-bottom: 0;
   }
 
   ul {
@@ -49,6 +51,11 @@
 
         strong {
           flex-basis: 5%;
+          padding-right: 0.5rem;
+        }
+
+        strong, span {
+          white-space: nowrap;
         }
       } 
     }

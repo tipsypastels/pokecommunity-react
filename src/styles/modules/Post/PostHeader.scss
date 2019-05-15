@@ -8,8 +8,14 @@
     margin-right: 8px;
 
     .avatar {
-      max-width: 140px;
-      max-height: 140px;
+      max-width: 64px;
+      max-height: 64px;
+
+
+      @media screen and (min-width: 768px) {
+        max-width: 140px;
+        max-height: 140px;
+      }
     }
   }
 
@@ -34,10 +40,20 @@
   }
 
   .statistics {
-    display: flex;
+    display: none;
+
+    @media screen and (min-width: 768px) {
+      display: flex;
+    }
   }
 
   .minibio {
+    display: none;
+    
+    @media screen and (min-width: 768px) {
+      display: block;
+    }
+
     margin-left: 20px;
     font-size: 80%;
 

@@ -18,7 +18,7 @@ class ThreadPoll extends Component<IProps> {
   render() {
     return (
       <Block.ListContent className="ThreadPoll" listItems={this.getItems()}>
-        <div className="flex flex-v-center">
+        <div className="desktop-flex flex-v-center">
           <h2 className="flex-grows">
             {this.props.poll.question}
           </h2>
