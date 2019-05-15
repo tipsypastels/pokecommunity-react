@@ -63,12 +63,9 @@ export default class ThreadHeader extends Component<IProps> {
           </div>
         </Block.Header>
 
-        <Block.Content>
-          <When condition={typeof this.props.poll !== 'undefined'}>
-            <ThreadPoll
-              poll={this.props.poll}
-            />
-          </When>
+        {this.props.poll && <ThreadPoll poll={this.props.poll} />}
+
+        <Block.Footer>
           <div className="flex">
             <When condition={this.props.canReply}>
               <Button color="primary" onClick={this.props.openEditor}>
@@ -94,7 +91,7 @@ export default class ThreadHeader extends Component<IProps> {
               </Dropdown.Menu>
             </Dropdown>
           </div>
-        </Block.Content>
+        </Block.Footer>
       </Block>
     )
   }

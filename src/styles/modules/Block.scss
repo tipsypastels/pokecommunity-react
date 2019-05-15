@@ -20,7 +20,32 @@
     }
   }
 
-  & > .BlockContent {
-    padding: 0.625rem;
+  & > .BlockContent,
+  & > .BlockFooter {
+    &:not(:empty) {
+      padding: 0.625rem;
+    }
+  }
+
+  .BlockListContent:not(:empty) {
+    padding: 0;
+
+    .children:not(:empty) {
+      padding: 5px 20px;
+    }
+
+    & > ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        padding: 3px 20px;
+
+        &:nth-child(odd) {
+          background-color: #fafafa; // TODO etc 
+        }
+      }
+    }
   }
 }

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { ProgressBar } from 'react-bootstrap';
+import pluralize from 'pluralize';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChartPie } from '@fortawesome/pro-solid-svg-icons';
+
+import Block from '../Block';
 
 import PollInterface from '../../types/PollInterface';
 
@@ -15,24 +17,22 @@ interface IProps {
 class ThreadPoll extends Component<IProps> {
   render() {
     return (
-      <div className="ThreadPoll">
-        <div className="poll-header flex">
-          <h3 className="flex-grows">
+      <Block.ListContent className="ThreadPoll" listItems={this.getItems()}>
+        <div className="flex flex-v-center">
+          <h2 className="flex-grows">
             {this.props.poll.question}
-          </h3>
-          <span className="poll-type">
+          </h2>
+
+          <small className="poll-type">
             <FontAwesomeIcon 
               className="fa-fw"
               icon={faChartPie}
             />
             {this.props.poll.type} Poll
-          </span>
+          </small>
         </div>
-        <ul className="poll-options">
-          {this.generatePollOptions()}
-        </ul>
-      </div>
-    );
+      </Block.ListContent>
+    )
   }
 
   getTotalVotes() {
@@ -41,19 +41,29 @@ class ThreadPoll extends Component<IProps> {
     }, 0);
   }
 
-  generatePollOptions() {
 
-    return this.props.poll.options.map(option =>
-      <li className="flex flex-v-center">
-        <span className="option-title">
-          {option.title}
-        </span>
-        <ProgressBar
-          now={(option.votes.length / this.getTotalVotes()) * 100}
-          label={`${option.votes.length} votes`}
-        />
-      </li>
-    );
+
+  getItems() {
+    return this.props.poll.options.map(option => {
+      let phrase = `${option.votes.length} ${pluralize('votes', option.votes.length)}`;
+      let percentage = (option.votes.length / this.getTotalVotes()) * 100;
+
+      return (
+        <li>
+          <div className="poll-progress" style={{
+            backgroundSize: `${percentage}%`,
+          }}>
+            <strong>
+              {phrase}
+            </strong>
+
+            <span>
+              {option.title}
+            </span>
+          </div>
+        </li>
+      );
+    });
   }
 }
 
