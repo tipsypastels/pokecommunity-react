@@ -60,6 +60,46 @@ export default class ThreadPage extends Component<IProps, IState> {
         canReactToPosts: true,
         canSharePosts: true,
         totalPages: 1,
+        poll: { 
+          question: 'why are cats better than dogs?',
+          type: 'Open',
+          options: [
+            {
+              title: 'because they are great!',
+              votes: [ 
+                {
+                  user: {
+                    userid: 1,
+                    username: 'Rainbow'
+                  },
+                },
+                {
+                  user: {
+                    userid: 2,
+                    username: 'Nina'
+                  },
+                },
+                {
+                  user: {
+                    userid: 3,
+                    username: 'Jake'
+                  }
+                }
+              ],
+            },
+            {
+              title: 'because they are soft',
+              votes: [
+                {
+                  user: {
+                    userid: 4,
+                    username: 'Kitty'
+                  }
+                }, 
+              ]
+            }
+          ]
+        },
 
         forum: {
           forumid: 1,
@@ -286,6 +326,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         canReply={this.state.thread.canReply}
         postusername={this.state.thread.postusername}
         dateline={this.state.thread.dateline}
+        poll={this.state.thread.poll}
         openEditor={this.openNewPostModal}
       />
     );

@@ -8,6 +8,9 @@ import { faClock } from '@fortawesome/pro-regular-svg-icons';
 
 import Block from '../Block';
 import Stat from '../Stat';
+import ThreadPoll from './ThreadPoll';
+
+import PollInterface from '../../types/PollInterface';
 
 import '../../../styles/modules/ThreadHeader.scss';
 
@@ -19,6 +22,7 @@ interface IProps {
   canReply: boolean;
   postusername: string;
   dateline: number;
+  poll: PollInterface;
   openEditor: () => void;
 }
 
@@ -59,30 +63,37 @@ export default class ThreadHeader extends Component<IProps> {
           </div>
         </Block.Header>
 
-        <Block.Content className="flex v-center flex-v-center">
-          <When condition={this.props.canReply}>
-            <Button color="primary" onClick={this.props.openEditor}>
-              Reply to Thread
-            </Button>
+        <Block.Content>
+          <When condition={typeof this.props.poll !== 'undefined'}>
+            <ThreadPoll
+              poll={this.props.poll}
+            />
           </When>
+          <div className="flex">
+            <When condition={this.props.canReply}>
+              <Button color="primary" onClick={this.props.openEditor}>
+                Reply to Thread
+              </Button>
+            </When>
 
-          <div className="flex-grows" />
+            <div className="flex-grows" />
 
-          <Dropdown alignRight>
-            <Dropdown.Toggle variant="link" id="thread-tools">
-              <FontAwesomeIcon icon={faWrench} />
+            <Dropdown alignRight>
+              <Dropdown.Toggle variant="link" id="thread-tools">
+                <FontAwesomeIcon icon={faWrench} />
 
-              <span>
-                Tools
-              </span>
-            </Dropdown.Toggle>
+                <span>
+                  Tools
+                </span>
+              </Dropdown.Toggle>
 
-            <Dropdown.Menu>
-              <Dropdown.Item href="#">
-                hello world
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+              <Dropdown.Menu>
+                <Dropdown.Item href="#">
+                  hello world
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+          </div>
         </Block.Content>
       </Block>
     )
