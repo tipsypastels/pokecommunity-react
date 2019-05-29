@@ -1,24 +1,12 @@
-import MiniBiographyInterface from './MiniBiographyInterface';
-import PostFlairInterface from './PostFlairInterface';
-
 export default interface UserInterface {
-  userid: number;
+  id: number;
   username: string;
-  avatarURL?: string;
-  usertitleHTML?: string;
+  avatar?: string;
+  usertitle?: string;
 
-  /*
-    Below this are aspects of the PostUser interface, which
-    is user with post-related associations loaded. PostUsers
-    are still valid Users, which is why the fields are
-    optional here.
-  */
-
-  postCount?: number;
-  yearCount?: number;
-
-  miniBiography?: MiniBiographyInterface;
-  postFlair?: PostFlairInterface;
-
-  isNewMember?: boolean;
+  created: number;
+  birthday: string;
+  lastOnline: number;
+  lastPosted: number;
+  postCount: number;
 }

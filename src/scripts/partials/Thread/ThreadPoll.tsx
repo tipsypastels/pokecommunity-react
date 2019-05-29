@@ -14,6 +14,10 @@ interface IProps {
   poll: PollInterface;
 }
 
+const pollStatusName = (isPublic: number) => (
+  ['Open', 'Secret'][isPublic]
+)
+
 class ThreadPoll extends Component<IProps> {
   render() {
     return (
@@ -28,7 +32,7 @@ class ThreadPoll extends Component<IProps> {
               className="fa-fw"
               icon={faChartPie}
             />
-            {this.props.poll.type} Poll
+            {pollStatusName(this.props.poll.public)} Poll
           </small>
         </div>
       </Block.ListContent>

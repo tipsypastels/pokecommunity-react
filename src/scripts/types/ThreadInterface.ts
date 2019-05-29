@@ -4,15 +4,16 @@ import UserInterface from './UserInterface';
 import PollInterface from './PollInterface';
 
 export default interface ThreadInterface {
-  threadid: number;
-  postuserid: number;
+  id: number;
+  userid: number;
   forumid: number;
 
   title: string;
-  postusername: string;
-  dateline: number;
+  username: string;
+  created: number;
 
-  open: boolean;
+  open: number;
+  sticky: boolean;
   views: number;
 
   banner?: string;

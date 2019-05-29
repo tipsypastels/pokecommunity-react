@@ -1,4 +1,6 @@
 export default interface ForumInterface {
-  forumid: number;
+  id: number;
   title: string;
+  canCreateThreads: boolean;
+  canModerate: boolean;
 }

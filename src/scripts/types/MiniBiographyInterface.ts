@@ -1,8 +1,8 @@
 export default interface MiniBiographyInterface {
-  age?: number;
+  birthday?: string;
   gender?: string;
   location?: string;
 
-  lastOnline?: string;
-  lastPosted?: string;
+  lastOnline?: number;
+  lastPosted?: number;
 }

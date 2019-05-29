@@ -22,18 +22,18 @@ class UserList extends Component<IProps> {
 
   renderUsers() {
     return this.props.users.map(user => {
-      let avatarIMG = {
-        backgroundImage: `url(${user.avatarURL})`
+      let avatar = {
+        backgroundImage: `url(${user.avatar})`
       }
       return <a
-        href={vBRoute('profile', user.userid)}
+        href={vBRoute('profile', user.id)}
         className="user flex flex-v-center"
-        key={user.userid}
+        key={user.id}
       >
         <div
           className="avatar"
           title={`${user.username}'s Avatar`}
-          style={avatarIMG}
+          style={avatar}
         />
         <div className={`username`}>
           {user.username}

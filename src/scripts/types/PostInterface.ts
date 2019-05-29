@@ -1,14 +1,13 @@
 import PostUserInterface from './PostUserInterface';
 
 export default interface PostInterface {
-  postid: number;
+  id: number;
   threadid: number;
   userid: number;
-  indexInThread: number;
 
   username: string;
   content: string;
-  dateline: number;
+  created: number;
 
   canEdit: boolean;
 

@@ -27,17 +27,17 @@ interface IProps extends MiniBiographyInterface {
 }
 
 const PostMiniBiography = (props: IProps) => {
-  let age         = null;
+  let birthday    = null;
   let gender      = null; 
   let location    = null;
   let lastOnline  = null; 
   let lastPosted  = null;;
 
-  if (props.age) {
-    age = (
+  if (props.birthday) {
+    birthday = (
       <div>
         <FontAwesomeIcon icon={faCalendarAlt} />
-        Age {props.age}
+        Age {props.birthday}
       </div>
     );
   }
@@ -80,7 +80,7 @@ const PostMiniBiography = (props: IProps) => {
 
   return (
     <div className="minibio" style={props.style}>
-      {age}
+      {birthday}
       {gender}
       {location}
       {lastOnline}

@@ -1,16 +1,21 @@
 import UserInterface from './UserInterface';
 
-export interface PollVote {
+export interface PollVoteInterface {
   user: UserInterface;
 }
 
-export interface PollOption {
+export interface PollOptionInterface {
   title: string;
-  votes: PollVote[];
+  votes: PollVoteInterface[];
 }
 
 export default interface PollInterface {
+  id: number;
   question: string;
-  type: string;
-  options: PollOption[];
+  created: number;
+  active: number;
+  voters: number;
+  public: number;
+  
+  options: PollOptionInterface[];
 }

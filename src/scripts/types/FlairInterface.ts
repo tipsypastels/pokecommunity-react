@@ -1,9 +1,9 @@
 import { CSSProperties } from "react";
 
-export default interface PostFlairInterface {
-  main?:          CSSProperties;
+export default interface FlairInterface {
   avatar?:        CSSProperties;
+  minibio?:       CSSProperties;
+  userinfo?:      CSSProperties;
   username?:      CSSProperties;
   statistics?:    CSSProperties;
-  miniBiography?: CSSProperties;
 }

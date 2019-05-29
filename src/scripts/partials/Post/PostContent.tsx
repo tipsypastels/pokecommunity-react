@@ -4,16 +4,15 @@ import BBCode from 'pokecommunity-bbcode';
 import '../../../styles/modules/Post/PostContent.scss';
 
 interface IProps {
-  dateline: number;
+  created: number;
   content: string;
-  indexInThread: number;
   canModerate: boolean; // TODO add the checkbox somewhere
 }
 
-const PostContent = ({ indexInThread , content, dateline, canModerate }: IProps) => (
+const PostContent = ({ content, created }: IProps) => (
   <div className="PostContent">
     <div className="time text-small flex-grows">
-      {(new Date(dateline)).toDateString()}, Post #{indexInThread}
+      {(new Date(created)).toDateString()}, Post #?
     </div>
 
     <main 

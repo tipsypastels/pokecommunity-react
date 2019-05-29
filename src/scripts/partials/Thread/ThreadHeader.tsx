@@ -15,20 +15,19 @@ import PollInterface from '../../types/PollInterface';
 import '../../../styles/modules/ThreadHeader.scss';
 
 interface IProps {
-  threadid: number;
   title: string;
   views: number;
   repliesCount: number;
   canReply: boolean;
-  postusername: string;
-  dateline: number;
+  username: string;
+  created: number;
   poll: PollInterface;
   openEditor: () => void;
 }
 
 export default class ThreadHeader extends Component<IProps> {
   render() {
-    const { title, views, repliesCount, postusername } = this.props;
+    const { title, views, repliesCount, username } = this.props;
     return (
       <Block className="ThreadHeader">
         <Block.Header>
@@ -37,14 +36,14 @@ export default class ThreadHeader extends Component<IProps> {
               {title}
             </h2>
 
-            <div className="thread-starter-and-dateline text-small">
+            <div className="thread-starter-and-created text-small">
               <span className="thread-starter">
-                Started by {postusername}
+                Started by {username}
               </span>
 
-              <span className="thread-dateline">
+              <span className="thread-created">
                 <FontAwesomeIcon className="fa-fw" icon={faClock} />
-                {(new Date(this.props.dateline)).toDateString()}
+                {(new Date(this.props.created)).toDateString()}
               </span>
             </div>
           </div>

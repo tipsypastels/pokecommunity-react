@@ -10,6 +10,6 @@ export interface BreadcrumbInterface {
 export const threadBreadcrumbs = (thread: ThreadInterface) => (
   [
     { name: thread.forum.title, path: `/forumdisplay.php?f=${thread.forumid}` },
-    { name: thread.title, path: `/thread/${thread.threadid}`}
+    { name: thread.title, path: `/thread/${thread.id}`}
   ]
 );

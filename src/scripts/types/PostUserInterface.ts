@@ -1,11 +1,8 @@
 import UserInterface from './UserInterface';
-import MiniBiographyInterface from './MiniBiographyInterface';
-import PostFlairInterface from './PostFlairInterface';
+import TextFieldInterface from './TextFieldInterface';
+import ProfileFieldInterface from './ProfileFieldInterface';
 
 export default interface PostUserInterface extends UserInterface {
-  postCount: number;
-  yearCount: number;
-
-  miniBiography: MiniBiographyInterface;
-  postFlair: PostFlairInterface;
+  textFields: TextFieldInterface;
+  profileFields: ProfileFieldInterface;
 }
