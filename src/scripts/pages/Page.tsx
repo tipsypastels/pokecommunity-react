@@ -32,6 +32,7 @@ export default class Page extends Component<IProps> {
     return (
       <div className={`Page ${this.props.name}Page`}>
         <Omnibar breadcrumbs={this.props.breadcrumbs} />
+        
         {this.getBanner()}
         {this.getContent()}
       </div>

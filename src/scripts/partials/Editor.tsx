@@ -1,15 +1,9 @@
 import React, { Component } from 'react'
 
 import Toolbar from './Editor/Toolbar';
+import MentionsMenu from './Editor/ContextMenus/MentionsMenu';
 
 import '../../styles/modules/Editor.scss';
-
-const KEYBINDS = {
-  9: /* tab */ function(e) {
-    e.preventDefault();
-    document.execCommand('insertText', false, '  ');
-  },
-}
 
 interface IProps {
   content: string;
@@ -18,6 +12,7 @@ interface IProps {
 
 interface IState {
   textareaRef: React.RefObject<HTMLTextAreaElement>;
+  ContextMenuComponent?: typeof Component;
 }
 
 export default class Editor extends Component<IProps, IState> {
@@ -36,6 +31,8 @@ export default class Editor extends Component<IProps, IState> {
           setContent={this.props.setContent}
           textareaRef={this.state.textareaRef}
         />
+
+        {this.getContextMenu()}
 
         <textarea 
           className="Content"
@@ -61,9 +58,29 @@ export default class Editor extends Component<IProps, IState> {
   }
 
   onKeyDown = (e: any) => {
-    const keybind = KEYBINDS[e.keyCode];
-    if (keybind) {
-      keybind.call(this, e);
+    switch(e.keyCode) {
+      case 9: /* tab */
+        e.preventDefault();
+        document.execCommand('insertText', false, '  ');
+        break;
+      
+
+      case 50: /* @ */
+        this.setState({ ContextMenuComponent: MentionsMenu });
+        break;
     }
+  }
+
+  getContextMenu() {
+    const { ContextMenuComponent } = this.state;
+    if (!ContextMenuComponent) {
+      return null;
+    }
+
+    return (
+      <ContextMenuComponent
+
+      />
+    );
   }
 }

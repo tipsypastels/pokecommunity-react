@@ -1,5 +1,9 @@
 import React from 'react';
+import { Badge } from 'react-bootstrap';
 import { When } from 'react-if';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/pro-solid-svg-icons';
 
 import PostMiniBiography from './PostMiniBiography';
 import Stat from '../Stat';
@@ -20,6 +24,7 @@ interface IProps {
   yearCount: number;
   miniBiography: MiniBiographyInterface;
   postFlair: PostFlairInterface;
+  isNewMember?: boolean;
 }
 
 const PostHeader = (props: IProps) => (
@@ -53,6 +58,19 @@ const PostHeader = (props: IProps) => (
       })()}
     
     </div>
+
+    <When condition={
+      typeof props.isNewMember !== 'undefined' && props.isNewMember
+    }>
+      <Badge 
+        variant="secondary" 
+        title="Be sure to say hello :]" 
+        className="newmember"
+      >
+        New Member!
+        <FontAwesomeIcon className="fa-fw" icon={faHeart} />
+      </Badge>
+    </When>
 
     <div className="statistics" style={props.postFlair.statistics}>
       <Stat name="posts" number={props.postCount} />

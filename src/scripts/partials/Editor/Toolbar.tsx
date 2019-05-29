@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component, ReactNode } from 'react';
+import { Dropdown } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
@@ -7,6 +8,13 @@ import {
   faStrikethrough,
   faEyeSlash,
 } from '@fortawesome/pro-solid-svg-icons';
+
+import { insertTagInTextarea } from '../../helpers/Editor/toolbarUtils';
+
+// TODO move this somewhere else
+const AVAILABLE_FONTS = [
+  'Noto Sans',
+];
 
 interface IProps {
   content: string;
@@ -17,7 +25,7 @@ interface IProps {
 export default class Toolbar extends Component<IProps> {
   render() {
     return (
-      <div className="Toolbar" onClick={this.onClick}>
+      <div className="Toolbar" onClick={this.forgivinglySelectTextarea}>
         <div className="tool-group">
           <button title="Make text bold" onClick={() => this.insertTag('b')}>
             <FontAwesomeIcon icon={faBold} />
@@ -33,6 +41,18 @@ export default class Toolbar extends Component<IProps> {
         </div>
 
         <div className="tool-group">
+          <Dropdown>
+            <Dropdown.Toggle id="font-dropdown">
+              Font             
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {this.getFonts()}
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+
+        <div className="tool-group">
           <button title="Wrap text in a spoiler" onClick={() => this.insertTag('spoiler')}>
             <FontAwesomeIcon icon={faEyeSlash} />
           </button>
@@ -41,9 +61,7 @@ export default class Toolbar extends Component<IProps> {
     );
   }
 
-  // when the toolbar is clicked, select the textbox
-  // unless a button was clicked
-  onClick = (e) => {
+  forgivinglySelectTextarea = (e) => {
     if (e.target.tagName === 'button') {
       return;
     }
@@ -51,23 +69,25 @@ export default class Toolbar extends Component<IProps> {
     this.props.textareaRef.current.focus();
   }
 
-  insertTag = (tag: string) => {
+  insertTag = (tag: string, tagValue?: string) => {
     const textarea = this.props.textareaRef.current;
-    textarea.focus();
-
-    const { selectionStart, selectionEnd } = textarea;
-    let { content } = this.props;
-
-    const openTag = `[${tag}]`;
-    const closeTag = `[/${tag}]`;
-
-    let selectedContent = content.slice(selectionStart, selectionEnd);
-    let insertContent = openTag + selectedContent + closeTag;
-
-    document.execCommand('insertText', false, insertContent);
-
-    textarea.selectionStart -= closeTag.length + selectedContent.length;
-    textarea.selectionEnd -= closeTag.length;
+    const { content } = this.props;
+    
+    insertTagInTextarea({ textarea, content, tag, tagValue });
   }
+
+  getFonts(): ReactNode {
+    return this.mapOptionsToDropdown('font', AVAILABLE_FONTS);
+  }
+
+  mapOptionsToDropdown = (tag: string, options: string[]): ReactNode => (
+    <React.Fragment>
+      {options.map(option => (
+        <Dropdown.Item key={option} onClick={() => this.insertTag(tag, option)}>
+          {option}
+        </Dropdown.Item>
+      ))}
+    </React.Fragment>
+  )
 }
 

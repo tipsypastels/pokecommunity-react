@@ -37,6 +37,7 @@ class Post extends Component<IProps> {
             yearCount={user.yearCount}
             miniBiography={user.miniBiography}
             postFlair={user.postFlair}
+            isNewMember={user.isNewMember}
           />
         </Block.Header>
 

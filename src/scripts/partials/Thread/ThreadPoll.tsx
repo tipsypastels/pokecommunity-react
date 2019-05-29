@@ -49,7 +49,7 @@ class ThreadPoll extends Component<IProps> {
       let percentage = (option.votes.length / this.getTotalVotes()) * 100;
 
       return (
-        <li>
+        <li key={option.title}>
           <div className="poll-progress" style={{
             backgroundSize: `${percentage}%`,
           }}>

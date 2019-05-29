@@ -19,4 +19,6 @@ export default interface UserInterface {
 
   miniBiography?: MiniBiographyInterface;
   postFlair?: PostFlairInterface;
+
+  isNewMember?: boolean;
 }

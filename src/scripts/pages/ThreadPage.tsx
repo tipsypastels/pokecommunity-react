@@ -166,6 +166,7 @@ export default class ThreadPage extends Component<IProps, IState> {
               avatarURL: 'https://www.pokecommunity.com/images/avatars/b2w2-trainers/Lady.gif',
               postCount: 2,
               yearCount: 2,
+              isNewMember: true,
               miniBiography: {},
               postFlair: {
                 main: {
