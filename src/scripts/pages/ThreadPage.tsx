@@ -16,10 +16,10 @@ import { pageNumber } from '../helpers/PageHelpers';
 import Post from '../partials/Post';
 import NewPostModal from '../partials/NewPostModal';
 
-import mockThread from '../mock/thread.json';
+import newcoreApi from '../bridge/newcoreApi';
 
 interface IParams {
-  threadid: string;
+  id: string;
   page?: string;
 }
 
@@ -46,9 +46,16 @@ export default class ThreadPage extends Component<IProps, IState> {
   // this is just for testing the loading message
   // obviously make this an api request later
   componentWillMount() {
-    setTimeout(() => {
-      this.setState({ thread: mockThread });
-    }, 200);
+    newcoreApi({
+      method: 'get',
+      url: `/threads/${this.props.match.params.id}`,
+    }).then(response => {
+      if (response.status === 200) {
+        this.setState({ thread: response.data });
+      } else {
+        console.error('TODO', response);
+      }
+    });
   }
 
   render() {

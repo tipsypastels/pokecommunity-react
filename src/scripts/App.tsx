@@ -27,7 +27,7 @@ class App extends Component<IProps, IState> {
       <div className="App" data-theme={this.state.theme}>
         <Router>
           <Route path ="/" exact component ={Spheal}/>
-          <Route path="/thread/:threadid" exact component={ThreadPage}/>
+          <Route path="/threads/:id" exact component={ThreadPage}/>
         </Router>
       </div>
     );
