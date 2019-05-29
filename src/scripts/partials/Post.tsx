@@ -8,6 +8,7 @@ import PostFooter from './Post/PostFooter';
 
 import ThreadInterface from '../types/ThreadInterface';
 import PostInterface from '../types/PostInterface';
+import Signature from './User/Signature';
 
 interface IProps extends PostInterface {
   thread: ThreadInterface;
@@ -35,6 +36,9 @@ class Post extends Component<IProps> {
             created={created}
             canModerate={thread.canModerate}
           />
+
+          {this.getSignature()}
+
           <PostFooter 
             canEdit={canEdit}
             canSharePosts={thread.canSharePosts}
@@ -44,6 +48,11 @@ class Post extends Component<IProps> {
         </Block.Content>
       </Block>
     )
+  }
+
+  getSignature() {
+    const { signature } = this.props.user.textFields;
+    return signature && <Signature signature={signature} />;
   }
 }
 

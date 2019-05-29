@@ -1,0 +1,12 @@
+.Signature {
+  &::before {
+    display: block;
+    content: '';
+    margin-bottom: 10px;
+
+    height: 1px;
+    width: 30%;
+
+    background-color: #ddd; // TODO vars
+  }
+}
