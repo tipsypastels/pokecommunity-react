@@ -1,3 +1,5 @@
+import strftime from 'strftime';
+
 export type Datelike = Date | number | string;
 
 export const MS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -45,14 +47,20 @@ export function relativeDateOf(date: Datelike) {
     case 1:
       return 'yesterday';
     default:
-      return standardFormattedDate(date);
+      return standardDate(date);
   }
 }
 
-export function standardFormattedDate(date: Datelike) {
+// format: May 07, 2019
+export function standardDate(date: Datelike) {
   date = resolveDate(date);
+  return strftime('%B %d, %Y', date);
+}
 
-  return date.toDateString();
+// format: May 07, 2019 at 10:22 PM
+export function standardDateTime(date: Datelike) {
+  date = resolveDate(date);
+  return strftime('%B %d, %Y at %I:%M %p', date);
 }
 
 export function yearsSince(date: Datelike) {
