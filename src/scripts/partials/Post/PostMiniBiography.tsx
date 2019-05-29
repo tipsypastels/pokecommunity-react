@@ -14,8 +14,10 @@ import { faCircle as faCircleHollow } from '@fortawesome/pro-regular-svg-icons';
 
 import MiniBiographyInterface from '../../types/MiniBiographyInterface';
 
+import { lastActionHistory, yearsSince } from '../../helpers/DateHelpers';
+
 const genderToIcon = (gender: string) => {
-  return ({ male: faMale, female: faFemale})[gender.toLowerCase()] || faGenderless
+  return ({ male: faMale, female: faFemale })[gender.toLowerCase()] || faGenderless
 }
 
 const onlineToIcon = (lastOnline) => (
@@ -37,7 +39,7 @@ const PostMiniBiography = (props: IProps) => {
     birthday = (
       <div>
         <FontAwesomeIcon icon={faCalendarAlt} />
-        Age {props.birthday}
+        Age {yearsSince(props.birthday)}
       </div>
     );
   }
@@ -64,7 +66,7 @@ const PostMiniBiography = (props: IProps) => {
     lastOnline = (
       <div>
         <FontAwesomeIcon icon={onlineToIcon(props.lastOnline)} />
-        {props.lastOnline}
+        {lastActionHistory('Seen', props.lastOnline)}
       </div>
     );
   }
@@ -73,7 +75,7 @@ const PostMiniBiography = (props: IProps) => {
     lastPosted = (
       <div>
         <FontAwesomeIcon icon={faCommentLines} />
-        {props.lastPosted}
+        {lastActionHistory('Posted', props.lastPosted)}
       </div>
     );
   }

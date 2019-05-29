@@ -12,16 +12,13 @@ import PostUserInterface from '../../types/PostUserInterface';
 
 import vBRoute from '../../bridge/vBRoute';
 
+import { yearsSince } from '../../helpers/DateHelpers';
+
 import '../../../styles/modules/Post/PostHeader.scss';
 
 interface IProps {
   user: PostUserInterface;
 }
-
-function getYearCount(userCreated: number) {
-  return (new Date()).getFullYear() 
-    - (new Date(userCreated * 1000)).getFullYear();
-} 
 
 const PostHeader = ({ user }: IProps) => (
   <div className="PostHeader" style={user.textFields.flair.userinfo}>
@@ -68,7 +65,7 @@ const PostHeader = ({ user }: IProps) => (
 
     <div className="statistics" style={user.textFields.flair.statistics}>
       <Stat name="posts" number={user.postCount} />
-      <Stat name="years" number={getYearCount(user.created)} />
+      <Stat name="years" number={yearsSince(user.created)} />
     </div>
 
     <PostMiniBiography
