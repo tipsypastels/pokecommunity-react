@@ -43,19 +43,18 @@ export default class ThreadPage extends Component<IProps, IState> {
     };
   }
 
-  // this is just for testing the loading message
-  // obviously make this an api request later
-  componentWillMount() {
-    newcoreApi({
-      method: 'get',
-      url: `/threads/${this.props.match.params.id}`,
-    }).then(response => {
-      if (response.status === 200) {
-        this.setState({ thread: response.data });
-      } else {
-        console.error('TODO', response);
-      }
-    });
+  async componentWillMount() {
+    try {
+      const response = await newcoreApi({
+        method: 'get',
+        url: `/threads/${this.props.match.params.id}`,
+      });
+
+      this.setState({ thread: response.data });
+    } catch(e) {
+      // TODO
+      console.error(e);
+    }
   }
 
   render() {
