@@ -67,7 +67,9 @@ class Post extends Component<IProps> {
     return (
       <StaffPost 
         title={staffPostGroup.singularTitle} 
-        color={staffPostGroup.color} 
+        color={staffPostGroup.color}
+        icon={staffPostGroup.icon}
+        former={staffPostGroup.former}
       />
     )
   }

@@ -1,17 +1,37 @@
 import React from 'react';
 
 import '../../../styles/modules/Post/StaffPost.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface IProps {
   title: string;
   color: string;
-  // icon?: string; // TODO
-  // TODO also former?
+  icon?: string;
+  former: boolean;
 }
 
-const StaffPost = ({ title, color }: IProps) => (
+function iconFor(icon?: string) {
+  if (!icon) {
+    return null;
+  }
+
+  if (icon.match(/^https:\/\//)) {
+    return (
+      <img 
+        className="staffpost-image"
+        src={icon}
+      />
+    );
+  } else {
+    return (
+      icon
+    );
+  }
+}
+
+const StaffPost = ({ title, color, icon, former }: IProps) => (
   <div className="StaffPost" style={{ backgroundColor: color }}>
-    {title} Post
+    {former && 'Former'} {title} Post
   </div>
 )
 

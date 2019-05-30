@@ -1,5 +1,5 @@
 import PostUserInterface from './PostUserInterface';
-import UsergroupInterface from './UsergroupInterface';
+import StaffPostGroupInterface from './StaffPostGroupInterface';
 
 export default interface PostInterface {
   id: number;
@@ -10,7 +10,7 @@ export default interface PostInterface {
   content: string;
   created: number;
 
-  staffPostGroup?: UsergroupInterface;
+  staffPostGroup?: StaffPostGroupInterface;
 
   canEdit: boolean;
 
