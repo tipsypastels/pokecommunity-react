@@ -5,10 +5,11 @@ import Block from './Block';
 import PostHeader from './Post/PostHeader';
 import PostContent from './Post/PostContent';
 import PostFooter from './Post/PostFooter';
+import Signature from './User/Signature';
+import StaffPost from './Post/StaffPost';
 
 import ThreadInterface from '../types/ThreadInterface';
 import PostInterface from '../types/PostInterface';
-import Signature from './User/Signature';
 
 interface IProps extends PostInterface {
   thread: ThreadInterface;
@@ -27,8 +28,13 @@ class Post extends Component<IProps> {
     return (
       <Block className="Post">
         <Block.Header noPadding noBorderBottom>
-          <PostHeader user={user} />
+          <PostHeader 
+            user={user}
+            forumid={thread.forumid}
+          />
         </Block.Header>
+
+        {this.getStaffPost()}
 
         <Block.Content>
           <PostContent
@@ -53,6 +59,22 @@ class Post extends Component<IProps> {
   getSignature() {
     const { signature } = this.props.user.textFields;
     return signature && <Signature signature={signature} />;
+  }
+
+  getStaffPost() {
+    let { staffPostGroup } = this.props;
+    if (!staffPostGroup) {
+      return null;
+    }
+
+    return (
+      <StaffPost 
+        title={staffPostGroup.singularTitle} 
+        color={staffPostGroup.color}
+        icon={staffPostGroup.icon}
+        former={staffPostGroup.former}
+      />
+    )
   }
 }
 

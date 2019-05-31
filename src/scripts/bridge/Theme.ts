@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-import THEME_CONFIG from './THEME_CONFIG.json';
+import THEME_CONFIG from '../../configs/themes.json';
 
 /*
   There are three ways we can get the current theme from a

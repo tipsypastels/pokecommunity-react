@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Badge } from 'react-bootstrap';
 import { When } from 'react-if';
 
@@ -15,68 +15,141 @@ import vBRoute from '../../bridge/vBRoute';
 import { yearsSince } from '../../helpers/DateHelpers';
 
 import '../../../styles/modules/Post/PostHeader.scss';
+import UserModal from '../User/UserModal';
 
 interface IProps {
   user: PostUserInterface;
+  forumid: number;
 }
 
-const PostHeader = ({ user }: IProps) => (
-  <div className="PostHeader" style={user.textFields.flair.userinfo}>
-    <When condition={typeof user.avatar !== 'undefined'}>
+interface IState {
+  userModalOpen: boolean;
+}
+
+export default class PostHeader extends Component<IProps, IState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userModalOpen: false,
+    }
+  }
+
+  render() {
+    const { user } = this.props;
+    return (
+      <div className="PostHeader" style={user.textFields.flair.userinfo}>
+        {this.getUserModal()}
+        {this.getAvatar()}
+        {this.getUsernameAndUsertitle()}
+        {this.getNewUserBadge()}
+        {this.getStatistics()}
+        {this.getMinibio()}
+      </div>
+    )
+  }
+
+  getUserModal() {
+    return (
+      <UserModal
+        user={this.props.user}
+        show={this.state.userModalOpen}
+        closeModal={this.closeUserModal}
+        forumid={this.props.forumid}
+      />
+    )
+  }
+
+  getAvatar() {
+    const { user } = this.props;
+    if (!user.avatar) {
+      return null;
+    }
+
+    return (
       <div className="avatar-container">
-        <a href={vBRoute('profile', user.id)}>
+        <a onClick={this.openUserModal} href={vBRoute('profile', user.id)}>
           <img
-            src={user.avatar} 
+            src={user.avatar}
             alt={`${user.username}'s Avatar`}
             className="avatar"
             style={user.textFields.flair.avatar}
           />
         </a>
       </div>
-    </When>
+    );
+  }
 
-    <div className="username-usertitle">
-      <h1 style={user.textFields.flair.username}>
-        <a href={vBRoute('profile', user.id)}>
-          {user.username}
-        </a>
-      </h1>
+  getUsernameAndUsertitle() {
+    const { user } = this.props;
 
-      {(() => {
-        if (typeof user.usertitle !== 'undefined') {
-          return (
-            <h2 dangerouslySetInnerHTML={{ __html: user.usertitle }} />
-          )
-        }
-      })()}
-    
-    </div>
+    let usertitle = null;
+    if (user.usertitle) {
+      usertitle = (
+        <h2 dangerouslySetInnerHTML={{ __html: user.usertitle }} />
+      );
+    }
 
-    <When condition={false}>
-      <Badge 
-        variant="secondary" 
-        title="Be sure to say hello :]" 
-        className="newmember"
-      >
-        New Member!
-        <FontAwesomeIcon className="fa-fw" icon={faHeart} />
-      </Badge>
-    </When>
+    return (
+      <div className="username-usertitle">
+        <h1 style={user.textFields.flair.username}>
+          <a onClick={this.openUserModal} href={vBRoute('profile', user.id)}>
+            {user.username}
+          </a>
+        </h1>
 
-    <div className="statistics" style={user.textFields.flair.statistics}>
-      <Stat name="posts" number={user.postCount} />
-      <Stat name="years" number={yearsSince(user.created)} />
-    </div>
+        {usertitle}
 
-    <PostMiniBiography
-      birthday={user.birthday}
-      gender={user.profileFields.gender}
-      location={user.profileFields.location}
-      lastOnline={user.lastOnline}
-      lastPosted={user.lastPosted}
-      style={user.textFields.flair.minibio}
-    />
-  </div>
-);
+      </div>
+    )
+  }
 
-export default PostHeader;
+  getNewUserBadge() {
+    return null; // TODO
+
+    // return (
+    //   <Badge
+    //     variant="secondary"
+    //     title="Be sure to say hello :]"
+    //     className="newmember"
+    //   >
+    //     New Member!
+    //     <FontAwesomeIcon className="fa-fw" icon={faHeart} />
+    //   </Badge>
+    // )
+  }
+
+  getStatistics() {
+    const { user } = this.props;
+
+    return (
+      <div className="statistics" style={user.textFields.flair.statistics}>
+        <Stat name="posts" number={user.postCount} />
+        <Stat name="years" number={yearsSince(user.created)} />
+      </div>
+    );
+  }
+
+  getMinibio() {
+    const { user } = this.props;
+
+    return (
+      <PostMiniBiography
+        birthday={user.birthday}
+        gender={user.profileFields.gender}
+        location={user.profileFields.location}
+        lastOnline={user.lastOnline}
+        lastPosted={user.lastPosted}
+        style={user.textFields.flair.minibio}
+      />
+    );
+  }
+
+  openUserModal = (e: React.MouseEvent) => {
+    e.preventDefault();
+    this.setState({ userModalOpen: true });
+  }
+
+  closeUserModal = () => {
+    this.setState({ userModalOpen: false });
+  }
+}

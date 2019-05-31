@@ -1,3 +1,5 @@
+import UsergroupInterface from "./UsergroupInterface";
+
 export default interface UserInterface {
   id: number;
   username: string;
@@ -9,4 +11,6 @@ export default interface UserInterface {
   lastOnline: number;
   lastPosted: number;
   postCount: number;
+
+  usergroups?: UsergroupInterface[];
 }

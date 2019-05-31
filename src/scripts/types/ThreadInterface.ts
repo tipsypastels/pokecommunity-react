@@ -16,8 +16,6 @@ export default interface ThreadInterface {
   sticky: boolean;
   views: number;
 
-  banner?: string;
-
   poll?: PollInterface;
 
   // User is optional, as most of the important data like username and id is cached in the thread table.
