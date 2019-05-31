@@ -19,6 +19,7 @@ import UserModal from '../User/UserModal';
 
 interface IProps {
   user: PostUserInterface;
+  forumid: number;
 }
 
 interface IState {
@@ -53,6 +54,7 @@ export default class PostHeader extends Component<IProps, IState> {
         user={this.props.user}
         show={this.state.userModalOpen}
         closeModal={this.closeUserModal}
+        forumid={this.props.forumid}
       />
     )
   }

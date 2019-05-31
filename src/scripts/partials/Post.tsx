@@ -28,7 +28,10 @@ class Post extends Component<IProps> {
     return (
       <Block className="Post">
         <Block.Header noPadding noBorderBottom>
-          <PostHeader user={user} />
+          <PostHeader 
+            user={user}
+            forumid={thread.forumid}
+          />
         </Block.Header>
 
         {this.getStaffPost()}

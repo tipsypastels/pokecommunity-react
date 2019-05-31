@@ -114,7 +114,7 @@ export default class ThreadPage extends Component<IProps, IState> {
   }
 
   getBanner() {
-    return this.state.thread.banner;
+    return this.state.thread.forum.banner;
   }
 
   getHeader() {
