@@ -12,6 +12,8 @@ import ThreadPoll from './ThreadPoll';
 
 import PollInterface from '../../types/PollInterface';
 
+import { standardDateTime } from '../../helpers/DateHelpers';
+
 import '../../../styles/modules/ThreadHeader.scss';
 
 interface IProps {
@@ -43,7 +45,7 @@ export default class ThreadHeader extends Component<IProps> {
 
               <span className="thread-created">
                 <FontAwesomeIcon className="fa-fw" icon={faClock} />
-                {(new Date(this.props.created)).toDateString()}
+                {standardDateTime(this.props.created)}
               </span>
             </div>
           </div>
