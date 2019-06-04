@@ -46,9 +46,9 @@
 
   .user-fields {
     display: flex;
+    font-size: 1rem;
     flex-wrap: wrap;
     justify-content: center;
-    margin-bottom: 0.5rem;
 
     .field {
       text-align: center;
@@ -58,40 +58,41 @@
 
       // TODO these breakpoints are really random, find better ones
 
-      @media screen and (min-width: 400px) {
+      @media screen and (min-width: 500px) {
         flex-basis: 50%;
       }
 
-      @media screen and (min-width: 1000px) {
+      @media screen and (min-width: 756px) {
         flex-basis: unset;
       }
 
       &:not(:last-child) {
-        padding-right: 0.65rem;
+        padding-right: 1rem;
       }
 
-      strong {
+      .field-title {
+        //TODO replace color with variable
         display: block;
         white-space: nowrap;
+        font-size: 0.85rem;
+        color: rgb(134, 132, 132);
       }
     }
   }
 
-  .user-controls {
-    display: flex;
-    align-items: center;
+  .modal-footer {
+    justify-content: flex-start;
 
-    .control {
-      cursor: pointer;
+    .user-controls {
+      button {
+        &:not(:last-of-type) {
+          margin-right: 0.5rem;
+        }
 
-      &:not(:last-child) {
-        margin-right: 0.5rem;
-      }
-
-      svg {
-        font-size: 1.45rem;
+        svg {
+          font-size: 1.45rem;
+        }
       }
     }
-
   }
 }

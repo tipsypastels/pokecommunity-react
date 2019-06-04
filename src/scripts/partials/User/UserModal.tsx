@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Modal, Button, ButtonToolbar } from 'react-bootstrap';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faList, faHammerWar } from '@fortawesome/pro-light-svg-icons';
@@ -26,7 +26,7 @@ export default class UserModal extends Component<IProps> {
     const { user } = this.props;
 
     return (
-      <Modal 
+      <Modal
         dialogClassName="UserModal modal-dialog-centered"
         show={this.props.show}
         onHide={this.props.closeModal}
@@ -35,7 +35,7 @@ export default class UserModal extends Component<IProps> {
           {this.getUserBanner()}
           {this.getAvatar()}
         </a>
-        
+
         <Modal.Header>
           <Modal.Title>
             <a
@@ -44,20 +44,17 @@ export default class UserModal extends Component<IProps> {
               {user.username}
             </a>
           </Modal.Title>
+          {this.getUsergroups()}
           {this.getQuickSelfIntro()}
         </Modal.Header>
 
         <Modal.Body>
           {this.getDisplayFields()}
-
-          <div className="flex flex-v-center">
-            {this.getUsergroups()}
-
-            <div className="flex-grows" />
-
-            {this.getControls()}
-          </div>
         </Modal.Body>
+
+        <Modal.Footer>
+          {this.getControls()}
+        </Modal.Footer>
       </Modal>
     )
   }
@@ -68,13 +65,19 @@ export default class UserModal extends Component<IProps> {
       return null;
     }
 
-    return usergroups.map(usergroup => (
-      <Usergroup 
+    const usergroupComponents = usergroups.map(usergroup => (
+      <Usergroup
         key={usergroup.id}
         title={usergroup.singularTitle}
         color={usergroup.color}
       />
     ));
+
+    return (
+      <div className="usergroups">
+        {usergroupComponents}
+      </div>
+    );
   }
 
   getQuickSelfIntro() {
@@ -88,24 +91,15 @@ export default class UserModal extends Component<IProps> {
   getControls() {
     return (
       <div className="user-controls">
-        <div 
-          className="control"
-          title={`Send Message to ${this.props.user.username}`} 
-        >
-          <FontAwesomeIcon icon={faComments} />
-        </div>
-        <div 
-          className="control"
-          title={`See Posts by ${this.props.user.username}`}
-        >
-          <FontAwesomeIcon icon={faList} />
-        </div>
-        <div 
-          className="control"
-          title={`Moderate ${this.props.user.username}`}
-        >
+        <Button variant="outline-secondary">
+          Send Message
+        </Button>
+        <Button variant="outline-secondary">
+          See Posts
+        </Button>
+        <Button variant="link">
           <FontAwesomeIcon icon={faHammerWar} />
-        </div>
+        </Button>
       </div>
     )
   }
@@ -114,33 +108,33 @@ export default class UserModal extends Component<IProps> {
     return (
       <div className="user-fields">
         <div className="field">
-          <strong>
-            Previous Username
-          </strong>
-          
+          <div className="field-title">
+            Formerly
+          </div>
+
           HackDeoxys
         </div>
 
         <div className="field">
-          <strong>
-            Discord Nickname
-          </strong>
+          <div className="field-title">
+            Discord
+          </div>
 
-         Nina#1337
+          Nina#1337
         </div>
 
         <div className="field">
-          <strong>
+          <div className="field-title">
             In-Game Name
-          </strong>
+          </div>
 
           Meme
         </div>
 
         <div className="field">
-          <strong>
+          <div className="field-title">
             Friend Code
-          </strong>
+          </div>
 
           1010-0101-0101
         </div>
@@ -150,11 +144,11 @@ export default class UserModal extends Component<IProps> {
 
   getUserBanner() {
     return (
-        <img
-          className="user-banner"
-          src='https://i.imgur.com/W3JtH80.jpg'
-          alt={`${this.props.user.username}'s Banner`}
-        />
+      <img
+        className="user-banner"
+        src='https://i.imgur.com/W3JtH80.jpg'
+        alt={`${this.props.user.username}'s Banner`}
+      />
     );
   }
 
@@ -163,7 +157,7 @@ export default class UserModal extends Component<IProps> {
     if (!avatar) {
       return null;
     }
-    
+
     return (
       <img src={avatar} className="avatar" />
     );
