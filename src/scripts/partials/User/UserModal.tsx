@@ -159,7 +159,11 @@ export default class UserModal extends Component<IProps> {
     }
 
     return (
-      <img src={avatar} className="avatar" />
+      <img 
+        className="avatar" 
+        src={avatar}
+        alt={`${this.props.user.username}'s Avatar`} 
+      />
     );
   }
 }
