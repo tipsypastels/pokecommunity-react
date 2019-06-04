@@ -144,10 +144,9 @@ export default class UserModal extends Component<IProps> {
 
   getUserBanner() {
     return (
-      <img
+      <div
         className="user-banner"
-        src='https://i.imgur.com/W3JtH80.jpg'
-        alt={`${this.props.user.username}'s Banner`}
+        style={{ backgroundImage: 'url(https://i.imgur.com/W3JtH80.jpg)' }}
       />
     );
   }
