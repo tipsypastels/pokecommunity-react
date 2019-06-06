@@ -8,11 +8,16 @@ import { BreadcrumbInterface } from '../types/BreadcrumbInterface';
 
 import '../../styles/modules/Page.scss';
 
-interface IProps {
+export interface PageProps {
+  appCurrentBanner: string | null;
+  setAppBanner: (banner: string) => void;
+}
+
+interface IProps extends PageProps {
   name: string;
   loading: boolean;
   children: ReactNode;
-  banner?: string;
+  newBanner?: string;
   breadcrumbs?: BreadcrumbInterface[];
   htmlTitle?: string;
 }
@@ -26,6 +31,7 @@ export default class Page extends Component<IProps> {
   
   componentDidUpdate() {
     this.setTitle();
+    this.setAppCurrentBanner();
   }
   
   render() {
@@ -38,6 +44,15 @@ export default class Page extends Component<IProps> {
       </div>
     )
   }
+
+  setAppCurrentBanner() {
+    const { setAppBanner, appCurrentBanner, newBanner } = this.props;
+    if (!newBanner || appCurrentBanner === newBanner) {
+      return;
+    }
+
+    setAppBanner(newBanner);
+  }
   
   setTitle() {
     if (this.props.htmlTitle) {
@@ -48,11 +63,13 @@ export default class Page extends Component<IProps> {
   }
 
   getBanner() {
-    if (this.props.banner) {
+    const { appCurrentBanner } = this.props;
+
+    if (appCurrentBanner) {
       return (
         <div 
           className="forum-banner"
-          dangerouslySetInnerHTML={{ __html: this.props.banner }}
+          dangerouslySetInnerHTML={{ __html: appCurrentBanner }}
         />
       )
     }

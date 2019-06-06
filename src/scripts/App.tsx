@@ -12,6 +12,7 @@ import '../styles/base/buttons.scss';
 interface IProps {}
 interface IState {
   theme: string;
+  banner?: string;
 }
 
 class App extends Component<IProps, IState> {
@@ -19,6 +20,7 @@ class App extends Component<IProps, IState> {
     super(props);
     this.state = {
       theme: getCurrentTheme(),
+      banner: null,
     }
   }
 
@@ -27,10 +29,20 @@ class App extends Component<IProps, IState> {
       <div className="App" data-theme={this.state.theme}>
         <Router>
           <Route path ="/" exact component ={Spheal}/>
-          <Route path="/threads/:id" exact component={ThreadPage}/>
+          <Route path="/threads/:id" exact render={route => (
+            <ThreadPage 
+              appCurrentBanner={this.state.banner}
+              setAppBanner={this.setAppBanner} 
+              {...route} 
+            />
+          )}/>
         </Router>
       </div>
     );
+  }
+
+  setAppBanner = (banner: string) => {
+    this.setState({ banner });
   }
 }
 
