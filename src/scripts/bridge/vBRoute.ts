@@ -1,5 +1,7 @@
 const vBRoutesList = {
   profile: userid => `/memberinfo.php?u=${userid}`,
+  sendPm: userid => `/private.php?do=newpm&u=${userid}`,
+  searchUserPosts: userid => `/search.php?do=finduser&u=${userid}`,
 };
 
 export default function vBRoute(name, ...args) {
