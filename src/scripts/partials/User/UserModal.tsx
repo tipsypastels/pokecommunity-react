@@ -91,10 +91,16 @@ export default class UserModal extends Component<IProps> {
   getControls() {
     return (
       <div className="user-controls">
-        <Button variant="outline-secondary">
+        <Button 
+          href={vBRoute('sendPm', this.props.user.id)} 
+          variant="outline-secondary"
+        >
           Send Message
         </Button>
-        <Button variant="outline-secondary">
+        <Button 
+          href={vBRoute('searchUserPosts', this.props.user.id)}
+          variant="outline-secondary"
+        >
           See Posts
         </Button>
         <Button variant="link">
