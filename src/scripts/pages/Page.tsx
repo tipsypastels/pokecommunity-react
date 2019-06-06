@@ -46,8 +46,14 @@ export default class Page extends Component<IProps> {
   }
 
   setAppCurrentBanner() {
-    const { setAppBanner, appCurrentBanner, newBanner } = this.props;
-    if (!newBanner || appCurrentBanner === newBanner) {
+    const { 
+      setAppBanner, 
+      appCurrentBanner, 
+      newBanner,
+      loading
+    } = this.props;
+
+    if (loading || appCurrentBanner === newBanner) {
       return;
     }
 
