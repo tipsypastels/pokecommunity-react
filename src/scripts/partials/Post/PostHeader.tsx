@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import { Badge } from 'react-bootstrap';
-import { When } from 'react-if';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/pro-solid-svg-icons';
 
 import PostMiniBiography from './PostMiniBiography';
 import Stat from '../Stat';
@@ -113,7 +109,6 @@ export default class PostHeader extends Component<IProps, IState> {
     //     className="newmember"
     //   >
     //     New Member!
-    //     <FontAwesomeIcon className="fa-fw" icon={faHeart} />
     //   </Badge>
     // )
   }

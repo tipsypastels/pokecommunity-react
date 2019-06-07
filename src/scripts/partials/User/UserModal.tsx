@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button, ButtonToolbar } from 'react-bootstrap';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments, faList, faHammerWar } from '@fortawesome/pro-light-svg-icons';
+import Icon from '../Icon';
 
 import PostUserInterface from '../../types/PostUserInterface';
 
@@ -104,7 +103,7 @@ export default class UserModal extends Component<IProps> {
           See Posts
         </Button>
         <Button variant="link">
-          <FontAwesomeIcon icon={faHammerWar} />
+          <Icon name="hammer-war" group="fal"/>
         </Button>
       </div>
     )

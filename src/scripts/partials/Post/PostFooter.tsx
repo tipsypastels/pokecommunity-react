@@ -2,59 +2,58 @@ import React from 'react';
 import { ButtonToolbar, Button } from 'react-bootstrap';
 import { When } from 'react-if';
 
-import '../../../styles/modules/Post/PostFooter.scss';
+import Icon from '../Icon';
+import Action from '../Action';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faThumbsUp, 
-  faShareSquare,
-  faEdit,
-  faCommentDots
-} from '@fortawesome/pro-light-svg-icons';
+import '../../../styles/modules/Post/PostFooter.scss';
 
 interface IProps {
   canEdit: boolean;
-  canSharePost: boolean;
-  canRespond: boolean;
+  canSharePosts: boolean;
+  canReply: boolean;
   canReactToPosts: boolean;
 }
 
-const PostFooter = ({ canEdit, canSharePosts, canReply, canReactToPosts }) => (
+const PostFooter = ({ canEdit, canSharePosts, canReply, canReactToPosts }: IProps) => (
   <div className="PostFooter flex">
     <ButtonToolbar className="post-left-actions flex-grows">
       <When condition={canReactToPosts}>
-        <Button className="menu-button" variant="link">
-          <FontAwesomeIcon icon={faThumbsUp}/>
-          <span>
-            Like
-          </span>
-        </Button>
+        <Action
+          name="Like"
+          icon={{ name: 'thumbs-up', group: 'fal' }}
+          active={false /* TODO */}
+          activate={() => {}}
+          deactivate={() => {}}
+        />
       </When>
       <When condition={canSharePosts}>
-        <Button className="menu-button" variant="link">
-          <FontAwesomeIcon icon={faShareSquare} />
-          <span>
-            Share
-          </span>
-        </Button>
+        <Action
+          name="Share"
+          icon={{ name: 'share-square', group: 'fal' }}
+          active={false /* TODO */}
+          activate={() => {}}
+          deactivate={() => {}}
+        />
       </When>
     </ButtonToolbar>
     <div className="post-right-actions">
       <When condition={canEdit}>
-        <Button className="menu-button" variant="link">
-          <FontAwesomeIcon icon={faEdit}/>
-          <span>
-            Edit
-          </span>
-        </Button>
+        <Action
+          name="Edit"
+          icon={{ name: 'edit', group: 'fal' }}
+          active={false /* TODO */}
+          activate={() => { }}
+          deactivate={() => { }}
+        />
       </When>
       <When condition={canReply}>
-        <Button className="menu-button" variant="link">
-          <FontAwesomeIcon icon={faCommentDots}/>
-          <span>
-            Respond
-          </span>
-        </Button>
+        <Action
+          name="Respond"
+          icon={{ name: 'comment-dots', group: 'fal' }}
+          active={false /* TODO */}
+          activate={() => { }}
+          deactivate={() => { }}
+        />
       </When>
     </div>
   </div>

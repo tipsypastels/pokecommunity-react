@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import pluralize from 'pluralize';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartPie } from '@fortawesome/pro-solid-svg-icons';
+import Icon from '../Icon';
 
 import Block from '../Block';
 
@@ -28,10 +27,7 @@ class ThreadPoll extends Component<IProps> {
           </h2>
 
           <small className="poll-type">
-            <FontAwesomeIcon 
-              className="fa-fw"
-              icon={faChartPie}
-            />
+            <Icon fw name="chart-pie" />
             {pollStatusName(this.props.poll.public)} Poll
           </small>
         </div>
@@ -61,7 +57,7 @@ class ThreadPoll extends Component<IProps> {
               {phrase}
             </strong>
 
-            <span>
+            <span className="option-title">
               {option.title}
             </span>
           </div>

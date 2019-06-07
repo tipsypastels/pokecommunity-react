@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { Button, Dropdown } from 'react-bootstrap';
 import { When } from 'react-if';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWrench } from '@fortawesome/pro-solid-svg-icons';
-import { faClock } from '@fortawesome/pro-regular-svg-icons';
+import Icon from '../Icon';
 
 import Block from '../Block';
 import Stat from '../Stat';
@@ -44,7 +42,7 @@ export default class ThreadHeader extends Component<IProps> {
               </span>
 
               <span className="thread-created">
-                <FontAwesomeIcon className="fa-fw" icon={faClock} />
+                <Icon fw name="clock" />
                 {standardDateTime(this.props.created)}
               </span>
             </div>
@@ -78,7 +76,7 @@ export default class ThreadHeader extends Component<IProps> {
 
             <Dropdown alignRight>
               <Dropdown.Toggle variant="link" id="thread-tools">
-                <FontAwesomeIcon icon={faWrench} />
+                <Icon name="wrench" />
 
                 <span>
                   Tools

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import '../../../styles/modules/Post/StaffPost.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 interface IProps {
   title: string;

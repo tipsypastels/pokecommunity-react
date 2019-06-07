@@ -1,28 +1,23 @@
 import React, { CSSProperties } from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faCalendarAlt,
-  faMale, 
-  faFemale, 
-  faGenderless,
-  faGlobe,
-  faCircle as faCircleSolid,
-  faCommentLines,
-} from '@fortawesome/pro-solid-svg-icons';
-import { faCircle as faCircleHollow } from '@fortawesome/pro-regular-svg-icons';
+import Icon, { ICON_GROUP } from '../Icon';
 
 import MiniBiographyInterface from '../../types/MiniBiographyInterface';
 
 import { lastActionHistory, yearsSince } from '../../helpers/DateHelpers';
 
 const genderToIcon = (gender: string) => {
-  return ({ male: faMale, female: faFemale })[gender.toLowerCase()] || faGenderless
+  gender = gender.toLowerCase();
+  return gender === 'Other' ? 'genderless' : gender;
 }
 
-const onlineToIcon = (lastOnline) => (
-  lastOnline === 'Online now' ? faCircleSolid : faCircleHollow
-);
+const onlineToIcon = (lastOnline) => {
+  const group: ICON_GROUP = lastOnline === 'Online now'
+    ? 'far'
+    : 'fas';
+
+  return { name: 'circle', group };
+};
 
 interface IProps extends MiniBiographyInterface {
   style?: CSSProperties; // post flair
@@ -38,7 +33,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.birthday) {
     birthday = (
       <div>
-        <FontAwesomeIcon icon={faCalendarAlt} />
+        <Icon name="calendar-alt" />
         Age {yearsSince(props.birthday)}
       </div>
     );
@@ -47,7 +42,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.gender) {
     gender = (
       <div>
-        <FontAwesomeIcon icon={genderToIcon(props.gender)} />
+        <Icon name={genderToIcon(props.gender)} />
         {props.gender}
       </div>
     );
@@ -56,7 +51,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.location) {
     location = (
       <div>
-        <FontAwesomeIcon icon={faGlobe} />
+        <Icon name="globe" />
         {props.location}
       </div>
     );
@@ -65,7 +60,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.lastOnline) {
     lastOnline = (
       <div>
-        <FontAwesomeIcon icon={onlineToIcon(props.lastOnline)} />
+        <Icon {...onlineToIcon(props.lastOnline)} />
         {lastActionHistory('Seen', props.lastOnline)}
       </div>
     );
@@ -74,7 +69,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.lastPosted) {
     lastPosted = (
       <div>
-        <FontAwesomeIcon icon={faCommentLines} />
+        <Icon name="comment-lines" />
         {lastActionHistory('Posted', props.lastPosted)}
       </div>
     );

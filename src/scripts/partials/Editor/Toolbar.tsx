@@ -1,13 +1,7 @@
 import React, { Component, ReactNode } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faBold, 
-  faItalic, 
-  faStrikethrough,
-  faEyeSlash,
-} from '@fortawesome/pro-solid-svg-icons';
+import Icon from '../Icon';
 
 import { insertTagInTextarea } from '../../helpers/Editor/toolbarUtils';
 
@@ -28,15 +22,15 @@ export default class Toolbar extends Component<IProps> {
       <div className="Toolbar" onClick={this.forgivinglySelectTextarea}>
         <div className="tool-group">
           <button title="Make text bold" onClick={() => this.insertTag('b')}>
-            <FontAwesomeIcon icon={faBold} />
+            <Icon name="bold" />
           </button>
 
           <button title="Make text italic" onClick={() => this.insertTag('i')}>
-            <FontAwesomeIcon icon={faItalic} />
+            <Icon name="italic" />
           </button>
 
           <button title="Make text crossed out" onClick={() => this.insertTag('s')}>
-            <FontAwesomeIcon icon={faStrikethrough} />
+            <Icon name="strikethrough" />
           </button>
         </div>
 
@@ -54,7 +48,7 @@ export default class Toolbar extends Component<IProps> {
 
         <div className="tool-group">
           <button title="Wrap text in a spoiler" onClick={() => this.insertTag('spoiler')}>
-            <FontAwesomeIcon icon={faEyeSlash} />
+            <Icon name="eye-slash" />
           </button>
         </div>
       </div>
