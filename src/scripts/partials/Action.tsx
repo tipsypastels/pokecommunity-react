@@ -22,23 +22,13 @@ export default class Action extends Component<IProps> {
         variant="link" 
         onClick={this.onClick}
       >
-        {this.getIcon()}
+        <Icon.Maybe from={this.props.icon} />
 
         <span>
           {this.props.name}
         </span>
       </Button>
     )
-  }
-
-  getIcon() {
-    const { icon } = this.props;
-
-    if (typeof icon === 'string') {
-      return <Icon name={icon} />;
-    }
-
-    return <Icon {...icon} />;
   }
 
   onClick() {

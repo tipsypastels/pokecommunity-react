@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Icon, { ICON_GROUP } from '../Icon';
+
 import '../../../styles/modules/Post/StaffPost.scss';
 
 interface IProps {
@@ -23,14 +25,14 @@ function iconFor(icon?: string) {
     );
   } else {
     return (
-      icon
+      <Icon.Dynamic from={icon} />
     );
   }
 }
 
 const StaffPost = ({ title, color, icon, former }: IProps) => (
   <div className="StaffPost" style={{ backgroundColor: color }}>
-    {former && 'Former'} {title} Post
+    {iconFor(icon)} {former && 'Former'} {title} Post
   </div>
 )
 
