@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { BreadcrumbInterface } from '../../types/BreadcrumbInterface';
 import Icon from '../Icon';
 
+import AppContext from '../../AppContext';
+
 import logo from '../../../images/common/brand-transparent.png';
 import '../../../styles/modules/Omnibar.scss';
 import vBRoute from '../../bridge/vBRoute';
@@ -16,6 +18,8 @@ interface IProps {
 }
 
 export default class Omnibar extends Component<IProps> {
+  static contextType = AppContext;
+
   render() {
     return (
       <Navbar className="Omnibar" variant="dark" fixed="top" expand>
@@ -92,6 +96,15 @@ export default class Omnibar extends Component<IProps> {
             <Dropdown id="user-menu" alignRight as={NavItem}>
               <Dropdown.Toggle id="user-menu-toggle" as={Nav.Link}>
                 <Icon name="user" group="fal" size="lg" fw />
+
+                {(({ currentUser }) => {
+                  if (currentUser) {
+                    return currentUser.username;
+                  } else {
+                    return 'Sign In';
+                  }
+                })(this.context)}
+
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item>Hello there!</Dropdown.Item>

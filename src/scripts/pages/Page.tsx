@@ -4,9 +4,12 @@ import { Container } from 'react-bootstrap';
 import DefaultBanner from '../partials/Header/DefaultBanner';
 import Omnibar from '../partials/Header/Omnibar';
 
+import UserInterface from '../types/UserInterface';
 import { BreadcrumbInterface } from '../types/BreadcrumbInterface';
+import AppContext from '../AppContext';
 
 import '../../styles/modules/Page.scss';
+import newcoreApi from '../bridge/newcoreApi';
 
 export interface PageProps {
   appCurrentBanner: string | null;
@@ -25,8 +28,11 @@ interface IProps extends PageProps {
 export const baseTitle = 'The PokéCommunity Forums';
 
 export default class Page extends Component<IProps> {
-  componentDidMount() {
+  static contextType = AppContext;
+
+  async componentDidMount() {
     this.setTitle();
+    await this.whoAmI();
   }
   
   componentDidUpdate() {
@@ -93,5 +99,30 @@ export default class Page extends Component<IProps> {
         {this.props.children}
       </Container>
     )
+  }
+
+  async whoAmI() {
+    if (this.context.currentUser) {
+      return;
+    }
+
+    try {
+      const { status, data } = await newcoreApi({
+        method: 'get',
+        url: '/users/whoami',
+      });
+
+      let currentUser;
+      if (status === 200) {
+        currentUser = data;
+      } else {
+        currentUser = null;
+      }
+
+      this.context.setCurrentUser(currentUser);
+    } catch(e) {
+      // KEEP it's fine to ignore this error, doesn't need to display to the user unless they're specifically trying to login/register imo
+      console.error(e)
+    }
   }
 }
