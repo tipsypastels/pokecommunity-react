@@ -120,15 +120,19 @@ export default class ThreadPage extends Component<IProps, IState> {
   }
 
   getHeader() {
+    const { thread } = this.state;
+
     return (
       <ThreadHeader
-        title={this.state.thread.title}
-        views={this.state.thread.views}
-        repliesCount={this.state.thread.repliesCount}
-        canReply={this.state.thread.canReply}
-        username={this.state.thread.username}
-        created={this.state.thread.created}
-        poll={this.state.thread.poll}
+        title={thread.title}
+        views={thread.views}
+        repliesCount={thread.repliesCount}
+        canReply={thread.canReply}
+        username={thread.username}
+        created={thread.created}
+        poll={thread.poll}
+        forumTitle={thread.forum.title}
+        forumIcon={thread.forum.icon}
         openEditor={this.openNewPostModal}
       />
     );

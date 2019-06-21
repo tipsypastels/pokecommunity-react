@@ -1,9 +1,41 @@
 .ThreadHeader {
   align-items: baseline;
+  color: rgb(100, 100, 100);
 
-  .thread-starter-and-dateline {
-    span:not(:first-of-type) {
-      margin-left: 10px;
+  .thread-icon {
+    height: 50px;
+    width: 50px;
+
+    background-color: rgba(92, 92, 92, 1);
+    background-image: url(https://www.pokecommunuty.com/images/brand-transparent.png);
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    margin: 10px;
+
+    @media screen and (min-width: 768px) {
+      height: 70px;
+      width: 70px;
+    }
+  }
+
+  .forum-title {
+    font-size: 90%;
+  }
+
+  .thread-title {
+    font-weight: 300;
+    margin-bottom: 4px;
+    font-size: 150%;
+    color: #646464; // TODO colours
+  }
+
+  .thread-starter-and-created {
+    .thread-created {
+      margin-left: 5px;
+      color: #0069d9;
     }
   }
 

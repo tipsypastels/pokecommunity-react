@@ -128,11 +128,6 @@ class Post extends Component<IProps, IState> {
       return;
     }
 
-    // TODO HACK eh...
-    if (['ul', 'li', 'a', 'button'].includes(e.target.name)) {
-      return;
-    }
-    
     this.setOverflow(false);
   }
 }

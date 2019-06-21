@@ -22,17 +22,37 @@ interface IProps {
   username: string;
   created: number;
   poll: PollInterface;
+  forumTitle: string;
+  forumIcon: string;
+
   openEditor: () => void;
 }
 
 export default class ThreadHeader extends Component<IProps> {
   render() {
-    const { title, views, repliesCount, username } = this.props;
+    const { 
+      title, 
+      views, 
+      repliesCount, 
+      username, 
+      forumTitle, 
+      forumIcon,
+    } = this.props;
+    
     return (
       <Block className="ThreadHeader">
         <Block.Header>
+          <div 
+            className="thread-icon" 
+            style={{ backgroundImage: `url(${forumIcon})` }} 
+          />
+
           <div className="thread-info flex-grows">
-            <h2>
+            <span className="forum-title">
+              {forumTitle}
+            </span>
+
+            <h2 className="thread-title">
               {title}
             </h2>
 
@@ -42,7 +62,7 @@ export default class ThreadHeader extends Component<IProps> {
               </span>
 
               <span className="thread-created">
-                <Icon fw name="clock" />
+                <Icon fw name="clock" group="far" />
                 {standardDateTime(this.props.created)}
               </span>
             </div>

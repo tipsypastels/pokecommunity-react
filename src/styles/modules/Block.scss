@@ -4,7 +4,7 @@
 
   padding: 0;
   background-color: white;
-  margin-bottom: 1.25rem;
+  margin: 10px 0;
 
   position: relative;
 
@@ -72,7 +72,7 @@
     margin: 0;
     padding: 0.25rem 0;
 
-    background-color: #308D5E; // TODO colours etc
+    background-color: #0069d9; // TODO colours etc
     color: white;
 
     user-select: none;
@@ -95,7 +95,7 @@
 
       &:hover {
         background-color: white;
-        color: #308d5e;
+        color: #0069d9;
       }
 
       &:not(:last-child) {

@@ -53,6 +53,10 @@ export default class Action extends Component<IProps> {
 
   onClick = () => {
     const { active, activate, deactivate } = this.props;
-    active ? deactivate() : activate();
+    const handler = active ? deactivate : activate;
+
+    if (typeof handler === 'function') {
+      handler();
+    }
   }
 }
