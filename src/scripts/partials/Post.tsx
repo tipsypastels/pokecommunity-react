@@ -15,7 +15,18 @@ interface IProps extends PostInterface {
   thread: ThreadInterface;
 }
 
-class Post extends Component<IProps> {
+interface IState {
+  overflowActive: boolean;
+}
+
+class Post extends Component<IProps, IState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      overflowActive: false,
+    };
+  }
+
   render() {
     const {
       user,
@@ -26,7 +37,36 @@ class Post extends Component<IProps> {
     } = this.props;
     
     return (
-      <Block className="Post">
+      <Block className="Post" onClick={this.disableOverflowIfActive}>
+        {/* TODO move these to a getter with perm checks */}
+        <Block.OverflowMenu 
+          active={this.state.overflowActive}
+          items={[
+            {
+              name: `Ignore ${user.username}`,
+              icon: 'user-minus',
+            },
+            {
+              name: `Moderate ${user.username}`,
+              icon: 'user-shield',
+            },
+            'divider',
+            {
+              name: 'Share Post',
+              icon: 'share-square',
+              className: 'd-block d-md-none',
+            },
+            {
+              name: 'Report Post',
+              icon: 'exclamation-triangle',
+            },
+            {
+              name: 'Delete Post',
+              icon: 'trash-alt',
+            }
+          ]}
+        />
+
         <Block.Header noPadding noBorderBottom>
           <PostHeader 
             user={user}
@@ -50,6 +90,8 @@ class Post extends Component<IProps> {
             canSharePosts={thread.canSharePosts}
             canReply={thread.canReply}
             canReactToPosts={thread.canReactToPosts}
+            overflowActive={this.state.overflowActive}
+            setOverflow={this.setOverflow}
           />
         </Block.Content>
       </Block>
@@ -75,6 +117,23 @@ class Post extends Component<IProps> {
         former={staffPostGroup.former}
       />
     )
+  }
+
+  setOverflow = (overflowActive: boolean) => {
+    this.setState({ overflowActive });
+  }
+
+  disableOverflowIfActive = (e) => {
+    if (!this.state.overflowActive) {
+      return;
+    }
+
+    // TODO HACK eh...
+    if (['ul', 'li', 'a', 'button'].includes(e.target.name)) {
+      return;
+    }
+    
+    this.setOverflow(false);
   }
 }
 

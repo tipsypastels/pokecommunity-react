@@ -1,60 +1,21 @@
 import React, { ReactNode, Component } from 'react'
 
+import OverflowMenu from './Block/OverflowMenu';
+import Header from './Block/Header';
+import Content from './Block/Content';
+import ListContent from './Block/ListContent';
+import Footer from './Block/Footer';
+
 import '../../styles/modules/Block.scss';
 
-interface IProps {
+export interface BlockProps {
   children: ReactNode;
   className?: string;
+  onClick?: (any) => void;
 }
 
-interface HeaderProps extends IProps {
-  noBorderBottom?: boolean;
-  noPadding?: boolean;
-}
-
-const Header = (props: HeaderProps) => (
-  <header className={
-    `BlockHeader ${props.className || ''} ${props.noBorderBottom ? 'no-border-bottom' : ''} ${props.noPadding ? 'no-padding' : ''}`
-  }>
-    {props.children}
-  </header>
-);
-
-const Content = (props: IProps) => (
-  <div className={`BlockContent ${props.className || ''}`}>
-    {props.children}
-  </div>
-);
-
-const Footer = (props: IProps) => (
-  <div className={`BlockFooter ${props.className || ''}`}>
-    {props.children}
-  </div>
-)
-
-interface ListContentProps {
-  // children is NOT the list items, it's used
-  // to add content above the list (like a title)
-  children: ReactNode;
-  className?: string;
-  listItems: ReactNode[];
-}
-
-const ListContent = /* alternative to Content */ (props: ListContentProps) => (
-  <div className={`BlockContent BlockListContent ${props.className || ''}`}>
-    <div className="children">
-      {props.children}
-    </div>
-
-    <ul>
-      {props.listItems}
-    </ul>
-  </div>
-);
-
-class Block extends Component<IProps> {
-  // FIXME figure out a better way to use namespaced
-  // components in TS
+class Block extends Component<BlockProps> {
+  static OverflowMenu = OverflowMenu;
   static Header = Header;
   static Content = Content;
   static ListContent = ListContent;
@@ -62,7 +23,10 @@ class Block extends Component<IProps> {
 
   render() {
     return (
-      <section className={`Block ${this.props.className || ''}`}>
+      <section 
+        className={`Block ${this.props.className || ''}`}
+        onClick={this.props.onClick}
+      >
         {this.props.children}
       </section>
     );
