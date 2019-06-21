@@ -11,7 +11,7 @@ import StaffPost from './Post/StaffPost';
 import ThreadInterface from '../types/ThreadInterface';
 import PostInterface from '../types/PostInterface';
 
-interface IProps extends PostInterface {
+export interface PostProps extends PostInterface {
   thread: ThreadInterface;
 }
 
@@ -19,7 +19,7 @@ interface IState {
   overflowActive: boolean;
 }
 
-class Post extends Component<IProps, IState> {
+class Post extends Component<PostProps, IState> {
   constructor(props) {
     super(props);
     this.state = {

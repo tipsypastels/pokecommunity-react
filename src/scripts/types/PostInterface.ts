@@ -9,6 +9,7 @@ export default interface PostInterface {
   username: string;
   content: string;
   created: number;
+  visible: number;
 
   staffPostGroup?: StaffPostGroupInterface;
 

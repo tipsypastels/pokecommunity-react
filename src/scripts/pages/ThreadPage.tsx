@@ -13,7 +13,7 @@ import ThreadInterface from '../types/ThreadInterface';
 import { threadBreadcrumbs } from '../types/BreadcrumbInterface';
 import { pageNumber } from '../helpers/PageHelpers';
 
-import Post from '../partials/Post';
+import PostWrapper from '../partials/Post/PostWrapper';
 import NewPostModal from '../partials/NewPostModal';
 
 import newcoreApi from '../bridge/newcoreApi';
@@ -150,7 +150,7 @@ export default class ThreadPage extends Component<IProps, IState> {
 
   getPosts() {
     return this.state.thread.posts.map(post => (
-      <Post key={post.id} thread={this.state.thread} {...post} />
+      <PostWrapper key={post.id} thread={this.state.thread} {...post} />
     ));
   }
 
