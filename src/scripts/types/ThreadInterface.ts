@@ -2,6 +2,7 @@ import PostInterface from './PostInterface';
 import ForumInterface from './ForumInterface';
 import UserInterface from './UserInterface';
 import PollInterface from './PollInterface';
+import ContentMetaInterface from './ContentMetaInterface';
 
 export default interface ThreadInterface {
   id: number;
@@ -17,6 +18,7 @@ export default interface ThreadInterface {
   views: number;
 
   poll?: PollInterface;
+  contentMeta?: ContentMetaInterface;
 
   // User is optional, as most of the important data like username and id is cached in the thread table.
   // This maybe isn't the best way to work this out..

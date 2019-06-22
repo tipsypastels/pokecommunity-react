@@ -133,6 +133,10 @@ export default class ThreadPage extends Component<IProps, IState> {
         poll={thread.poll}
         forumTitle={thread.forum.title}
         forumIcon={thread.forum.icon}
+        threadIcon={thread.contentMeta 
+          && thread.contentMeta.thumbnail
+          && thread.contentMeta.thumbnail.small
+        }
         openEditor={this.openNewPostModal}
       />
     );

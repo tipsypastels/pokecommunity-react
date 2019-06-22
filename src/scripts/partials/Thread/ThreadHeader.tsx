@@ -23,7 +23,9 @@ interface IProps {
   created: number;
   poll: PollInterface;
   forumTitle: string;
-  forumIcon: string;
+
+  forumIcon?: string;
+  threadIcon?: string;
 
   openEditor: () => void;
 }
@@ -37,6 +39,7 @@ export default class ThreadHeader extends Component<IProps> {
       username, 
       forumTitle, 
       forumIcon,
+      threadIcon,
     } = this.props;
     
     return (
@@ -44,7 +47,7 @@ export default class ThreadHeader extends Component<IProps> {
         <Block.Header>
           <div 
             className="thread-icon" 
-            style={{ backgroundImage: `url(${forumIcon})` }} 
+            style={{ backgroundImage: `url(${threadIcon || forumIcon})` }} 
           />
 
           <div className="thread-info flex-grows">
