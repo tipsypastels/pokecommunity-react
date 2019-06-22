@@ -33,7 +33,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.birthday) {
     birthday = (
       <div>
-        <Icon name="calendar-alt" />
+        <Icon fw name="calendar-alt" />
         Age {yearsSince(props.birthday)}
       </div>
     );
@@ -42,7 +42,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.gender) {
     gender = (
       <div>
-        <Icon name={genderToIcon(props.gender)} />
+        <Icon fw name={genderToIcon(props.gender)} />
         {props.gender}
       </div>
     );
@@ -51,7 +51,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.location) {
     location = (
       <div>
-        <Icon name="globe" />
+        <Icon fw name="globe" />
         {props.location}
       </div>
     );
@@ -60,7 +60,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.lastOnline) {
     lastOnline = (
       <div>
-        <Icon {...onlineToIcon(props.lastOnline)} />
+        <Icon fw {...onlineToIcon(props.lastOnline)} />
         {lastActionHistory('Seen', props.lastOnline)}
       </div>
     );
@@ -69,7 +69,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.lastPosted) {
     lastPosted = (
       <div>
-        <Icon name="comment-lines" />
+        <Icon fw name="comment-lines" />
         {lastActionHistory('Posted', props.lastPosted)}
       </div>
     );
