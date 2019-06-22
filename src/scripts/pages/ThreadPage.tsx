@@ -153,8 +153,13 @@ export default class ThreadPage extends Component<IProps, IState> {
   }
 
   getPosts() {
-    return this.state.thread.posts.map(post => (
-      <PostWrapper key={post.id} thread={this.state.thread} {...post} />
+    return this.state.thread.posts.map((post, index) => (
+      <PostWrapper 
+        key={post.id}
+        index={index} 
+        thread={this.state.thread} 
+        {...post} 
+      />
     ));
   }
 

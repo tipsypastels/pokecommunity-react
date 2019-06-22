@@ -13,6 +13,7 @@ import PostInterface from '../types/PostInterface';
 
 export interface PostProps extends PostInterface {
   thread: ThreadInterface;
+  index: number;
 }
 
 interface IState {
@@ -34,6 +35,7 @@ class Post extends Component<PostProps, IState> {
       created,
       thread,
       canEdit,
+      index,
     } = this.props;
     
     return (
@@ -81,6 +83,7 @@ class Post extends Component<PostProps, IState> {
             content={content}
             created={created}
             canModerate={thread.canModerate}
+            index={index}
           />
 
           {this.getSignature()}
