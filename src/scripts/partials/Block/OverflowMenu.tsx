@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import Icon, { IconProps } from '../Icon';
 import { Link } from 'react-router-dom';
 
@@ -11,7 +11,11 @@ export interface MenuItem {
   onClick?: () => void;
 }
 
-export type MenuItemOrDivider = MenuItem | 'divider';
+export interface Divider {
+  divider: number;
+}
+
+export type MenuItemOrDivider = MenuItem | Divider;
 
 interface IProps {
   active: boolean;
@@ -19,9 +23,12 @@ interface IProps {
 }
 
 const OverflowMenuItem = ({ item }: { item: MenuItemOrDivider }) => {
-  if (item === 'divider') {
+  if ('divider' in item) {
     return (
-      <li className="divider" />
+      <li 
+        key={`divider-${item.divider}`} 
+        className="divider" 
+      />
     );
   }
 
@@ -46,6 +53,7 @@ const OverflowMenuItem = ({ item }: { item: MenuItemOrDivider }) => {
 
   return (
     <li 
+      key={item.name}
       className={`overflow-menu-item ${item.className}`} 
       onClick={item.onClick}
     >
@@ -56,7 +64,9 @@ const OverflowMenuItem = ({ item }: { item: MenuItemOrDivider }) => {
 
 const OverflowMenu = ({ active, items }: IProps) => (
   <ul className={`BlockOverflowMenu ${active && 'active'}`}>
-    {items.map(item => <OverflowMenuItem item={item} />)}  
+    {items.map(item => (
+      <OverflowMenuItem item={item} key={JSON.stringify(item)} />
+    ))}  
   </ul>
 );
 

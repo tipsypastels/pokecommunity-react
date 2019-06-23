@@ -1,0 +1,39 @@
+// not style-specific
+$share-option-colors: (
+  copy-link: rgba(227, 66, 26, 0.9),
+  promote-post: #019691,
+  to-twitter: #1D77B2,
+  to-facebook: #4267B2,
+) !default;
+
+.SharePostModal {
+  .share-options-list {
+    .share-option {
+      cursor: pointer;
+
+      display: block;
+      width: 100%;
+      
+      color: white;
+      text-decoration: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 5px;
+      
+      &:not(:last-child) {
+        margin-bottom: 0.5rem;
+      }
+  
+      .icon {
+        font-size: 1.15em;
+        margin-right: 0.25rem;
+      }
+  
+      @each $class, $color in $share-option-colors {
+        &.#{$class} {
+          background-color: $color;
+        }
+      } 
+    }
+  }
+
+}

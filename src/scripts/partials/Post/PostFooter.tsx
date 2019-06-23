@@ -4,6 +4,7 @@ import { When } from 'react-if';
 
 import Icon from '../Icon';
 import Action from '../Action';
+import { PostActionModal } from '../Post';
 
 import '../../../styles/modules/Post/PostFooter.scss';
 
@@ -12,9 +13,12 @@ interface IProps {
   canSharePosts: boolean;
   canReply: boolean;
   canReactToPosts: boolean;
-
+  
   overflowActive: boolean;
   setOverflow: (boolean) => void;
+
+  actionModalOpen: PostActionModal;
+  setActionModalOpen: (PostActionModal) => void;
 }
 
 class PostFooter extends Component<IProps> {
@@ -23,7 +27,9 @@ class PostFooter extends Component<IProps> {
       canEdit, 
       canSharePosts, 
       canReply, 
-      canReactToPosts, 
+      canReactToPosts,
+      actionModalOpen,
+      setActionModalOpen,
     } = this.props;
 
     return (
@@ -43,9 +49,9 @@ class PostFooter extends Component<IProps> {
               name="Share"
               className="d-none d-md-block"
               icon={{ name: 'share-square', group: 'fal' }}
-              active={false /* TODO */}
-              activate={() => {}}
-              deactivate={() => {}}
+              active={actionModalOpen === 'share'}
+              activate={() => setActionModalOpen('share')}
+              deactivate={() => setActionModalOpen(null)}
             />
           </When>
         </ButtonToolbar>

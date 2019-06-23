@@ -67,6 +67,7 @@ export default class Icon extends Component<IconProps> {
     return (
       <i
         className={`
+          icon
           ${group}
           ${name}
           ${fw && 'fa-fw'}

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { EditorLayout } from '../NewPostModal';
 import TabbedLayout from './LayoutItems/TabbedLayout';
 import RowsLayout from './LayoutItems/RowsLayout';

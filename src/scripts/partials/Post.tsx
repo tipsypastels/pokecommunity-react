@@ -10,14 +10,18 @@ import StaffPost from './Post/StaffPost';
 
 import ThreadInterface from '../types/ThreadInterface';
 import PostInterface from '../types/PostInterface';
+import SharePostModal from './Post/ActionModals/SharePostModal';
 
 export interface PostProps extends PostInterface {
   thread: ThreadInterface;
   index: number;
 }
 
+export type PostActionModal = null | 'share';
+
 interface IState {
   overflowActive: boolean;
+  actionModalOpen: PostActionModal;
 }
 
 class Post extends Component<PostProps, IState> {
@@ -25,11 +29,13 @@ class Post extends Component<PostProps, IState> {
     super(props);
     this.state = {
       overflowActive: false,
+      actionModalOpen: null,
     };
   }
 
   render() {
     const {
+      id,
       user,
       content,
       created,
@@ -37,9 +43,18 @@ class Post extends Component<PostProps, IState> {
       canEdit,
       index,
     } = this.props;
+
+    const { actionModalOpen } = this.state;
     
     return (
       <Block className="Post" onClick={this.disableOverflowIfActive}>
+        <SharePostModal
+          postid={id}
+          user={user}
+          show={actionModalOpen === 'share'}
+          closeModal={() => this.setActionModalOpen(null)}
+        />
+
         {/* TODO move these to a getter with perm checks */}
         <Block.OverflowMenu 
           active={this.state.overflowActive}
@@ -52,7 +67,7 @@ class Post extends Component<PostProps, IState> {
               name: `Moderate ${user.username}`,
               icon: 'user-shield',
             },
-            'divider',
+            { divider: 0 },
             {
               name: 'Share Post',
               icon: 'share-square',
@@ -88,13 +103,15 @@ class Post extends Component<PostProps, IState> {
 
           {this.getSignature()}
 
-          <PostFooter 
+          <PostFooter
             canEdit={canEdit}
             canSharePosts={thread.canSharePosts}
             canReply={thread.canReply}
             canReactToPosts={thread.canReactToPosts}
             overflowActive={this.state.overflowActive}
             setOverflow={this.setOverflow}
+            actionModalOpen={actionModalOpen}
+            setActionModalOpen={this.setActionModalOpen}
           />
         </Block.Content>
       </Block>
@@ -132,6 +149,10 @@ class Post extends Component<PostProps, IState> {
     }
 
     this.setOverflow(false);
+  }
+
+  setActionModalOpen = (actionModalOpen: PostActionModal) => {
+    this.setState({ actionModalOpen });
   }
 }
 
