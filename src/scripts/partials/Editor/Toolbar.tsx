@@ -34,7 +34,7 @@ export default class Toolbar extends Component<IProps> {
           </button>
         </div>
 
-        <div className="tool-group">
+        {/*<div className="tool-group">
           <Dropdown>
             <Dropdown.Toggle id="font-dropdown">
               Font             
@@ -44,7 +44,7 @@ export default class Toolbar extends Component<IProps> {
               {this.getFonts()}
             </Dropdown.Menu>
           </Dropdown>
-        </div>
+        </div>*/}
 
         <div className="tool-group">
           <button title="Wrap text in a spoiler" onClick={() => this.insertTag('spoiler')}>

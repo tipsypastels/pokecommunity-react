@@ -11,7 +11,7 @@ export default class Preview extends Component<IProps> {
 
     return (
       <div className="Preview">
-        <strong>
+        <strong className="preview-title">
           Preview
         </strong>
 
