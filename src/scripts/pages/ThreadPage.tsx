@@ -7,6 +7,7 @@ import ThreadHeader from '../partials/Thread/ThreadHeader';
 import Viewing from '../partials/Viewing';
 import QuickReply from '../partials/Thread/QuickReply';
 import Pagination from '../partials/Pagination';
+import FloatingActions from '../partials/Thread/FloatingActions';
 
 import ThreadInterface from '../types/ThreadInterface';
 
@@ -51,7 +52,7 @@ export default class ThreadPage extends Component<IProps, IState> {
       });
 
       this.setState({ thread: response.data });
-    } catch(e) {
+    } catch (e) {
       // TODO
       console.error(e);
     }
@@ -71,6 +72,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         {this.state.thread &&
           <div>
             {this.getNewPostModal()}
+            {this.getFloatingActions()}
             {this.getHeader()}
             {this.getPagination()}
             {this.getPosts()}
@@ -102,9 +104,22 @@ export default class ThreadPage extends Component<IProps, IState> {
     )
   }
 
+  getFloatingActions() {
+    //TODO make selectePostsCount and deselectedPosts work currently placeholder
+    return (
+      <FloatingActions
+        canModerate={this.state.thread.canModerate}
+        canReply={this.state.thread.canReply}
+        openNewPostModal={this.openNewPostModal}
+        selectedPostsCount={1}
+        deselectPosts={() => { }}
+      />
+    )
+  }
+
   getPagination() {
     return (
-      <Pagination 
+      <Pagination
         currentPage={this.state.currentPage}
         totalPages={this.state.thread.totalPages}
       />
@@ -133,7 +148,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         poll={thread.poll}
         forumTitle={thread.forum.title}
         forumIcon={thread.forum.icon}
-        threadIcon={thread.contentMeta 
+        threadIcon={thread.contentMeta
           && thread.contentMeta.thumbnail
           && thread.contentMeta.thumbnail.small
         }
@@ -154,11 +169,11 @@ export default class ThreadPage extends Component<IProps, IState> {
 
   getPosts() {
     return this.state.thread.posts.map((post, index) => (
-      <PostWrapper 
+      <PostWrapper
         key={post.id}
-        index={index} 
-        thread={this.state.thread} 
-        {...post} 
+        index={index}
+        thread={this.state.thread}
+        {...post}
       />
     ));
   }
