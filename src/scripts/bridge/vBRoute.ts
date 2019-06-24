@@ -10,6 +10,8 @@ const vBRoutesList = {
   donatenow: `/donations/donate`,
   promotedcontentmanager: `/servicepanel.php?do=newbuzzentry`,
   promotepost: postid => `/servicepanel.php?do=newbuzzentry&p=${postid}`,
+  login: '/login.php',
+  register: '/newaccount.php',
 };
 
 let loggedRouteWarnings = [];

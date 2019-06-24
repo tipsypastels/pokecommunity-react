@@ -4,12 +4,18 @@ import { Container } from 'react-bootstrap';
 import DefaultBanner from '../partials/Header/DefaultBanner';
 import Omnibar from '../partials/Header/Omnibar';
 
+import Err404 from '../partials/PagePartials/Errors/Err404';
+import Err500 from '../partials/PagePartials/Errors/Err500';
+import Loading from '../partials/PagePartials/Loading';
+
 import UserInterface from '../types/UserInterface';
 import { BreadcrumbInterface } from '../types/BreadcrumbInterface';
 import AppContext from '../AppContext';
+import newcoreApi from '../bridge/newcoreApi';
 
 import '../../styles/modules/Page.scss';
-import newcoreApi from '../bridge/newcoreApi';
+
+export type PageError = null | 404 | 500;
 
 export interface PageProps {
   appCurrentBanner: string | null;
@@ -23,6 +29,7 @@ interface IProps extends PageProps {
   newBanner?: string;
   breadcrumbs?: BreadcrumbInterface[];
   htmlTitle?: string;
+  error: PageError;
 }
 
 export const baseTitle = 'The PokéCommunity Forums';
@@ -41,8 +48,12 @@ export default class Page extends Component<IProps> {
   }
   
   render() {
+    const readyClass = this.props.loading
+      ? 'is-loading'
+      : 'is-ready';
+
     return (
-      <div className={`Page ${this.props.name}Page`}>
+      <div className={`Page ${this.props.name}Page ${readyClass}`}>
         <Omnibar breadcrumbs={this.props.breadcrumbs} />
         
         {this.getBanner()}
@@ -90,8 +101,16 @@ export default class Page extends Component<IProps> {
   }
 
   getContent() {
+    if (this.props.error === 404) {
+      return <Err404 />;
+    }
+
+    if (this.props.error === 500) {
+      return <Err500 />;
+    }
+
     if (this.props.loading) {
-      return 'Loading...';
+      return <Loading />;
     }
 
     return (

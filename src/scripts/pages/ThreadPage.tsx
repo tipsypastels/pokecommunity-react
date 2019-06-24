@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { RouteComponentProps } from 'react-router-dom';
 import queryString from 'query-string';
 
-import Page, { PageProps } from './Page';
+import Page, { PageProps, PageError } from './Page';
 import ThreadHeader from '../partials/Thread/ThreadHeader';
 import Viewing from '../partials/Viewing';
 import QuickReply from '../partials/Thread/QuickReply';
@@ -29,6 +29,7 @@ interface IState {
   thread?: ThreadInterface;
   editorOpen: boolean;
   currentPage: number;
+  error: PageError;
 }
 
 export default class ThreadPage extends Component<IProps, IState> {
@@ -40,6 +41,7 @@ export default class ThreadPage extends Component<IProps, IState> {
       thread: undefined,
       editorOpen: false,
       currentPage: pageNumber(queryParams.page),
+      error: null,
     };
   }
 
@@ -52,8 +54,11 @@ export default class ThreadPage extends Component<IProps, IState> {
 
       this.setState({ thread: response.data });
     } catch(e) {
-      // TODO
-      console.error(e);
+      if (e.toString().match(/404/)) {
+        this.setState({ error: 404 });
+      } else {
+        this.setState({ error: 500 });
+      }
     }
   }
 
@@ -67,6 +72,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         setAppBanner={this.props.setAppBanner}
         breadcrumbs={this.state.thread && this.getBreadcrumbs()}
         htmlTitle={this.getHtmlTitle()}
+        error={this.state.error}
       >
         {this.state.thread &&
           <div>
