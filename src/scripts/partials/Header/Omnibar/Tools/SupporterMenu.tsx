@@ -18,7 +18,7 @@ export default class SupporterMenu extends Component {
           <Icon name="donate" group="fal" size="lg" fw />
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item className="primary-item">
+          <Dropdown.Header>
             <Icon name="donate" group="fal" />
 
             <div className="donation-text">
@@ -30,7 +30,7 @@ export default class SupporterMenu extends Component {
                 Support the PokéCommunity’s running costs with a small monetary donation. You can even get a few cool things by doing so.
               </small>
             </div>
-          </Dropdown.Item>
+          </Dropdown.Header>
 
           <Dropdown.Item>
             Learn more...
