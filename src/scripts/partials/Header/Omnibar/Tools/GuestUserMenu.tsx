@@ -4,7 +4,7 @@ import { Dropdown, NavItem, Nav, Button } from 'react-bootstrap';
 import Icon from '../../../Icon';
 import vBRoute from '../../../../bridge/vBRoute';
 
-import '../../../../../styles/modules/Header/Omnibar/Menus/GuestUserMenu.scss';
+import '../../../../../styles/modules/Header/Omnibar/Tools/GuestUserMenu.scss';
 
 export default class GuestUserMenu extends Component {
   render() {
