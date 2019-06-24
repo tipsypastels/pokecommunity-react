@@ -1,0 +1,30 @@
+.GuestUserMenu {
+  .dropdown-item {
+    margin: 0.25rem;
+
+    &:not(:first-child) {
+      padding-top: 0.5rem;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #e5e5e5;
+      padding-bottom: 1rem;
+    }
+
+    .icon {
+      font-size: 3rem;
+      display: block;
+      margin: auto;
+    }
+
+    h2 {
+      margin-top: 0.35rem;
+      font-weight: 300;
+      font-size: 1.3rem;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+}

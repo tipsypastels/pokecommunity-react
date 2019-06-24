@@ -8,10 +8,12 @@ import { BreadcrumbInterface } from '../../types/BreadcrumbInterface';
 import Icon from '../Icon';
 
 import AppContext from '../../AppContext';
+import vBRoute from '../../bridge/vBRoute';
+
+import OmnibarTools from './Omnibar/OmnibarTools';
 
 import logo from '../../../images/common/brand-transparent.png';
-import '../../../styles/modules/Omnibar.scss';
-import vBRoute from '../../bridge/vBRoute';
+import '../../../styles/modules/Header/Omnibar.scss';
 
 interface IProps {
   breadcrumbs?: BreadcrumbInterface[];
@@ -23,7 +25,6 @@ export default class Omnibar extends Component<IProps> {
   render() {
     return (
       <Navbar className="Omnibar" variant="dark" fixed="top" expand>
-        
         <Navbar.Brand href="#home">
           <span className="brand-logo">
             <img 
@@ -43,6 +44,11 @@ export default class Omnibar extends Component<IProps> {
 
         <Navbar.Collapse id="basic-navbar-nav">
           {this.props.breadcrumbs && this.getBreadcrumbs()}
+
+          <div className="mr-auto" />
+
+          <OmnibarTools />
+          {/*
           <Nav className="navbar-user-tools">
             <Dropdown className={this.hideOmnibarItemIfCrumbs()} id="help-menu" alignRight as={NavItem}>
               <Dropdown.Toggle id="help-menu-toggle" as={Nav.Link}>
@@ -93,24 +99,11 @@ export default class Omnibar extends Component<IProps> {
                 <Dropdown.Item>Hello there!</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            <Dropdown id="user-menu" alignRight as={NavItem}>
-              <Dropdown.Toggle id="user-menu-toggle" as={Nav.Link}>
-                <Icon name="user" group="fal" size="lg" fw />
+            
+            <GuestUserMenu />
+          </Nav>*/}
 
-                {(({ currentUser }) => {
-                  if (currentUser) {
-                    return currentUser.username;
-                  } else {
-                    return 'Sign In';
-                  }
-                })(this.context)}
-
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item>Hello there!</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </Nav>
+          
         </Navbar.Collapse>
       </Navbar>
     );
@@ -145,7 +138,7 @@ export default class Omnibar extends Component<IProps> {
 
     return (
       // TODO bs component?
-      <ul className="navbar-nav navbar-breadcrumb mr-auto">
+      <ul className="navbar-nav navbar-breadcrumb">
         {crumbs}
       </ul>
     )

@@ -1,0 +1,18 @@
+.Page.is-loading {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.Loading { 
+  margin-top: 4rem !important;
+  
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  
+.icon {
+    color: mix(black, transparent, 30%);
+    font-size: 6rem;
+  }
+}

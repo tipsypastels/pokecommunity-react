@@ -1,0 +1,27 @@
+.SupporterMenu {
+  .primary-item {
+    padding: 20px 30px;
+
+    .icon {
+      font-size: 3rem;
+      display: block;
+      margin: auto;
+    }
+
+    .donation-text {
+      h2 {
+        margin-top: 0.5rem;
+
+        font-weight: 300;
+        font-size: 1.3rem;
+        text-align: center;
+      }
+
+      small {
+        display: block;
+        margin: auto;
+        white-space: normal;
+      }
+    }
+  }
+}
