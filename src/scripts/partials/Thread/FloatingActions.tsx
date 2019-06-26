@@ -27,7 +27,7 @@ export default class FloatingActions extends Component<IProps> {
     if (this.props.canModerate) {
       return (
         <div className="action action-secondary">
-          <Icon name="cog" group="fas" fw />
+          <Icon name="cog" fw />
         </div>
       );
     }
@@ -39,7 +39,8 @@ export default class FloatingActions extends Component<IProps> {
       if (this.props.selectedPostsCount > 0) {
         replyBadge = (
           <Badge
-            variant="light" className="action action-reply-badge"
+            variant="light" 
+            className="action action-reply-badge"
           >
             {this.props.selectedPostsCount}
           </Badge>
@@ -53,7 +54,7 @@ export default class FloatingActions extends Component<IProps> {
             className="action action-reply"
             onClick={this.props.openNewPostModal}
           >
-            <Icon name="pencil" group="fas" fw />
+            <Icon name="pencil" fw />
           </div>
         </div>
 
@@ -68,7 +69,7 @@ export default class FloatingActions extends Component<IProps> {
           className="action action-secondary"
           onClick={this.props.deselectPosts}
         >
-          <Icon name="times" group="fas" fw />
+          <Icon name="times" fw />
         </div>
       );
     }

@@ -14,8 +14,6 @@ export interface BlockProps {
   onClick?: (any) => void;
 }
 
-
-
 class Block extends Component<BlockProps> {
   static OverflowMenu = OverflowMenu;
   static Header = Header;
