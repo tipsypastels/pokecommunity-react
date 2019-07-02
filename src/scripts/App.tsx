@@ -11,14 +11,13 @@ import Spheal from './pages/Spheal';
 import '../styles/base/utilities.scss';
 import '../styles/base/buttons.scss';
 
-interface IProps {}
 interface IState {
   theme: string;
   banner?: string;
   currentUser?: UserInterface,
 }
 
-class App extends Component<IProps, IState> {
+class App extends Component<{}, IState> {
   constructor(props) {
     super(props);
     this.state = {
