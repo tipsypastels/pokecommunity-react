@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { ButtonToolbar, Button } from 'react-bootstrap';
+import { ButtonToolbar } from 'react-bootstrap';
 import { When } from 'react-if';
 
-import Icon from '../Icon';
 import Action from '../Action';
 import { PostActionModal } from '../Post';
 
 import '../../../styles/modules/Post/PostFooter.scss';
 
 interface IProps {
+  id: number;
+
   canEdit: boolean;
   canSharePosts: boolean;
   canReply: boolean;
@@ -19,17 +20,25 @@ interface IProps {
 
   actionModalOpen: PostActionModal;
   setActionModalOpen: (PostActionModal) => void;
+
+  selectPost: (postid: number) => void;
+  deselectPost: (postid: number) => void;
+  checkPostSelected: (postid: number) => boolean;
 }
 
 class PostFooter extends Component<IProps> {
   render() {
     const { 
+      id,
       canEdit, 
       canSharePosts, 
       canReply, 
       canReactToPosts,
       actionModalOpen,
       setActionModalOpen,
+      selectPost,
+      deselectPost,
+      checkPostSelected,
     } = this.props;
 
     return (
@@ -67,11 +76,12 @@ class PostFooter extends Component<IProps> {
           </When>
           <When condition={canReply}>
             <Action
-              name="Respond"
+              name="Select"
+              activeName="Selected"
               icon={{ name: 'comment-dots', group: 'fal' }}
-              active={false /* TODO */}
-              activate={() => { }}
-              deactivate={() => { }}
+              active={checkPostSelected(id)}
+              activate={() => selectPost(id)}
+              deactivate={() => deselectPost(id)}
             />
 
             <Action

@@ -6,6 +6,6 @@ export default class UserMenu extends Component {
   static contextType = AppContext;
 
   render() {
-    return null;
+    return <div>TODO</div>;
   }
 }

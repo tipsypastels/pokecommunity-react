@@ -1,4 +1,5 @@
 import strftime from 'strftime';
+import UserInterface from '../types/UserInterface';
 
 export type Datelike = Date | number | string;
 
@@ -66,4 +67,12 @@ export function standardDateTime(date: Datelike) {
 export function yearsSince(date: Datelike) {
   date = resolveDate(date);
   return (new Date()).getFullYear() - (date).getFullYear();
+}
+
+export function userIsNew(user: UserInterface): boolean {
+  const created = resolveDate(user.created).getTime();
+  const timeDiff = Math.abs(Date.now() - created);
+  const daysDiff = Math.ceil(timeDiff / MS_PER_DAY);
+
+  return daysDiff <= 7;
 }

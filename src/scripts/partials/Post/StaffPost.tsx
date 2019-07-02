@@ -1,6 +1,5 @@
 import React from 'react';
-
-import Icon, { ICON_GROUP } from '../Icon';
+import Icon from '../Icon';
 
 import '../../../styles/modules/Post/StaffPost.scss';
 
@@ -19,6 +18,7 @@ function iconFor(icon?: string) {
   if (icon.match(/^https:\/\//)) {
     return (
       <img 
+        alt=""
         className="staffpost-image"
         src={icon}
       />

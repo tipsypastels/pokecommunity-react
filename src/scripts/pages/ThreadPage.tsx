@@ -31,6 +31,8 @@ interface IState {
   editorOpen: boolean;
   currentPage: number;
   error: PageError;
+
+  selectedPosts: Set<number>;
 }
 
 export default class ThreadPage extends Component<IProps, IState> {
@@ -43,6 +45,8 @@ export default class ThreadPage extends Component<IProps, IState> {
       editorOpen: false,
       currentPage: pageNumber(queryParams.page),
       error: null,
+
+      selectedPosts: new Set(),
     };
   }
 
@@ -106,6 +110,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         show={this.state.editorOpen}
         thread={this.state.thread}
         closeModal={this.closeNewPostModal}
+        quotedContent={this.getNewPostQuotes()}
       />
     )
   }
@@ -117,8 +122,8 @@ export default class ThreadPage extends Component<IProps, IState> {
         canModerate={this.state.thread.canModerate}
         canReply={this.state.thread.canReply}
         openNewPostModal={this.openNewPostModal}
-        selectedPostsCount={1}
-        deselectPosts={() => { }}
+        selectedPostsCount={this.state.selectedPosts.size}
+        deselectPosts={this.deselectAllPosts}
       />
     )
   }
@@ -179,6 +184,9 @@ export default class ThreadPage extends Component<IProps, IState> {
         key={post.id}
         index={index}
         thread={this.state.thread}
+        selectPost={this.selectPost}
+        deselectPost={this.deselectPost}
+        checkPostSelected={this.checkPostSelected}
         {...post}
       />
     ));
@@ -198,5 +206,62 @@ export default class ThreadPage extends Component<IProps, IState> {
 
   closeNewPostModal = () => {
     this.setState({ editorOpen: false });
+  }
+
+  /**
+   * @name getNewPostQuotes
+   * @description Generates the string of [quote] tags that are inserted into the new post editor when you have posts selected.
+   */
+  getNewPostQuotes() {
+    const { selectedPosts } = this.state;
+    const { posts } = this.state.thread;
+
+    if (selectedPosts.size === 0) {
+      return null;
+    }
+
+    return [...selectedPosts].map(postid => {
+      const post = posts.find(post => post.id === postid);
+      if (!post) {
+        return '';
+      }
+
+      return `[quote=${post.user.username};${post.id}]${post.content}[/quote]\n`;
+    }).join("\n");
+  }
+
+  selectPost = (postid: number) => {
+    let { selectedPosts } = this.state;
+    
+    selectedPosts = new Set(
+      [...selectedPosts].concat(postid)
+    );
+    
+    this.setState({ selectedPosts });
+  }
+
+  deselectPost = (postid: number) => {
+    let { selectedPosts } = this.state;
+
+    // dup the object, don't mutate directly
+    selectedPosts = new Set([...selectedPosts]);
+    selectedPosts.delete(postid);
+
+    this.setState({ selectedPosts });
+  }
+
+  deselectAllPosts = () => {
+    let { selectedPosts } = this.state;
+    selectedPosts = new Set([...selectedPosts]);
+
+    for (let i of selectedPosts) {
+      selectedPosts.delete(i);
+    }
+
+    this.setState({ selectedPosts });
+  }
+
+  checkPostSelected = (postid: number) => {
+    return [...this.state.selectedPosts].includes(postid);
   }
 }

@@ -3,7 +3,6 @@ import { Modal, Tab, Nav } from 'react-bootstrap';
 
 import Editor from '../../Editor';
 import Preview from '../../Editor/Preview';
-import Icon from '../../Icon';
 import { LayoutItemProps } from '../LayoutContainer';
 
 export default class TabbedLayout extends Component<LayoutItemProps> {
