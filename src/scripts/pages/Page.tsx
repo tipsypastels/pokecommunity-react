@@ -2,6 +2,7 @@ import React, { ReactNode, Component } from 'react'
 import { Container } from 'react-bootstrap';
 
 import DefaultBanner from '../partials/Header/DefaultBanner';
+import CommunityMenu from '../partials/Header/CommunityMenu';
 import Omnibar from '../partials/Header/Omnibar';
 
 import Err404 from '../partials/PagePartials/Errors/Err404';
@@ -41,12 +42,12 @@ export default class Page extends Component<IProps> {
     this.setTitle();
     await this.whoAmI();
   }
-  
+
   componentDidUpdate() {
     this.setTitle();
     this.setAppCurrentBanner();
   }
-  
+
   render() {
     const readyClass = this.props.loading
       ? 'is-loading'
@@ -54,8 +55,8 @@ export default class Page extends Component<IProps> {
 
     return (
       <div className={`Page ${this.props.name}Page ${readyClass}`}>
+        <CommunityMenu />
         <Omnibar breadcrumbs={this.props.breadcrumbs} />
-        
         {this.getBanner()}
         {this.getContent()}
       </div>
@@ -63,9 +64,9 @@ export default class Page extends Component<IProps> {
   }
 
   setAppCurrentBanner() {
-    const { 
-      setAppBanner, 
-      appCurrentBanner, 
+    const {
+      setAppBanner,
+      appCurrentBanner,
       newBanner,
       loading
     } = this.props;
@@ -76,7 +77,7 @@ export default class Page extends Component<IProps> {
 
     setAppBanner(newBanner);
   }
-  
+
   setTitle() {
     if (this.props.htmlTitle) {
       document.title = [this.props.htmlTitle, baseTitle].join(' - ');
@@ -90,7 +91,7 @@ export default class Page extends Component<IProps> {
 
     if (appCurrentBanner) {
       return (
-        <div 
+        <div
           className="forum-banner"
           dangerouslySetInnerHTML={{ __html: appCurrentBanner }}
         />
@@ -139,7 +140,7 @@ export default class Page extends Component<IProps> {
       }
 
       this.context.setCurrentUser(currentUser);
-    } catch(e) {
+    } catch (e) {
       // KEEP it's fine to ignore this error, doesn't need to display to the user unless they're specifically trying to login/register imo
       console.error(e)
     }

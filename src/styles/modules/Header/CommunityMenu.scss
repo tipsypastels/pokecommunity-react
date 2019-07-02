@@ -1,0 +1,64 @@
+$community-menu-colors:
+(
+  cmenu-seventh-gen: rgba(0, 187, 255, 0.7),
+  cmenu-daily: rgba(255, 129, 0, 0.7),
+  cmenu-fan-games: rgba(202, 153, 69, 0.7),
+  cmenu-art: rgba(0, 157, 191, 0.7),
+  cmenu-battle: rgba(166, 57, 130, 0.7),
+  cmenu-discord: rgba(114, 137, 218, 0.7)
+);
+
+.CommunityMenu {
+  padding: 0;
+  background-color: mix(rgba(64, 64, 64, 0.7), rgba(0, 0, 0, 0.8), 50%);
+
+  &.expanded {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .cm-element {
+      width: 100%;
+    }
+  }
+
+  &.visible {
+    @media (max-width: 768px) {
+      .cm-element {
+        display: none;
+      }
+    }
+  }
+
+  &.hidden {
+    display: none;
+  }
+
+  .cm-element {
+    padding: 3px 20px;
+    color: white;
+    text-transform: uppercase;
+    font-weight: lighter;
+    text-decoration: none;
+
+    @each $name, $color in $community-menu-colors {
+      &.#{$name} {
+        &:hover {
+          background-color: $color;
+        }
+      }
+    }
+  }
+
+  .cmenu-fourms {
+    color: rgb(227, 66, 26);
+  }
+
+  .pc-toggle {
+    color: white;
+    padding: 3px 20px;
+    width: 100%;
+    cursor: pointer;
+    user-select: none;
+  }
+}
+

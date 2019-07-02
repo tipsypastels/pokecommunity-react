@@ -20,7 +20,16 @@ $community-nav-item-color: #fff;
   box-shadow: $omnibar-box-shadow;
   align-items: stretch;
 	will-change: transform;
-    transition: transform 200ms linear;
+  transition: transform 200ms linear;
+
+  .CommunityMenu.visible + & {
+    top: 30px;
+  }
+
+  .CommunityMenu.expanded + & {
+    top: 210px;
+  }
+
 	&.nav-unfixed {
 		transform: translateY(-$community-nav-height);
 	}
