@@ -1,11 +1,18 @@
 .Editor {
+  position: relative;
+
   .Toolbar {
     display: flex;
+    justify-content: center;
     margin-bottom: 0.25rem;
 
     .tool-group {
-      &:not(:first-of-type) {
-        margin-left: 0.5rem;
+      &:not(:last-of-type) {
+        margin-right: 0.5rem;
+      }
+
+      .dropdown {
+        display: inline-block;
       }
 
       button {
@@ -14,6 +21,9 @@
         // TODO colours
         background-color: #fff;
         border: 1px solid #ccc;
+        color: black;
+        border-radius: 0;
+        display: inline-block;
 
         &:hover {
           background-color: #e6e6e6;
@@ -35,6 +45,42 @@
     @media screen and (min-width: 768px) {
       min-height: 5rem;
       max-height: 75rem;
+    }
+  }
+
+  .editor-context-menu {
+    display: flex;
+    position: absolute;
+
+    width: 400px;
+    max-width: 90%;
+
+    background-color: var(--primary);
+    padding: 4px 8px;
+    padding-bottom: 6px;
+
+    border-radius: 6px;
+    margin-bottom: 2rem;
+
+    box-shadow: 2px 2px 3px mix(black, transparent, 60%);
+    transition: 0.1s ease-in-out;
+    
+    &:after {
+      content: '';
+      position: absolute;
+      
+      bottom: 0;
+      left: var(--arrow-offset);
+      width: 0;
+      height: 0;
+      
+      border: 20px solid transparent;
+      border-top-color: var(--primary);
+      border-bottom: 0;
+      margin-left: -20px;
+      margin-bottom: -20px;
+      
+      transition: 0.1s ease-in-out;
     }
   }
 }

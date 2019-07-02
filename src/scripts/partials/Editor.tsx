@@ -1,9 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import getCaretCoordinates from 'textarea-caret';
 
 import Toolbar from './Editor/Toolbar';
-import MentionsMenu from './Editor/ContextMenus/MentionsMenu';
+import { insertTagInTextarea } from '../helpers/Editor/toolbarUtils';
 
 import '../../styles/modules/Editor.scss';
+
+
 
 interface IProps {
   content: string;
@@ -12,7 +15,7 @@ interface IProps {
 
 interface IState {
   textareaRef: React.RefObject<HTMLTextAreaElement>;
-  ContextMenuComponent?: typeof Component;
+  ContextMenuComponent?: typeof Component | React.FC;
 }
 
 export default class Editor extends Component<IProps, IState> {
@@ -30,6 +33,8 @@ export default class Editor extends Component<IProps, IState> {
           content={this.props.content}
           setContent={this.props.setContent}
           textareaRef={this.state.textareaRef}
+          insertTag={this.insertTag}
+          setContextMenu={this.setContextMenu}
         />
 
         {this.getContextMenu()}
@@ -61,14 +66,34 @@ export default class Editor extends Component<IProps, IState> {
     switch(e.keyCode) {
       case 9: /* tab */
         e.preventDefault();
-        document.execCommand('insertText', false, '  ');
+        this.insertText('  ');
         break;
       
 
-      case 50: /* @ */
-        this.setState({ ContextMenuComponent: MentionsMenu });
-        break;
+      // case 50: /* @ */
+      //   this.setState({ ContextMenuComponent: MentionsMenu });
+      //   break;
     }
+  }
+
+  insertText = (text: string) => {
+    this.state.textareaRef.current.focus();
+    document.execCommand('insertText', false, text);
+  }
+
+  insertTag = (tag: string, tagValue?: string) => {
+    const textarea = this.state.textareaRef.current;
+    const { content } = this.props;
+
+    insertTagInTextarea({ textarea, content, tag, tagValue });
+  }
+
+  setContextMenu = (ContextMenuComponent: typeof Component) => {
+    this.setState({ ContextMenuComponent });
+  }
+
+  closeContextMenu = () => {
+    this.setState({ ContextMenuComponent: null });
   }
 
   getContextMenu() {
@@ -77,9 +102,15 @@ export default class Editor extends Component<IProps, IState> {
       return null;
     }
 
+    const textarea = this.state.textareaRef.current;
+    const cursorPos = getCaretCoordinates(textarea, textarea.selectionEnd);
+
     return (
       <ContextMenuComponent
-
+        cursorPos={cursorPos}
+        insertText={this.insertText}
+        insertTag={this.insertTag}
+        closeContextMenu={this.closeContextMenu}
       />
     );
   }
