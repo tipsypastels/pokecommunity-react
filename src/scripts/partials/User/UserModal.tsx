@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import { Modal, Button, ButtonToolbar } from 'react-bootstrap';
-
-import Icon from '../Icon';
+import { Modal } from 'react-bootstrap';
 
 import PostUserInterface from '../../types/PostUserInterface';
 
 import Usergroup from './Usergroup';
-
 import vBRoute from '../../bridge/vBRoute';
+import Action from '../Action';
 
 import '../../../styles/modules/User/UserModal.scss';
-
-//TODO mockup for allll of this
 
 interface IProps {
   user: PostUserInterface;
@@ -90,21 +86,22 @@ export default class UserModal extends Component<IProps> {
   getControls() {
     return (
       <div className="user-controls">
-        <Button 
-          href={vBRoute('sendPm', this.props.user.id)} 
-          variant="outline-secondary"
-        >
-          Send Message
-        </Button>
-        <Button 
+        <Action
+          name="View Profile"
+          icon={{ name: 'id-card', group: 'fal' }}
+          href={vBRoute('profile', this.props.user.id)}
+          className="d-none d-md-inline"
+        />
+        <Action
+          name="Send Message"
+          icon={{ name: 'comments', group: 'fal' }}
+          href={vBRoute('sendPm', this.props.user.id)}
+        />
+        <Action
+          name="See Posts"
+          icon={{ name: 'list', group: 'fal' }}
           href={vBRoute('searchUserPosts', this.props.user.id)}
-          variant="outline-secondary"
-        >
-          See Posts
-        </Button>
-        <Button variant="link">
-          <Icon name="hammer-war" group="fal"/>
-        </Button>
+        />
       </div>
     )
   }

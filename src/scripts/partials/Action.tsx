@@ -7,18 +7,21 @@ import '../../styles/modules/Action.scss';
 
 interface IProps {
   name?: string;
+  activeName?: string;
   icon?: string | IconProps;
   className?: string;
 
   active?: boolean;
   activate?: () => void;
   deactivate?: () => void;
+  href?: string;
 }
 
 export default class Action extends Component<IProps> {
   render() {
     return (
-      <Button 
+      <Button
+        href={this.props.href}
         className={
           `Action 
           ${this.props.active && 'active-action'} 
@@ -42,12 +45,17 @@ export default class Action extends Component<IProps> {
   }
 
   getName() {
-    if (this.props.name) {
-      return (
-        <span>
-          {this.props.name}
-        </span>
-      );
+    const { active, name, activeName } = this.props;
+    let relevantName;
+
+    if (active) {
+      relevantName = activeName || name;
+    } else {
+      relevantName = name;
+    }
+
+    if (relevantName) {
+      return <span>{relevantName}</span>
     }
   }
 

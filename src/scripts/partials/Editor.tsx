@@ -36,7 +36,7 @@ export default class Editor extends Component<IProps, IState> {
 
         <textarea 
           className="Content"
-          value={this.props.content}
+          defaultValue={this.props.content}
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
           ref={this.state.textareaRef}

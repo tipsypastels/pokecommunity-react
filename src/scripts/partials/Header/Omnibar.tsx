@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Form, FormControl, Button, Dropdown, NavItem } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 import { When } from 'react-if';
-
 import { Link } from 'react-router-dom';
 
 import { BreadcrumbInterface } from '../../types/BreadcrumbInterface';
 import Icon from '../Icon';
 
 import AppContext from '../../AppContext';
-import vBRoute from '../../bridge/vBRoute';
-
 import OmnibarTools from './Omnibar/OmnibarTools';
 
 import logo from '../../../images/common/brand-transparent.png';

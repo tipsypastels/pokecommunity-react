@@ -8,7 +8,6 @@ import Err404 from '../partials/PagePartials/Errors/Err404';
 import Err500 from '../partials/PagePartials/Errors/Err500';
 import Loading from '../partials/PagePartials/Loading';
 
-import UserInterface from '../types/UserInterface';
 import { BreadcrumbInterface } from '../types/BreadcrumbInterface';
 import AppContext from '../AppContext';
 import newcoreApi from '../bridge/newcoreApi';

@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { Modal, Button, Dropdown } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 import LayoutContainer from './NewPostModal/LayoutContainer';
 import LayoutSwitcher from './NewPostModal/LayoutSwitcher';
 import SubmitButton from './NewPostModal/SubmitButton';
-import Icon from './Icon';
+import TabbedLayout from './NewPostModal/LayoutItems/TabbedLayout';
 
 import ThreadInterface from '../types/ThreadInterface';
 
 import '../../styles/modules/NewPostModal.scss';
-import TabbedLayout from './NewPostModal/LayoutItems/TabbedLayout';
 
 // TODO allow this to be nil or work in other contexts
 // like creating new thread, all that stuff
@@ -18,6 +17,7 @@ interface IProps {
   thread: ThreadInterface;
   show: boolean;
   closeModal: () => void;
+  quotedContent?: string;
 }
 
 export type EditorLayout = 'columns' | 'rows' | 'tabbed';
@@ -41,10 +41,17 @@ function getInitialLayout(): EditorLayout {
 }
 
 export default class NewPostModal extends Component<IProps, IState> {
+  static getDerivedStateFromProps(props: IProps, state: IState) {
+    if (props.quotedContent && !state.content) {
+      return { content: props.quotedContent };
+    }
+    return null;
+  }
+
   constructor(props) {
     super(props);
     this.state = {
-      content: '',
+      content: this.props.quotedContent || '',
       layout: getInitialLayout(),
     }
   }
@@ -77,7 +84,7 @@ export default class NewPostModal extends Component<IProps, IState> {
           />
         </Modal.Header>
 
-        {/* TODO 
+        {/*
           doing it this way is fine, but it means you're rendering two 
           <Preview /> elements which is what does the actual bbcode parsing
           this may be inefficient, and if you ever experience lag when using this menu you may want to add a method to *this* component to do the parsing and pass it down as a prop - so it only gets done once

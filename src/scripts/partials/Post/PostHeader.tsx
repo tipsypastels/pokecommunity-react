@@ -8,7 +8,7 @@ import PostUserInterface from '../../types/PostUserInterface';
 
 import vBRoute from '../../bridge/vBRoute';
 
-import { yearsSince } from '../../helpers/DateHelpers';
+import { yearsSince, userIsNew } from '../../helpers/DateHelpers';
 
 import '../../../styles/modules/Post/PostHeader.scss';
 import UserModal from '../User/UserModal';
@@ -100,17 +100,19 @@ export default class PostHeader extends Component<IProps, IState> {
   }
 
   getNewUserBadge() {
-    return null; // TODO
+    if (!userIsNew(this.props.user)) {
+      return;
+    }
 
-    // return (
-    //   <Badge
-    //     variant="secondary"
-    //     title="Be sure to say hello :]"
-    //     className="newmember"
-    //   >
-    //     New Member!
-    //   </Badge>
-    // )
+    return (
+      <Badge
+        variant="secondary"
+        title="Be sure to say hello :]"
+        className="newmember"
+      >
+        New Member!
+      </Badge>
+    )
   }
 
   getStatistics() {

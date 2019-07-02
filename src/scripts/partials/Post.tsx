@@ -15,6 +15,10 @@ import SharePostModal from './Post/ActionModals/SharePostModal';
 export interface PostProps extends PostInterface {
   thread: ThreadInterface;
   index: number;
+  
+  selectPost: (postid: number) => void;
+  deselectPost: (postid: number) => void;
+  checkPostSelected: (postid: number) => boolean;
 }
 
 export type PostActionModal = null | 'share';
@@ -42,6 +46,9 @@ class Post extends Component<PostProps, IState> {
       thread,
       canEdit,
       index,
+      selectPost,
+      deselectPost,
+      checkPostSelected,
     } = this.props;
 
     const { actionModalOpen } = this.state;
@@ -97,13 +104,13 @@ class Post extends Component<PostProps, IState> {
           <PostContent
             content={content}
             created={created}
-            canModerate={thread.canModerate}
             index={index}
           />
 
           {this.getSignature()}
 
           <PostFooter
+            id={id}
             canEdit={canEdit}
             canSharePosts={thread.canSharePosts}
             canReply={thread.canReply}
@@ -112,6 +119,9 @@ class Post extends Component<PostProps, IState> {
             setOverflow={this.setOverflow}
             actionModalOpen={actionModalOpen}
             setActionModalOpen={this.setActionModalOpen}
+            selectPost={selectPost}
+            deselectPost={deselectPost}
+            checkPostSelected={checkPostSelected}
           />
         </Block.Content>
       </Block>
