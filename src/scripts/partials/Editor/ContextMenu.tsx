@@ -1,6 +1,4 @@
-import React, { Component, CSSProperties, ReactNode } from 'react'
-import Icon, { IconProps } from '../Icon';
-import { Button } from 'react-bootstrap';
+import React, { Component, CSSProperties, ReactNode } from 'react';
 
 export type ContextMenuOptions = null | 'links' | 'images' | 'mentions';
 
@@ -19,6 +17,7 @@ export default class ContextMenu extends Component<IProps> {
   render() {
     return (
       <div
+        id="editor-context-menu"
         className={`editor-context-menu ${this.props.className}`}
         style={this.getStyle()}
       >
@@ -31,7 +30,7 @@ export default class ContextMenu extends Component<IProps> {
     const { width } = this.props;
     const { cursorPos } = this.props;
 
-    const bottom = cursorPos.top - cursorPos.height;
+    const bottom = 70 - cursorPos.top;
     const left = Math.max(0, cursorPos.left - (width / 2));
 
     const arrowOffset = Math.min(Math.max(25, cursorPos.left), width / 2) + 'px';

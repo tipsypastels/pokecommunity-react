@@ -10,7 +10,11 @@ interface IProps extends MinimalUserInterface {
 
 const MentionableUser = (props: IProps) => (
   <div className={`MentionableUser ${props.selected && 'selected'}`}>
-    <img className="avatar" src={props.avatar} />
+    <img 
+      className="avatar" 
+      src={props.avatar}
+      alt={`${props.username}'s Avatar`}
+    />
     <span className="username">
       {props.username}
     </span>

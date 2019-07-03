@@ -1,4 +1,4 @@
-import React, { Component, CSSProperties } from 'react'
+import React, { Component } from 'react'
 import { Button } from 'react-bootstrap';
 import ContextMenu from '../ContextMenu';
 import Icon, { IconProps } from '../../Icon';

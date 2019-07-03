@@ -30,11 +30,13 @@ export default class Editor extends Component<IProps, IState> {
   }
 
   componentDidUpdate(prevProps: IProps, prevState: IState) {
+    // if the user JUST started typing a mention this update, start the mentions menu
     if (this.typingMention() && prevState.contextMenu !== 'mentions') {
       this.setState({ contextMenu: 'mentions' });
       return;
     }
     
+    // vice versa, if they just stopped this update, close the menu
     if (!this.typingMention() && prevState.contextMenu === 'mentions') {
       this.setState({ contextMenu: null });
     }
@@ -173,23 +175,17 @@ export default class Editor extends Component<IProps, IState> {
       return null;
     }
 
-    console.log({ selectionStart, selectionEnd });
-
-    console.log(value);
     let word = value.substring(selectionStart, selectionEnd);
-    console.log(`initial: ${word}`);
 
     // loop back
     for (let i = selectionStart; i >= 0; i--) {
       const char = value.charAt(i);
-      console.log(char);
       if (char.match(/\s/)) {
         break;
       }
 
       word = `${char}${word}`;
     }
-    console.log(`after back: ${word}`)
 
     // loop forwards
     for (let i = selectionEnd + 1; i < value.length; i++) {
@@ -200,7 +196,6 @@ export default class Editor extends Component<IProps, IState> {
 
       word += char;
     }
-    console.log(`after forward: ${word}`);
 
     return word;
   }
