@@ -1,0 +1,24 @@
+.MentionableUser {
+  display: flex;
+  align-items: center;
+
+  border-radius: 3px;
+  cursor: pointer;
+  
+  &.selected,
+  &:hover {
+    background-color: white;
+    color: var(--primary);
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 0.25rem;
+  }
+
+  .avatar {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    margin-right: 0.25rem;
+  }
+}

@@ -1,9 +1,7 @@
 import UsergroupInterface from "./UsergroupInterface";
+import MinimalUserInterface from "./MinimalUserInterface";
 
-export default interface UserInterface {
-  id: number;
-  username: string;
-  avatar?: string;
+export default interface UserInterface extends MinimalUserInterface {
   usertitle?: string;
 
   created: number;

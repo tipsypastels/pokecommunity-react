@@ -3,8 +3,7 @@ import { Dropdown } from 'react-bootstrap';
 
 import Icon from '../Icon';
 import StaffPostOptions from './StaffPostOptions';
-import LinksMenu from './ContextMenus/LinksMenu';
-import ImagesMenu from './ContextMenus/ImagesMenu';
+import { ContextMenuOptions } from './ContextMenu';
 
 // TODO move this somewhere else
 const AVAILABLE_FONTS = [
@@ -18,7 +17,7 @@ interface IProps {
   textareaRef: React.RefObject<HTMLTextAreaElement>;
   setContent: (content: string, callback?: () => void) => void;
   insertTag: (tag: string, tagValue?: string) => void;
-  setContextMenu: (ContextMenuComponent: typeof Component) => void;
+  setContextMenu: (contextMenu: ContextMenuOptions) => void;
 }
 
 export default class Toolbar extends Component<IProps> {
@@ -79,10 +78,10 @@ export default class Toolbar extends Component<IProps> {
         </div>
 
         <div className="tool-group">
-          <button title="Insert a link" onClick={() => this.props.setContextMenu(LinksMenu)}>
+          <button title="Insert a link" onClick={() => this.props.setContextMenu('links')}>
             <Icon name="link" />
           </button>
-          <button title="Insert an image" onClick={() => this.props.setContextMenu(ImagesMenu)}>
+          <button title="Insert an image" onClick={() => this.props.setContextMenu('images')}>
             <Icon name="image" />
           </button>
           <button title="Insert a quote" onClick={tag('quote')}>

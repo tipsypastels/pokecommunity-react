@@ -3,10 +3,12 @@ import getCaretCoordinates from 'textarea-caret';
 
 import Toolbar from './Editor/Toolbar';
 import { insertTagInTextarea } from '../helpers/Editor/toolbarUtils';
+import { ContextMenuOptions } from './Editor/ContextMenu';
 
 import '../../styles/modules/Editor.scss';
-
-
+import LinksMenu from './Editor/ContextMenu/LinksMenu';
+import ImagesMenu from './Editor/ContextMenu/ImagesMenu';
+import MentionsMenu from './Editor/ContextMenu/MentionsMenu';
 
 interface IProps {
   content: string;
@@ -15,7 +17,7 @@ interface IProps {
 
 interface IState {
   textareaRef: React.RefObject<HTMLTextAreaElement>;
-  ContextMenuComponent?: typeof Component | React.FC;
+  contextMenu: ContextMenuOptions;
 }
 
 export default class Editor extends Component<IProps, IState> {
@@ -23,7 +25,19 @@ export default class Editor extends Component<IProps, IState> {
     super(props);
     this.state = {
       textareaRef: React.createRef<HTMLTextAreaElement>(),
+      contextMenu: null,
     };
+  }
+
+  componentDidUpdate(prevProps: IProps, prevState: IState) {
+    if (this.typingMention() && prevState.contextMenu !== 'mentions') {
+      this.setState({ contextMenu: 'mentions' });
+      return;
+    }
+    
+    if (!this.typingMention() && prevState.contextMenu === 'mentions') {
+      this.setState({ contextMenu: null });
+    }
   }
 
   render() {
@@ -44,6 +58,7 @@ export default class Editor extends Component<IProps, IState> {
           defaultValue={this.props.content}
           onChange={this.onChange}
           onKeyDown={this.onKeyDown}
+          onDoubleClick={this.closeContextMenu}
           ref={this.state.textareaRef}
         />
       </div>
@@ -68,11 +83,6 @@ export default class Editor extends Component<IProps, IState> {
         e.preventDefault();
         this.insertText('  ');
         break;
-      
-
-      // case 50: /* @ */
-      //   this.setState({ ContextMenuComponent: MentionsMenu });
-      //   break;
     }
   }
 
@@ -88,30 +98,116 @@ export default class Editor extends Component<IProps, IState> {
     insertTagInTextarea({ textarea, content, tag, tagValue });
   }
 
-  setContextMenu = (ContextMenuComponent: typeof Component) => {
-    this.setState({ ContextMenuComponent });
+  setContextMenu = (contextMenu: ContextMenuOptions) => {
+    this.setState({ contextMenu });
   }
 
   closeContextMenu = () => {
-    this.setState({ ContextMenuComponent: null });
+    this.setState({ contextMenu: null });
   }
 
   getContextMenu() {
-    const { ContextMenuComponent } = this.state;
-    if (!ContextMenuComponent) {
+    const { contextMenu } = this.state;
+    if (!contextMenu) {
       return null;
     }
 
     const textarea = this.state.textareaRef.current;
     const cursorPos = getCaretCoordinates(textarea, textarea.selectionEnd);
 
-    return (
-      <ContextMenuComponent
-        cursorPos={cursorPos}
-        insertText={this.insertText}
-        insertTag={this.insertTag}
-        closeContextMenu={this.closeContextMenu}
-      />
-    );
+    const contextProps = { 
+      cursorPos,
+      closeContextMenu: this.closeContextMenu,
+    }
+
+    switch(contextMenu) {
+      case 'links':
+        return (
+          <LinksMenu
+            {...contextProps}
+            onSubmit={content => {
+              this.insertTag('url', content);
+            }}
+          />
+        );
+      case 'images':
+        return (
+          <ImagesMenu
+            {...contextProps}
+            onSubmit={content => {
+              this.insertTag('img');
+              this.insertText(content);
+            }}
+          />
+        );
+      case 'mentions':
+        return (
+          <MentionsMenu
+            cursorPos={cursorPos}
+          />
+        );
+    }
+  }
+
+  /**
+   * @name getCurrentWord
+   * @description Gets the current word being typed or selected in the textbox by iterating forward and back until a space is encountered.
+   */
+  getCurrentWord(): string | null {
+    const textarea = this.state.textareaRef.current;
+
+    // playin it safe
+    if (!textarea) {
+      return null;
+    }
+
+    const { value, selectionStart, selectionEnd } = textarea;
+
+    // if the textarea is unfocused, there is no current word
+    if (typeof selectionStart === 'undefined' || typeof selectionEnd === 'undefined') {
+      return null;
+    }
+
+    // if a selection is being made, it is not possible to consistently determine a "current word" as the selection area can encompass multiple words. it's probably fine to just disable it in this case
+    if (selectionStart !== selectionEnd) {
+      return null;
+    }
+
+    console.log({ selectionStart, selectionEnd });
+
+    console.log(value);
+    let word = value.substring(selectionStart, selectionEnd);
+    console.log(`initial: ${word}`);
+
+    // loop back
+    for (let i = selectionStart; i >= 0; i--) {
+      const char = value.charAt(i);
+      console.log(char);
+      if (char.match(/\s/)) {
+        break;
+      }
+
+      word = `${char}${word}`;
+    }
+    console.log(`after back: ${word}`)
+
+    // loop forwards
+    for (let i = selectionEnd + 1; i < value.length; i++) {
+      const char = value.charAt(i);
+      if (char.match(/\s/)) {
+        break;
+      }
+
+      word += char;
+    }
+    console.log(`after forward: ${word}`);
+
+    return word;
+  }
+
+  typingMention(): boolean {
+    const currentWord = this.getCurrentWord();
+    return currentWord !== null 
+      && !!currentWord.match(/^@\S*$/); 
   }
 }
