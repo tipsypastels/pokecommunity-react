@@ -4,6 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 import Icon from '../Icon';
 import StaffPostOptions from './StaffPostOptions';
 import LinksMenu from './ContextMenus/LinksMenu';
+import ImagesMenu from './ContextMenus/ImagesMenu';
 
 // TODO move this somewhere else
 const AVAILABLE_FONTS = [
@@ -80,6 +81,9 @@ export default class Toolbar extends Component<IProps> {
         <div className="tool-group">
           <button title="Insert a link" onClick={() => this.props.setContextMenu(LinksMenu)}>
             <Icon name="link" />
+          </button>
+          <button title="Insert an image" onClick={() => this.props.setContextMenu(ImagesMenu)}>
+            <Icon name="image" />
           </button>
           <button title="Insert a quote" onClick={tag('quote')}>
             <Icon name="quote-left" />

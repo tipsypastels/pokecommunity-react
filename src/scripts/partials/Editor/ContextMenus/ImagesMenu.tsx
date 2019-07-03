@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import ContextMenu, { ContextMenuWrapperProps } from '../ContextMenu';
 
-export default class LinksMenu extends Component<ContextMenuWrapperProps> {
+export default class ImagesMenu extends Component<ContextMenuWrapperProps> {
   render() {
     return (
       <ContextMenu
-        tag="url"
-        placeholder="Enter the URL of your link"
-        icon="link"
-        contentBecomes="value"
+        tag="img"
+        placeholder="Enter the URL of your image"
+        icon="image"
+        contentBecomes="children"
         {...this.props}
       />
     )

@@ -14,6 +14,7 @@ export interface ContextMenuProps extends ContextMenuWrapperProps {
   placeholder: string;
   icon: string | IconProps;
   className?: string;
+  contentBecomes: 'value' | 'children';
 }
 
 interface IState {
@@ -70,7 +71,12 @@ export default class ContextMenu extends Component<ContextMenuProps, IState> {
 
   submit = () => {
     if (this.state.content) {
-      this.props.insertTag(this.props.tag, this.state.content);
+      if (this.props.contentBecomes === 'value') {
+        this.props.insertTag(this.props.tag, this.state.content);
+      } else {
+        this.props.insertTag(this.props.tag);
+        this.props.insertText(this.state.content);
+      }
       this.props.closeContextMenu();
     }
   }
