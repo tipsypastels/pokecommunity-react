@@ -3,8 +3,6 @@ import { Button } from 'react-bootstrap';
 import ContextMenu from '../ContextMenu';
 import Icon, { IconProps } from '../../Icon';
 
-export type ContextMenuOptions = null | 'links' | 'images' | 'mentions';
-
 export interface ContextMenuWrapperProps {
   cursorPos: { left: number, top: number, height: number };
   closeContextMenu: () => void;

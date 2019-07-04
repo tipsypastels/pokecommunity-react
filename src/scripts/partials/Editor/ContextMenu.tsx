@@ -1,6 +1,6 @@
 import React, { Component, CSSProperties, ReactNode } from 'react';
 
-export type ContextMenuOptions = null | 'links' | 'images' | 'mentions';
+export type ContextMenuOptions = null | 'links' | 'images';
 
 export interface IProps {
   cursorPos: { left: number, top: number, height: number };

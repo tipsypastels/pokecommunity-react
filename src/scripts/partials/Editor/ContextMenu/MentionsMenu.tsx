@@ -8,39 +8,55 @@ import MentionableUser from '../../User/MentionableUser';
 
 interface IProps {
   cursorPos: { left: number, top: number, height: number };
+  insertText: (text: string) => void;
+  currentWord: string;
 }
 
 interface IState {
   mentionableUsers?: MinimalUserInterface[];
+  selectionIndex: number;
 }
+
+const MAX_MENTIONABLE_USERS_TO_SHOW_AT_ONCE = 5;
+
+const MOCK_DATA = [
+  {
+    id: 210532,
+    username: 'Rainbow',
+    avatar: 'https://development.pokecommunity.com/customavatars/avatar210532_651.gif',
+  },
+  {
+    id: 5,
+    username: 'Laslow',
+    avatar: 'https://www.pokecommunity.com/customavatars/thumbs/avatar5_9.gif',
+  },
+  {
+    id: 3002,
+    username: 'Hiroshi Sotomura',
+    avatar: 'https://www.pokecommunity.com/customavatars/thumbs/avatar5_9.gif',
+  },
+  {
+    id: 67132,
+    username: 'Nina',
+    avatar: 'https://www.pokecommunity.com/customavatars/thumbs/avatar67163_92.gif',
+  },
+];
 
 export default class MentionsMenu extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      mentionableUsers: undefined,
+      mentionableUsers: MOCK_DATA,
+      selectionIndex: 0,
     };
   }
 
   componentDidMount() {
-    // TODO api call here!
-    this.setState({ mentionableUsers: [
-      {
-        id: 210532,
-        username: 'Rainbow',
-        avatar: 'https://development.pokecommunity.com/customavatars/avatar210532_651.gif',
-      },
-      {
-        id: 5,
-        username: 'Laslow',
-        avatar: 'https://www.pokecommunity.com/customavatars/thumbs/avatar5_9.gif',
-      },
-      {
-        id: 67132,
-        username: 'Nina',
-        avatar: 'https://www.pokecommunity.com/customavatars/thumbs/avatar67163_92.gif',
-      },
-    ] });
+    window.addEventListener('keydown', this.keybinds);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.keybinds);
   }
 
   render() {
@@ -53,6 +69,27 @@ export default class MentionsMenu extends Component<IProps, IState> {
         {this.getContent()}
       </ContextMenu>
     );
+  }
+
+  keybinds = (e) => {
+    if (e.keyCode === 40 /* down arrow */) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.moveSelectionIndex('down');
+    }
+
+    if (e.keyCode === 38 /* up arrow */) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.moveSelectionIndex('up');
+    }
+
+    if (e.keyCode === 13 /* enter */) {
+      if (this.autocompleteCurrentlySelectedUser()) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }
   }
 
   getContent(): ReactNode {
@@ -71,9 +108,9 @@ export default class MentionsMenu extends Component<IProps, IState> {
 
     if (users.length === 0) {
       return (
-        <React.Fragment>
-          Couldn't find anyone on your friends list with that name. <strong>Don't worry</strong> - you can still mention any user on PokéCommunity! 
-        </React.Fragment>
+        <div className="no-results">
+          Couldn't find anyone on your friends list with that name. <strong>Don't worry</strong> - you can still mention any user on PokéCommunity!
+        </div>
       );
     }
 
@@ -83,10 +120,15 @@ export default class MentionsMenu extends Component<IProps, IState> {
           Mention a friend
         </div>
 
-        {users.map(user => (
+        {users.map((user, i) => (
           <MentionableUser 
             key={user.id}
-            selected={false /* TODO */}
+            completedPartOfName={this.getMentionedNameWithoutSymbol()}
+            selected={this.state.selectionIndex === i}
+            enter={this.autocompleteCurrentlySelectedUser}
+            hover={() => {
+              this.setState({ selectionIndex: i });
+            }}
             {...user}
           />
         ))}
@@ -95,6 +137,62 @@ export default class MentionsMenu extends Component<IProps, IState> {
   }
 
   getRelevantUsers(): MinimalUserInterface[] {
-    return this.state.mentionableUsers; // TODO filtering
+    const users = this.state.mentionableUsers;
+    if (!users) {
+      return;
+    }
+
+    const mentionedName = this.getMentionedNameWithoutSymbol();
+    return users
+      .filter(user => user.username.startsWith(mentionedName))
+      .slice(0, MAX_MENTIONABLE_USERS_TO_SHOW_AT_ONCE);
+  }
+
+  moveSelectionIndex(direction: 'down' | 'up') {
+    const count = this.getRelevantUsers().length;
+    let { selectionIndex } = this.state;
+
+    if (direction === 'down') {
+      selectionIndex += 1;
+      if (selectionIndex >= count) {
+        selectionIndex = 0;
+      }
+    } else {
+      selectionIndex -= 1;
+      if (selectionIndex < 0) {
+        selectionIndex = count - 1;
+      }
+    }
+
+    this.setState({ selectionIndex });
+  }
+
+  // TODO if the cursor is not at the end of the name, this can autocomplete in the wrong place. not ideal. ideally we'd replace the current word instead of appending the rest of it
+  autocompleteCurrentlySelectedUser = (): boolean => {
+    const users = this.getRelevantUsers();
+    const user = users[this.state.selectionIndex];
+
+    if (!user) {
+      return false;
+    }
+
+    const mentionedName = this.getMentionedNameWithoutSymbol();
+    const restOfName = user.username.slice(mentionedName.length);
+
+    let multiwordNameSuffix = '';
+    if (user.username.includes(' ')) {
+      multiwordNameSuffix = `#${user.id}`;
+    }
+
+    this.props.insertText(`${restOfName}${multiwordNameSuffix} `);
+    return true;
+  }
+
+  getMentionedNameWithoutSymbol(): string | null {
+    const { currentWord } = this.props;
+    if (currentWord) {
+      return currentWord.replace(/^@/, '');
+    } 
+    return null;
   }
 }
