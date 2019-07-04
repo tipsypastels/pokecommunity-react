@@ -7,18 +7,20 @@ interface IProps {
 
 export default class Preview extends Component<IProps> {
   render() {
-    const __html = BBCode.process({ text: this.props.content }).html;
+    return null; // new parser needed!
 
-    return (
-      <div className="Preview">
-        <strong className="preview-title">
-          Preview
-        </strong>
+    // const __html = BBCode.process({ text: this.props.content }).html;
 
-        <div
-          dangerouslySetInnerHTML={{ __html }}
-        />
-      </div>
-    )
+    // return (
+    //   <div className="Preview">
+    //     <strong className="preview-title">
+    //       Preview
+    //     </strong>
+
+    //     <div
+    //       dangerouslySetInnerHTML={{ __html }}
+    //     />
+    //   </div>
+    // )
   }
 }
