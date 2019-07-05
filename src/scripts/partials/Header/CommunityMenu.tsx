@@ -118,10 +118,8 @@ class CommunityMenu extends Component<{}, IState> {
     let currentScroll = window.pageYOffset;
     let mode;
     if (prevScroll > currentScroll) {
-      console.log("Scroll up?");
       mode = 'visible';
     } else {
-      console.log("Scroll Down?");
       mode = 'hidden';
     }
     this.setState({ scrollPosition: currentScroll, mode });

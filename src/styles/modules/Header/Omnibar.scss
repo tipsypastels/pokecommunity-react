@@ -1,6 +1,6 @@
 // TODO move this
 $app-color: rgba(227, 66, 26, 0.9);
-$omnibar-color: rgba(64, 64, 64, 0.9);
+$omnibar-color: darken(rgba(64, 64, 64, 0.9), 2%);
 $omnibar-box-shadow: 0 1px rgba(0, 0, 0, 0.15);
 $omnibar-height: 4.875rem; /* Baseline height to determine how content is shifted - only use if content is covered by Omnibar. Should always be 4.875rem, sized to elements inside it. */
 $omnibar-badge-color: #db3c12;
