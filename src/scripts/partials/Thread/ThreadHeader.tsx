@@ -13,7 +13,6 @@ import PollInterface from '../../types/PollInterface';
 import { standardDateTime } from '../../helpers/DateHelpers';
 
 import '../../../styles/modules/ThreadHeader.scss';
-import Action from '../Action';
 
 interface IProps {
   title: string;
@@ -28,6 +27,7 @@ interface IProps {
 
   forumIcon?: string;
   threadIcon?: string;
+
 
   openEditor: () => void;
 }
@@ -101,10 +101,11 @@ export default class ThreadHeader extends Component<IProps> {
 
             <Dropdown alignRight>
               <Dropdown.Toggle variant="link" id="thread-tools">
-                <Action
-                  name="Moderation"
-                  icon="wrench"
-                />
+                <Icon name="wrench" />
+
+                <span>
+                  Tools
+                </span>
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
