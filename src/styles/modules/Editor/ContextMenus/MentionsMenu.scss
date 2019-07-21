@@ -1,0 +1,28 @@
+.editor-context-menu.MentionsMenu {
+  color: white; // TODO etc etc
+  padding: 8px;
+
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .icon {
+      margin-right: 0.25rem;
+      font-size: 1.3rem;
+    }
+  }
+
+  .mentionable-users {
+    width: 100%;
+    
+    .title {
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      color: mix(transparent, white, 10%);
+      margin-bottom: 0.25rem;
+    }
+  }
+}

@@ -154,6 +154,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         views={thread.views}
         repliesCount={thread.repliesCount}
         canReply={thread.canReply}
+        canModerate={thread.canModerate}
         username={thread.username}
         created={thread.created}
         poll={thread.poll}

@@ -13,12 +13,14 @@ import PollInterface from '../../types/PollInterface';
 import { standardDateTime } from '../../helpers/DateHelpers';
 
 import '../../../styles/modules/ThreadHeader.scss';
+import Action from '../Action';
 
 interface IProps {
   title: string;
   views: number;
   repliesCount: number;
   canReply: boolean;
+  canModerate: boolean;
   username: string;
   created: number;
   poll: PollInterface;
@@ -99,11 +101,10 @@ export default class ThreadHeader extends Component<IProps> {
 
             <Dropdown alignRight>
               <Dropdown.Toggle variant="link" id="thread-tools">
-                <Icon name="wrench" />
-
-                <span>
-                  Tools
-                </span>
+                <Action
+                  name="Moderation"
+                  icon="wrench"
+                />
               </Dropdown.Toggle>
 
               <Dropdown.Menu>

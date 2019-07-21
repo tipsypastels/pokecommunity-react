@@ -30,6 +30,7 @@ export const EDITOR_LAYOUTS_AVAILABLE_AT = 'md';
 
 interface IState {
   content: string;
+  mentions: string[];
   layout: EditorLayout;
 }
 
@@ -52,6 +53,7 @@ export default class NewPostModal extends Component<IProps, IState> {
     super(props);
     this.state = {
       content: this.props.quotedContent || '',
+      mentions: [],
       layout: getInitialLayout(),
     }
   }
@@ -66,7 +68,7 @@ export default class NewPostModal extends Component<IProps, IState> {
     `;
 
     return (
-      <Modal dialogClassName="NewPostModal modal-dialog-centered" show={this.props.show} onHide={this.props.closeModal}>
+      <Modal dialogClassName="NewPostModal modal-dialog-centered" show={this.props.show} onHide={this.props.closeModal} keyboard={false}>
         <Modal.Header className="flex">
           <Modal.Title className="flex-grows">
             Reply <span className="d-none d-md-inline">to "{this.props.thread.title}"</span>

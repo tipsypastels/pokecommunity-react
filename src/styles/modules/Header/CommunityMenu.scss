@@ -10,7 +10,7 @@ $community-menu-colors:
 
 .CommunityMenu {
   padding: 0;
-  background-color: mix(rgba(64, 64, 64, 0.7), rgba(0, 0, 0, 0.8), 50%);
+  background-color: darken(rgba(64, 64, 64, 1), 3%);
 
   &.expanded {
     flex-direction: column;

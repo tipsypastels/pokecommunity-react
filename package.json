@@ -18,7 +18,8 @@
     "react-if": "^3.4.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
-    "strftime": "^0.10.0"
+    "strftime": "^0.10.0",
+    "textarea-caret": "^3.1.0"
   },
   "devDependencies": {
     "@types/jest": "24.0.12",
