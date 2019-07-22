@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import queryString from 'query-string';
 
@@ -58,7 +58,7 @@ export default class ThreadPage extends Component<IProps, IState> {
       });
 
       this.setState({ thread: response.data });
-    } catch(e) {
+    } catch (e) {
       if (e.toString().match(/404/)) {
         this.setState({ error: 404 });
       } else {
@@ -233,11 +233,11 @@ export default class ThreadPage extends Component<IProps, IState> {
 
   selectPost = (postid: number) => {
     let { selectedPosts } = this.state;
-    
+
     selectedPosts = new Set(
       [...selectedPosts].concat(postid)
     );
-    
+
     this.setState({ selectedPosts });
   }
 

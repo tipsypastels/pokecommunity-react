@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap';
 import DefaultBanner from '../partials/Header/DefaultBanner';
 import CommunityMenu from '../partials/Header/CommunityMenu';
 import Omnibar from '../partials/Header/Omnibar';
+import Footer from '../partials/Footer';
 
 import Err404 from '../partials/PagePartials/Errors/Err404';
 import Err500 from '../partials/PagePartials/Errors/Err500';
@@ -58,6 +59,7 @@ export default class Page extends Component<IProps> {
         <Omnibar breadcrumbs={this.props.breadcrumbs} />
         {this.getBanner()}
         {this.getContent()}
+        <Footer />
       </div>
     )
   }

@@ -7,6 +7,7 @@ import AppContext from './AppContext';
 
 import ThreadPage from './pages/ThreadPage';
 import Spheal from './pages/Spheal';
+import Index from './pages/IndexPage';
 
 import '../styles/base/utilities.scss';
 import '../styles/base/buttons.scss';
@@ -32,14 +33,14 @@ class App extends Component<{}, IState> {
       <AppContext.Provider value={this.getContextFromState()}>
         <div className="App" data-theme={this.state.theme}>
           <Router>
-            <Route path ="/" exact component ={Spheal}/>
+            <Route path="/" exact component={Index} />
             <Route path="/threads/:id" exact render={route => (
-              <ThreadPage 
+              <ThreadPage
                 appCurrentBanner={this.state.banner}
                 setAppBanner={this.setAppBanner}
-                {...route} 
+                {...route}
               />
-            )}/>
+            )} />
           </Router>
         </div>
       </AppContext.Provider>
