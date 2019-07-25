@@ -1,0 +1,51 @@
+.UserMenu {
+  .user-menu-toggle {
+    font-weight: 300;
+
+    .avatar {
+      height: 40px;
+      width: 40px;
+      margin-left: 6px;
+    }
+  }
+
+  .dropdown-header {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 100%;
+
+    @media (min-width: 768px) {
+      width: 320px;
+    }
+
+    .user-menu-item {
+      width: 33.333333%;
+      padding: 10px 5px;
+
+      text-decoration: none;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .icon {
+        font-size: 2rem;
+      }
+
+      span {
+        white-space: normal;
+      }
+    }
+
+    .sign-out {
+      display: block;
+      width: 100%;
+      text-decoration: none;
+
+      .icon {
+        margin-right: 0.15rem;
+      }
+    }
+  }
+}
