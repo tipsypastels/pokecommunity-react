@@ -96,24 +96,6 @@ export default class ThreadHeader extends Component<IProps> {
                 Reply to Thread
               </Button>
             </When>
-
-            <div className="flex-grows" />
-
-            <Dropdown alignRight>
-              <Dropdown.Toggle variant="link" id="thread-tools">
-                <Icon name="wrench" />
-
-                <span>
-                  Tools
-                </span>
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item href="#">
-                  hello world
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
           </div>
         </Block.Footer>
       </Block>

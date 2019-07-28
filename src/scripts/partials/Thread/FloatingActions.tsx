@@ -9,6 +9,7 @@ interface IProps {
   canReply: boolean;
   selectedPostsCount: number;
   openNewPostModal: () => void;
+  openModerationModal: () => void;
   deselectPosts: () => void;
 }
 
@@ -26,7 +27,7 @@ export default class FloatingActions extends Component<IProps> {
   getModerationAction() {
     if (this.props.canModerate) {
       return (
-        <div className="action action-secondary">
+        <div className="action action-secondary" onClick={this.props.openModerationModal}>
           <Icon name="cog" fw />
         </div>
       );
