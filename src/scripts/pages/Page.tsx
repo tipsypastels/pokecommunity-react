@@ -128,22 +128,17 @@ export default class Page extends Component<IProps> {
     }
 
     try {
-      const { status, data } = await newcoreApi({
+      const response = await newcoreApi({
         method: 'get',
-        url: '/users/whoami',
+        url: '/auth/whoami',
+        withCredentials: true,
       });
 
-      let currentUser;
-      if (status === 200) {
-        currentUser = data;
-      } else {
-        currentUser = null;
-      }
-
-      this.context.setCurrentUser(currentUser);
+      const user = response.data;
+      this.context.setCurrentUser(user);
     } catch (e) {
       // KEEP it's fine to ignore this error, doesn't need to display to the user unless they're specifically trying to login/register imo
-      console.error(e)
+      this.context.setCurrentUser(null);
     }
   }
 }

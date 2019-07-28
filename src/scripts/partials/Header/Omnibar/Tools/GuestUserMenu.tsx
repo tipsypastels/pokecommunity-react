@@ -104,13 +104,11 @@ export default class GuestUserMenu extends Component<{}, IState> {
       const response = await newcoreApi({
         url: '/auth/login',
         method: 'post',
-        data: {
-          email,
-          password,
-        }
+        data: { email, password }
       });
 
-      console.log(response);
+      const user = response.data;
+      this.context.setCurrentUser(user);
     } catch(e) {
       console.error(e);
     }

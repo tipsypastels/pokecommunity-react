@@ -12,6 +12,14 @@ const vBRoutesList = {
   promotepost: postid => `/servicepanel.php?do=newbuzzentry&p=${postid}`,
   login: '/login.php',
   register: '/newaccount.php',
+  dashboard: '/dashboard',
+  settings: '/settings',
+  friends: '/settings/friends',
+  subscriptions: '/subscription.php',
+  subscriptionUpdates: '/search.php?do=getnew&and=subscribe',
+  editAvatar: '/settings/editavatar',
+  editFlair: '/settings/postflair',
+  editProfile: '/settings/profile',
 };
 
 let loggedRouteWarnings = [];
