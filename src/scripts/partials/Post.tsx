@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { When } from 'react-if';
 
 import Block from './Block';
+import Icon from './Icon';
 
 import PostHeader from './Post/PostHeader';
 import PostContent from './Post/PostContent';
@@ -11,6 +13,11 @@ import StaffPost from './Post/StaffPost';
 import ThreadInterface from '../types/ThreadInterface';
 import PostInterface from '../types/PostInterface';
 import SharePostModal from './Post/ActionModals/SharePostModal';
+
+import AppContext from '../AppContext';
+import vBRoute from '../bridge/vBRoute';
+
+import '../../styles/modules/Post.scss';
 
 export interface PostProps extends PostInterface {
   thread: ThreadInterface;
@@ -29,6 +36,8 @@ interface IState {
 }
 
 class Post extends Component<PostProps, IState> {
+  static contextType = AppContext;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -54,41 +63,12 @@ class Post extends Component<PostProps, IState> {
     const { actionModalOpen } = this.state;
     
     return (
-      <Block className="Post" onClick={this.disableOverflowIfActive}>
+      <Block className="Post">
         <SharePostModal
           postid={id}
           user={user}
           show={actionModalOpen === 'share'}
           closeModal={() => this.setActionModalOpen(null)}
-        />
-
-        {/* TODO move these to a getter with perm checks */}
-        <Block.OverflowMenu 
-          active={this.state.overflowActive}
-          items={[
-            {
-              name: `Ignore ${user.username}`,
-              icon: 'user-minus',
-            },
-            {
-              name: `Moderate ${user.username}`,
-              icon: 'user-shield',
-            },
-            { divider: 0 },
-            {
-              name: 'Share Post',
-              icon: 'share-square',
-              className: 'd-block d-md-none',
-            },
-            {
-              name: 'Report Post',
-              icon: 'exclamation-triangle',
-            },
-            {
-              name: 'Delete Post',
-              icon: 'trash-alt',
-            }
-          ]}
         />
 
         <Block.Header noPadding noBorderBottom>
@@ -124,6 +104,8 @@ class Post extends Component<PostProps, IState> {
             checkPostSelected={checkPostSelected}
           />
         </Block.Content>
+
+        {this.getOverflowMenu()}
       </Block>
     )
   }
@@ -149,16 +131,83 @@ class Post extends Component<PostProps, IState> {
     )
   }
 
-  setOverflow = (overflowActive: boolean) => {
-    this.setState({ overflowActive });
-  }
+  getOverflowMenu() {
+    const { currentUser } = this.context;
 
-  disableOverflowIfActive = (e) => {
-    if (!this.state.overflowActive) {
-      return;
+    if (!this.state.overflowActive || !currentUser) {
+      return null;
     }
 
-    this.setOverflow(false);
+    {/* TODO move these to a getter with perm checks */ }
+    {/* <Block.OverflowMenu 
+          active={this.state.overflowActive}
+          items={[
+            {
+              name: `Ignore ${user.username}`,
+              icon: 'user-minus',
+            },
+            {
+              name: `Moderate ${user.username}`,
+              icon: 'user-shield',
+            },
+            { divider: 0 },
+            {
+              name: 'Share Post',
+              icon: 'share-square',
+              className: 'd-block d-md-none',
+            },
+            {
+              name: 'Report Post',
+              icon: 'exclamation-triangle',
+            },
+            {
+              name: 'Delete Post',
+              icon: 'trash-alt',
+            }
+          ]}
+        /> */}
+
+    const { user } = this.props;
+
+    return (
+      <div className="post-overflow-menu">
+        <When condition={currentUser.id !== user.id}>
+          <a className="overflow-action" href={vBRoute('ignoreUser', user.id)}>
+            <Icon name="user-minus" fw />
+            Ignore {user.username}
+          </a>
+        </When>
+
+        <When condition={this.props.thread.canSharePosts}>
+          <div className="overflow-action d-block d-md-none" onClick={() => this.setActionModalOpen('share')}>
+            <Icon name="share-square" fw />
+            Share Post
+          </div>
+        </When>
+
+        <a className="overflow-action" href={vBRoute('report', this.props.id)}>
+          <Icon name="exclamation-triangle" fw />
+          Report Post
+        </a>
+
+        <When condition={this.props.canEdit}>
+          <a className="overflow-action" href={vBRoute('deletePost', this.props.id)}>
+            <Icon name="trash-alt" fw />
+            Delete Post
+          </a>
+        </When>
+
+        <div className="flex-grows" />
+
+        <div className="close-overflow d-none d-md-block" onClick={() => this.setOverflow(false)}>
+          <Icon name="times" />
+        </div>
+      </div>
+    );
+  }
+
+  setOverflow = (overflowActive: boolean) => {
+    this.setState({ overflowActive });
   }
 
   setActionModalOpen = (actionModalOpen: PostActionModal) => {

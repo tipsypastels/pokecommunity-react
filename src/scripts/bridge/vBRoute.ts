@@ -20,6 +20,9 @@ const vBRoutesList = {
   editAvatar: '/settings/editavatar',
   editFlair: '/settings/postflair',
   editProfile: '/settings/profile',
+  report: postid => `/report.php?p=${postid}`,
+  deletePost: postid => `/postings.php?do=deletepost&p=${postid}`,
+  ignoreUser: userid => `/settings.php?do=addlist&userlist=ignore&u=${userid}`,
 };
 
 let loggedRouteWarnings = [];

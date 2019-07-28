@@ -5,6 +5,8 @@ import { When } from 'react-if';
 import Action from '../Action';
 import { PostActionModal } from '../Post';
 
+import AppContext from '../../AppContext';
+
 import '../../../styles/modules/Post/PostFooter.scss';
 
 interface IProps {
@@ -27,6 +29,8 @@ interface IProps {
 }
 
 class PostFooter extends Component<IProps> {
+  static contextType = AppContext;
+
   render() {
     const { 
       id,
@@ -83,7 +87,8 @@ class PostFooter extends Component<IProps> {
               activate={() => selectPost(id)}
               deactivate={() => deselectPost(id)}
             />
-
+          </When>
+          <When condition={!!this.context.currentUser}>
             <Action
               name="More"
               icon={{ name: 'ellipsis-h', group: 'fal' }}
