@@ -1,12 +1,41 @@
 .Err404 {
-  max-width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    @media (max-width: 756px) {
+      margin: 10px 0px !important;
+    }
 
-  .video {
-    display: block;
-    margin: auto;
+  .error-icon {
+    font-size: 5rem;
   }
 
-  h1 {
-    font-weight: 300;
+  .error-subtitle {
+    font-size: 0.7rem;
+    margin-bottom: 20px;
+  }
+
+  .error-message {
+    justify-content: center;
+    align-items: center;
+    @media (min-width: 756px) {
+      display: flex;
+    }
+
+    .error-image {
+      height: 400px;
+
+      @media (max-width: 756px) {
+        height: 200px;
+      }
+    }
+
+    .error-text {
+      margin: 10px 10px;
+      .link {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
   }
 }

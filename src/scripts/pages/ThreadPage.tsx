@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Link } from 'react-router-dom';
 import queryString from 'query-string';
 
 import Page, { PageProps, PageError } from './Page';
