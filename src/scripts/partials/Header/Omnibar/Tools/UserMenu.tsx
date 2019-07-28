@@ -35,7 +35,11 @@ export default class UserMenu extends Component {
         <Dropdown.Menu>
           <Dropdown.Header>
             {this.getMenuItems().map((item: UserMenuItem) => (
-              <a href={item.link} className="user-menu-item">
+              <a 
+                key={item.name} 
+                href={item.link} 
+                className="user-menu-item"
+              >
                 <Icon.Maybe from={item.icon} />
 
                 <span>

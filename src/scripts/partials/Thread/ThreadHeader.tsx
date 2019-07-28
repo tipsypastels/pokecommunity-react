@@ -103,14 +103,16 @@ export default class ThreadHeader extends Component<IProps> {
             <div className="flex-grows" />
 
             <When condition={this.props.canModerate}>
-              <Button variant="link" onClick={this.props.openModeration}>
-                <Icon name="shield" />
-                Moderate
-              </Button>
+              <div className="d-none d-md-flex">
+                <Button variant="link" onClick={this.props.openModeration}>
+                  <Icon name="shield" />
+                  Moderate
+                </Button>
 
-              <ThreadHeaderSelectPosts 
-                selectPostsByFilter={this.props.selectPostsByFilter}
-              />
+                <ThreadHeaderSelectPosts 
+                  selectPostsByFilter={this.props.selectPostsByFilter}
+                />
+              </div>
             </When>
           </div>
         </Block.Footer>
