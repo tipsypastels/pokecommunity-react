@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
+import { Container } from 'react-bootstrap';
 
-import '../../../../styles/modules/PagePartials/Errors/Err500.scss';
+import ErrorPage from './ErrorPage';
 
 export default class Err500 extends Component {
   render() {
     return (
-      <div>
-        
-      </div>
+      <Container fluid className="Err404">
+        <ErrorPage>
+          <div>
+            A 500 error has occured.
+             <div>
+            </div>
+          </div>
+        </ErrorPage>
+      </Container>
     )
   }
 }
