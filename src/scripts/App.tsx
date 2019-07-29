@@ -8,13 +8,19 @@ import AppContext from './AppContext';
 import IndexPage from './pages/IndexPage';
 import ThreadPage from './pages/ThreadPage';
 
+import ThemePickerModal from './partials/ThemePickerModal';
+
+import { themeLocalstorageKey } from '../configs/themes.json';
+
 import '../styles/base/utilities.scss';
 import '../styles/base/buttons.scss';
+import '../styles/all-themes.scss';
 
 interface IState {
   theme: string;
+  themePickerOpen: boolean;
   banner?: string;
-  currentUser?: UserInterface,
+  currentUser?: UserInterface;
 }
 
 export const POKECOMM3_ROUTES = {
@@ -27,6 +33,7 @@ class App extends Component<{}, IState> {
     super(props);
     this.state = {
       theme: getCurrentTheme(),
+      themePickerOpen: false,
       banner: null,
       currentUser: null,
     }
@@ -36,6 +43,8 @@ class App extends Component<{}, IState> {
     return (
       <AppContext.Provider value={this.getContextFromState()}>
         <div className="App" data-theme={this.state.theme}>
+          <ThemePickerModal show={this.state.themePickerOpen} />
+
           <Router>
             {Object.keys(POKECOMM3_ROUTES).map(path => {
               const Component = POKECOMM3_ROUTES[path];
@@ -56,6 +65,19 @@ class App extends Component<{}, IState> {
     );
   }
 
+  openThemePicker = () => {
+    this.setState({ themePickerOpen: true });
+  }
+
+  closeThemePicker = () => {
+    this.setState({ themePickerOpen: false });
+  }
+
+  setTheme = (theme: string) => {
+    this.setState({ theme });
+    localStorage.setItem(themeLocalstorageKey, theme);
+  }
+
   setAppBanner = (banner: string) => {
     this.setState({ banner });
   }
@@ -66,8 +88,11 @@ class App extends Component<{}, IState> {
 
   getContextFromState() {
     return {
-      currentUser: this.state.currentUser,
-      setCurrentUser: this.setCurrentUser,
+      currentUser:      this.state.currentUser,
+      setCurrentUser:   this.setCurrentUser,
+      openThemePicker:  this.openThemePicker,
+      closeThemePicker: this.closeThemePicker,
+      setTheme:         this.setTheme,
     };
   }
 }

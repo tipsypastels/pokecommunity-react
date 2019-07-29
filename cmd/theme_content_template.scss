@@ -1,0 +1,39 @@
+/*
+  THEME_NAME_HERE
+
+  Welcome to the theme file for THEME_NAME_HERE in PokéCommunity 3. Like the New UI, you will use this file to set stylesheet configuration details for your theme. However, the exact process is a little different.
+
+  In PC 3, we use "custom properties", aka CSS variables, rather than SASS/SCSS variables to store theme-specific config. The reason for this is a technical one to do with the limitations of React and single page apps.
+
+  What's the difference? You may be familiar with SASS variables, which are written like so:
+
+    $my-variable: my-value;
+
+  CSS variables are written like this instead:
+
+    --my-variable: my-value;
+
+  Simple, right? Well, there's a few other differences.
+
+  If you need to *use* a CSS variable somewhere else, instead of just writing its name like in SASS, you must use the var() function. For example, once --my-variable is declared, you can access it elsewhere using var(--my-var).
+
+  It's worth noting that although we're not using SASS variables for configuration, you *can* still use other SASS features such as nesting and mixins.
+
+  Another difference from PC 2.0 is that the entirety of your theme config, including any custom CSS changes, *must* be written inside the outermost .App block in this file. It should look like this:
+
+  .App[data-theme="THEME_SLUG_HERE"] {
+    // put all your code here
+  }
+
+  Make sure to *never* add rules or variables outside of that block, or you will introduce bugs with PC 3's theme system.
+
+  Anyways, that wraps up this introduction. Have fun customizing your theme! If you have any questions, you know who to come to.
+
+  - Dakota
+
+  PS: You can delete this message from your theme files.
+*/
+
+.App[data-theme="THEME_SLUG_HERE"] {
+
+}

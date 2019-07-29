@@ -87,7 +87,7 @@ export default class GuestUserMenu extends Component<{}, IState> {
               No account? No worries.
             </h2>
 
-            <Button {...SmartLink.shim('/threads/165')} variant="primary">
+            <Button {...SmartLink.shim('/newaccount.php')} variant="primary">
               Create account
             </Button>
           </Dropdown.Header>

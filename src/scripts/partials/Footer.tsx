@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import AppContext from '../AppContext';
 
 import Icon from './Icon';
 
@@ -8,6 +9,8 @@ import { ReactComponent as FooterLogo } from '../../images/common/logo.php.svg';
 import '../../styles/modules/Footer.scss';
 
 class Footer extends Component {
+  static contextType = AppContext;
+
   render() {
     return (
       <footer className="Footer">
@@ -22,7 +25,9 @@ class Footer extends Component {
           <div className="theme-select">
             <Button
               className="theme-button"
-              variant="light">
+              variant="light"
+              onClick={this.context.openThemePicker}
+            >
               Change Theme
             </Button>
           </div>

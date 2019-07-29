@@ -108,14 +108,14 @@ export default class SmartLink extends Component<IProps> {
     }
 
     return Object.keys(formData).map(name => {
-      const value = formData[name];
-      if (Array.isArray(value)) {
-        return value.map(val => (
+      const rawValue = formData[name];
+      if (Array.isArray(rawValue)) {
+        return rawValue.map(value => (
           <input 
             key={`${name}[${value}]`}
             type="hidden"
             name={`${name}[${value}]`}
-            value={value}
+            value={rawValue}
           />
         ));
       } else {
@@ -124,7 +124,7 @@ export default class SmartLink extends Component<IProps> {
             key={name} 
             type="hidden"
             name={name}
-            value={value}
+            value={rawValue}
           />
         )
       }
