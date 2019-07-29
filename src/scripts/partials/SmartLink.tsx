@@ -2,10 +2,15 @@ import React, { Component, AnchorHTMLAttributes } from 'react';
 import { Link } from 'react-router-dom';
 import { pokecomm3RouteExists } from '../bridge/routeUtils';
 
+export interface SmartLinkFormData {
+  [key: string]: string | string[];
+}
+
 interface IProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   to: string;
   href?: never;
   method?: 'get' | 'post';
+  formData?: SmartLinkFormData;
 }
 
 export default class SmartLink extends Component<IProps> {
@@ -40,7 +45,8 @@ export default class SmartLink extends Component<IProps> {
       to, 
       method, 
       href, 
-      children, 
+      children,
+      formData,
       ...delegatedProps 
     } = this.props;
 
@@ -74,9 +80,15 @@ export default class SmartLink extends Component<IProps> {
         
         return (
           <form action={to} method="post" ref={formRef}>
-            <a 
+            {this.getInputFromFormData()}
+
+            <a
               href="#" 
-              onClick={() => formRef.current.submit()} 
+              onClick={e => {
+                e.preventDefault();
+                formRef.current.submit();
+                return false;
+              }} 
               {...delegatedProps}
             >
               {children}
@@ -84,5 +96,38 @@ export default class SmartLink extends Component<IProps> {
           </form>
         );
     }
+  }
+
+  /**
+   * Generates hidden <input> tags for the POST variants of <SmartLink />
+   */
+  getInputFromFormData() {
+    const { formData } = this.props;
+    if (!formData) {
+      return null;
+    }
+
+    return Object.keys(formData).map(name => {
+      const value = formData[name];
+      if (Array.isArray(value)) {
+        return value.map(val => (
+          <input 
+            key={`${name}[${value}]`}
+            type="hidden"
+            name={`${name}[${value}]`}
+            value={value}
+          />
+        ));
+      } else {
+        return (
+          <input
+            key={name} 
+            type="hidden"
+            name={name}
+            value={value}
+          />
+        )
+      }
+    })
   }
 }

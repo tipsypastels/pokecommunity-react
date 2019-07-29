@@ -7,9 +7,10 @@ import pluralize from 'pluralize';
 
 import ThreadInterface from '../../types/ThreadInterface';
 import PostInterface from '../../types/PostInterface';
+import PostVisibility from '../../types/PostVisibility';
+import SmartLink, { SmartLinkFormData } from '../SmartLink';
 
 import '../../../styles/modules/Thread/ModerationModal.scss';
-import PostVisibility from '../../types/PostVisibility';
 
 interface IProps {
   show: boolean;
@@ -20,10 +21,11 @@ interface IProps {
 
 export interface ModerationTool {
   name: string;
-  className: string;
   icon: string;
   action: string | (() => void);
+  formData?: SmartLinkFormData;
   if?: boolean | ((post: PostInterface) => boolean);
+  method?: 'get' | 'post';
 }
 
 export default class ModerationModal extends Component<IProps> {
@@ -47,93 +49,82 @@ export default class ModerationModal extends Component<IProps> {
             </strong>
 
             <div className="moderation-modal-tools moderate-thread">
-              {this.toolFor({
+              {this.threadTool({
                 name: 'Edit Thread',
-                className: 'edit-thread',
                 icon: 'edit',
-                action: '#',
+                do: 'editthread',
               })}
 
               {/* TODO change thread state once newcore outputs that */}
 
               <If condition={!!thread.open}>
                 <Then>
-                  {this.toolFor({
+                  {this.threadTool({
                     name: 'Close Thread', 
-                    className: 'close-thread', 
                     icon: 'lock',
-                    action: '#',
+                    do: 'openclosethread',
                   })}
                 </Then>
                 <Else>
-                  {this.toolFor({
+                  {this.threadTool({
                     name: 'Open Thread',
-                    className: 'open-thread',
                     icon: 'unlock',
-                    action: '#',
+                    do: 'openclosethread',
                   })}
                 </Else>
               </If>
 
               <If condition={!!thread.sticky}>
                 <Then>
-                  {this.toolFor({
+                  {this.threadTool({
                     name: 'Unsticky Thread',
-                    className: 'unstick-thread',
                     icon: 'map-marker-times',
-                    action: '#',
+                    do: 'stick',
                   })}
                 </Then>
                 <Else>
-                  {this.toolFor({
+                  {this.threadTool({
                     name: 'Sticky Thread',
-                    className: 'stick-thread',
                     icon: 'map-marker-check',
-                    action: '#',
+                    do: 'stick',
                   })}
                 </Else>
               </If>
 
-              {this.toolFor({
+              {this.threadTool({
                 name: 'Move Thread',
-                className: 'move-thread',
                 icon: 'sign',
-                action: '#',
+                do: 'movethread',
               })}
 
-              {this.toolFor({
+              {this.threadTool({
                 name: 'Copy Thread',
-                className: 'copy-thread',
                 icon: 'copy',
-                action: '#',
+                do: 'copythread',
               })}
 
-              {this.toolFor({
+              {this.threadTool({
                 name: 'Delete Thread',
-                className: 'delete-thread',
                 icon: 'trash',
-                action: '#',
+                do: 'deletethread',
               })}
 
-              {this.toolFor({
+              {this.threadTool({
                 name: 'Merge Threads',
-                className: 'merge-threads',
                 icon: 'code-merge',
-                action: '#',
+                do: 'mergethread',
               })}
 
-              {this.toolFor({
+              {this.threadTool({
                 name: 'Manage Pins',
-                className: 'manage-pins',
                 icon: 'thumbtack',
-                action: '#',
+                do: 'pinthread',
               })}
 
-              {this.toolFor({
+              {this.threadTool({
                 name: 'Remove Redirects',
-                className: 'remove-redirects',
                 icon: 'unlink',
-                action: '#',
+                do: 'removeredirect',
               })}
             </div>
 
@@ -155,49 +146,43 @@ export default class ModerationModal extends Component<IProps> {
                   </strong>
 
                   <div className="moderation-modal-tools moderate-posts">
-                    {this.toolFor({
+                    {this.postTool({
                       name: `Move ${postsPhrase}`,
-                      className: 'move-posts',
                       icon: 'sign',
-                      action: '#',
+                      do: 'moveposts',
                     })}
 
-                    {this.toolFor({
+                    {this.postTool({
                       name: `Copy ${postsPhrase}`,
-                      className: 'copy-posts',
                       icon: 'copy',
-                      action: '#',
+                      do: 'copyposts',
                     })}
 
-                    {this.toolFor({
+                    {this.postTool({
                       name: `Delete ${postsPhrase}`,
-                      className: 'delete-posts',
                       icon: 'trash',
-                      action: '#',
+                      do: 'deleteposts',
                       if: post => post.visible !== PostVisibility.Deleted,
                     })}
 
-                    {this.toolFor({
+                    {this.postTool({
                       name: `Spam ${postsPhrase}`,
-                      className: 'spam-posts',
                       icon: 'robot',
-                      action: '#',
+                      do: 'spampost',
                       if: post => post.visible !== PostVisibility.Deleted,
                     })}
 
-                    {this.toolFor({
+                    {this.postTool({
                       name: `Undelete ${postsPhrase}`,
-                      className: 'undelete-posts',
                       icon: 'trash-restore',
-                      action: '#',
+                      do: 'undeleteposts',
                       if: post => post.visible === PostVisibility.Deleted,
                     })}
 
-                    {this.toolFor({
+                    {this.postTool({
                       name: 'Merge Posts',
-                      className: 'merge-posts',
                       icon: 'code-merge',
-                      action: '#',
+                      do: 'mergeposts',
                       if: selectedPosts.length > 1,
                     })}
                   </div>
@@ -208,6 +193,32 @@ export default class ModerationModal extends Component<IProps> {
         </Modal.Body>
       </Modal>
     );
+  }
+
+  threadTool(tool: Partial<ModerationTool> & { do?: string }) {
+    const { thread } = this.props;
+  
+    tool.action || (tool.action = `/postings.php?t=${thread.id}`);
+    tool.formData || (tool.formData = { do: tool.do });
+    tool.method || (tool.method = 'post');
+
+    return this.toolFor(tool as ModerationTool);
+  }
+
+  postTool(tool: Partial<ModerationTool> & { do?: string }) {
+    const selectedPostIds = this.props.selectedPosts
+      .map(p => p.id.toString());
+
+    tool.action || (tool.action = '/inlinemod.php');
+    
+    tool.formData || (tool.formData = { 
+      do: tool.do, 
+      plist: selectedPostIds 
+    });
+    
+    tool.method || (tool.method = 'post');
+
+    return this.toolFor(tool as ModerationTool);
   }
 
   toolFor(tool: ModerationTool): ReactNode {
@@ -221,16 +232,13 @@ export default class ModerationModal extends Component<IProps> {
 
     let actionProp;
     if (typeof tool.action === 'string') {
-      actionProp = { href: tool.action }
+      actionProp = { to: tool.action, formData: tool.formData }
     } else {
       actionProp = { onClick: tool.action };
     }
 
     return (
-      <a 
-        className={`moderation-tool ${tool.className}`} 
-        {...actionProp}
-      >
+      <SmartLink {...actionProp} method={tool.method} className="moderation-tool">
         <div className="icon-wrapper">
           <Icon name={tool.icon} fw />
         </div>
@@ -238,7 +246,7 @@ export default class ModerationModal extends Component<IProps> {
         <div className="tool-name">
           {tool.name}
         </div>
-      </a>
+      </SmartLink>
     )
   }
 

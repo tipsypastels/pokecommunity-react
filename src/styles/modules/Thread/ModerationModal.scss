@@ -14,15 +14,13 @@
       .icon-wrapper { background-color: var(--posts-mod-color); }
     }
     
+    & > *:not(:last-child) .tool-name {
+      border-bottom: 1px solid #dee2e6; // TODO colours
+    }
+
     .moderation-tool {
       display: flex;
       margin-bottom: 0.5rem;
-
-      &:not(:last-child) {
-        .tool-name {
-          border-bottom: 1px solid #dee2e6; // TODO colours
-        }
-      }
 
       .tool-name {
         flex-grow: 1;
