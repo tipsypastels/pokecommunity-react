@@ -3,7 +3,6 @@ import ThreadInterface from './ThreadInterface';
 export interface BreadcrumbInterface {
   name: string;
   path: string;
-  vb?: boolean;
 }
 
 // TODO make forums a thing
@@ -13,7 +12,6 @@ export const threadBreadcrumbs = (thread: ThreadInterface) => (
     { 
       name: thread.forum.title, 
       path: `/forumdisplay.php?f=${thread.forumid}`, 
-      vb: true 
     },
 
     { 

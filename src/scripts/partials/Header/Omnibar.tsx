@@ -11,6 +11,7 @@ import OmnibarTools from './Omnibar/OmnibarTools';
 
 import logo from '../../../images/common/brand-transparent.png';
 import '../../../styles/modules/Header/Omnibar.scss';
+import SmartLink from '../SmartLink';
 
 interface IProps {
   breadcrumbs?: BreadcrumbInterface[];
@@ -51,31 +52,14 @@ export default class Omnibar extends Component<IProps> {
   }
 
   getBreadcrumbs() {
-    const crumbs = this.props.breadcrumbs.map(({ name, path, vb }) => {
-      /* if the link includes a php extension, then
-         this is a link to a vB page and we use <a href>
-         otherwise, <Link to>
-      */
-
-      let link;
-      if (vb) {
-        link = <a href={path} className="nav-link">
-         <Icon name="chevron-left" group="far" size="lg" />
-           {name}
-        </a>
-      } else {
-        link = <Link to={path} className="nav-link">
+    const crumbs = this.props.breadcrumbs.map(({ name, path }) => (
+      <li key={name} className="nav-item">
+        <SmartLink to={path} className="nav-link">
           <Icon name="chevron-left" group="far" size="lg" />
-           &nbsp;{name}
-        </Link>
-      }
-
-      return (
-        <li key={name} className="nav-item">
-          {link}
-        </li>
-      );
-    });
+            {name}
+        </SmartLink>
+      </li>
+    ));
 
     return (
       // TODO bs component?
