@@ -5,7 +5,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import AppContext from '../../../AppContext';
 import UserInterface from '../../../types/UserInterface';
 import Icon from '../../Icon';
-import vBRoute from '../../../bridge/vBRoute';
+import SmartLink from '../../SmartLink';
 
 import '../../../../styles/modules/Post/ActionModals/SharePostModal.scss';
 
@@ -61,12 +61,12 @@ export default class SharePostModal extends Component<IProps, IState> {
             </div>
           </CopyToClipboard>
 
-          <a href={vBRoute('promotepost', postid)} className="share-option promote-post">
+          <SmartLink to={`/servicepanel.php?do=newbuzzentry&p=${postid}`} className="share-option promote-post">
             <Icon name="microphone" fw />
             <span>
               Promote Post
             </span>
-          </a>
+          </SmartLink>
 
           {/* These two should always be a href, as external links */}
           <a 

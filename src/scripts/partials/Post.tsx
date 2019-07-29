@@ -15,7 +15,7 @@ import PostInterface from '../types/PostInterface';
 import SharePostModal from './Post/ActionModals/SharePostModal';
 
 import AppContext from '../AppContext';
-import vBRoute from '../bridge/vBRoute';
+import SmartLink from './SmartLink';
 
 import '../../styles/modules/Post.scss';
 
@@ -138,44 +138,15 @@ class Post extends Component<PostProps, IState> {
       return null;
     }
 
-    {/* TODO move these to a getter with perm checks */ }
-    {/* <Block.OverflowMenu 
-          active={this.state.overflowActive}
-          items={[
-            {
-              name: `Ignore ${user.username}`,
-              icon: 'user-minus',
-            },
-            {
-              name: `Moderate ${user.username}`,
-              icon: 'user-shield',
-            },
-            { divider: 0 },
-            {
-              name: 'Share Post',
-              icon: 'share-square',
-              className: 'd-block d-md-none',
-            },
-            {
-              name: 'Report Post',
-              icon: 'exclamation-triangle',
-            },
-            {
-              name: 'Delete Post',
-              icon: 'trash-alt',
-            }
-          ]}
-        /> */}
-
     const { user } = this.props;
 
     return (
       <div className="post-overflow-menu">
         <When condition={currentUser.id !== user.id}>
-          <a className="overflow-action" href={vBRoute('ignoreUser', user.id)}>
+          <SmartLink to={`/settings.php?do=addlist&userlist=ignore&u=${user.id}`} className="overflow-action">
             <Icon name="user-minus" fw />
             Ignore {user.username}
-          </a>
+          </SmartLink>
         </When>
 
         <When condition={this.props.thread.canSharePosts}>
@@ -185,16 +156,16 @@ class Post extends Component<PostProps, IState> {
           </div>
         </When>
 
-        <a className="overflow-action" href={vBRoute('report', this.props.id)}>
+        <SmartLink to={`/report.php?p=${this.props.id}`} className="overflow-action">
           <Icon name="exclamation-triangle" fw />
           Report Post
-        </a>
+        </SmartLink>
 
         <When condition={this.props.canEdit}>
-          <a className="overflow-action" href={vBRoute('deletePost', this.props.id)}>
+          <SmartLink to={`/postings.php?do=deletepost&p=${this.props.id}`} className="overflow-action">
             <Icon name="trash-alt" fw />
             Delete Post
-          </a>
+          </SmartLink>
         </When>
 
         <div className="flex-grows" />

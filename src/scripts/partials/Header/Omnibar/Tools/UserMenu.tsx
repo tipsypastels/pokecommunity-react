@@ -3,7 +3,7 @@ import { NavItem, Dropdown, Nav, Form, Button } from 'react-bootstrap';
 
 import Icon, { IconProps } from '../../../Icon';
 import AppContext from '../../../../AppContext';
-import vBRoute from '../../../../bridge/vBRoute';
+import SmartLink from '../../../SmartLink';
 
 import '../../../../../styles/modules/Header/Omnibar/Tools/UserMenu.scss';
 
@@ -35,9 +35,9 @@ export default class UserMenu extends Component {
         <Dropdown.Menu>
           <Dropdown.Header>
             {this.getMenuItems().map((item: UserMenuItem) => (
-              <a 
+              <SmartLink 
                 key={item.name} 
-                href={item.link} 
+                to={item.link} 
                 className="user-menu-item"
               >
                 <Icon.Maybe from={item.icon} />
@@ -45,7 +45,7 @@ export default class UserMenu extends Component {
                 <span>
                   {item.name}
                 </span>
-              </a>
+              </SmartLink>
             ))}
           </Dropdown.Header>
 
@@ -93,47 +93,47 @@ export default class UserMenu extends Component {
     return [
       {
         name: 'Profile',
-        link: vBRoute('profile', currentUser.id),
+        link: `/memberinfo.php?u=${currentUser.id}`,
         icon: 'user',
       },
       {
         name: 'Dashboard',
-        link: vBRoute('dashboard'),
+        link: '/dashboard',
         icon: 'tachometer',
       },
       {
         name: 'Settings',
-        link: vBRoute('settings'),
+        link: '/settings',
         icon: 'sliders-v-square'
       },
       {
         name: 'Friends',
-        link: vBRoute('friends'),
+        link: '/settings/friends',
         icon: { name: 'address-book', group: 'far' },
       },
       {
         name: 'Followed',
-        link: vBRoute('subscriptions'),
+        link: '/subscription.php',
         icon: 'bookmark',
       },
       {
         name: 'Updates',
-        link: vBRoute('subscriptionUpdates'),
+        link: '/search.php?do=getnew&and=subscribe',
         icon: { name: 'check', mask: 'fas fa-heart', transform: 'shrink-8 up-.5' }
       },
       {
         name: 'Edit Avatar',
-        link: vBRoute('editAvatar'),
+        link: '/settings/editavatar',
         icon: { name: 'portrait', group: 'far' },
       },
       {
         name: 'Edit Flair',
-        link: vBRoute('editFlair'),
+        link: '/settings/postflair',
         icon: 'fire',
       },
       {
         name: 'Edit Profile',
-        link: vBRoute('editProfile'),
+        link: '/settings/profile',
         icon: { name: 'address-card', group: 'fal' },
       },
     ]

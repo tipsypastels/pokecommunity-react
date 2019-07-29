@@ -5,9 +5,8 @@ import UserInterface from './types/UserInterface';
 import { getCurrentTheme } from './bridge/Theme';
 import AppContext from './AppContext';
 
+import IndexPage from './pages/IndexPage';
 import ThreadPage from './pages/ThreadPage';
-import Spheal from './pages/Spheal';
-import Index from './pages/IndexPage';
 
 import '../styles/base/utilities.scss';
 import '../styles/base/buttons.scss';
@@ -17,6 +16,11 @@ interface IState {
   banner?: string;
   currentUser?: UserInterface,
 }
+
+export const POKECOMM3_ROUTES = {
+  '/':            IndexPage,
+  '/threads/:id': ThreadPage,
+};
 
 class App extends Component<{}, IState> {
   constructor(props) {
@@ -33,14 +37,19 @@ class App extends Component<{}, IState> {
       <AppContext.Provider value={this.getContextFromState()}>
         <div className="App" data-theme={this.state.theme}>
           <Router>
-            <Route path="/" exact component={Index} />
-            <Route path="/threads/:id" exact render={route => (
-              <ThreadPage
-                appCurrentBanner={this.state.banner}
-                setAppBanner={this.setAppBanner}
-                {...route}
-              />
-            )} />
+            {Object.keys(POKECOMM3_ROUTES).map(path => {
+              const Component = POKECOMM3_ROUTES[path];
+
+              return (
+                <Route key={path} path={path} exact render={route => (
+                  <Component
+                    appCurrentBanner={this.state.banner}
+                    setAppBanner={this.setAppBanner}
+                    {...route}
+                  />
+                )} />
+              );
+            })}
           </Router>
         </div>
       </AppContext.Provider>

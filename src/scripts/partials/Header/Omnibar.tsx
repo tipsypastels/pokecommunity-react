@@ -22,7 +22,7 @@ export default class Omnibar extends Component<IProps> {
   render() {
     return (
       <Navbar className="Omnibar" variant="dark" fixed="top" expand>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand as={Link} to="/">
           <span className="brand-logo">
             <img 
               alt="PokéCommunity"
@@ -45,62 +45,6 @@ export default class Omnibar extends Component<IProps> {
           <div className="mr-auto" />
 
           <OmnibarTools />
-          {/*
-          <Nav className="navbar-user-tools">
-            <Dropdown className={this.hideOmnibarItemIfCrumbs()} id="help-menu" alignRight as={NavItem}>
-              <Dropdown.Toggle id="help-menu-toggle" as={Nav.Link}>
-                <Icon name="question-circle" group="fal" size="lg" fw />
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item href={vBRoute('forums','support')} >Feedback & Support</Dropdown.Item>
-                <Dropdown.Item href={vBRoute('rules')} >Feedback & Support</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown className={this.hideOmnibarItemIfCrumbs()} id="supporters-menu" alignRight as={NavItem}>
-              <Dropdown.Toggle id="supporters-menu-toggle" as={Nav.Link}>
-                <Icon name="donate" group="fal" size="lg" fw />
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item>Hello there!</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown className={this.hideOmnibarItemIfCrumbs()} id="admin-tools-menu" alignRight as={NavItem}>
-              <Dropdown.Toggle id="admin-tools-menu-toggle" as={Nav.Link}>
-                <Icon name="toolbox" group="fal" size="lg" fw />
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item>Hello there!</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown id="search-menu" alignRight as={NavItem}>
-              <Dropdown.Toggle id="search-menu-toggle" as={Nav.Link}>
-                <Icon name="search" group="fal" size="lg" fw />
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item>Hello there!</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown id="messages-menu" alignRight as={NavItem}>
-              <Dropdown.Toggle id="messages-menu-toggle" as={Nav.Link}>
-                <Icon name="envelope" group="fal" size="lg" fw />
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item>Hello there!</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown id="notifications-menu" alignRight as={NavItem}>
-              <Dropdown.Toggle id="notifications-menu-toggle" as={Nav.Link}>
-                <Icon name="bell" group="fal" size="lg" fw />
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item>Hello there!</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-            
-            <GuestUserMenu />
-          </Nav>*/}
-
-          
         </Navbar.Collapse>
       </Navbar>
     );
