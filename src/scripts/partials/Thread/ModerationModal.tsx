@@ -210,7 +210,6 @@ export default class ModerationModal extends Component<IProps> {
     );
   }
 
-  // TODO add the actions
   toolFor(tool: ModerationTool): ReactNode {
     if (tool.if === false) {
       return null;

@@ -1,53 +1,51 @@
 import React, { Component } from 'react';
 import { Navbar } from 'react-bootstrap';
 
-import CommunityMenuElement, { CommunityMenuElementProps } from './CommunityMenu/CommunityMenuElement';
+import SmartLink from '../SmartLink';
 
 import '../../../styles/modules/Header/CommunityMenu.scss';
 
-//TODO add relevent links, change internal when needed
+export interface CommunityMenuElementProps {
+  className: string;
+  name: string;
+  link: string;
+}
+
 const communityMenuElemements: CommunityMenuElementProps[] = [
   {
     className: "cmenu-fourms",
     name: "Forums",
     link: "/",
-    internal: false,
   },
   {
     className: "cmenu-seventh-gen",
     name: "Seventh Gen",
     link: "/forumdisplay.php?f=400",
-    internal: false,
   },
   {
     className: "cmenu-daily",
     name: "Daily",
     link: "https://daily.pokecommunity.com/",
-    internal: false,
   },
   {
     className: "cmenu-fan-games",
     name: "Fan Games",
     link: "/forumdisplay.php?f=289",
-    internal: false,
   },
   {
     className: "cmenu-art",
     name: "Art",
     link: "/forumdisplay.php?f=21",
-    internal: false,
   },
   {
     className: "cmenu-battle",
     name: "Battle",
     link: "http://pokecommunity.psim.us/",
-    internal: false,
   },
   {
     className: "cmenu-discord",
     name: "Discord",
     link: "https://discord.gg/hpQpnzX",
-    internal: false,
   },
 
 ];
@@ -94,13 +92,9 @@ class CommunityMenu extends Component<{}, IState> {
 
   renderCommunityMenu() {
     return communityMenuElemements.map(element => (
-      <CommunityMenuElement
-        key={element.className}
-        className={element.className}
-        name={element.name}
-        link={element.link}
-        internal={element.internal}
-      />
+      <SmartLink to={element.link} className={`${element.className} cm-element`}>
+        {element.name}
+      </SmartLink>
     ))
   }
 

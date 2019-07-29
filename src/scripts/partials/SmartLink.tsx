@@ -55,8 +55,8 @@ export default class SmartLink extends Component<IProps> {
           </Link>
         );
 
-      // This is an internal link, but we want to submit it as a post request. Not sure how to handle this case yet. Look at how Rails does it?
-      // TODO
+      // This is an internal link, but we want to submit it as a post request. 
+      // TODO Not sure how to handle this case yet. Look at how Rails does it?
       case isPC3 && method === 'post':
         return null;
 
