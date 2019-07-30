@@ -131,6 +131,7 @@ export default class Page extends Component<IProps> {
       const { status, data } = await newcoreApi({
         method: 'get',
         url: '/users/whoami',
+        withCredentials: true,
       });
 
       let currentUser;

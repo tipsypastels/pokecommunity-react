@@ -1,3 +1,4 @@
-@mixin theme {
+.the-vast-quack {
   $app-color: blue;
+  @import "../all.scss";
 }

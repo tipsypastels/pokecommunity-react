@@ -6,11 +6,12 @@ import { getCurrentTheme } from './bridge/Theme';
 import AppContext from './AppContext';
 
 import ThreadPage from './pages/ThreadPage';
-import Spheal from './pages/Spheal';
 import Index from './pages/IndexPage';
 
 import '../styles/base/utilities.scss';
 import '../styles/base/buttons.scss';
+
+import '../styles/theme-vars.scss';
 
 interface IState {
   theme: string;
@@ -26,12 +27,13 @@ class App extends Component<{}, IState> {
       banner: null,
       currentUser: null,
     }
+    this.toggleTheme = this.toggleTheme.bind(this);
   }
 
   render() {
     return (
       <AppContext.Provider value={this.getContextFromState()}>
-        <div className="App" data-theme={this.state.theme}>
+        <div className={"App " + this.state.theme}>
           <Router>
             <Route path="/" exact component={Index} />
             <Route path="/threads/:id" exact render={route => (
@@ -42,9 +44,15 @@ class App extends Component<{}, IState> {
               />
             )} />
           </Router>
+          <button onClick={this.toggleTheme}>Change theme</button>
         </div>
       </AppContext.Provider>
     );
+  }
+
+  toggleTheme() {
+    const theme = (this.state.theme === 'the-vast-quack') ? 'default-orange' : 'the-vast-quack';
+    this.setState({ theme });
   }
 
   setAppBanner = (banner: string) => {

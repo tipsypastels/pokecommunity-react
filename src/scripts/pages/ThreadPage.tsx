@@ -55,6 +55,7 @@ export default class ThreadPage extends Component<IProps, IState> {
       const response = await newcoreApi({
         method: 'get',
         url: `/threads/${this.props.match.params.id}`,
+        withCredentials: true,
       });
 
       this.setState({ thread: response.data });

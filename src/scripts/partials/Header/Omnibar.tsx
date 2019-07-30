@@ -10,7 +10,7 @@ import AppContext from '../../AppContext';
 import OmnibarTools from './Omnibar/OmnibarTools';
 
 import logo from '../../../images/common/brand-transparent.png';
-import '../../../styles/modules/Header/Omnibar.scss';
+import '../../../styles/theme-vars.scss';
 
 interface IProps {
   breadcrumbs?: BreadcrumbInterface[];
@@ -21,7 +21,7 @@ export default class Omnibar extends Component<IProps> {
 
   render() {
     return (
-      <Navbar className="Omnibar" variant="dark" fixed="top" expand>
+      <Navbar className="Omnibar the-vast-quack" variant="dark" fixed="top" expand>
         <Navbar.Brand href="#home">
           <span className="brand-logo">
             <img 

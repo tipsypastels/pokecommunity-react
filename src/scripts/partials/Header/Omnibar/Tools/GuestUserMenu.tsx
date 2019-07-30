@@ -107,7 +107,8 @@ export default class GuestUserMenu extends Component<{}, IState> {
         data: {
           email,
           password,
-        }
+        },
+        withCredentials: true,
       });
 
       console.log(response);
