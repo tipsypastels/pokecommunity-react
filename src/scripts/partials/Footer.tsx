@@ -21,6 +21,9 @@ class Footer extends Component {
         <div className="footer-links">
 
           <div className="theme-select">
+            <div className="display-text">
+              Display Options
+            </div>
             <Button
               className="theme-button"
               variant="light"
