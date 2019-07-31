@@ -43,7 +43,7 @@ export default class ModerationModal extends Component<IProps> {
         <Modal.Body>
           <div className="manage-thread">
             <strong>
-              When managing the current thread, you can...
+              Manage this thread:
             </strong>
 
             <div className="moderation-modal-tools moderate-thread">
@@ -151,7 +151,7 @@ export default class ModerationModal extends Component<IProps> {
               return (
                 <React.Fragment>
                   <strong>
-                    You have {selectedPosts.length} {postsPhrase.toLowerCase()} selected. When managing, you can...
+                    Manage {selectedPosts.length} selected {postsPhrase.toLowerCase()}:
                   </strong>
 
                   <div className="moderation-modal-tools moderate-posts">

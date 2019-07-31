@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { Modal } from 'react-bootstrap';
 
 import PostUserInterface from '../../types/PostUserInterface';
@@ -43,9 +43,7 @@ export default class UserModal extends Component<IProps> {
           {this.getQuickSelfIntro()}
         </Modal.Header>
 
-        <Modal.Body>
-          {this.getDisplayFields()}
-        </Modal.Body>
+        {this.getDisplayFields()}
 
         <Modal.Footer>
           {this.getControls()}
@@ -107,40 +105,43 @@ export default class UserModal extends Component<IProps> {
   }
 
   getDisplayFields() {
+    const { user } = this.props;
+    const fields = {};
+
+    if (user.oldUsernames.length > 0) {
+      fields['Formerly'] = user
+        .oldUsernames[user.oldUsernames.length - 1]
+        .username;
+    }
+
+    if (user.profileFields.discordName) {
+      fields['Discord'] = user.profileFields.discordName;
+    }
+
+    if (user.profileFields.inGameName) {
+      fields['In-Game Name'] = user.profileFields.inGameName;
+    }
+
+    if (user.friendCode) {
+      fields['Friend Code'] = user.friendCode;
+    }
+
+    if (Object.keys(fields).length === 0) {
+      return null;
+    }
+
     return (
-      <div className="user-fields">
-        <div className="field">
-          <div className="field-title">
-            Formerly
+      <Modal.Body className="user-fields">
+        {Object.keys(fields).map(fieldName => (
+          <div className="field">
+            <div className="field-title">
+              {fieldName}
+            </div>
+
+            {fields[fieldName]}
           </div>
-
-          HackDeoxys
-        </div>
-
-        <div className="field">
-          <div className="field-title">
-            Discord
-          </div>
-
-          Nina#1337
-        </div>
-
-        <div className="field">
-          <div className="field-title">
-            In-Game Name
-          </div>
-
-          Meme
-        </div>
-
-        <div className="field">
-          <div className="field-title">
-            Friend Code
-          </div>
-
-          1010-0101-0101
-        </div>
-      </div>
+        ))}
+      </Modal.Body>
     );
   }
 
