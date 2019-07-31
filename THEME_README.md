@@ -60,8 +60,9 @@ Easy. Repeat after me:
 
 ```bash
 git add .
-git commit -m " message here "
+git commit -m "write a message here about what you're submitting"
 git push --set-upstream origin BRANCH_NAME_HERE
 ```
+(Note that the quotes in `git commit` are not part of the placeholder, you do need to include them around your message).
 
 The React discord channel should light up with a message if you have successfully submitted your work. Once I or someone else have had the chance to review it, your branch will be merged into the master branch.
