@@ -136,7 +136,6 @@ export default class ThreadPage extends Component<IProps, IState> {
   }
 
   getFloatingActions() {
-    //TODO make selectePostsCount and deselectedPosts work currently placeholder
     return (
       <FloatingActions
         canModerate={this.state.thread.canModerate}

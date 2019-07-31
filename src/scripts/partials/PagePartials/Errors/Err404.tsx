@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-import '../../../../styles/modules/PagePartials/Errors/Err404.scss';
-
 //TODO: link to error page doesn't seem to work, unknown if window.history.back() will actually pull back to the proper place.
 
 export default class Err404 extends Component {

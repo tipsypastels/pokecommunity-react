@@ -2,8 +2,6 @@ import React, { Component, ReactNode } from 'react';
 import ContextMenu from '../ContextMenu';
 import Icon from '../../Icon';
 import MinimalUserInterface from '../../../types/MinimalUserInterface';
-
-import '../../../../styles/modules/Editor/ContextMenus/MentionsMenu.scss';
 import MentionableUser from '../../User/MentionableUser';
 
 interface IProps {

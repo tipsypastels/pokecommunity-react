@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 
 import UserInterface from '../types/UserInterface';
-
-import vBRoute from '../bridge/vBRoute';
-
-import '../../styles/modules/UserList.scss';
+import SmartLink from './SmartLink';
 
 interface IProps {
   users: UserInterface[];
@@ -25,20 +22,22 @@ class UserList extends Component<IProps> {
       let avatar = {
         backgroundImage: `url(${user.avatar})`
       }
-      return <a
-        href={vBRoute('profile', user.id)}
-        className="user flex flex-v-center"
-        key={user.id}
-      >
-        <div
-          className="avatar"
-          title={`${user.username}'s Avatar`}
-          style={avatar}
-        />
-        <div className={`username`}>
-          {user.username}
-        </div>
-      </a>
+      return ( 
+        <SmartLink
+          to={`/memberinfo.php?u=${user.id}`}
+          className="user flex flex-v-center"
+          key={user.id}
+        >
+          <div
+            className="avatar"
+            title={`${user.username}'s Avatar`}
+            style={avatar}
+          />
+          <div className={`username`}>
+            {user.username}
+          </div>
+        </SmartLink>
+      );
     });
   }
 }

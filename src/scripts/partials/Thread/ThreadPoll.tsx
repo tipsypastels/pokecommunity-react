@@ -7,8 +7,6 @@ import Block from '../Block';
 
 import PollInterface from '../../types/PollInterface';
 
-import '../../../styles/modules/ThreadPoll.scss';
-
 interface IProps {
   poll: PollInterface;
 }

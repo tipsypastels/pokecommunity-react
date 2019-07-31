@@ -4,8 +4,6 @@ import ForumInterface from '../../types/ForumInterface';
 
 import Forum from './Forum';
 
-import '../../../styles/modules/Index/Category.scss';
-
 interface IProps {
   title: string;
   forums: ForumInterface[];

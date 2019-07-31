@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Dropdown, NavItem, Nav } from 'react-bootstrap';
 
 import Icon from '../../../Icon';
-import vBRoute from '../../../../bridge/vBRoute';
+import SmartLink from '../../../SmartLink';
 
 export default class HelpMenu extends Component {
   render() {
@@ -17,11 +17,11 @@ export default class HelpMenu extends Component {
           <Icon name="question-circle" group="fal" size="lg" fw />
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item href={vBRoute('forums','support')}>
+          <Dropdown.Item {...SmartLink.shim('/forumdisplay.php?fn=support')}>
             Feedback & Support
           </Dropdown.Item>
 
-          <Dropdown.Item href={vBRoute('rules')}>
+          <Dropdown.Item {...SmartLink.shim('/forumdisplay.php?fn=support')}>
             Feedback & Support
           </Dropdown.Item>
         </Dropdown.Menu>

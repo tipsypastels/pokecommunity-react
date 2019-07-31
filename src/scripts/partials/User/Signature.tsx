@@ -1,8 +1,6 @@
 import React from 'react';
 import BBCode from 'pokecommunity-bbcode';
 
-import '../../../styles/modules/User/Signature.scss';
-
 interface IProps {
   signature: string;
 }

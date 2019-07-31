@@ -10,8 +10,6 @@ import ImagesMenu from './Editor/ContextMenu/ImagesMenu';
 import MentionsMenu from './Editor/ContextMenu/MentionsMenu';
 import { currentWord } from '../helpers/Editor/currentWord';
 
-import '../../styles/modules/Editor.scss';
-
 interface IProps {
   content: string;
   setContent: (content: string, callback?: () => void) => void;

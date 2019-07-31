@@ -1,11 +1,11 @@
 .Action {
   padding: 5px 10px;
-  color: #777; // TODO
+  color: $action-color;
   font-size: 80%;
   text-decoration: none !important;
 
   &:hover,
   &.active-action {
-    color: rgb(71, 140, 196); // TODO i know, i know
+    color: $action-color-active;
   }
 }

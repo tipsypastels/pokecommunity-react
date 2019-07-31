@@ -14,8 +14,6 @@ import { BreadcrumbInterface } from '../types/BreadcrumbInterface';
 import AppContext from '../AppContext';
 import newcoreApi from '../bridge/newcoreApi';
 
-import '../../styles/modules/Page.scss';
-
 export type PageError = null | 404 | 500;
 
 export interface PageProps {

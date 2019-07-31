@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import Icon from '../Icon';
 import { Badge } from 'react-bootstrap';
 
-import '../../../styles/modules/Thread/FloatingActions.scss';
-
 interface IProps {
   canModerate: boolean;
   canReply: boolean;

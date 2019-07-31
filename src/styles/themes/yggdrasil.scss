@@ -1,0 +1,103 @@
+/*
+  Yggdrasil
+
+  Welcome to the theme file for Yggdrasil in PokéCommunity 3. Like the New UI, you will use this file to set stylesheet configuration details for your theme.
+
+  Please note! You must wrap all your theme code inside the [data-theme] block. It should look something like this:
+
+  [data-theme="yggdrasil"] {
+    // put all your code here
+  }
+
+  Make sure to *never* add rules or variables outside of that block, or you will introduce bugs with PC 3's theme system.
+
+  - Dakota
+
+  PS: You can delete this message from your theme files.
+*/
+
+[data-theme="yggdrasil"] {
+  // ==================================
+  // PART 0 Base Colors
+  // ==================================
+
+  // The color of the page background.
+  $background-color: white;
+
+  // The color of the background, shaded slightly. This is used to make certain blocks stand out.
+  $background-color-shaded: #f9f9f9;
+
+  // The color of the page text.
+  $text-color: #212529;
+
+  // Will be used for buttons, links, and some other elements.
+  $primary-color: #007bff;
+
+  // Used for less important elements
+  $secondary-color: #28a745;
+
+  // Used to divide elements, and as the borders of some buttons
+  $divider-color: #dee2e6;
+
+  // Used to divide elements, darker than the default divider.
+  $divider-color-dark: #adadad;
+
+  // ==================================
+  // PART 1 Interface Elements
+  // ==================================
+
+  // The color of buttons with variant="primary".
+  $button-primary-color: $primary-color;
+
+  // The color of links NOT INCLUDING the contents of posts.
+  $link-color: $primary-color;
+
+  // The color of links inside posts.
+  $link-in-posts-color: $primary-color;
+
+  // An action is a minimal style of button used in the footers of posts, (such as the Like button), among other places.
+  $action-color: #777;
+
+  // An action changes color when it is active.
+  $action-color-active: rgb(71, 140, 196);
+
+  // ==================================
+  // PART 2 Blocks
+  // ==================================
+
+  // The background of the main area of blocks.
+  $block-background-color: $background-color;
+
+  // The background of the header area of blocks.
+  $block-header-background-color: $background-color-shaded;
+
+  // The color of the divider line between the block header and content. Note that you can disable for a specific component using <Block.Header noBorderBottom>.
+  $block-header-divider-color: #444;
+
+  // The shadow applied to blocks.
+  $block-shadow: 0 0.625rem 0.625rem 0.125rem rgba(0, 0, 0, 0.05), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.12), 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.24);
+
+  // ==================================
+  // PART 3 Header & Footer
+  // ==================================
+
+  // The banner image
+  $banner: url(https://www.pokecommunity.com/styles/default/pokecommunity-cloudspace.jpg);
+
+  // ==================================
+  // PART 4 Modals
+  // ==================================
+
+  $modal-background-color: $background-color;
+
+  // The color of the thread moderation icons in the mod menu
+  $thread-mod-color: $primary-color;
+
+  // The color of the post moderation icons in the mod menu
+  $posts-mod-color: $secondary-color;
+
+  // --- IMPORTANT ---
+  // Do not remove this line or add anything below it.
+  // This should always be the final element in your theme declaration.
+  @import '../all-modules.scss';
+}

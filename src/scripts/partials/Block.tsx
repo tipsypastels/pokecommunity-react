@@ -5,8 +5,6 @@ import Content from './Block/Content';
 import ListContent from './Block/ListContent';
 import Footer from './Block/Footer';
 
-import '../../styles/modules/Block.scss';
-
 export interface BlockProps {
   children: ReactNode;
   className?: string;

@@ -4,10 +4,8 @@ import { Modal } from 'react-bootstrap';
 import PostUserInterface from '../../types/PostUserInterface';
 
 import Usergroup from './Usergroup';
-import vBRoute from '../../bridge/vBRoute';
+import SmartLink from '../SmartLink';
 import Action from '../Action';
-
-import '../../../styles/modules/User/UserModal.scss';
 
 interface IProps {
   user: PostUserInterface;
@@ -26,18 +24,16 @@ export default class UserModal extends Component<IProps> {
         show={this.props.show}
         onHide={this.props.closeModal}
       >
-        <a href={vBRoute('profile', this.props.user.id)}>
+        <SmartLink to={`/memberinfo.php?u=${this.props.user.id}`}>
           {this.getUserBanner()}
           {this.getAvatar()}
-        </a>
+        </SmartLink>
 
         <Modal.Header>
           <Modal.Title>
-            <a
-              href={vBRoute('profile', this.props.user.id)}
-            >
+            <SmartLink to={`/memberinfo.php?u=${this.props.user.id}`}>
               {user.username}
-            </a>
+            </SmartLink>
           </Modal.Title>
           {this.getUsergroups()}
           {this.getQuickSelfIntro()}
@@ -87,18 +83,18 @@ export default class UserModal extends Component<IProps> {
         <Action
           name="View Profile"
           icon={{ name: 'id-card', group: 'fal' }}
-          href={vBRoute('profile', this.props.user.id)}
+          href={`/memberinfo.php?u=${this.props.user.id}`}
           className="d-none d-md-inline"
         />
         <Action
           name="Send Message"
           icon={{ name: 'comments', group: 'fal' }}
-          href={vBRoute('sendPm', this.props.user.id)}
+          href={`/private.php?do=newpm&u=${this.props.user.id}`}
         />
         <Action
           name="See Posts"
           icon={{ name: 'list', group: 'fal' }}
-          href={vBRoute('searchUserPosts', this.props.user.id)}
+          href={`/search.php?do=finduser&u=${this.props.user.id}`}
         />
       </div>
     )

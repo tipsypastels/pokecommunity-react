@@ -1,10 +1,8 @@
-// TODO themes should set their own banners
-
 .DefaultBanner {
   display: block;
   background-position: center;
   background-size: cover;
-  background-image: url(https://www.pokecommunity.com/styles/default/pokecommunity-cloudspace.jpg);
+  background-image: $banner;
 
   display: flex;
   flex-direction: column;
