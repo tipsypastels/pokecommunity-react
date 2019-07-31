@@ -3,8 +3,6 @@ import { Navbar } from 'react-bootstrap';
 
 import SmartLink from '../SmartLink';
 
-import '../../../styles/modules/Header/CommunityMenu.scss';
-
 export interface CommunityMenuElementProps {
   className: string;
   name: string;

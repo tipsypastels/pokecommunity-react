@@ -8,8 +8,6 @@ import TabbedLayout from './NewPostModal/LayoutItems/TabbedLayout';
 
 import ThreadInterface from '../types/ThreadInterface';
 
-import '../../styles/modules/NewPostModal.scss';
-
 // TODO allow this to be nil or work in other contexts
 // like creating new thread, all that stuff
 

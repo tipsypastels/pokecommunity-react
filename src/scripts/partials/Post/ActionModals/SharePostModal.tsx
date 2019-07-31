@@ -7,8 +7,6 @@ import UserInterface from '../../../types/UserInterface';
 import Icon from '../../Icon';
 import SmartLink from '../../SmartLink';
 
-import '../../../../styles/modules/Post/ActionModals/SharePostModal.scss';
-
 interface IProps {
   postid: number;
   user: UserInterface;

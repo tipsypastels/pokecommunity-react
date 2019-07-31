@@ -39,10 +39,18 @@ class App extends Component<{}, IState> {
     }
   }
 
+  componentDidMount() {
+    document.body.dataset.theme = this.state.theme;
+  }
+
+  componentDidUpdate() {
+    document.body.dataset.theme = this.state.theme;
+  }
+
   render() {
     return (
       <AppContext.Provider value={this.getContextFromState()}>
-        <div className="App" data-theme={this.state.theme}>
+        <div className="App">
           <ThemePickerModal show={this.state.themePickerOpen} />
 
           <Router>
@@ -90,6 +98,7 @@ class App extends Component<{}, IState> {
     return {
       currentUser:      this.state.currentUser,
       setCurrentUser:   this.setCurrentUser,
+      theme:            this.state.theme,
       openThemePicker:  this.openThemePicker,
       closeThemePicker: this.closeThemePicker,
       setTheme:         this.setTheme,

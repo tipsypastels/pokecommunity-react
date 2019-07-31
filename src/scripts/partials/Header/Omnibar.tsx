@@ -10,7 +10,6 @@ import AppContext from '../../AppContext';
 import OmnibarTools from './Omnibar/OmnibarTools';
 
 import logo from '../../../images/common/brand-transparent.png';
-import '../../../styles/modules/Header/Omnibar.scss';
 import SmartLink from '../SmartLink';
 
 interface IProps {

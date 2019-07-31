@@ -7,8 +7,6 @@ import Usergroup from './Usergroup';
 import SmartLink from '../SmartLink';
 import Action from '../Action';
 
-import '../../../styles/modules/User/UserModal.scss';
-
 interface IProps {
   user: PostUserInterface;
   show: boolean;

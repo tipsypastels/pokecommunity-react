@@ -36,7 +36,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "create:theme": "node cmd/theme_create.js"
+    "create:theme": "node cmd/theme_create.js",
+    "css:modules:bundle": "node cmd/bundle_css_modules.js"
   },
   "eslintConfig": {
     "extends": "react-app"

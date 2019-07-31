@@ -14,8 +14,6 @@ import PostInterface from '../../types/PostInterface';
 
 import { standardDateTime } from '../../helpers/DateHelpers';
 
-import '../../../styles/modules/ThreadHeader.scss';
-
 interface IProps {
   title: string;
   views: number;

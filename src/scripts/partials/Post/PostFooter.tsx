@@ -7,8 +7,6 @@ import { PostActionModal } from '../Post';
 
 import AppContext from '../../AppContext';
 
-import '../../../styles/modules/Post/PostFooter.scss';
-
 interface IProps {
   id: number;
 

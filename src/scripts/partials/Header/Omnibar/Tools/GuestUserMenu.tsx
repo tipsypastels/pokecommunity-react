@@ -5,7 +5,6 @@ import Icon from '../../../Icon';
 import AppContext from '../../../../AppContext';
 import newcoreApi from '../../../../bridge/newcoreApi';
 
-import '../../../../../styles/modules/Header/Omnibar/Tools/GuestUserMenu.scss';
 import SmartLink from '../../../SmartLink';
 
 interface IState {

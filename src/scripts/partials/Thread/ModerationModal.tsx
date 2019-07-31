@@ -10,8 +10,6 @@ import PostInterface from '../../types/PostInterface';
 import PostVisibility from '../../types/PostVisibility';
 import SmartLink, { SmartLinkFormData } from '../SmartLink';
 
-import '../../../styles/modules/Thread/ModerationModal.scss';
-
 interface IProps {
   show: boolean;
   thread: ThreadInterface;

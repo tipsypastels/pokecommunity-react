@@ -17,8 +17,6 @@ import SharePostModal from './Post/ActionModals/SharePostModal';
 import AppContext from '../AppContext';
 import SmartLink from './SmartLink';
 
-import '../../styles/modules/Post.scss';
-
 export interface PostProps extends PostInterface {
   thread: ThreadInterface;
   index: number;

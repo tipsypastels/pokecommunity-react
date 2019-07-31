@@ -3,8 +3,6 @@ import { Container } from 'react-bootstrap';
 
 import Icon from '../Icon';
 
-import '../../../styles/modules/PagePartials/Loading.scss';
-
 const Loading = () => (
   <Container fluid className="Loading">
     <Icon 

@@ -84,7 +84,7 @@ inquirer.prompt(questions).then(({ name, author, variant, image, bridge }) => {
     });
   }
 
-  fs.appendFile('./src/all-themes.scss', `@import "themes/${slug}.scss;\n`, err => {
+  fs.appendFile('./src/styles/all-themes.scss', `@import "themes/${slug}.scss";\n`, err => {
     if (err) {
       console.log(err);
     } else {

@@ -6,8 +6,6 @@ import Icon from './Icon';
 
 import { ReactComponent as FooterLogo } from '../../images/common/logo.php.svg';
 
-import '../../styles/modules/Footer.scss';
-
 class Footer extends Component {
   static contextType = AppContext;
 

@@ -2,8 +2,6 @@ import React from 'react';
 
 import MinimalUserInterface from '../../types/MinimalUserInterface';
 
-import '../../../styles/modules/User/MentionableUser.scss';
-
 interface IProps extends MinimalUserInterface {
   selected: boolean;
   completedPartOfName: string;

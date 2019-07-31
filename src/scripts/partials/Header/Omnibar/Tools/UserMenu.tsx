@@ -5,8 +5,6 @@ import Icon, { IconProps } from '../../../Icon';
 import AppContext from '../../../../AppContext';
 import SmartLink from '../../../SmartLink';
 
-import '../../../../../styles/modules/Header/Omnibar/Tools/UserMenu.scss';
-
 export interface UserMenuItem {
   name: string;
   link: string;

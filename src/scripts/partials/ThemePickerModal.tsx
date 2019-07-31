@@ -4,8 +4,6 @@ import { Modal, Nav } from 'react-bootstrap';
 
 import { themes } from '../../configs/themes.json';
 
-import '../../styles/modules/ThemePickerModal.scss';
-
 interface IProps {
   show: boolean;
 }

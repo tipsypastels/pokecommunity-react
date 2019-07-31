@@ -1,17 +1,13 @@
 .ModerationModal {
-  // TODO move this into theme config
-  --thread-mod-color: #007bff;
-  --posts-mod-color: #ff912b;
-
   .moderation-modal-tools {
     margin: 1rem 0;
 
     &.moderate-thread {
-      .icon-wrapper { background-color: var(--thread-mod-color); }
+      .icon-wrapper { background-color: $thread-mod-color; }
     }
 
     &.moderate-posts {
-      .icon-wrapper { background-color: var(--posts-mod-color); }
+      .icon-wrapper { background-color: $posts-mod-color; }
     }
     
     & > *:not(:last-child) .tool-name {

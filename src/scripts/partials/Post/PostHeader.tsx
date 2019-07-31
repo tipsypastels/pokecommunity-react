@@ -11,8 +11,6 @@ import SmartLink from '../SmartLink';
 
 import { yearsSince, userIsNew } from '../../helpers/DateHelpers';
 
-import '../../../styles/modules/Post/PostHeader.scss';
-
 interface IProps {
   user: PostUserInterface;
   forumid: number;

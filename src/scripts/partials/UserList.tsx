@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 
 import UserInterface from '../types/UserInterface';
-
-import '../../styles/modules/UserList.scss';
 import SmartLink from './SmartLink';
 
 interface IProps {

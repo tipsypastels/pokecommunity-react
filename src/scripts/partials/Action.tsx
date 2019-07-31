@@ -3,7 +3,6 @@ import { Button } from 'react-bootstrap';
 
 import Icon, { IconProps } from './Icon';
 
-import '../../styles/modules/Action.scss';
 import SmartLink from './SmartLink';
 
 interface IProps {

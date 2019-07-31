@@ -3,8 +3,6 @@ import BBCode from 'pokecommunity-bbcode';
 
 import { standardDateTime } from '../../helpers/DateHelpers';
 
-import '../../../styles/modules/Post/PostContent.scss';
-
 interface IProps {
   created: number;
   content: string;
