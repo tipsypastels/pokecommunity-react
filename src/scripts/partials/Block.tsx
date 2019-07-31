@@ -1,6 +1,5 @@
 import React, { ReactNode, Component } from 'react'
 
-import OverflowMenu from './Block/OverflowMenu';
 import Header from './Block/Header';
 import Content from './Block/Content';
 import ListContent from './Block/ListContent';
@@ -15,7 +14,6 @@ export interface BlockProps {
 }
 
 class Block extends Component<BlockProps> {
-  static OverflowMenu = OverflowMenu;
   static Header = Header;
   static Content = Content;
   static ListContent = ListContent;

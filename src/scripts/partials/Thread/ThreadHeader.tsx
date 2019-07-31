@@ -7,8 +7,10 @@ import Icon from '../Icon';
 import Block from '../Block';
 import Stat from '../Stat';
 import ThreadPoll from './ThreadPoll';
+import ThreadHeaderSelectPosts from './ThreadHeaderSelectPosts';
 
 import PollInterface from '../../types/PollInterface';
+import PostInterface from '../../types/PostInterface';
 
 import { standardDateTime } from '../../helpers/DateHelpers';
 
@@ -28,8 +30,9 @@ interface IProps {
   forumIcon?: string;
   threadIcon?: string;
 
-
   openEditor: () => void;
+  openModeration: () => void;
+  selectPostsByFilter: (callback: (post: PostInterface, selected?: boolean) => boolean) => void;
 }
 
 export default class ThreadHeader extends Component<IProps> {
@@ -96,9 +99,24 @@ export default class ThreadHeader extends Component<IProps> {
                 Reply to Thread
               </Button>
             </When>
+
+            <div className="flex-grows" />
+
+            <When condition={this.props.canModerate}>
+              <div className="d-none d-md-flex">
+                <Button variant="link" onClick={this.props.openModeration}>
+                  <Icon name="shield" />
+                  Moderate
+                </Button>
+
+                <ThreadHeaderSelectPosts 
+                  selectPostsByFilter={this.props.selectPostsByFilter}
+                />
+              </div>
+            </When>
           </div>
         </Block.Footer>
       </Block>
-    )
+    );
   }
 }

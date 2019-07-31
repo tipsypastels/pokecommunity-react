@@ -42,9 +42,9 @@ export default class ModerationModal extends Component<IProps> {
 
         <Modal.Body>
           <div className="manage-thread">
-            <b>
+            <strong>
               When managing the current thread, you can...
-            </b>
+            </strong>
 
             <div className="moderation-modal-tools moderate-thread">
               {this.toolFor({
@@ -137,47 +137,12 @@ export default class ModerationModal extends Component<IProps> {
               })}
             </div>
 
-            
-            {/* <b>
-              To select posts, you can...
-            </b>
-
-            <div className="moderation-modal-tools">
-              {this.toolFor({
-                name: 'Select All',
-                className: 'select-all',
-                icon: 'clipboard-check',
-                action: '#',
-              })}
-
-              {this.toolFor({
-                name: 'Deselect All',
-                className: 'deselect-all',
-                icon: 'clipboard',
-                action: '#',
-              })}
-
-              {this.toolFor({
-                name: 'Select Deleted',
-                className: 'select-deleted',
-                icon: 'dumpster',
-                action: '#',
-              })}
-
-              {this.toolFor({
-                name: 'Select Unapproved',
-                className: 'select-unapproved',
-                icon: 'ballot',
-                action: '#',
-              })}
-            </div> */}
-
             {(() => {
               if (selectedPosts.length < 1) {
                 return (
-                  <b>
+                  <strong>
                     Select some posts to view post moderation options! 
-                  </b>
+                  </strong>
                 );
               }
 
@@ -185,9 +150,9 @@ export default class ModerationModal extends Component<IProps> {
 
               return (
                 <React.Fragment>
-                  <b>
+                  <strong>
                     You have {selectedPosts.length} {postsPhrase.toLowerCase()} selected. When managing, you can...
-                  </b>
+                  </strong>
 
                   <div className="moderation-modal-tools moderate-posts">
                     {this.toolFor({

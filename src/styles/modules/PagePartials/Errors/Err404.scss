@@ -6,20 +6,17 @@
       margin: 10px 0px !important;
     }
 
-  .error-icon {
-    font-size: 5rem;
-  }
-
-  .error-subtitle {
-    font-size: 0.7rem;
-    margin-bottom: 20px;
-  }
-
   .error-message {
     justify-content: center;
     align-items: center;
     @media (min-width: 756px) {
       display: flex;
+    }
+
+    .main-text {
+      font-size: 1.5rem;
+      font-weight: 200;
+      margin-bottom: 5px;
     }
 
     .error-image {
@@ -31,11 +28,20 @@
     }
 
     .error-text {
-      margin: 10px 10px;
+      margin: 10px 20px;
       .link {
         cursor: pointer;
-        text-decoration: underline;
+        color: #007bff;
+
+        &:hover {
+          text-decoration: underline;
+          color: #0056b3;
+        }
       }
+    }
+
+    .error-home {
+      margin-top: 10px;
     }
   }
 }

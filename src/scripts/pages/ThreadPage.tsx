@@ -186,6 +186,8 @@ export default class ThreadPage extends Component<IProps, IState> {
           && thread.contentMeta.thumbnail.small
         }
         openEditor={this.openNewPostModal}
+        openModeration={this.openModerationModal}
+        selectPostsByFilter={this.selectPostsByFilter}
       />
     );
   }
@@ -281,15 +283,28 @@ export default class ThreadPage extends Component<IProps, IState> {
     this.setState({ selectedPosts });
   }
 
-  deselectAllPosts = () => {
-    let { selectedPosts } = this.state;
-    selectedPosts = new Set([...selectedPosts]);
-
-    for (let i of selectedPosts) {
-      selectedPosts.delete(i);
+  selectPostsByFilter = (callback: (post: PostInterface, selected?: boolean) => boolean) => {
+    const { thread } = this.state;
+    if (!thread) {
+      return;
     }
 
+    const { posts } = thread;
+    const filtered = [];
+
+    for (let post of posts) {
+      const selected = this.checkPostSelected(post.id);
+      if (callback(post, selected)) {
+        filtered.push(post.id);
+      }
+    }
+
+    const selectedPosts = new Set(filtered);
     this.setState({ selectedPosts });
+  }
+
+  deselectAllPosts = () => {
+    this.setState({ selectedPosts: new Set() });
   }
 
   checkPostSelected = (postid: number) => {
