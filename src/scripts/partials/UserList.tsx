@@ -24,7 +24,7 @@ class UserList extends Component<IProps> {
       }
       return ( 
         <SmartLink
-          to={`/memberinfo.php?u=${user.id}`}
+          to={`/member.php.php?u=${user.id}`}
           className="user flex flex-v-center"
           key={user.id}
         >

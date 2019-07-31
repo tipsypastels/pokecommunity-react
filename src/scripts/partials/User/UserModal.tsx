@@ -24,14 +24,14 @@ export default class UserModal extends Component<IProps> {
         show={this.props.show}
         onHide={this.props.closeModal}
       >
-        <SmartLink to={`/memberinfo.php?u=${this.props.user.id}`}>
+        <SmartLink to={`/member.php?u=${this.props.user.id}`}>
           {this.getUserBanner()}
           {this.getAvatar()}
         </SmartLink>
 
         <Modal.Header>
           <Modal.Title>
-            <SmartLink to={`/memberinfo.php?u=${this.props.user.id}`}>
+            <SmartLink to={`/member.php?u=${this.props.user.id}`}>
               {user.username}
             </SmartLink>
           </Modal.Title>
@@ -83,7 +83,7 @@ export default class UserModal extends Component<IProps> {
         <Action
           name="View Profile"
           icon={{ name: 'id-card', group: 'fal' }}
-          href={`/memberinfo.php?u=${this.props.user.id}`}
+          href={`/member.php?u=${this.props.user.id}`}
           className="d-none d-md-inline"
         />
         <Action

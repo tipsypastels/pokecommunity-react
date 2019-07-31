@@ -91,7 +91,7 @@ export default class UserMenu extends Component {
     return [
       {
         name: 'Profile',
-        link: `/memberinfo.php?u=${currentUser.id}`,
+        link: `/member.php?u=${currentUser.id}`,
         icon: 'user',
       },
       {

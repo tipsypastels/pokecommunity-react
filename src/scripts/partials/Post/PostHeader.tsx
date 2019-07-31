@@ -61,7 +61,7 @@ export default class PostHeader extends Component<IProps, IState> {
 
     return (
       <div className="avatar-container">
-        <SmartLink to={`/memberinfo.php?u=${user.id}`} onClick={this.openUserModal}>
+        <SmartLink to={`/member.php?u=${user.id}`} onClick={this.openUserModal}>
           <img
             src={user.avatar}
             alt={`${user.username}'s Avatar`}
@@ -86,7 +86,7 @@ export default class PostHeader extends Component<IProps, IState> {
     return (
       <div className="username-usertitle">
         <h1 style={user.textFields.flair.username}>
-          <SmartLink to={`/memberinfo.php?u=${user.id}`} onClick={this.openUserModal}>
+          <SmartLink to={`/member.php?u=${user.id}`} onClick={this.openUserModal}>
             {user.username}
           </SmartLink>
         </h1>
