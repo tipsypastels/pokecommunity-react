@@ -64,7 +64,7 @@ export default class ThreadPage extends Component<IProps, IState> {
       this.setState({ thread: response.data });
     } catch (e) {
       if (e.toString().match(/404/)) {
-        this.setState({ error: 500 });
+        this.setState({ error: 404 });
       } else {
         this.setState({ error: 500 });
       }
