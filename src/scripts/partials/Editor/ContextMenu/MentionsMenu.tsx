@@ -3,11 +3,13 @@ import ContextMenu from '../ContextMenu';
 import Icon from '../../Icon';
 import MinimalUserInterface from '../../../types/MinimalUserInterface';
 import MentionableUser from '../../User/MentionableUser';
+import TextareaTransformer from '../../../helpers/Editor/TextareaTransformer';
 
 interface IProps {
   cursorPos: { left: number, top: number, height: number };
-  insertText: (text: string) => void;
-  currentWord: string;
+  transformer: TextareaTransformer;
+  // insertText: (text: string) => void;
+  // currentWord: string;
 }
 
 interface IState {
@@ -165,7 +167,6 @@ export default class MentionsMenu extends Component<IProps, IState> {
     this.setState({ selectionIndex });
   }
 
-  // TODO if the cursor is not at the end of the name, this can autocomplete in the wrong place. not ideal. ideally we'd replace the current word instead of appending the rest of it
   autocompleteCurrentlySelectedUser = (): boolean => {
     const users = this.getRelevantUsers();
     const user = users[this.state.selectionIndex];
@@ -174,20 +175,12 @@ export default class MentionsMenu extends Component<IProps, IState> {
       return false;
     }
 
-    const mentionedName = this.getMentionedNameWithoutSymbol();
-    const restOfName = user.username.slice(mentionedName.length);
-
-    let multiwordNameSuffix = '';
-    if (user.username.includes(' ')) {
-      multiwordNameSuffix = `#${user.id}`;
-    }
-
-    this.props.insertText(`${restOfName}${multiwordNameSuffix} `);
+    this.props.transformer.replaceCurrentWordWith(`@${user.username} `);
     return true;
   }
 
   getMentionedNameWithoutSymbol(): string | null {
-    const { currentWord } = this.props;
+    const { currentWord } = this.props.transformer;
     if (currentWord) {
       return currentWord.replace(/^@/, '');
     } 

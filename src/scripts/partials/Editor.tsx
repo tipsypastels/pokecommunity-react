@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import getCaretCoordinates from 'textarea-caret';
 
 import Toolbar from './Editor/Toolbar';
-import { insertTagInTextarea } from '../helpers/Editor/toolbarUtils';
 import { ContextMenuOptions } from './Editor/ContextMenu';
 
 import LinksMenu from './Editor/ContextMenu/LinksMenu';
 import ImagesMenu from './Editor/ContextMenu/ImagesMenu';
 import MentionsMenu from './Editor/ContextMenu/MentionsMenu';
 import { currentWord } from '../helpers/Editor/currentWord';
+import TextareaTransformer from '../helpers/Editor/TextareaTransformer';
 
 interface IProps {
   content: string;
@@ -21,6 +21,8 @@ interface IState {
 }
 
 export default class Editor extends Component<IProps, IState> {
+  transformer: TextareaTransformer;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -29,27 +31,18 @@ export default class Editor extends Component<IProps, IState> {
     };
   }
 
-  // componentDidUpdate(prevProps: IProps, prevState: IState) {
-  //   // if the user JUST started typing a mention this update, start the mentions menu
-  //   if (this.typingMention() && prevState.contextMenu !== 'mentions') {
-  //     this.setState({ contextMenu: 'mentions' });
-  //     return;
-  //   }
-    
-  //   // vice versa, if they just stopped this update, close the menu
-  //   if (!this.typingMention() && prevState.contextMenu === 'mentions') {
-  //     this.setState({ contextMenu: null });
-  //   }
-  // }
+  componentDidMount() {
+    this.transformer = new TextareaTransformer({
+      textarea: this.getTextarea(),
+      onChange: this.props.setContent,
+    });
+  }
 
   render() {
     return (
       <div className="Editor">
         <Toolbar 
-          content={this.props.content}
-          setContent={this.props.setContent}
-          textareaRef={this.state.textareaRef}
-          insertTag={this.insertTag}
+          transformer={this.transformer}
           setContextMenu={this.setContextMenu}
         />
 
@@ -88,25 +81,13 @@ export default class Editor extends Component<IProps, IState> {
 
     if (e.keyCode === 9 /* tab */) {
       e.preventDefault();
-      this.insertText('  ');
+      this.transformer.insert('  ');
     }
   }
 
   onClick = () => {
     // see the reasoning on using forceUpdate ^ in onKeyUp
     this.forceUpdate();
-  }
-
-  insertText = (text: string) => {
-    this.getTextarea().focus();
-    document.execCommand('insertText', false, text);
-  }
-
-  insertTag = (tag: string, tagValue?: string) => {
-    const textarea = this.getTextarea();
-    const { content } = this.props;
-
-    insertTagInTextarea({ textarea, content, tag, tagValue });
   }
 
   setContextMenu = (contextMenu: ContextMenuOptions) => {
@@ -131,8 +112,9 @@ export default class Editor extends Component<IProps, IState> {
       return (
         <MentionsMenu
           cursorPos={cursorPos}
-          insertText={this.insertText}
-          currentWord={this.getCurrentWord()}
+          transformer={this.transformer}
+          // insertText={this.insertText}
+          // currentWord={this.getCurrentWord()}
         />
       );
     }
@@ -153,7 +135,7 @@ export default class Editor extends Component<IProps, IState> {
           <LinksMenu
             {...contextProps}
             onSubmit={content => {
-              this.insertTag('url', content);
+              this.transformer.insertTag('url', content);
             }}
           />
         );
@@ -162,8 +144,8 @@ export default class Editor extends Component<IProps, IState> {
           <ImagesMenu
             {...contextProps}
             onSubmit={content => {
-              this.insertTag('img');
-              this.insertText(content);
+              this.transformer.insertTag('img');
+              this.transformer.insert(content);
             }}
           />
         );

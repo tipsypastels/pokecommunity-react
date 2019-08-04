@@ -4,6 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 import Icon from '../Icon';
 import StaffPostOptions from './StaffPostOptions';
 import { ContextMenuOptions } from './ContextMenu';
+import TextareaTransformer from '../../helpers/Editor/TextareaTransformer';
 
 // TODO move this somewhere else
 const AVAILABLE_FONTS = [
@@ -13,16 +14,15 @@ const AVAILABLE_FONTS = [
 const AVAILABLE_SIZES = '1 2 3 4 5 6 7'.split(' ');
 
 interface IProps {
-  content: string;
-  textareaRef: React.RefObject<HTMLTextAreaElement>;
-  setContent: (content: string, callback?: () => void) => void;
-  insertTag: (tag: string, tagValue?: string) => void;
+  transformer: TextareaTransformer;
   setContextMenu: (contextMenu: ContextMenuOptions) => void;
 }
 
 export default class Toolbar extends Component<IProps> {
   render() {
-    const tag = (value: string) => () => this.props.insertTag(value);  
+    const tag = (value: string) => () => {
+      this.props.transformer.insertTag(value);  
+    }
 
     return (
       <div className="Toolbar" onClick={this.forgivinglySelectTextarea}>
@@ -106,7 +106,7 @@ export default class Toolbar extends Component<IProps> {
       return;
     }
 
-    this.props.textareaRef.current.focus();
+    this.props.transformer.focus()
   }
 
   getFonts(): ReactNode {
@@ -120,7 +120,7 @@ export default class Toolbar extends Component<IProps> {
   mapOptionsToDropdown = (tag: string, options: string[]): ReactNode => (
     <React.Fragment>
       {options.map(option => (
-        <Dropdown.Item key={option} onClick={() => this.props.insertTag(tag, option)}>
+        <Dropdown.Item key={option} onClick={() => this.props.transformer.insertTag(tag, option)}>
           {option}
         </Dropdown.Item>
       ))}
