@@ -129,7 +129,7 @@ export default class UserModal extends Component<IProps> {
     return (
       <Modal.Body className="user-fields">
         {Object.keys(fields).map(fieldName => (
-          <div className="field">
+          <div className="field" key={fieldName}>
             <div className="field-title">
               {fieldName}
             </div>

@@ -20,6 +20,7 @@ import PostModal from '../partials/PostModal';
 import ModerationModal from '../partials/Thread/ModerationModal';
 
 import newcoreApi from '../bridge/newcoreApi';
+import SmartLink from '../partials/SmartLink';
 
 interface IParams {
   id: string;
@@ -42,20 +43,48 @@ interface IState {
 export default class ThreadPage extends Component<IProps, IState> {
   constructor(props) {
     super(props);
+    this.state = this.stateForNewlyLoadedThread();
+    // let queryParams = queryString.parse(this.props.location.search);
+
+    // this.state = {
+    //   thread: undefined,
+    //   editorOpen: false,
+    //   moderationOpen: false,
+    //   currentPage: pageNumber(queryParams.page),
+    //   error: null,
+
+    //   selectedPosts: new Set(),
+    // };
+  }
+
+  async componentDidMount() {
+    await this.queryForThread();
+  }
+
+  // react doesn't actually re-render the component when the :id param changes. it only triggers a props update. so, if the user jumps straight from one thread to another, this method gets called instead
+  // TODO it would be nice to have an easier way of resetting the state
+  async componentDidUpdate(prevProps: IProps) {
+    if (prevProps.match.params.id !== this.props.match.params.id) {
+      this.setState(this.stateForNewlyLoadedThread(), async () => {
+        await this.queryForThread();
+      });
+    }
+  }
+
+  stateForNewlyLoadedThread(): IState {
     let queryParams = queryString.parse(this.props.location.search);
 
-    this.state = {
+    return {
       thread: undefined,
+      error: null,
       editorOpen: false,
       moderationOpen: false,
       currentPage: pageNumber(queryParams.page),
-      error: null,
-
       selectedPosts: new Set(),
     };
   }
 
-  async componentWillMount() {
+  async queryForThread() {
     try {
       const response = await newcoreApi({
         method: 'get',
@@ -84,6 +113,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         htmlTitle={this.getHtmlTitle()}
         error={this.state.error}
       >
+        <SmartLink to="/threads/40">x</SmartLink>
         {this.state.thread &&
           <div>
             {this.getNewPostModal()}
