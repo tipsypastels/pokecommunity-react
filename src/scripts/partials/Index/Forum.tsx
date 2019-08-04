@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-
 import Icon from '../Icon';
-
 import ForumInterface from '../../types/ForumInterface';
-
 import { relativeDateOf } from '../../helpers/DateHelpers';
+import SmartLink from '../SmartLink';
 
-import '../../../styles/modules/Index/Forum.scss';
 
 export default class Forum extends Component<ForumInterface>{
   // TODO probably change the default icon
   defaultIcon = "https://www.pokecommunity.com/uploads/imageshare/31_1564205383355311634.png";
+
   render() {
     const {
       id,
@@ -21,20 +19,23 @@ export default class Forum extends Component<ForumInterface>{
       hasSubforums,
       icon,
     } = this.props;
+
+    const forumLink = `/forumdisplay.php?f=${id}`;
+
     return (
       <div className="Forum">
-        <a className="forum-icon" href={"/forums/" + id}>
+        <SmartLink to={forumLink} className="forum-icon">
           <img src={icon || this.defaultIcon} alt={title} />
-        </a>
+        </SmartLink>
         <div className="info">
           <header>
-            <a className="title" href={"/forums/" + id}>
+            <SmartLink to={forumLink} className="title">
               <aside className="forum-description">{description}</aside>
               <h2>
                 {title}
                 {viewers > 0 && this.getViewers()}
               </h2>
-            </a>
+            </SmartLink>
             {hasSubforums && this.getSubforums() }
           </header>
           {hasThreads && this.getLastPosts() } 
@@ -42,18 +43,20 @@ export default class Forum extends Component<ForumInterface>{
       </div> 
     )
   }
+
   getViewers() {
     const viewers = this.props.viewers;
     return (
       <small className="viewers"><Icon fw name="eye" /> {viewers}</small>
     )
   }
+
   getSubforums() {
     return this.props.subforums.map(forum => (
-      <ul className="subforums">
+      <ul className="subforums" key={forum.id}>
         <div>
-          <a 
-            href={"/forums/" + forum.id} 
+          <SmartLink 
+            to={`/forumdisplay.php?f=${forum.id}`} 
             title={forum.title} 
             className="subforum"
           >
@@ -61,37 +64,52 @@ export default class Forum extends Component<ForumInterface>{
               src={forum.icon || this.defaultIcon} 
               alt={forum.title} 
             />
-          </a>
+          </SmartLink>
         </div>
       </ul>
     ));
   }
+
   getLastPosts() {
     const { 
       lastPostDate,
       lastPostUsername,
       lastThreadTitle,
-      // TODO link to post with => lastThreadId,
+      lastThreadId,
     } = this.props;
+
+    const newPostsLink = `/threads/${lastThreadId}?goto=new`;
+    const authorLink = `/member.php?username=${lastPostUsername}`;
+
     return (
       <div className="last-posts">
         <div className="last-posts-meta">
-          <a 
+          <SmartLink 
             className="last-post-title" 
-            href="TODO link to specific post" 
+            to={newPostsLink}
             title={lastThreadTitle}
           >
             {lastThreadTitle}
-          </a>
+          </SmartLink>
+
           <span className="author align-right">
-            <a className="last-post-link-time" href="1">
-              <span className="time">{relativeDateOf(lastPostDate)}</span>
-            </a>
+            <SmartLink to={newPostsLink} className="last-post-link-time">
+              <span className="time">
+                {relativeDateOf(lastPostDate)}
+              </span>
+            </SmartLink>
+
             <span className="by"> 
               &nbsp;by&nbsp;
-              <a href="TODO user profile link" className="by-line">{lastPostUsername}</a>
+              <SmartLink to={authorLink} className="by-line">
+                {lastPostUsername}
+              </SmartLink>
+              
               &nbsp;
-              <a href="TODO thread link" className="last-post-link"><Icon fw name="chevron-circle-right" /></a>
+
+              <SmartLink to={newPostsLink} className="last-post-link">
+                <Icon fw name="chevron-circle-right" />
+              </SmartLink>
             </span>
           </span>
         </div>

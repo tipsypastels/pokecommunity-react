@@ -44,6 +44,7 @@ export default class IndexPage extends Component<IProps, IState>
     const { categories } = this.state;
     return categories.map(category => (
       <Category
+        key={category.id}
         id={category.id}
         title={category.title}
         forums={category.forums}

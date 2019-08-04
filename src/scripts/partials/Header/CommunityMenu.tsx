@@ -90,7 +90,7 @@ class CommunityMenu extends Component<{}, IState> {
 
   renderCommunityMenu() {
     return communityMenuElemements.map(element => (
-      <SmartLink to={element.link} className={`${element.className} cm-element`}>
+      <SmartLink key={element.name} to={element.link} className={`${element.className} cm-element`}>
         {element.name}
       </SmartLink>
     ))
