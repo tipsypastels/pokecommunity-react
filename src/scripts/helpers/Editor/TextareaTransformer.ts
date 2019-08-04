@@ -76,8 +76,8 @@ export default class TextareaTransformer {
 
     this.insert(insertContent);
 
-    textarea.selectionStart -= closeTag.length + selectedContent.length;
-    textarea.selectionEnd -= closeTag.length;
+    this.selectionStart -= closeTag.length + selectedContent.length;
+    this.selectionEnd -= closeTag.length;
   }
 
   replaceCurrentWordWith(text: string) {
@@ -102,7 +102,13 @@ export default class TextareaTransformer {
     const valueAfter  = value.slice(selectionEnd);
     
     const newValue = valueBefore + text + valueAfter;
+
+    // setting the value immediately moves selection to the end
     this.value = newValue;
+
+    // so we have to account for that
+    this.selectionStart -= valueAfter.length;
+    this.selectionEnd -= valueAfter.length;
   }
 }
 

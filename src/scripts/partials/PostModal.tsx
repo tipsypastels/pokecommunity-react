@@ -162,7 +162,7 @@ export default class PostModal extends Component<IProps, IState> {
 
     return (
       <Button variant="outline-primary" className="revert-draft" onClick={this.revertDraft}>
-        Revert Draft
+        {this.isEditingPost() ? 'Revert' : 'Clear'} Draft
       </Button>
     )
   }

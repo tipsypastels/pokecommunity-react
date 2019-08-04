@@ -175,7 +175,12 @@ export default class MentionsMenu extends Component<IProps, IState> {
       return false;
     }
 
-    this.props.transformer.replaceCurrentWordWith(`@${user.username} `);
+    let name = user.username;
+    if (name.includes(' ')) {
+      name += `#${user.id}`;
+    }
+
+    this.props.transformer.replaceCurrentWordWith(`@${name} `);
     return true;
   }
 
