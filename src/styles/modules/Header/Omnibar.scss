@@ -22,14 +22,6 @@ $community-nav-item-color: #fff;
 	will-change: transform;
   transition: transform 200ms linear;
 
-  .CommunityMenu.visible + & {
-    top: 30px;
-  }
-
-  .CommunityMenu.expanded + & {
-    top: 210px;
-  }
-
 	&.nav-unfixed {
 		transform: translateY(-$community-nav-height);
 	}
@@ -281,4 +273,15 @@ $community-nav-item-color: #fff;
       }
     }
   }
+}
+
+/* these can't be inside and use + &, because of how specificity works
+  now that everything is wrapped in [data-theme]
+*/
+.CommunityMenu.visible + .Omnibar {
+  top: 30px;
+}
+
+.CommunityMenu.expanded + .Omnibar {
+  top: 210px;
 }
