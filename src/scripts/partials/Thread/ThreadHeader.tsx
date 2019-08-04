@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Dropdown } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { When } from 'react-if';
 
 import Icon from '../Icon';

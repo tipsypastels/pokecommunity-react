@@ -102,7 +102,7 @@ class Post extends Component<PostProps, IState> {
             selectPost={selectPost}
             deselectPost={deselectPost}
             checkPostSelected={checkPostSelected}
-            openEditorToCurrentPost={() => this.props.openEditor(this.props)}
+            openEditorToCurrentPost={() => openEditor(this.props)}
           />
         </Block.Content>
 

@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from 'react';
+import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 
 import PostUserInterface from '../../types/PostUserInterface';

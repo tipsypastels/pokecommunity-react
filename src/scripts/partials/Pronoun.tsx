@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import UserInterface from '../types/UserInterface';
 import AppContext from '../AppContext';
 

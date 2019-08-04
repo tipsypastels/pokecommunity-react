@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react';
-import { NavItem, Dropdown, Nav, Form, Button } from 'react-bootstrap';
+import { NavItem, Dropdown, Nav } from 'react-bootstrap';
 
 import Icon, { IconProps } from '../../../Icon';
 import AppContext from '../../../../AppContext';

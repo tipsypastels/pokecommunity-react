@@ -1,8 +1,7 @@
 import React, { Component, ReactNode } from 'react'
 import { Modal } from 'react-bootstrap';
-import Icon, { IconProps } from '../Icon';
+import Icon from '../Icon';
 import { If, Then, Else } from 'react-if';
-import { Button } from 'react-bootstrap';
 import pluralize from 'pluralize';
 
 import ThreadInterface from '../../types/ThreadInterface';

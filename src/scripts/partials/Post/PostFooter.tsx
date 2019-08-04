@@ -6,7 +6,6 @@ import Action from '../Action';
 import { PostActionModal } from '../Post';
 
 import AppContext from '../../AppContext';
-import PostInterface from '../../types/PostInterface';
 
 interface IProps {
   id: number;

@@ -1,4 +1,4 @@
-import React, { ReactNode, Component } from 'react';
+import React, { Component } from 'react';
 
 import Page, { PageProps, PageError } from './Page';
 import BulletinBoard from '../partials/Index/BulletinBoard';
