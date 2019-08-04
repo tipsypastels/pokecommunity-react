@@ -20,7 +20,6 @@ import PostModal from '../partials/PostModal';
 import ModerationModal from '../partials/Thread/ModerationModal';
 
 import newcoreApi from '../bridge/newcoreApi';
-import SmartLink from '../partials/SmartLink';
 
 interface IParams {
   id: string;
@@ -101,7 +100,6 @@ export default class ThreadPage extends Component<IProps, IState> {
         htmlTitle={this.getHtmlTitle()}
         error={this.state.error}
       >
-        <SmartLink to="/threads/40">x</SmartLink>
         {this.state.thread &&
           <div>
             {this.getNewPostModal()}
