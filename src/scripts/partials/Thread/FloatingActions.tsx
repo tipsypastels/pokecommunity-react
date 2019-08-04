@@ -6,7 +6,7 @@ interface IProps {
   canModerate: boolean;
   canReply: boolean;
   selectedPostsCount: number;
-  openNewPostModal: () => void;
+  openEditor: () => void;
   openModerationModal: () => void;
   deselectPosts: () => void;
 }
@@ -51,7 +51,7 @@ export default class FloatingActions extends Component<IProps> {
           {replyBadge}
           <div
             className="action action-reply"
-            onClick={this.props.openNewPostModal}
+            onClick={this.props.openEditor}
           >
             <Icon name="pencil" fw />
           </div>

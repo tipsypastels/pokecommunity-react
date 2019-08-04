@@ -6,6 +6,7 @@ import Action from '../Action';
 import { PostActionModal } from '../Post';
 
 import AppContext from '../../AppContext';
+import PostInterface from '../../types/PostInterface';
 
 interface IProps {
   id: number;
@@ -24,6 +25,8 @@ interface IProps {
   selectPost: (postid: number) => void;
   deselectPost: (postid: number) => void;
   checkPostSelected: (postid: number) => boolean;
+
+  openEditorToCurrentPost: () => void;
 }
 
 class PostFooter extends Component<IProps> {
@@ -41,6 +44,7 @@ class PostFooter extends Component<IProps> {
       selectPost,
       deselectPost,
       checkPostSelected,
+      openEditorToCurrentPost
     } = this.props;
 
     return (
@@ -72,8 +76,7 @@ class PostFooter extends Component<IProps> {
               name="Edit"
               icon={{ name: 'edit', group: 'fal' }}
               active={false /* TODO */}
-              activate={() => { }}
-              deactivate={() => { }}
+              activate={openEditorToCurrentPost}
             />
           </When>
           <When condition={canReply}>

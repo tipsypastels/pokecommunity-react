@@ -24,6 +24,7 @@ export interface PostProps extends PostInterface {
   selectPost: (postid: number) => void;
   deselectPost: (postid: number) => void;
   checkPostSelected: (postid: number) => boolean;
+  openEditor: (post: PostInterface) => void;
 }
 
 export type PostActionModal = null | 'share';
@@ -56,6 +57,7 @@ class Post extends Component<PostProps, IState> {
       selectPost,
       deselectPost,
       checkPostSelected,
+      openEditor
     } = this.props;
 
     const { actionModalOpen } = this.state;
@@ -100,6 +102,7 @@ class Post extends Component<PostProps, IState> {
             selectPost={selectPost}
             deselectPost={deselectPost}
             checkPostSelected={checkPostSelected}
+            openEditorToCurrentPost={() => this.props.openEditor(this.props)}
           />
         </Block.Content>
 
