@@ -6,6 +6,7 @@ import AppContext from '../../../AppContext';
 import UserInterface from '../../../types/UserInterface';
 import Icon from '../../Icon';
 import SmartLink from '../../SmartLink';
+import Pronoun from '../../Pronoun';
 
 interface IProps {
   postid: number;
@@ -42,7 +43,7 @@ export default class SharePostModal extends Component<IProps, IState> {
       >
         <Modal.Header closeButton>
           <Modal.Title>
-            {this.getTitle()}
+            Share <Pronoun of={this.props.user} /> post
           </Modal.Title>
         </Modal.Header>
         
@@ -89,16 +90,6 @@ export default class SharePostModal extends Component<IProps, IState> {
         </Modal.Body>
       </Modal>
     )
-  }
-
-  getTitle() {
-    const { user } = this.props;
-    const { currentUser } = this.context;
-    if (currentUser && currentUser.id === user.id) {
-      return 'Share your post';
-    }
-
-    return `Share ${user.username}'s post`;
   }
 
   getCopyText() {

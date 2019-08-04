@@ -16,7 +16,7 @@ import { threadBreadcrumbs } from '../types/BreadcrumbInterface';
 import { pageNumber } from '../helpers/PageHelpers';
 
 import PostWrapper from '../partials/Post/PostWrapper';
-import NewPostModal from '../partials/NewPostModal';
+import PostModal from '../partials/PostModal';
 import ModerationModal from '../partials/Thread/ModerationModal';
 
 import newcoreApi from '../bridge/newcoreApi';
@@ -31,6 +31,7 @@ type IProps = RouteComponentProps<IParams> & PageProps;
 interface IState {
   thread?: ThreadInterface;
   editorOpen: boolean;
+  editedPost?: PostInterface;
   moderationOpen: boolean;
   currentPage: number;
   error: PageError;
@@ -111,10 +112,12 @@ export default class ThreadPage extends Component<IProps, IState> {
     }
 
     return (
-      <NewPostModal
+      <PostModal
         show={this.state.editorOpen}
         thread={this.state.thread}
-        closeModal={this.closeNewPostModal}
+        cacheKey={this.getEditorCacheKey()}
+        post={this.state.editedPost}
+        close={this.closeEditor}
         quotedContent={this.getNewPostQuotes()}
       />
     )
@@ -141,7 +144,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         canModerate={this.state.thread.canModerate}
         openModerationModal={this.openModerationModal}
         canReply={this.state.thread.canReply}
-        openNewPostModal={this.openNewPostModal}
+        openEditor={this.openEditorToNew}
         selectedPostsCount={this.state.selectedPosts.size}
         deselectPosts={this.deselectAllPosts}
       />
@@ -184,7 +187,7 @@ export default class ThreadPage extends Component<IProps, IState> {
           && thread.contentMeta.thumbnail
           && thread.contentMeta.thumbnail.small
         }
-        openEditor={this.openNewPostModal}
+        openEditor={this.openEditorToNew}
         openModeration={this.openModerationModal}
         selectPostsByFilter={this.selectPostsByFilter}
       />
@@ -210,6 +213,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         selectPost={this.selectPost}
         deselectPost={this.deselectPost}
         checkPostSelected={this.checkPostSelected}
+        openEditor={this.openEditorToEdit}
         {...post}
       />
     ));
@@ -218,16 +222,20 @@ export default class ThreadPage extends Component<IProps, IState> {
   getQuickReply() {
     if (this.state.thread && this.state.thread.canReply) {
       return (
-        <QuickReply openNewPostModal={this.openNewPostModal} />
+        <QuickReply openEditor={this.openEditorToNew} />
       )
     }
   }
 
-  openNewPostModal = () => {
-    this.setState({ editorOpen: true });
+  openEditorToNew = () => {
+    this.setState({ editorOpen: true, editedPost: undefined });
   }
 
-  closeNewPostModal = () => {
+  openEditorToEdit = (post: PostInterface) => {
+    this.setState({ editorOpen: true, editedPost: post });
+  }
+
+  closeEditor = () => {
     this.setState({ editorOpen: false });
   }
 
@@ -261,6 +269,18 @@ export default class ThreadPage extends Component<IProps, IState> {
       return `[quote=${post.user.username};${post.id}]${post.content}[/quote]\n`;
     }).join("\n");
   }
+
+  /**
+   * Returns a unique identifier that the PostModal can use to uniquely identify edited posts. This is done so that unsaved content from editing one post does not "bleed through" when another post is edited. This also applies to creating a new post.
+   */
+  getEditorCacheKey = (): string => {
+    const { thread, editedPost: post } = this.state;
+
+    return `${thread.forum.id}_${post
+      ? `edit_${post.id}`
+      : 'new'
+    }`;
+  } 
 
   selectPost = (postid: number) => {
     let { selectedPosts } = this.state;
