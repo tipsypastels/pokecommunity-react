@@ -1,4 +1,27 @@
 .Category
 {
-  
+  margin-bottom: 3pt;
+  width: 100%;
+  .title {
+    a {
+      color: #646464; // TODO colours
+    }
+    h1 {
+      margin: 0px;
+      padding: 5px; // TODO $standard-padding
+
+      font-weight: 800;
+      font-size: 100%;
+      @media (min-width: 950px) {
+        padding: 0;
+        font-size: 150%;
+      } 
+    }
+  }
+  .forum-wrap {
+    @media screen and (min-width: 950px) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
 }
