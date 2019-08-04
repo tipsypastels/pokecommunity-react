@@ -44,17 +44,6 @@ export default class ThreadPage extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = this.stateForNewlyLoadedThread();
-    // let queryParams = queryString.parse(this.props.location.search);
-
-    // this.state = {
-    //   thread: undefined,
-    //   editorOpen: false,
-    //   moderationOpen: false,
-    //   currentPage: pageNumber(queryParams.page),
-    //   error: null,
-
-    //   selectedPosts: new Set(),
-    // };
   }
 
   async componentDidMount() {
@@ -62,7 +51,6 @@ export default class ThreadPage extends Component<IProps, IState> {
   }
 
   // react doesn't actually re-render the component when the :id param changes. it only triggers a props update. so, if the user jumps straight from one thread to another, this method gets called instead
-  // TODO it would be nice to have an easier way of resetting the state
   async componentDidUpdate(prevProps: IProps) {
     if (prevProps.match.params.id !== this.props.match.params.id) {
       this.setState(this.stateForNewlyLoadedThread(), async () => {
