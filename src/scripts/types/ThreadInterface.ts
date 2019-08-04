@@ -15,6 +15,7 @@ export default interface ThreadInterface {
 
   open: number;
   sticky: boolean;
+  visible: number;
   views: number;
 
   poll?: PollInterface;

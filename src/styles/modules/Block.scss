@@ -1,15 +1,14 @@
 .Block {
-  // TODO move colours to themes etc 
-  box-shadow: 0 0.625rem 0.625rem 0.125rem rgba(0, 0, 0, 0.05), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.12), 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.24);
+  box-shadow: $block-shadow;
 
   padding: 0;
-  background-color: white;
+  background-color: $block-background-color;
   margin: 10px 0;
 
   position: relative;
 
   & > header {
-    background-color: #f9f9f9;
+    background-color: $block-header-background-color;
     display: flex;
     align-items: center;
     
@@ -18,7 +17,7 @@
     }
     
     &:not(.no-border-bottom) {
-      border-bottom: 2px solid #444;
+      border-bottom: 2px solid $block-header-divider-color;
     }
   }
 
@@ -47,63 +46,6 @@
         &:nth-child(odd) {
           background-color: #fafafa; // TODO etc 
         }
-      }
-    }
-  }
-
-  & > .BlockOverflowMenu {
-    &:not(.active) {
-      width: 0;
-    }
-
-    &.active {
-      // TODO it's weird to hardcode this but transitions don't work without it... investigate alternatives
-      width: 185px;
-    }
-
-    transition: 0.15s ease-in-out;
-
-    position: absolute;
-    overflow: hidden;
-    bottom: 0;
-    right: 0;
-
-    list-style: none;
-    margin: 0;
-    padding: 0.25rem 0;
-
-    background-color: #0069d9; // TODO colours etc
-    color: white;
-
-    user-select: none;
-    border-top-left-radius: 4px;
-
-    .divider {
-      display: block;
-      width: 100%;
-      height: 1px;
-      
-      // TODO colours etc
-      background-color: mix(white, transparent, 25%);
-      margin: 0.35rem 0;
-    }
-
-    .overflow-menu-item {
-      cursor: pointer;
-      padding: 0.15rem 0.75rem;
-      white-space: nowrap;
-
-      &:hover {
-        background-color: white;
-        color: #0069d9;
-      }
-
-      &:not(:last-child) {
-        margin-bottom: 0.15rem;
-      }
-
-      .menu-text {
-        margin-left: 0.35rem;
       }
     }
   }

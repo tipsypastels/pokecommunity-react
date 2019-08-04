@@ -1,0 +1,39 @@
+.ModerationModal {
+  .moderation-modal-tools {
+    margin: 1rem 0;
+
+    &.moderate-thread {
+      .icon-wrapper { background-color: $thread-mod-color; }
+    }
+
+    &.moderate-posts {
+      .icon-wrapper { background-color: $posts-mod-color; }
+    }
+    
+    & > *:not(:last-child) .tool-name {
+      border-bottom: 1px solid #dee2e6; // TODO colours
+    }
+
+    .moderation-tool {
+      display: flex;
+      margin-bottom: 0.5rem;
+
+      .tool-name {
+        flex-grow: 1;
+      }
+
+      .icon-wrapper {
+        margin-right: 0.5rem;
+        color: white;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 30px;
+        height: 30px;
+        border-radius: 4px;
+      }
+    }
+  }
+}

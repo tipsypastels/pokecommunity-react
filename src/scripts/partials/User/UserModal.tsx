@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { Modal } from 'react-bootstrap';
 
 import PostUserInterface from '../../types/PostUserInterface';
 
 import Usergroup from './Usergroup';
-import vBRoute from '../../bridge/vBRoute';
+import SmartLink from '../SmartLink';
 import Action from '../Action';
-
-import '../../../styles/modules/User/UserModal.scss';
 
 interface IProps {
   user: PostUserInterface;
@@ -26,26 +24,22 @@ export default class UserModal extends Component<IProps> {
         show={this.props.show}
         onHide={this.props.closeModal}
       >
-        <a href={vBRoute('profile', this.props.user.id)}>
+        <SmartLink to={`/member.php?u=${this.props.user.id}`}>
           {this.getUserBanner()}
           {this.getAvatar()}
-        </a>
+        </SmartLink>
 
         <Modal.Header>
           <Modal.Title>
-            <a
-              href={vBRoute('profile', this.props.user.id)}
-            >
+            <SmartLink to={`/member.php?u=${this.props.user.id}`}>
               {user.username}
-            </a>
+            </SmartLink>
           </Modal.Title>
           {this.getUsergroups()}
           {this.getQuickSelfIntro()}
         </Modal.Header>
 
-        <Modal.Body>
-          {this.getDisplayFields()}
-        </Modal.Body>
+        {this.getDisplayFields()}
 
         <Modal.Footer>
           {this.getControls()}
@@ -89,58 +83,61 @@ export default class UserModal extends Component<IProps> {
         <Action
           name="View Profile"
           icon={{ name: 'id-card', group: 'fal' }}
-          href={vBRoute('profile', this.props.user.id)}
+          href={`/member.php?u=${this.props.user.id}`}
           className="d-none d-md-inline"
         />
         <Action
           name="Send Message"
           icon={{ name: 'comments', group: 'fal' }}
-          href={vBRoute('sendPm', this.props.user.id)}
+          href={`/private.php?do=newpm&u=${this.props.user.id}`}
         />
         <Action
           name="See Posts"
           icon={{ name: 'list', group: 'fal' }}
-          href={vBRoute('searchUserPosts', this.props.user.id)}
+          href={`/search.php?do=finduser&u=${this.props.user.id}`}
         />
       </div>
     )
   }
 
   getDisplayFields() {
+    const { user } = this.props;
+    const fields = {};
+
+    if (user.oldUsernames.length > 0) {
+      fields['Formerly'] = user
+        .oldUsernames[user.oldUsernames.length - 1]
+        .username;
+    }
+
+    if (user.profileFields.discordName) {
+      fields['Discord'] = user.profileFields.discordName;
+    }
+
+    if (user.profileFields.inGameName) {
+      fields['In-Game Name'] = user.profileFields.inGameName;
+    }
+
+    if (user.friendCode) {
+      fields['Friend Code'] = user.friendCode;
+    }
+
+    if (Object.keys(fields).length === 0) {
+      return null;
+    }
+
     return (
-      <div className="user-fields">
-        <div className="field">
-          <div className="field-title">
-            Formerly
+      <Modal.Body className="user-fields">
+        {Object.keys(fields).map(fieldName => (
+          <div className="field">
+            <div className="field-title">
+              {fieldName}
+            </div>
+
+            {fields[fieldName]}
           </div>
-
-          HackDeoxys
-        </div>
-
-        <div className="field">
-          <div className="field-title">
-            Discord
-          </div>
-
-          Nina#1337
-        </div>
-
-        <div className="field">
-          <div className="field-title">
-            In-Game Name
-          </div>
-
-          Meme
-        </div>
-
-        <div className="field">
-          <div className="field-title">
-            Friend Code
-          </div>
-
-          1010-0101-0101
-        </div>
-      </div>
+        ))}
+      </Modal.Body>
     );
   }
 

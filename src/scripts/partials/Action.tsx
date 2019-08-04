@@ -3,7 +3,7 @@ import { Button } from 'react-bootstrap';
 
 import Icon, { IconProps } from './Icon';
 
-import '../../styles/modules/Action.scss';
+import SmartLink from './SmartLink';
 
 interface IProps {
   name?: string;
@@ -21,7 +21,7 @@ export default class Action extends Component<IProps> {
   render() {
     return (
       <Button
-        href={this.props.href}
+        {...SmartLink.shim(this.props.href)}
         className={
           `Action 
           ${this.props.active && 'active-action'} 

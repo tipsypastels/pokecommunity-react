@@ -1,8 +1,6 @@
 import React from 'react';
 import Icon from '../Icon';
 
-import '../../../styles/modules/Post/StaffPost.scss';
-
 interface IProps {
   title: string;
   color: string;

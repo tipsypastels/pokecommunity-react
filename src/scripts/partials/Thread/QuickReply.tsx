@@ -1,9 +1,14 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 
-export default function QuickReply(props) {
+interface IProps {
+  openNewPostModal: () => void;
+}
+
+export default function QuickReply(props: IProps) {
   return (
-    <div className="block QuickReply">
-      quick reply here
-    </div>
+    <Button className="d-block w-100" onClick={props.openNewPostModal}>
+      Reply to Thread
+    </Button>
   );
 }

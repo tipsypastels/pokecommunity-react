@@ -3,8 +3,6 @@ import { Dropdown, NavItem, Nav } from 'react-bootstrap';
 
 import Icon from '../../../Icon';
 
-import '../../../../../styles/modules/Header/Omnibar/Tools/SupporterMenu.scss';
-
 export default class SupporterMenu extends Component {
   render() {
     return (

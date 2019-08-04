@@ -1,7 +1,5 @@
 import React from 'react';
 
-import '../../../styles/modules/User/Usergroup.scss';
-
 interface IProps {
   title: string;
   color: string;

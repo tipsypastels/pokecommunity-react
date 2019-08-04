@@ -1,18 +1,33 @@
 {
   "themes": {
-    "the-vast-quack": {
-      "name": "The Vast Quack"
-    },
     "sky-high": {
-      "name": "Sky High"
+      "name": "Sky High",
+      "variant": "light",
+      "image": "https://www.pokecommunity.com/uploads/imageshare/67163_1557536258585572367.png",
+      "author": "Rainbow"
+    },
+    "yggdrasil": {
+      "name": "Yggdrasil",
+      "variant": "dark",
+      "image": "https://www.pokecommunity.com/uploads/imageshare/67163_15575364951229061884.png",
+      "author": "Cherrim"
+    },
+    "color-flattened-oras": {
+      "name": "Color Flattened ORAS",
+      "variant": "light",
+      "image": "https://www.pokecommunity.com/uploads/imageshare/67163_1557536777206147551.png",
+      "author": "Rainbow"
+    },
+    "the-johto-elite": {
+      "name": "The Johto Elite",
+      "variant": "dark",
+      "image": "https://www.pokecommunity.com/uploads/imageshare/67163_155754062071388229.png",
+      "author": "tokyodrift"
     }
   },
-
-  "defaultTheme": "the-vast-quack",
-
+  "defaultTheme": "sky-high",
   "themeLocalstorageKey": "POKECOMMUNITY_THEME",
   "themeBridgeCookie": "bbstyleid",
-
   "vbThemeBridge": {
     "312": "sky-high"
   }

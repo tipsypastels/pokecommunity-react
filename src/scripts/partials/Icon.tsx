@@ -16,6 +16,7 @@ interface AdditionalIconProps {
   fw?: boolean;
   className?: string;
   transform?: string;
+  mask?: string;
   size?: ICON_SIZE; 
 }
 
@@ -56,10 +57,11 @@ export default class Icon extends Component<IconProps> {
     className: '',
     group: 'fas',
     transform: '',
+    mask: '',
   };
 
   render() {
-    let { name, size, fw, className, group, transform } = this.props;
+    let { name, size, fw, className, group, transform, mask } = this.props;
     name = name.startsWith('fa-') 
       ? name 
       : `fa-${name}`;
@@ -75,6 +77,7 @@ export default class Icon extends Component<IconProps> {
           ${className}
         `}
         data-fa-transform={transform}
+        data-fa-mask={mask}
       />
     )
   }

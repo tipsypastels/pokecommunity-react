@@ -1,0 +1,38 @@
+.Post {
+  & > .post-overflow-menu {
+    padding: 0.25rem;
+
+    background-color: #0069d9; // TODO colours etc
+    color: mix(white, transparent, 85%);
+
+    user-select: none;
+    
+    @media screen and (min-width: 768px) {
+      display: flex;
+      align-items: center;
+    }
+    
+    .overflow-action {
+      display: block;
+      cursor: pointer;
+      white-space: nowrap;
+      margin: 0.25rem;
+
+      color: inherit;
+      
+      &:hover {
+        color: white;
+        text-decoration: none;
+      }
+
+      .icon {
+        margin-right: 0.35rem;
+      }
+    }
+
+    .close-overflow {
+      margin-right: 0.5rem;
+      cursor: pointer;
+    }
+  }
+}

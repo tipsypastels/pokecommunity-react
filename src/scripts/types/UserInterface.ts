@@ -1,5 +1,6 @@
 import UsergroupInterface from "./UsergroupInterface";
 import MinimalUserInterface from "./MinimalUserInterface";
+import OldUsernameInterface from "./OldUsernameInterface";
 
 export default interface UserInterface extends MinimalUserInterface {
   usertitle?: string;
@@ -11,4 +12,7 @@ export default interface UserInterface extends MinimalUserInterface {
   postCount: number;
 
   usergroups?: UsergroupInterface[];
+
+  oldUsernames: OldUsernameInterface[];
+  friendCode: string;
 }

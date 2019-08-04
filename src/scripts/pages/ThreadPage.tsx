@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Link } from 'react-router-dom';
 import queryString from 'query-string';
 
 import Page, { PageProps, PageError } from './Page';
@@ -10,12 +10,14 @@ import Pagination from '../partials/Pagination';
 import FloatingActions from '../partials/Thread/FloatingActions';
 
 import ThreadInterface from '../types/ThreadInterface';
+import PostInterface from '../types/PostInterface';
 
 import { threadBreadcrumbs } from '../types/BreadcrumbInterface';
 import { pageNumber } from '../helpers/PageHelpers';
 
 import PostWrapper from '../partials/Post/PostWrapper';
 import NewPostModal from '../partials/NewPostModal';
+import ModerationModal from '../partials/Thread/ModerationModal';
 
 import newcoreApi from '../bridge/newcoreApi';
 
@@ -29,6 +31,7 @@ type IProps = RouteComponentProps<IParams> & PageProps;
 interface IState {
   thread?: ThreadInterface;
   editorOpen: boolean;
+  moderationOpen: boolean;
   currentPage: number;
   error: PageError;
 
@@ -43,6 +46,7 @@ export default class ThreadPage extends Component<IProps, IState> {
     this.state = {
       thread: undefined,
       editorOpen: false,
+      moderationOpen: false,
       currentPage: pageNumber(queryParams.page),
       error: null,
 
@@ -82,6 +86,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         {this.state.thread &&
           <div>
             {this.getNewPostModal()}
+            {this.getModerationModal()}
             {this.getFloatingActions()}
             {this.getHeader()}
             {this.getPagination()}
@@ -115,11 +120,26 @@ export default class ThreadPage extends Component<IProps, IState> {
     )
   }
 
+  getModerationModal() {
+    if (!this.state.thread.canModerate) {
+      return null;
+    }
+
+    return (
+      <ModerationModal 
+        show={this.state.moderationOpen}
+        thread={this.state.thread}
+        closeModal={this.closeModerationModal}
+        selectedPosts={this.getSelectedPostsAsObjects()}
+      />
+    )
+  }
+
   getFloatingActions() {
-    //TODO make selectePostsCount and deselectedPosts work currently placeholder
     return (
       <FloatingActions
         canModerate={this.state.thread.canModerate}
+        openModerationModal={this.openModerationModal}
         canReply={this.state.thread.canReply}
         openNewPostModal={this.openNewPostModal}
         selectedPostsCount={this.state.selectedPosts.size}
@@ -165,6 +185,8 @@ export default class ThreadPage extends Component<IProps, IState> {
           && thread.contentMeta.thumbnail.small
         }
         openEditor={this.openNewPostModal}
+        openModeration={this.openModerationModal}
+        selectPostsByFilter={this.selectPostsByFilter}
       />
     );
   }
@@ -196,7 +218,7 @@ export default class ThreadPage extends Component<IProps, IState> {
   getQuickReply() {
     if (this.state.thread && this.state.thread.canReply) {
       return (
-        <QuickReply />
+        <QuickReply openNewPostModal={this.openNewPostModal} />
       )
     }
   }
@@ -209,10 +231,19 @@ export default class ThreadPage extends Component<IProps, IState> {
     this.setState({ editorOpen: false });
   }
 
+  openModerationModal = () => {
+    this.setState({ moderationOpen: true });
+  }
+
+  closeModerationModal = () => {
+    this.setState({ moderationOpen: false });
+  }
+
   /**
    * @name getNewPostQuotes
    * @description Generates the string of [quote] tags that are inserted into the new post editor when you have posts selected.
    */
+  // TODO seems to miss quotes after the first one sometimes
   getNewPostQuotes() {
     const { selectedPosts } = this.state;
     const { posts } = this.state.thread;
@@ -251,18 +282,42 @@ export default class ThreadPage extends Component<IProps, IState> {
     this.setState({ selectedPosts });
   }
 
-  deselectAllPosts = () => {
-    let { selectedPosts } = this.state;
-    selectedPosts = new Set([...selectedPosts]);
-
-    for (let i of selectedPosts) {
-      selectedPosts.delete(i);
+  selectPostsByFilter = (callback: (post: PostInterface, selected?: boolean) => boolean) => {
+    const { thread } = this.state;
+    if (!thread) {
+      return;
     }
 
+    const { posts } = thread;
+    const filtered = [];
+
+    for (let post of posts) {
+      const selected = this.checkPostSelected(post.id);
+      if (callback(post, selected)) {
+        filtered.push(post.id);
+      }
+    }
+
+    const selectedPosts = new Set(filtered);
     this.setState({ selectedPosts });
+  }
+
+  deselectAllPosts = () => {
+    this.setState({ selectedPosts: new Set() });
   }
 
   checkPostSelected = (postid: number) => {
     return [...this.state.selectedPosts].includes(postid);
+  }
+
+  getSelectedPostsAsObjects(): PostInterface[] {
+    const { thread } = this.state;
+    if (!thread) {
+      return [];
+    }
+
+    return [...this.state.selectedPosts].map(postid => (
+      thread.posts.find(post => post.id === postid)
+    ));
   }
 }

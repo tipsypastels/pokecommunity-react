@@ -3,15 +3,13 @@ import { Badge } from 'react-bootstrap';
 
 import PostMiniBiography from './PostMiniBiography';
 import Stat from '../Stat';
+import UserModal from '../User/UserModal';
 
 import PostUserInterface from '../../types/PostUserInterface';
 
-import vBRoute from '../../bridge/vBRoute';
+import SmartLink from '../SmartLink';
 
 import { yearsSince, userIsNew } from '../../helpers/DateHelpers';
-
-import '../../../styles/modules/Post/PostHeader.scss';
-import UserModal from '../User/UserModal';
 
 interface IProps {
   user: PostUserInterface;
@@ -63,14 +61,14 @@ export default class PostHeader extends Component<IProps, IState> {
 
     return (
       <div className="avatar-container">
-        <a onClick={this.openUserModal} href={vBRoute('profile', user.id)}>
+        <SmartLink to={`/member.php?u=${user.id}`} onClick={this.openUserModal}>
           <img
             src={user.avatar}
             alt={`${user.username}'s Avatar`}
             className="avatar"
             style={user.textFields.flair.avatar}
           />
-        </a>
+        </SmartLink>
       </div>
     );
   }
@@ -88,9 +86,9 @@ export default class PostHeader extends Component<IProps, IState> {
     return (
       <div className="username-usertitle">
         <h1 style={user.textFields.flair.username}>
-          <a onClick={this.openUserModal} href={vBRoute('profile', user.id)}>
+          <SmartLink to={`/member.php?u=${user.id}`} onClick={this.openUserModal}>
             {user.username}
-          </a>
+          </SmartLink>
         </h1>
 
         {usertitle}

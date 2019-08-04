@@ -7,13 +7,12 @@ import Icon from '../Icon';
 import Block from '../Block';
 import Stat from '../Stat';
 import ThreadPoll from './ThreadPoll';
+import ThreadHeaderSelectPosts from './ThreadHeaderSelectPosts';
 
 import PollInterface from '../../types/PollInterface';
+import PostInterface from '../../types/PostInterface';
 
 import { standardDateTime } from '../../helpers/DateHelpers';
-
-import '../../../styles/modules/ThreadHeader.scss';
-import Action from '../Action';
 
 interface IProps {
   title: string;
@@ -30,6 +29,8 @@ interface IProps {
   threadIcon?: string;
 
   openEditor: () => void;
+  openModeration: () => void;
+  selectPostsByFilter: (callback: (post: PostInterface, selected?: boolean) => boolean) => void;
 }
 
 export default class ThreadHeader extends Component<IProps> {
@@ -99,23 +100,21 @@ export default class ThreadHeader extends Component<IProps> {
 
             <div className="flex-grows" />
 
-            <Dropdown alignRight>
-              <Dropdown.Toggle variant="link" id="thread-tools">
-                <Action
-                  name="Moderation"
-                  icon="wrench"
-                />
-              </Dropdown.Toggle>
+            <When condition={this.props.canModerate}>
+              <div className="d-none d-md-flex">
+                <Button variant="link" onClick={this.props.openModeration}>
+                  <Icon name="shield" />
+                  Moderate
+                </Button>
 
-              <Dropdown.Menu>
-                <Dropdown.Item href="#">
-                  hello world
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
+                <ThreadHeaderSelectPosts 
+                  selectPostsByFilter={this.props.selectPostsByFilter}
+                />
+              </div>
+            </When>
           </div>
         </Block.Footer>
       </Block>
-    )
+    );
   }
 }

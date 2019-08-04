@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import '../../styles/modules/Pagination.scss';
-
 interface IProps {
   currentPage: number;
   totalPages: number;

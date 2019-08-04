@@ -51,7 +51,6 @@ export default class IndexPage extends Component<IProps, IState>
     ));
   }
 
-
   fakeCategories() {
     return [
       {

@@ -8,7 +8,7 @@
   &.selected,
   &:hover {
     background-color: white;
-    color: var(--primary);
+    color: $primary-color;
   }
 
   &:not(:last-child) {

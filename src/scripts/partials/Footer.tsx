@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
+import AppContext from '../AppContext';
 
 import Icon from './Icon';
 
 import { ReactComponent as FooterLogo } from '../../images/common/logo.php.svg';
 
-import '../../styles/modules/Footer.scss';
-
 class Footer extends Component {
+  static contextType = AppContext;
+
   render() {
     return (
       <footer className="Footer">
@@ -17,11 +19,18 @@ class Footer extends Component {
           </div>
         </div>
         <div className="footer-links">
-          <div className="link-wrapper">
-            <div className="link-background link-theme">
-              <Icon name="palette" size="lg" className="link-icon" fw />
+
+          <div className="theme-select">
+            <div className="display-text">
+              Display Options
             </div>
-            Theme
+            <Button
+              className="theme-button"
+              variant="light"
+              onClick={this.context.openThemePicker}
+            >
+              Change Theme
+            </Button>
           </div>
 
           <div className="link-wrapper">
@@ -54,6 +63,7 @@ class Footer extends Component {
         </div>
 
         <div className="social-links">
+
           <a href="http://www.facebook.com/thePokeCommunity" className="social-facebook">
             <Icon name="facebook-f" group="fab" size="lg" fw className="link-icon" />
           </a>
@@ -74,6 +84,7 @@ class Footer extends Component {
             <Icon name="rss" size="lg" fw className="link-icon" />
           </a>
         </div>
+
 
         <div className="footer-legal">
           <div>

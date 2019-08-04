@@ -1,8 +1,6 @@
 import React from 'react';
 import pluralize from 'pluralize';
 
-import '../../styles/modules/Stat.scss';
-
 interface IProps {
   inline?: boolean;
   name: string;

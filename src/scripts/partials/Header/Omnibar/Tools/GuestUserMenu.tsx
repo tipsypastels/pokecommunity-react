@@ -2,11 +2,10 @@ import React, { Component, FormEvent } from 'react'
 import { Dropdown, NavItem, Nav, Button, Form } from 'react-bootstrap';
 
 import Icon from '../../../Icon';
-import vBRoute from '../../../../bridge/vBRoute';
 import AppContext from '../../../../AppContext';
 import newcoreApi from '../../../../bridge/newcoreApi';
 
-import '../../../../../styles/modules/Header/Omnibar/Tools/GuestUserMenu.scss';
+import SmartLink from '../../../SmartLink';
 
 interface IState {
   email: string;
@@ -87,7 +86,7 @@ export default class GuestUserMenu extends Component<{}, IState> {
               No account? No worries.
             </h2>
 
-            <Button href={vBRoute('register')} variant="primary">
+            <Button {...SmartLink.shim('/newaccount.php')} variant="primary">
               Create account
             </Button>
           </Dropdown.Header>
@@ -104,13 +103,11 @@ export default class GuestUserMenu extends Component<{}, IState> {
       const response = await newcoreApi({
         url: '/auth/login',
         method: 'post',
-        data: {
-          email,
-          password,
-        }
+        data: { email, password }
       });
 
-      console.log(response);
+      const user = response.data;
+      this.context.setCurrentUser(user);
     } catch(e) {
       console.error(e);
     }

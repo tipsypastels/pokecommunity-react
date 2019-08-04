@@ -1,7 +1,6 @@
 //TODO switch out colors
 $internal-links:
 (
-  link-theme: #fc87b4,
   link-staff: rgb(0, 233, 132),
   link-rules: rgb(255, 144, 0),
   link-about: rgb(252, 53, 0),
@@ -38,11 +37,28 @@ $social-links:
     }
   }
 
+  .theme-select {
+    text-align: left;
+
+    .theme-button {
+      text-align: left;
+      margin-top: 8px;
+      width: 200px;
+    }
+
+    .display-text {
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: rgb(159, 220, 248);
+    }
+  }
+
   .footer-links {
     text-align: center;
     display: flex;
     justify-content: space-around;
-    margin: 20px 100px;
+    margin: 20px 50px;
 
     .link-wrapper {
       font-size: 0.8rem;
