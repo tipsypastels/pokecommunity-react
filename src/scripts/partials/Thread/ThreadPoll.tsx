@@ -15,6 +15,7 @@ const pollStatusName = (isPublic: number) => (
   ['Open', 'Secret'][isPublic]
 )
 
+// TODO keys may not be unique
 class ThreadPoll extends Component<IProps> {
   render() {
     return (

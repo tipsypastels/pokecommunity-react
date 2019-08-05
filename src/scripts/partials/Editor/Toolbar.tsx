@@ -6,12 +6,7 @@ import StaffPostOptions from './StaffPostOptions';
 import { ContextMenuOptions } from './ContextMenu';
 import TextareaTransformer from '../../helpers/Editor/TextareaTransformer';
 
-// TODO move this somewhere else
-const AVAILABLE_FONTS = [
-  'Noto Sans',
-];
-
-const AVAILABLE_SIZES = '1 2 3 4 5 6 7'.split(' ');
+import { editorFontSizes, editorFontOptions } from '../../../configs/config.json';
 
 interface IProps {
   transformer: TextareaTransformer;
@@ -32,7 +27,7 @@ export default class Toolbar extends Component<IProps> {
               Font             
             </Dropdown.Toggle>
 
-            <Dropdown.Menu>
+            <Dropdown.Menu className="font-dropdown-menu">
               {this.getFonts()}
             </Dropdown.Menu>
           </Dropdown>
@@ -110,11 +105,11 @@ export default class Toolbar extends Component<IProps> {
   }
 
   getFonts(): ReactNode {
-    return this.mapOptionsToDropdown('font', AVAILABLE_FONTS);
+    return this.mapOptionsToDropdown('font', editorFontOptions);
   }
 
   getSizes(): ReactNode {
-    return this.mapOptionsToDropdown('size', AVAILABLE_SIZES);
+    return this.mapOptionsToDropdown('size', editorFontSizes.split(' '));
   }
 
   mapOptionsToDropdown = (tag: string, options: string[]): ReactNode => (

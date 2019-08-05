@@ -4,7 +4,6 @@ import ForumInterface from '../../types/ForumInterface';
 import { relativeDateOf } from '../../helpers/DateHelpers';
 import SmartLink from '../SmartLink';
 
-
 export default class Forum extends Component<ForumInterface>{
   // TODO probably change the default icon
   defaultIcon = "https://www.pokecommunity.com/uploads/imageshare/31_1564205383355311634.png";

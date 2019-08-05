@@ -68,9 +68,6 @@ export default class PostModal extends Component<IProps, IState> {
   }
 
   componentDidUpdate(oldProps: IProps) {
-    console.log(oldProps);
-    console.log(this.props);
-    console.log('-------------');
     if (oldProps.cacheKey !== this.props.cacheKey || oldProps.quotedContent !== this.props.quotedContent) {
       this.setContent(this.getInitialContent());
     }
@@ -165,7 +162,6 @@ export default class PostModal extends Component<IProps, IState> {
 
   getInitialContent(skipDrafts = false): string {
     const { cacheKey: key, post, quotedContent } = this.props;
-    console.log(quotedContent);
     
     let defaultContent;
     if (post) {

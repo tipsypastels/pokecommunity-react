@@ -33,9 +33,7 @@ interface IState {
   editorOpen: boolean;
   editedPost?: PostInterface;
   moderationOpen: boolean;
-  currentPage: number;
   error: PageError;
-
   selectedPosts: Set<number>;
 }
 
@@ -51,7 +49,7 @@ export default class ThreadPage extends Component<IProps, IState> {
 
   // react doesn't actually re-render the component when the :id param changes. it only triggers a props update. so, if the user jumps straight from one thread to another, this method gets called instead
   async componentDidUpdate(prevProps: IProps) {
-    if (prevProps.match.params.id !== this.props.match.params.id) {
+    if (prevProps.match.params.id !== this.props.match.params.id || prevProps.location.search !== this.props.location.search) {
       this.setState(this.stateForNewlyLoadedThread(), async () => {
         await this.queryForThread();
       });
@@ -59,14 +57,11 @@ export default class ThreadPage extends Component<IProps, IState> {
   }
 
   stateForNewlyLoadedThread(): IState {
-    let queryParams = queryString.parse(this.props.location.search);
-
     return {
       thread: undefined,
       error: null,
       editorOpen: false,
       moderationOpen: false,
-      currentPage: pageNumber(queryParams.page),
       selectedPosts: new Set(),
     };
   }
@@ -170,7 +165,8 @@ export default class ThreadPage extends Component<IProps, IState> {
   getPagination() {
     return (
       <Pagination
-        currentPage={this.state.currentPage}
+        threadid={this.state.thread.id}
+        currentPage={this.getCurrentPage()}
         totalPages={this.state.thread.totalPages}
       />
     );
@@ -354,5 +350,13 @@ export default class ThreadPage extends Component<IProps, IState> {
     return [...this.state.selectedPosts].map(postid => (
       thread.posts.find(post => post.id === postid)
     ));
+  }
+
+  getCurrentPage() {
+    return pageNumber(this.getQueryParams().page);
+  }
+
+  getQueryParams() {
+    return queryString.parse(this.props.location.search);
   }
 }

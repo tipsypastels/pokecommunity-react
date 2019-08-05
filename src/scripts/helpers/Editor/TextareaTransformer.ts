@@ -43,6 +43,7 @@ export default class TextareaTransformer {
     if (this.textarea) {
       return currentWord(this.value, this.selectionStart, this.selectionEnd);
     }
+    return null;
   }
 
   getCurrentWordBounds() {
