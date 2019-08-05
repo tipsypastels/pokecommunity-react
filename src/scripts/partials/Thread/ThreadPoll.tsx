@@ -15,7 +15,6 @@ const pollStatusName = (isPublic: number) => (
   ['Open', 'Secret'][isPublic]
 )
 
-// TODO keys may not be unique
 class ThreadPoll extends Component<IProps> {
   render() {
     return (
@@ -40,15 +39,13 @@ class ThreadPoll extends Component<IProps> {
     }, 0);
   }
 
-
-
   getItems() {
-    return this.props.poll.options.map(option => {
+    return this.props.poll.options.map((option, i) => {
       let phrase = `${option.votes.length} ${pluralize('votes', option.votes.length)}`;
       let percentage = (option.votes.length / this.getTotalVotes()) * 100;
 
       return (
-        <li key={option.title}>
+        <li key={option.title + i}>
           <div className="poll-progress" style={{
             backgroundSize: `${percentage}%`,
           }}>

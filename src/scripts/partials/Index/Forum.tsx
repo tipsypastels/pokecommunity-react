@@ -4,10 +4,9 @@ import ForumInterface from '../../types/ForumInterface';
 import { relativeDateOf } from '../../helpers/DateHelpers';
 import SmartLink from '../SmartLink';
 
-export default class Forum extends Component<ForumInterface>{
-  // TODO probably change the default icon
-  defaultIcon = "https://www.pokecommunity.com/uploads/imageshare/31_1564205383355311634.png";
+export const DEFAULT_FORUM_ICON = 'https://www.pokecommunity.com/uploads/imageshare/31_1564205383355311634.png';
 
+export default class Forum extends Component<ForumInterface>{
   render() {
     const {
       id,
@@ -24,7 +23,7 @@ export default class Forum extends Component<ForumInterface>{
     return (
       <div className="Forum">
         <SmartLink to={forumLink} className="forum-icon">
-          <img src={icon || this.defaultIcon} alt={title} />
+          <img src={icon || DEFAULT_FORUM_ICON} alt={title} />
         </SmartLink>
         <div className="info">
           <header>
@@ -60,7 +59,7 @@ export default class Forum extends Component<ForumInterface>{
             className="subforum"
           >
             <img 
-              src={forum.icon || this.defaultIcon} 
+              src={forum.icon || DEFAULT_FORUM_ICON} 
               alt={forum.title} 
             />
           </SmartLink>

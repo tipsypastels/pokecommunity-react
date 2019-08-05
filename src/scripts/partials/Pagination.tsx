@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Pagination as BSPagination, Button } from 'react-bootstrap';
-import { When } from 'react-if';
+import { Pagination as BSPagination } from 'react-bootstrap';
 import SmartLink from './SmartLink';
 import Icon from './Icon';
 
@@ -57,7 +56,7 @@ interface PaginationItem {
 
 export default class Pagination extends Component<IProps> {
   render() {
-    const { threadid, currentPage, totalPages } = this.props;
+    const { currentPage, totalPages } = this.props;
     if (currentPage <= 1 && totalPages <= 1) {
       return null;
     }
