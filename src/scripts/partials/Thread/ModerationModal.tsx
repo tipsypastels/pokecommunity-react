@@ -52,7 +52,26 @@ export default class ModerationModal extends Component<IProps> {
                 do: 'editthread',
               })}
 
-              {/* TODO change thread state once newcore outputs that */}
+              {this.threadTool({
+                name: 'Publish Thread',
+                icon: 'megaphone',
+                do: 'publishthread',
+                if: thread.visible !== PostVisibility.Published,
+              })}
+
+              {this.threadTool({
+                name: 'Reject Thread',
+                icon: 'angry',
+                do: 'rejectthread',
+                if: thread.visible === PostVisibility.Moderated,
+              })}
+
+              {this.threadTool({
+                name: 'Unpublish Thread',
+                icon: 'eye-slash',
+                do: 'moderatethread',
+                if: thread.visible === PostVisibility.Published,
+              })}
 
               <If condition={!!thread.open}>
                 <Then>
