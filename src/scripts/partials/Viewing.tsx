@@ -14,11 +14,10 @@ interface IProps {
 
 class Viewing extends Component<IProps> {
   render() {
-    // TODO plurarize
     const { users, guests, viewing } = this.props;
     return (
       <Block className="Viewing">
-        <Block.Header>
+        <Block.Header className="flex flex-v-center">
           <h4>
             {users.length} {pluralize('people', users.length)} viewing this {viewing}
           </h4>

@@ -52,13 +52,6 @@ interface InitialContentOptions {
 export default class PostModal extends Component<IProps, IState> {
   static contextType = AppContext;
 
-  // static getDerivedStateFromProps(props: IProps, state: IState) {
-  //   if (props.quotedContent && !state.content) {
-  //     return { content: props.quotedContent };
-  //   }
-  //   return null;
-  // }
-
   constructor(props) {
     super(props);
     this.state = {
@@ -75,7 +68,10 @@ export default class PostModal extends Component<IProps, IState> {
   }
 
   componentDidUpdate(oldProps: IProps) {
-    if (oldProps.cacheKey !== this.props.cacheKey) {
+    console.log(oldProps);
+    console.log(this.props);
+    console.log('-------------');
+    if (oldProps.cacheKey !== this.props.cacheKey || oldProps.quotedContent !== this.props.quotedContent) {
       this.setContent(this.getInitialContent());
     }
   }
@@ -168,12 +164,14 @@ export default class PostModal extends Component<IProps, IState> {
   }
 
   getInitialContent(skipDrafts = false): string {
-    const { cacheKey: key, post } = this.props;
-
+    const { cacheKey: key, post, quotedContent } = this.props;
+    console.log(quotedContent);
     
     let defaultContent;
     if (post) {
       defaultContent = post.content;
+    } else if (quotedContent && !post) {
+      defaultContent = quotedContent;
     } else {
       defaultContent = '';
     }
@@ -239,8 +237,15 @@ export default class PostModal extends Component<IProps, IState> {
   cacheEdits = (content: string) => {
     const { cacheKey } = this.props;
 
-    CONTENT_CACHE[cacheKey] = content;
-    localStorage.setItem(lsKey(cacheKey), content);
+    // never cache just quotes, since that would take precendence over the user closing and opening the menu to change which posts are selected
+    if (content && content !== this.props.quotedContent) {
+      CONTENT_CACHE[cacheKey] = content;
+      localStorage.setItem(lsKey(cacheKey), content);
+    } else {
+      delete CONTENT_CACHE[cacheKey];
+      localStorage.removeItem(lsKey(cacheKey));
+    }
+
   }
 
   setDraftIndicator = (loadedDraftIndicator: boolean) => {

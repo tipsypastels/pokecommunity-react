@@ -267,7 +267,6 @@ export default class ThreadPage extends Component<IProps, IState> {
    * @name getNewPostQuotes
    * @description Generates the string of [quote] tags that are inserted into the new post editor when you have posts selected.
    */
-  // TODO seems to miss quotes after the first one sometimes
   getNewPostQuotes() {
     const { selectedPosts } = this.state;
     const { posts } = this.state.thread;
@@ -292,11 +291,11 @@ export default class ThreadPage extends Component<IProps, IState> {
   getEditorCacheKey = (): string => {
     const { thread, editedPost: post } = this.state;
 
-    return `${thread.forum.id}_${post
+    return `${thread.forum.id}_${thread.id}_${post
       ? `edit_${post.id}`
-      : 'new'
+      : 'reply'
     }`;
-  } 
+  }
 
   selectPost = (postid: number) => {
     let { selectedPosts } = this.state;
