@@ -198,6 +198,12 @@ $community-nav-item-color: #fff;
           transition-property: max-width;
           transition-duration: 0.5s;
           transition-timing-function: ease;
+          line-height: 2rem;
+          
+          .icon {
+            margin-right: 4px;
+          }
+
           .breadcrumb-node-home, .breadcrumb-node-label, .breadcrumb-node-label-back {
             margin-left: 0.2em;
           }
@@ -248,14 +254,16 @@ $community-nav-item-color: #fff;
           background-color: darken($omnibar-breadcrumb-background-color, 9%);
         }
         &:nth-last-of-type(1) a {
-          display: flex;
+          display: block;
           background-color: $omnibar-breadcrumb-background-color;
           letter-spacing: -0.07rem;
           max-width: 7rem;
+
           @media (min-width: 768px) {
             letter-spacing: 0;
             max-width: 10rem;
           }	
+          
           @media (min-width: 1200px) {
             max-width: 13rem;
           }	
@@ -266,7 +274,7 @@ $community-nav-item-color: #fff;
               display: none;
             }
             &:last-of-type .nav-link {
-              display: flex;
+              display: block;
             }
           }
         }

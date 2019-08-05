@@ -353,7 +353,14 @@ export default class ThreadPage extends Component<IProps, IState> {
   }
 
   getCurrentPage() {
-    return pageNumber(this.getQueryParams().page);
+    const { thread } = this.state;
+    const searchPage = pageNumber(this.getQueryParams().page);
+
+    if (!thread) {
+      return searchPage;
+    }
+
+    return Math.min(searchPage, thread.totalPages);
   }
 
   getQueryParams() {
