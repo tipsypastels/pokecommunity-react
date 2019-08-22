@@ -1,17 +1,14 @@
 import React from 'react';
-import BBCode from 'pokecommunity-bbcode';
+import Parser from '../../parser/Parser';
 
 interface IProps {
   signature: string;
 }
 
 const Signature = ({ signature }: IProps) => (
-  <div 
-    className="Signature"
-    dangerouslySetInnerHTML={{ 
-      __html: BBCode.process({ text: signature }).html
-    }}
-  />
+  <div className="Signature">
+    <Parser bbcode={signature} />
+  </div>
 )
 
 export default Signature;

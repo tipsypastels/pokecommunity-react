@@ -1,7 +1,7 @@
 import React from 'react';
-import BBCode from 'pokecommunity-bbcode';
 
 import { standardDateTime } from '../../helpers/DateHelpers';
+import Parser from '../../parser/Parser';
 
 interface IProps {
   created: number;
@@ -15,10 +15,9 @@ const PostContent = ({ index, created, content }: IProps) => (
       {standardDateTime(created)}, Post #{index + 1}
     </div>
 
-    <main 
-      className="post-message"
-      dangerouslySetInnerHTML={{ __html: BBCode.process({ text: content }).html}}
-    />
+    <main className="post-message">
+      <Parser bbcode={content} />
+    </main>
   </div>
 );
 

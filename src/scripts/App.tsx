@@ -7,6 +7,7 @@ import AppContext from './AppContext';
 
 import IndexPage from './pages/IndexPage';
 import ThreadPage from './pages/ThreadPage';
+import BBCodePage from './pages/docs/BBCodePage';
 
 import ThemePickerModal from './partials/ThemePickerModal';
 
@@ -24,8 +25,12 @@ interface IState {
 }
 
 export const POKECOMM3_ROUTES = {
+  // FORUMS
   '/':            IndexPage,
   '/threads/:id': ThreadPage,
+  
+  // DOCS
+  '/docs/bbcode': BBCodePage,
 };
 
 class App extends Component<{}, IState> {

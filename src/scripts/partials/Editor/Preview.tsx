@@ -1,26 +1,15 @@
 import React, { Component } from 'react'
-import BBCode from 'pokecommunity-bbcode';
+import Parser from '../../parser/Parser';
 
 interface IProps {
   content: string;
 }
 
 export default class Preview extends Component<IProps> {
+  // TODO we'll want postbits etc in here like vb previews
   render() {
-    return null; // new parser needed!
-
-    // const __html = BBCode.process({ text: this.props.content }).html;
-
-    // return (
-    //   <div className="Preview">
-    //     <strong className="preview-title">
-    //       Preview
-    //     </strong>
-
-    //     <div
-    //       dangerouslySetInnerHTML={{ __html }}
-    //     />
-    //   </div>
-    // )
+    return (
+      <Parser bbcode={this.props.content} />
+    );
   }
 }
