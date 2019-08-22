@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-escape */
+
 import { TAGS, TagDefinition, Tag, TagList } from "./tags";
 
 export type Taglike = string | Tag;

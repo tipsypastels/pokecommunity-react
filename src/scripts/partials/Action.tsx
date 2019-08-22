@@ -4,8 +4,12 @@ import { Button } from 'react-bootstrap';
 import Icon, { IconProps } from './Icon';
 
 import SmartLink from './SmartLink';
+import ClickHandler from './ClickHandler';
+import { nodeOrParentMatching } from '../helpers/DOMHelpers';
 
 interface IProps {
+  internalName?: string;
+
   name?: string;
   activeName?: string;
   icon?: string | IconProps;
@@ -15,24 +19,42 @@ interface IProps {
   activate?: () => void;
   deactivate?: () => void;
   href?: string;
+
+  contextActive?: boolean;
+  openContext?: () => void;
+  closeContext?: () => void;
+}
+
+function callFirstThatIsFunction(...funcs) {
+  for (let func of funcs) {
+    if (typeof func === 'function') {
+      func();
+      return;
+    }
+  }
 }
 
 export default class Action extends Component<IProps> {
   render() {
     return (
-      <Button
-        {...SmartLink.shim(this.props.href)}
-        className={
-          `Action 
-          ${this.props.active && 'active-action'} 
-          ${this.props.className}`
-        }
-        variant="link" 
-        onClick={this.onClick}
+      <ClickHandler 
+        onClick={this.onClickCb('short')} 
+        onHoldClick={this.onClickCb('long')}
       >
-        {this.getIcon()}
-        {this.getName()}
-      </Button>
+        <Button
+          {...SmartLink.shim(this.props.href)}
+          className={
+            `Action
+            action-${this.props.internalName} 
+            ${this.props.active && 'active-action'} 
+            ${this.props.className}`
+          }
+          variant="link" 
+        >
+          {this.getIcon()}
+          {this.getName()}
+        </Button>
+      </ClickHandler>
     )
   }
 
@@ -59,12 +81,67 @@ export default class Action extends Component<IProps> {
     }
   }
 
-  onClick = () => {
-    const { active, activate, deactivate } = this.props;
-    const handler = active ? deactivate : activate;
+  onClickCb = (click: 'short' | 'long') => {
+    const { 
+      active, 
+      activate, 
+      deactivate, 
+      contextActive, 
+    } = this.props;    
+    
+    return () => {
+      if (click === 'short') {
+        if (active) {
+          callFirstThatIsFunction(deactivate, this.closeContextAndRemoveBind());
+        } else {
+          callFirstThatIsFunction(activate, this.openContextAndBindToCloseCb());
+        }
+      } else {
+        const regularFallback = active ? deactivate : activate;
+        if (contextActive) {
+          callFirstThatIsFunction(this.closeContextAndRemoveBind(), regularFallback);
+        } else {
+          callFirstThatIsFunction(this.openContextAndBindToCloseCb(), regularFallback);
+        }
+      }
+    }
+  }
 
-    if (typeof handler === 'function') {
-      handler();
+  openContextAndBindToCloseCb() {
+    const { openContext } = this.props;
+    if (!openContext) {
+      return;
+    }
+
+    return () => {
+      openContext();
+      document.addEventListener('click', this.clickedOutsideContext)
+    }
+  }
+
+  closeContextAndRemoveBind() {
+    const { closeContext } = this.props;
+    if (!closeContext) {
+      return;
+    }
+
+    return () => {
+      closeContext();
+      document.removeEventListener('click', this.clickedOutsideContext);
+    }
+  }
+
+  clickedOutsideContext = ({ target }) => {
+    const { internalName, closeContext } = this.props;
+
+    if (!this.props.contextActive || nodeOrParentMatching(target, 
+      ({ classList }) => classList.contains(`action-${internalName}`) 
+    )) {
+      return;
+    }
+
+    if (typeof closeContext === 'function') {
+      closeContext();
     }
   }
 }

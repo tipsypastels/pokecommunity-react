@@ -31,6 +31,7 @@ export type PostActionModal = null | 'share';
 
 interface IState {
   overflowActive: boolean;
+  reactionsOpen: boolean;
   actionModalOpen: PostActionModal;
 }
 
@@ -41,6 +42,7 @@ class Post extends Component<PostProps, IState> {
     super(props);
     this.state = {
       overflowActive: false,
+      reactionsOpen: false,
       actionModalOpen: null,
     };
   }
@@ -103,6 +105,8 @@ class Post extends Component<PostProps, IState> {
             deselectPost={deselectPost}
             checkPostSelected={checkPostSelected}
             openEditorToCurrentPost={() => openEditor(this.props)}
+            reactionsOpen={this.state.reactionsOpen}
+            setReactionsOpen={this.setReactionsOpen}
           />
         </Block.Content>
 
@@ -184,6 +188,10 @@ class Post extends Component<PostProps, IState> {
 
   setActionModalOpen = (actionModalOpen: PostActionModal) => {
     this.setState({ actionModalOpen });
+  }
+
+  setReactionsOpen = (reactionsOpen: boolean) => {
+    this.setState({ reactionsOpen });
   }
 }
 

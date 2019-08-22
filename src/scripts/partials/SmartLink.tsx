@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
 import React, { Component, AnchorHTMLAttributes } from 'react';
 import { Link } from 'react-router-dom';
 import { pokecomm3RouteExists } from '../bridge/routeUtils';

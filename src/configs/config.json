@@ -64,5 +64,14 @@
     "Uncial Antiqua",
     "Voltaire",
     "Yanone Kaffeesatz"
+  ],
+  
+  "reactionOptions": [
+    "like", 
+    "love", 
+    "laugh", 
+    "surprise", 
+    "sad", 
+    "angry"
   ]
 }
