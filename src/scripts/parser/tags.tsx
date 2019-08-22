@@ -32,7 +32,7 @@ export const TAGS: TagList = {
   b: {
     name: 'Bold',
     allowsYouTo: 'format text as bold',
-    usage: '[b]value[/b]',
+    usage: '[b]content[/b]',
     example: '[b]bold text[/b]',
 
     render({ value, children }) {
@@ -58,7 +58,7 @@ export const TAGS: TagList = {
   i: {
     name: 'Italic',
     allowsYouTo: 'format text as italic',
-    usage: '[i]value[/i]',
+    usage: '[i]content[/i]',
     example: '[i]italicized text[/i]',
 
     render({ value, children }) {
@@ -69,7 +69,7 @@ export const TAGS: TagList = {
   u: {
     name: 'Underline',
     allowsYouTo: 'format text as underlined',
-    usage: '[u]value[/u]',
+    usage: '[u]content[/u]',
     example: '[u]underlined text[/u]',
 
     render({ value, children }) {
