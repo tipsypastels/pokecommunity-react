@@ -7813,6 +7813,11 @@ react-is@^16.3.2, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
 
+react-lib-adler32@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-lib-adler32/-/react-lib-adler32-1.0.3.tgz#63df1aed274eabcc1c5067077ea281ec30888ba7"
+  integrity sha512-AqFqdt4cP0RPffHNjVHZ7tyIgnoSzNxgFhG8XKMXCtA1dZ72gTPO4iYFwWDKHqvE8sHS14rhltQTdbXU5G4BFA==
+
 react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
@@ -8944,6 +8949,13 @@ strip-indent@^1.0.1:
 strip-json-comments@^2.0.1, strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
+
+style-it@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/style-it/-/style-it-2.1.4.tgz#bae8e73c69a9586a138a31fd3104182171b7149c"
+  integrity sha512-9eoEdUGD68XjvW/+BWo5Ir7d5+cXChcQMAuYHmgrHImz/jIfabxNj4pc+6DxVhxHnW92+ZzMVVUuxs4iTOXjsQ==
+  dependencies:
+    react-lib-adler32 "^1.0.3"
 
 style-loader@0.23.1:
   version "0.23.1"
