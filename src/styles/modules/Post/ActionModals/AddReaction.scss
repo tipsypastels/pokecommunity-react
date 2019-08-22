@@ -1,0 +1,35 @@
+$reaction-size: 48px;
+$reaction-hover-size: 64px;
+
+.ReactionsPopover {
+  max-width: unset;
+    
+  .AddReaction {
+    display: flex;
+  
+    .reaction-wrapper {
+      padding: 8px;
+      padding-top: 0;
+      height: $reaction-size;
+      transition: 0.25s ease-in-out;
+      
+      .reaction {
+        width: $reaction-size;
+        height: $reaction-size;
+    
+        cursor: pointer;
+        transition: 0.25s ease-in-out;    
+      }
+
+      &:hover {
+        padding: 0;
+
+        .reaction {
+          width: $reaction-hover-size;
+          height: $reaction-hover-size;
+        }
+      }
+      
+    }
+  }
+}

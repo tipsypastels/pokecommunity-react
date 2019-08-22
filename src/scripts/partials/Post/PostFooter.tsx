@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { ButtonToolbar } from 'react-bootstrap';
+import { ButtonToolbar, Overlay, Popover } from 'react-bootstrap';
 import { When } from 'react-if';
 
 import Action from '../Action';
 import { PostActionModal } from '../Post';
 
 import AppContext from '../../AppContext';
+import AddReaction from './ActionModals/AddReaction';
+import { reactionOptions } from '../../../configs/config.json';
 
 interface IProps {
   id: number;
@@ -16,21 +18,25 @@ interface IProps {
   canReactToPosts: boolean;
   
   overflowActive: boolean;
-  setOverflow: (boolean) => void;
+  setOverflow: (overflow: boolean) => void;
 
   actionModalOpen: PostActionModal;
-  setActionModalOpen: (PostActionModal) => void;
+  setActionModalOpen: (open: PostActionModal) => void;
 
   selectPost: (postid: number) => void;
   deselectPost: (postid: number) => void;
   checkPostSelected: (postid: number) => boolean;
 
   openEditorToCurrentPost: () => void;
+
+  reactionsOpen: boolean;
+  setReactionsOpen: (open: boolean) => void;
 }
 
 class PostFooter extends Component<IProps> {
   static contextType = AppContext;
-
+  private ref: React.RefObject<HTMLDivElement> = React.createRef< HTMLDivElement>();
+  
   render() {
     const { 
       id,
@@ -43,20 +49,43 @@ class PostFooter extends Component<IProps> {
       selectPost,
       deselectPost,
       checkPostSelected,
-      openEditorToCurrentPost
+      openEditorToCurrentPost,
+      reactionsOpen,
+      setReactionsOpen,
     } = this.props;
 
     return (
-      <div className="PostFooter flex">
+      <div className="PostFooter flex" ref={this.ref}>
         <ButtonToolbar className="post-left-actions flex-grows">
           <When condition={canReactToPosts}>
             <Action
+              internalName="like"
               name="Like"
               icon={{ name: 'thumbs-up', group: 'fal' }}
               active={false /* TODO */}
               activate={() => {}}
               deactivate={() => {}}
+              // TODO this doesn't account for if they've already reacted
+              contextActive={reactionsOpen}
+              openContext={() => setReactionsOpen(true)}
+              closeContext={() => setReactionsOpen(false)}
             />
+
+            <Overlay
+              show={reactionsOpen} 
+              onHide={() => setReactionsOpen(false)} 
+              placement="bottom-start" 
+              container={this.ref.current}
+              target={this.ref.current}
+            >
+              <Popover 
+                id="reactions-popover" 
+                className="ReactionsPopover"
+                data-reactions-count={reactionOptions.length}
+              >
+                <AddReaction />
+              </Popover>
+            </Overlay>
           </When>
           <When condition={canSharePosts}>
             <Action

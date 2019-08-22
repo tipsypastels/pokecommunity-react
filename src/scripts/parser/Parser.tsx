@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 
-import React, { Component, ReactNode } from 'react';
+import React, { Component } from 'react';
 import processString from 'react-process-string';
 import { TAG_NAMES } from './tags';
 import { resolveTag } from './tagFunctions';
