@@ -21,7 +21,10 @@ export default class TabbedLayout extends Component<LayoutItemProps> {
             </Tab.Pane>
 
             <Tab.Pane eventKey="preview">
-              <Preview content={content} />
+              <Preview 
+                content={content}
+                setMentions={this.props.setMentions} 
+              />
             </Tab.Pane>
           </Tab.Content>
         </Modal.Body>

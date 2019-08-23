@@ -6,12 +6,14 @@ import Block from '../../partials/Block';
 import { Form, Jumbotron, Button } from 'react-bootstrap';
 import { TagList } from '../../parser/tags';
 import { filterTags } from '../../parser/tagFunctions';
+import BBCodePlayground from '../../partials/BBCodePlayground';
 
 type IProps = PageProps;
 
 interface IState {
   error: PageError;
   filter: string;
+  playgroundOpen: boolean;
 }
 
 export default class BBCodePage extends Component<IProps, IState> {
@@ -20,7 +22,8 @@ export default class BBCodePage extends Component<IProps, IState> {
     this.state = {
       error: null,
       filter: '',
-    }
+      playgroundOpen: false,
+    };
   }
 
   render() {
@@ -32,10 +35,20 @@ export default class BBCodePage extends Component<IProps, IState> {
         setAppBanner={this.props.setAppBanner}
         error={this.state.error}
       >
+        {this.getPlayground()}
         {this.getHeader()}
         {this.getTagList()}
       </Page>
     );
+  }
+
+  getPlayground() {
+    return (
+      <BBCodePlayground
+        show={this.state.playgroundOpen}
+        close={() => this.setState({ playgroundOpen: false })}
+      />
+    )
   }
 
   getHeader() {
@@ -43,23 +56,48 @@ export default class BBCodePage extends Component<IProps, IState> {
       <Block>
         <Block.Header className="flex flex-v-center">
           <h2 className="flex-grows">
-            PokéCommunity Post Formatting
+            <span className="d-inline d-md-none">
+              BBCode
+            </span>
+            
+            <span className="d-none d-md-inline">
+              PokéCommunity Post Formatting
+            </span>
           </h2>
 
-          <div>
-            <Form.Control 
-              placeholder="Filter Tags"
-              value={this.state.filter} 
-              onChange={e => this.setState({ filter: e.target.value })}
-            />
+          <div className="d-none d-md-block">
+            {this.getOptions()}
           </div>
         </Block.Header>
 
         <Block.Content>
           PokéCommunity allows you to format your posts using <em>BBCode</em>, a tag-based language similar to HTML, but with a simplified syntax. Below is a list of usable tags.
         </Block.Content>
+
+        <Block.Footer className="d-block d-md-none">
+          {this.getOptions()}
+        </Block.Footer>
       </Block>
     )
+  }
+
+  getOptions() {
+    return (
+      <div className="flex">
+        <Button 
+          onClick={() => this.setState({ playgroundOpen: true })}
+        >
+          Try BBCode
+        </Button>
+
+        <Form.Control
+          placeholder="Filter Tags"
+          value={this.state.filter}
+          onChange={e => this.setState({ filter: e.target.value })}
+          className="ml-1"
+        />
+      </div>
+    );
   }
 
   getTagList(): ReactNode {

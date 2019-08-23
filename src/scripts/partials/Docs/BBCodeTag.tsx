@@ -21,7 +21,7 @@ export default class BBCodeTag extends Component<IProps> {
         </Block.Header>
 
         <Block.Content>
-          The <strong>[{tag.label}]</strong> tag allows you to {tag.allowsYouTo}. {this.getAliases()}
+          {this.getDescription()} 
 
           <Table className="my-2" striped bordered>
             <tbody>
@@ -69,6 +69,19 @@ export default class BBCodeTag extends Component<IProps> {
         {this.getPC3Only()}
       </Block>
     )
+  }
+
+  getDescription() {
+    const { tag } = this.props;
+    const opening = tag.label === '@'
+      ? <>The <strong>@</strong> symbol</>
+      : <>The <strong>[{tag.label}]</strong> tag</>;
+
+    return (
+      <>
+        {opening} allows you to {tag.allowsYouTo}. {this.getAliases()}
+      </>
+    );
   }
 
   getAliases() {

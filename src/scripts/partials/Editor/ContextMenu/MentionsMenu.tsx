@@ -177,7 +177,7 @@ export default class MentionsMenu extends Component<IProps, IState> {
 
     let name = user.username;
     if (name.includes(' ')) {
-      name += `#${user.id}`;
+      name = `[${name}]`;
     }
 
     this.props.transformer.replaceCurrentWordWith(`@${name} `);

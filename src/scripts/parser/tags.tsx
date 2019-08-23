@@ -5,6 +5,7 @@ import Style from 'style-it';
 
 import { renderUsergroup } from "./tagHelpers";
 import { urlPattern, hexPattern } from './patterns';
+import SmartLink from "../partials/SmartLink";
 
 export interface TagRenderProps {
   value: string;
@@ -17,8 +18,9 @@ export interface TagDefinition {
   usage: string;
   example: string;
 
-  note?: string;
+  note?: string | ReactNode;
   pc3Only?: boolean;
+  cssClass?: string;
 
   render: (props: TagRenderProps) => ReactNode;
 }
@@ -35,6 +37,25 @@ export interface TagList {
 
 // Keep this in alphabetical order!
 export const TAGS: TagList = {
+  '@': {
+    name: 'Mention',
+    allowsYouTo: 'mention a user. The mention will link to their profile and they will be notified of the post',
+    usage: '@username',
+    example: '@Rainbow',
+
+    note: <>To mention a user with a space in their name, wrap the name in square brackets e.g.: <strong>@[A Long Username]</strong>.</>,
+    cssClass: 'mention',
+    pc3Only: true,
+
+    render({ children }) {
+      return (
+        <SmartLink to={`/member.php?username=${children}`}>
+          @{children}         
+        </SmartLink>
+      )
+    },
+  },
+
   admin: {
     name: 'Admin',
     allowsYouTo: 'format with admin style',

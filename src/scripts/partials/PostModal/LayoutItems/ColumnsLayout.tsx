@@ -20,7 +20,10 @@ export default class ColumnsLayout extends Component<LayoutItemProps> {
           </Col>
 
           <Col sm={6}>
-            <Preview content={content} />
+            <Preview
+              content={this.props.content}
+              setMentions={this.props.setMentions}
+            />
           </Col>
         </Row>
       </Modal.Body>

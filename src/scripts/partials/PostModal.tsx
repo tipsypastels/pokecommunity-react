@@ -1,29 +1,18 @@
 import React, { Component } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
-import LayoutContainer from './PostModal/LayoutContainer';
-import LayoutSwitcher from './PostModal/LayoutSwitcher';
 import SubmitButton from './PostModal/SubmitButton';
-import TabbedLayout from './PostModal/LayoutItems/TabbedLayout';
-
 import ThreadInterface from '../types/ThreadInterface';
 import PostInterface from '../types/PostInterface';
 import AppContext from '../AppContext';
 import Pronoun from './Pronoun';
+import PostModalLayout from './PostModalLayout';
 
 // each post/new tracks its content seperately
 // they're cached in here
 // this won't actually persist across reloads etc
 // but we do that too (drafts)
 const CONTENT_CACHE = {};
-
-export type EditorLayout = 'columns' | 'rows' | 'tabbed';
-
-// layout is forced to switch on mobile
-export const DEFAULT_LAYOUT: EditorLayout = 'tabbed';
-export const LAYOUT_LOCALSTORAGE_KEY = 'pokecomm3_editorlayout';
-
-export const EDITOR_LAYOUTS_AVAILABLE_AT = 'md';
 
 interface IProps {
   thread: ThreadInterface;
@@ -36,8 +25,7 @@ interface IProps {
 
 interface IState {
   content: string;
-  mentions: string[];
-  layout: EditorLayout;
+  mentions: Set<string>;
   loadedDraftIndicator: boolean;
 }
 
@@ -56,8 +44,7 @@ export default class PostModal extends Component<IProps, IState> {
     super(props);
     this.state = {
       content: '',
-      layout: this.getInitialLayout(),
-      mentions: [],
+      mentions: new Set<string>(),
       loadedDraftIndicator: false,
     }
   }
@@ -74,62 +61,24 @@ export default class PostModal extends Component<IProps, IState> {
   }
 
   render() {
-    const ifLayoutsAreAvailable = `
-      d-none d-${EDITOR_LAYOUTS_AVAILABLE_AT}-block
-    `;
-
-    const unlessLayoutsAreAvailable = `
-      d-block d-${EDITOR_LAYOUTS_AVAILABLE_AT}-none
-    `;
-
     return (
-      <Modal dialogClassName="PostModal modal-dialog-centered" show={this.props.show} onHide={this.props.close} keyboard={false}>
-        <Modal.Header className="flex flex-v-center">
-          <Modal.Title>
-            {this.getModalTitle()}
-          </Modal.Title>
-
-          {this.getDraftIndicator()}
-
-          <div className="flex-grows" />
-
-          <div className={ifLayoutsAreAvailable}>
-            <LayoutSwitcher
-              layout={this.state.layout}
-              setLayoutCallback={this.setLayoutCallback}
-            />
-          </div>
-
+      <PostModalLayout
+        className="PostModal"
+        title={this.getModalTitle()}
+        show={this.props.show}
+        close={this.props.close}
+        content={this.state.content}
+        setContent={this.setContentAndResetDraftIndicator}
+        setMentions={this.setMentions}
+        draftIndicator={this.getDraftIndicator()}
+        submitButton={
           <SubmitButton
             isEditingPost={this.isEditingPost()}
             disabled={!this.canSubmitPost()}
           />
-        </Modal.Header>
-
-        {/*
-          doing it this way is fine, but it means you're rendering two 
-          <Preview /> elements which is what does the actual bbcode parsing
-          this may be inefficient, and if you ever experience lag when using this menu you may want to add a method to *this* component to do the parsing and pass it down as a prop - so it only gets done once
-
-          alternatively you could give the parser a way to memoize strings so parsing the same thing twice is instant, maybe? look into this if possible.
-        */}
-
-        <div className={unlessLayoutsAreAvailable}>
-          <TabbedLayout
-            content={this.state.content}
-            setContent={this.setContentAndResetDraftIndicator}
-          />
-        </div>
-
-        <div className={ifLayoutsAreAvailable}>
-          <LayoutContainer
-            layout={this.state.layout}
-            content={this.state.content}
-            setContent={this.setContentAndResetDraftIndicator}
-          />
-        </div>
-      </Modal>
-    )
+        }
+      />
+    );
   }
 
   getModalTitle() {
@@ -199,13 +148,6 @@ export default class PostModal extends Component<IProps, IState> {
     return returnValue;
   }
 
-  getInitialLayout(): EditorLayout {
-    const layout = localStorage.getItem(LAYOUT_LOCALSTORAGE_KEY)
-      || DEFAULT_LAYOUT;
-
-    return layout as EditorLayout;
-  }
-
   isEditingPost(): boolean {
     return !!this.props.post;
   }
@@ -262,10 +204,7 @@ export default class PostModal extends Component<IProps, IState> {
     return gt0;
   }
 
-  setLayoutCallback = (layout: EditorLayout): (() => void) => {
-    return () => {
-      this.setState({ layout });
-      localStorage.setItem(LAYOUT_LOCALSTORAGE_KEY, layout);
-    }
+  setMentions = (mentions: Set<string>) => {
+    this.setState({ mentions });
   }
 }

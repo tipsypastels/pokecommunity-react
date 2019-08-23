@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Dropdown } from 'react-bootstrap';
 
 import Icon from '../Icon';
-import { EditorLayout } from '../PostModal';
+import { EditorLayout } from '../PostModalLayout';
 
 interface IProps {
   layout: EditorLayout,
