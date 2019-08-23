@@ -1,20 +1,20 @@
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { codeBlock } from '../../../configs/config.json'; 
+import { codeBlock } from '../../../../configs/config.json'; 
 
 
 const { languages, aliases } = codeBlock;
 
-function fetchLang(name: string) {
+function langData(name: string) {
   return require(`react-syntax-highlighter/dist/esm/languages/hljs/${name}`).default;
 }
 
 (function(s) {
   for (let lang of languages) {
-    s.registerLanguage(lang, fetchLang(lang));
+    s.registerLanguage(lang, langData(lang));
   }
 
   for (let alias of Object.keys(aliases)) {
-    s.registerLanguage(alias, fetchLang(aliases[alias]));
+    s.registerLanguage(alias, langData(aliases[alias]));
   }
 })(SyntaxHighlighter);
 

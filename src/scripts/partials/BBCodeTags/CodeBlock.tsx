@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 import SyntaxHighlighterWithSupportedLanguages from './CodeBlock/SyntaxHighlighterWithSupportedLanguages';
 import a11yDark from 'react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark';
-import { codeBlock } from '../../configs/config.json';
-import { capitalize } from '../helpers/StringHelpers';
+import { codeBlock } from '../../../configs/config.json';
+import { capitalize } from '../../helpers/StringHelpers';
 
 const { aliases } = codeBlock;
 

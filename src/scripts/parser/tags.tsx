@@ -6,7 +6,8 @@ import Style from 'style-it';
 import { renderUsergroup } from "./tagHelpers";
 import { urlPattern, hexPattern } from './patterns';
 import SmartLink from "../partials/SmartLink";
-import CodeBlock from "../partials/CodeBlock";
+import CodeBlock from "../partials/BBCodeTags/CodeBlock";
+import Spoiler from "../partials/BBCodeTags/Spoiler";
 
 export interface TagRenderProps {
   value: string;
@@ -199,6 +200,24 @@ end[/code]`,
       return <em>{children}</em>;
     },
   },
+
+  spoiler: {
+    name: 'Spoiler',
+    allowsYouTo: 'hides all text and images inside the tags so as to not spoil a story or plot of something you post',
+    usage: '[spoiler=title]content[/spoiler]',
+    example: '[spoiler="military secrets inside"]quack[/spoiler]',
+    note: 'Specifying the title is optional.',
+
+    render({ value, children }) {
+      return (
+        <Spoiler title={value}>
+          {children}
+        </Spoiler>
+      );
+    },
+  },
+
+  spoilertitle: { alias: 'spoiler' },
 
   u: {
     name: 'Underline',
