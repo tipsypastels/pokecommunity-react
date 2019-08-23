@@ -11,11 +11,7 @@ interface IState {
 
 function getInitialCollapsedState(categoryid: number) {
   let value = localStorage.getItem(`pokecomm3_category_${categoryid}_collapsed`); 
-  if (value === "true") {
-    return true;
-  } else {
-    return false;
-  }
+  return (value === "true");
 }
 
 export default class Category extends Component<CategoryInterface, IState> {
