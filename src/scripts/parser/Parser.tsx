@@ -107,7 +107,7 @@ export default class Parser extends Component<ParserProps> {
         }
       }, {
         regex: /\n/,
-        fn: () => <br />,
+        fn: (key) => <br key={key} />,
       }]
     ))(text);
   }

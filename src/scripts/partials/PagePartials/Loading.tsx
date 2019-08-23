@@ -5,11 +5,13 @@ import Icon from '../Icon';
 
 const Loading = () => (
   <Container fluid className="Loading">
-    <Icon 
-      name="circle-notch"
-      group="far"
-      className="fa-spin"
-    />
+    <div>
+      <Icon 
+        name="circle-notch"
+        group="far"
+        className="fa-spin"
+      />
+    </div>
   </Container>
 );
 

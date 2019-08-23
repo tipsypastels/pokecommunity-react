@@ -30,7 +30,7 @@ export default class BBCodePage extends Component<IProps, IState> {
     return (
       <Page
         name="Index"
-        loading={false}
+        loading={true}
         appCurrentBanner={this.props.appCurrentBanner}
         setAppBanner={this.props.setAppBanner}
         error={this.state.error}
