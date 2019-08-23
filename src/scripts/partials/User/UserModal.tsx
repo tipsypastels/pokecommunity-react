@@ -79,7 +79,7 @@ export default class UserModal extends Component<IProps> {
 
   getControls() {
     return (
-      <div className="user-controls">
+      <div className="user-controls flex">
         <Action
           name="View Profile"
           icon={{ name: 'id-card', group: 'fal' }}
