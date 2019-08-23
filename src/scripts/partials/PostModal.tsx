@@ -32,11 +32,6 @@ interface IState {
 // the key used for localstorage
 const lsKey = (key: string) => `pokecomm3_draft_${key}`;
 
-interface InitialContentOptions {
-  skipDrafts?: boolean;
-  isDraftCb?: (isDraft: boolean) => void;
-}
-
 export default class PostModal extends Component<IProps, IState> {
   static contextType = AppContext;
 
@@ -47,19 +42,20 @@ export default class PostModal extends Component<IProps, IState> {
       mentions: new Set<string>(),
       loadedDraftIndicator: false,
     }
-  }
 
+  }
+  
   // this can't be inside a state initializer, as getInitialContent can also *change* state, so we need to make sure the component is mounted. trying to set state in a constructor is a memory leak
   componentDidMount() {
     this.setContent(this.getInitialContent());
   }
-
+  
   componentDidUpdate(oldProps: IProps) {
     if (oldProps.cacheKey !== this.props.cacheKey || oldProps.quotedContent !== this.props.quotedContent) {
       this.setContent(this.getInitialContent());
     }
   }
-
+  
   render() {
     return (
       <PostModalLayout

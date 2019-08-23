@@ -7,9 +7,8 @@ import TextareaTransformer from '../../../helpers/Editor/TextareaTransformer';
 
 interface IProps {
   cursorPos: { left: number, top: number, height: number };
+  textareaHeight: number;
   transformer: TextareaTransformer;
-  // insertText: (text: string) => void;
-  // currentWord: string;
 }
 
 interface IState {
@@ -64,6 +63,7 @@ export default class MentionsMenu extends Component<IProps, IState> {
       <ContextMenu 
         className="MentionsMenu" 
         cursorPos={this.props.cursorPos}
+        textareaHeight={this.props.textareaHeight}
         width={200}
       >
         {this.getContent()}

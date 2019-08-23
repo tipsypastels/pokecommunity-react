@@ -16,7 +16,7 @@ interface IProps {
   className: string;
   title: string | ReactNode;
   content: string;
-  setContent: (content: string) => void;
+  setContent: (content: string, callback?: () => void) => void;
   setMentions: (mentions: Set<string>) => void;
 
   show: boolean;

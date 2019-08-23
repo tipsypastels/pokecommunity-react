@@ -36,6 +36,14 @@ export default function HelpMenu() {
         Help Center
       </Dropdown.Item>
 
+      <Dropdown.Item {...SmartLink.shim('/docs/bbcode')}>
+        BBCode List
+      </Dropdown.Item>
+
+      <Dropdown.Item {...SmartLink.shim('/docs/emoji')}>
+        Emoji List
+      </Dropdown.Item>
+
       <Dropdown.Divider />
 
       <Dropdown.Item {...SmartLink.shim('/servicepanel.php?do=newbuzzentry')}>

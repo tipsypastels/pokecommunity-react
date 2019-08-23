@@ -5,6 +5,7 @@ export type ContextMenuOptions = null | 'links' | 'images';
 export interface IProps {
   cursorPos: { left: number, top: number, height: number };
   children: ReactNode;
+  textareaHeight: number;
   className?: string;
   width?: number;
 }
@@ -28,9 +29,9 @@ export default class ContextMenu extends Component<IProps> {
 
   getStyle(): CSSProperties {
     const { width } = this.props;
-    const { cursorPos } = this.props;
+    const { cursorPos, textareaHeight } = this.props;
 
-    const bottom = 70 - cursorPos.top;
+    const bottom = textareaHeight - cursorPos.top - 40;
     const left = Math.max(0, cursorPos.left - (width / 2));
 
     const arrowOffset = Math.min(Math.max(25, cursorPos.left), width / 2) + 'px';

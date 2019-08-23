@@ -5,6 +5,7 @@ import Icon, { IconProps } from '../../Icon';
 
 export interface ContextMenuWrapperProps {
   cursorPos: { left: number, top: number, height: number };
+  textareaHeight: number;
   closeContextMenu: () => void;
   onSubmit: (content: string) => boolean | void;
 }
@@ -30,8 +31,10 @@ export default class ContextMenuInput extends Component<ContextMenuProps, IState
   }
 
   render() {
+    const { cursorPos, textareaHeight } = this.props;
+
     return (
-      <ContextMenu cursorPos={this.props.cursorPos}>
+      <ContextMenu cursorPos={cursorPos} textareaHeight={textareaHeight}>
         <input
           autoFocus
           className="form-control"

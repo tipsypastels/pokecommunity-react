@@ -16,6 +16,7 @@ interface IProps {
 }
 
 interface IState {
+  editorRef: React.RefObject<HTMLDivElement>;
   textareaRef: React.RefObject<HTMLTextAreaElement>;
   contextMenu: ContextMenuOptions;
 }
@@ -26,6 +27,7 @@ export default class Editor extends Component<IProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
+      editorRef: React.createRef<HTMLDivElement>(),
       textareaRef: React.createRef<HTMLTextAreaElement>(),
       contextMenu: null,
     };
@@ -40,7 +42,7 @@ export default class Editor extends Component<IProps, IState> {
 
   render() {
     return (
-      <div className="Editor">
+      <div className="Editor" ref={this.state.editorRef}>
         <Toolbar 
           transformer={this.transformer}
           setContextMenu={this.setContextMenu}
@@ -106,13 +108,15 @@ export default class Editor extends Component<IProps, IState> {
     }
 
     const cursorPos = getCaretCoordinates(textarea, textarea.selectionEnd);
-
+    const textareaHeight = this.state.editorRef.current.offsetHeight;
+    
     // the mentions menu is a context menu but not caused by a state value, instead it's computed on the spot using typingMention() rather than duplicating the value into state
     if (this.typingMention()) {
       return (
         <MentionsMenu
           cursorPos={cursorPos}
           transformer={this.transformer}
+          textareaHeight={textareaHeight}
         />
       );
     }
@@ -124,6 +128,7 @@ export default class Editor extends Component<IProps, IState> {
 
     const contextProps = { 
       cursorPos,
+      textareaHeight,
       closeContextMenu: this.closeContextMenu,
     }
 

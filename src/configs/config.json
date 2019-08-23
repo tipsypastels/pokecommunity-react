@@ -73,5 +73,33 @@
     "surprise", 
     "sad", 
     "angry"
-  ]
+  ],
+
+  "codeBlock": {
+    "languages": [
+      "bash",
+      "cpp",
+      "cs",
+      "css",
+      "java",
+      "javascript",
+      "json",
+      "makefile",
+      "markdown",
+      "php",
+      "plaintext",
+      "python",
+      "ruby",
+      "scss",
+      "sql",
+      "yaml"
+    ],
+
+    "aliases": {
+      "c": "cpp",
+      "js": "javascript",
+      "ts": "typescript",
+      "html": "php"
+    }
+  }
 }

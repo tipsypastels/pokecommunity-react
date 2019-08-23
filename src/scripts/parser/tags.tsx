@@ -6,6 +6,7 @@ import Style from 'style-it';
 import { renderUsergroup } from "./tagHelpers";
 import { urlPattern, hexPattern } from './patterns';
 import SmartLink from "../partials/SmartLink";
+import CodeBlock from "../partials/CodeBlock";
 
 export interface TagRenderProps {
   value: string;
@@ -136,7 +137,25 @@ export const TAGS: TagList = {
     }
   },
 
-  //TODO code highlighting
+  code: {
+    name: 'Code',
+    allowsYouTo: 'display a block of code',
+    usage: '[code=language]content[/code]',
+    example: `[code="ruby"]10.times do
+  puts "Hello PokéCommunity!"
+end[/code]`,
+
+    note: <>You don't need to set the language if you don't need syntax highlighting.</>,
+    pc3Only: true,
+
+    render({ value, children }) {
+      return (
+        <CodeBlock language={value}>
+          {children}
+        </CodeBlock>
+      );
+    },
+  },
 
   color: {
     name: 'Color',
