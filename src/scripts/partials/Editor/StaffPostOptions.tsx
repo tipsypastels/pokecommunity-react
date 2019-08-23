@@ -14,7 +14,7 @@ export default class StaffPostOptions extends Component {
 
   render() {
     const { currentUser } = this.context;
-    if (!currentUser || !currentUser.usergroups.length) {
+    if (!currentUser || !currentUser.usergroups || !currentUser.usergroups.length) {
       return null;
     }
 

@@ -1,31 +1,46 @@
-import React, { Component } from 'react';
-import { Dropdown, NavItem, Nav } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Dropdown, Form } from 'react-bootstrap';
 
-import Icon from '../../../Icon';
 import SmartLink from '../../../SmartLink';
+import OmnibarTool from './OmnibarTool';
 
-export default class HelpMenu extends Component {
-  render() {
-    return (
-      <Dropdown 
-        alignRight 
-        as={NavItem}
-        className="HelpMenu"
-        id="help-menu" 
-      >
-        <Dropdown.Toggle id="help-menu-toggle" as={Nav.Link}>
-          <Icon name="question-circle" group="fal" size="lg" fw />
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item {...SmartLink.shim('/forumdisplay.php?fn=support')}>
-            Feedback & Support
-          </Dropdown.Item>
+export default function HelpMenu() {
+  const [search, setSearch] = useState('');
 
-          <Dropdown.Item {...SmartLink.shim('/forumdisplay.php?fn=support')}>
-            Feedback & Support
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    )
-  }
+  return (
+    <OmnibarTool name="help-menu" icon="question-circle">
+      <Form className="p-2" action="/faq.php" method="get">
+        <input type="hidden" name="do" value="search" />
+
+        <Form.Control
+          placeholder="Search Help"
+          name="q"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
+      </Form>
+
+      <Dropdown.Item {...SmartLink.shim('/forumdisplay.php?fn=support')}>
+        Feedback & Support
+      </Dropdown.Item>
+
+      <Dropdown.Item {...SmartLink.shim('/rules')}>
+        Community Rules
+      </Dropdown.Item>
+
+      <Dropdown.Item {...SmartLink.shim('/rules/moderation-policy')}>
+        Moderation Policy
+      </Dropdown.Item>
+
+      <Dropdown.Item {...SmartLink.shim('/faq.php')}>
+        Help Center
+      </Dropdown.Item>
+
+      <Dropdown.Divider />
+
+      <Dropdown.Item {...SmartLink.shim('/servicepanel.php?do=newbuzzentry')}>
+        Promote Content
+      </Dropdown.Item>
+    </OmnibarTool>
+  );
 }

@@ -11,11 +11,12 @@ import SearchPrompt from './Tools/SearchPrompt';
 import HelpMenu from './Tools/HelpMenu';
 import SupporterMenu from './Tools/SupporterMenu';
 
-type ToolList = (typeof React.Component)[];
+// rewrite how this works
+type ToolList = (any)[];
 
 const loggedinTools: ToolList = [
-  HelpMenu,
   SupporterMenu,
+  HelpMenu,
   SearchPrompt,
   Messages,
   Notifications,
@@ -23,8 +24,8 @@ const loggedinTools: ToolList = [
 ];
 
 const loggedoutTools: ToolList = [
-  HelpMenu,
   SupporterMenu,
+  HelpMenu,
   GuestUserMenu,
 ];
 
