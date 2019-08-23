@@ -68,7 +68,7 @@ export default class ThreadHeader extends Component<IProps> {
               </span>
 
               <span className="thread-created">
-                <Icon fw name="clock" group="far" />
+                <Icon fw name="clock" group="far" mr={1} />
                 {standardDateTime(this.props.created)}
               </span>
             </div>
@@ -103,7 +103,7 @@ export default class ThreadHeader extends Component<IProps> {
             <When condition={this.props.canModerate}>
               <div className="d-none d-md-flex">
                 <Button variant="link" onClick={this.props.openModeration}>
-                  <Icon name="shield" />
+                  <Icon name="shield" mr={1} />
                   Moderate
                 </Button>
 

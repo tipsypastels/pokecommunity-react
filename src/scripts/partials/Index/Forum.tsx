@@ -45,7 +45,10 @@ export default class Forum extends Component<ForumInterface>{
   getViewers() {
     const viewers = this.props.viewers;
     return (
-      <small className="viewers"><Icon fw name="eye" /> {viewers}</small>
+      <small className="viewers">
+        <Icon fw name="eye" className="mx-1" /> 
+        {viewers}
+      </small>
     )
   }
 

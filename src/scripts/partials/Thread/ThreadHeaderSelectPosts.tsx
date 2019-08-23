@@ -16,7 +16,7 @@ export default class ThreadHeaderSelectPosts extends Component<IProps> {
     return (
       <Dropdown alignRight>
         <Dropdown.Toggle variant="link" id="select-posts">
-          <Icon name="check-square" />
+          <Icon name="check-square" mr={1} />
           Select Posts
         </Dropdown.Toggle>
 

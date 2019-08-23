@@ -12,20 +12,22 @@ interface DynamicIconNameProps {
   from: string;
 }
 
+interface MaybeIconNameProps {
+  from: string | IconProps;
+}
+
 interface AdditionalIconProps {
   fw?: boolean;
   className?: string;
   transform?: string;
   mask?: string;
   size?: ICON_SIZE; 
+  mr?: number;
 }
 
-export type IconProps = IconNameProps & AdditionalIconProps;
-export type DynamicIconProps = DynamicIconNameProps & AdditionalIconProps;
-
-export interface MaybeIconProps {
-  from: string | IconProps;
-}
+export interface IconProps extends IconNameProps, AdditionalIconProps {}
+export interface DynamicIconProps extends DynamicIconNameProps, AdditionalIconProps {}
+export interface MaybeIconProps extends MaybeIconNameProps, AdditionalIconProps {}
 
 /**
  * Used for generating an icon where the fa name "fas fa-heart" is all contained in one string. This will split it and automatically generate the <Icon /> tag.
@@ -40,12 +42,12 @@ function Dynamic(props: DynamicIconProps) {
  * Used to generate an icon from a parameter that may just be a string (the icon name) or may be full icon props.
  */
 
-function Maybe({ from }: MaybeIconProps) {
-  if (typeof from === 'string') {
-    return <Icon name={from} />;
+function Maybe(props: MaybeIconProps) {
+  if (typeof props.from === 'string') {
+    return <Icon name={props.from} {...props} />;
   }  
 
-  return <Icon {...from} />;
+  return <Icon {...props.from} {...props} />;
 }
 
 export default class Icon extends Component<IconProps> {
@@ -61,7 +63,17 @@ export default class Icon extends Component<IconProps> {
   };
 
   render() {
-    let { name, size, fw, className, group, transform, mask } = this.props;
+    let { 
+      name, 
+      size, 
+      fw, 
+      className, 
+      group, 
+      transform, 
+      mask, 
+      mr, 
+    } = this.props;
+    
     name = name.startsWith('fa-') 
       ? name 
       : `fa-${name}`;
@@ -75,6 +87,7 @@ export default class Icon extends Component<IconProps> {
           ${fw && 'fa-fw'}
           ${size && `fa-${size}`}
           ${className}
+          ${mr && `mr-${mr}`}
         `}
         data-fa-transform={transform}
         data-fa-mask={mask}

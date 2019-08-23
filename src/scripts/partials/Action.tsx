@@ -61,7 +61,7 @@ export default class Action extends Component<IProps> {
   getIcon() {
     if (this.props.icon) {
       return (
-        <Icon.Maybe from={this.props.icon} />
+        <Icon.Maybe from={this.props.icon} mr={1} />
       );
     }
   }

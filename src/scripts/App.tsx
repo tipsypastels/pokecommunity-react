@@ -13,6 +13,7 @@ import ThemePickerModal from './partials/ThemePickerModal';
 
 import { themeLocalstorageKey } from '../configs/themes.json';
 
+import '../styles/fa/css/all.min.scss';
 import '../styles/base/utilities.scss';
 import '../styles/base/buttons.scss';
 import '../styles/all-themes.scss';
