@@ -11,7 +11,7 @@ interface IState {
 
 function getInitialCollapsedState(categoryid: number) {
   let value = localStorage.getItem(`pokecomm3_category_${categoryid}_collapsed`); 
-  return (value === "true");
+  return value === "true";
 }
 
 export default class Category extends Component<CategoryInterface, IState> {
@@ -60,17 +60,26 @@ export default class Category extends Component<CategoryInterface, IState> {
   }
 
   getCollapseButton() {
+    const { collapsed } = this.state;
+
     return (
-      <div className="collapse-button" onClick={()=>this.changeCollapsedState()}>
+      <div 
+        className="collapse-button" 
+        onClick={this.changeCollapsedState} 
+        role="button" 
+        aria-label={
+          `${collapsed ? 'Uncollapse' : 'Collapse'} the ${this.props.title} category`
+        }
+      >
         <Icon 
           group="far" 
-          name={this.state.collapsed? "chevron-circle-down" : "chevron-circle-up"}
+          name={collapsed ? "chevron-circle-down" : "chevron-circle-up"}
         />
       </div>
     )
   }
 
-  changeCollapsedState() {
+  changeCollapsedState = () => {
     this.setState(
       {collapsed: !this.state.collapsed},
       () => {
