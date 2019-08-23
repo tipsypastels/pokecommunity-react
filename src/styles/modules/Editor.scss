@@ -1,37 +1,6 @@
 .Editor {
   position: relative;
 
-  .Toolbar {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 0.25rem;
-
-    .tool-group {
-      &:not(:last-of-type) {
-        margin-right: 0.5rem;
-      }
-
-      .dropdown {
-        display: inline-block;
-      }
-
-      button {
-        padding: 2px 8px;
-
-        background-color: $modal-background-color;
-        border: 1px solid $divider-color;
-        color: $text-color;
-        border-radius: 0;
-        display: inline-block;
-
-        &:hover {
-          background-color: $background-color-shaded;
-          border-color: $divider-color-dark;
-        }
-      }
-    }
-  }
-
   .Content {
     display: block;
     width: 100%;

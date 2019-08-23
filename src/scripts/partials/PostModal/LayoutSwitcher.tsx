@@ -6,7 +6,7 @@ import { EditorLayout } from '../PostModal';
 
 interface IProps {
   layout: EditorLayout,
-  setLayoutCallback: (EditorLayout) => () => void;
+  setLayoutCallback: (layout: EditorLayout) => () => void;
 }
 
 export default class LayoutSwitcher extends Component<IProps> {
@@ -38,7 +38,7 @@ export default class LayoutSwitcher extends Component<IProps> {
             onClick={setLayoutCallback('columns')}
           >
             <strong className="d-block">
-              Columns Editor
+              Side-by-side Editor
             </strong>
 
             <span>

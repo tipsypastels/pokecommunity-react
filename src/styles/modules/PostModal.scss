@@ -11,6 +11,10 @@
     padding: 2px 0.375rem;
   }
 
+  .ColumnsLayout.modal-body .col-editor {
+    border-right: 1px solid $divider-color;
+  }
+
   .modal-footer {
     display: block;
 

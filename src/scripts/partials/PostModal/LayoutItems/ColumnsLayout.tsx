@@ -10,9 +10,9 @@ export default class ColumnsLayout extends Component<LayoutItemProps> {
     const { content, setContent } = this.props;
 
     return (
-      <Modal.Body>
+      <Modal.Body className="ColumnsLayout">
         <Row>
-          <Col sm={6}>
+          <Col sm={6} className="col-editor">
             <Editor
               content={content}
               setContent={setContent}

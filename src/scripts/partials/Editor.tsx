@@ -113,8 +113,6 @@ export default class Editor extends Component<IProps, IState> {
         <MentionsMenu
           cursorPos={cursorPos}
           transformer={this.transformer}
-          // insertText={this.insertText}
-          // currentWord={this.getCurrentWord()}
         />
       );
     }

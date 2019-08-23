@@ -68,7 +68,7 @@ export const TAGS: TagList = {
     usage: '[center]content[/center',
     example: '[center]Center Aligned[/center]',
     render({ children }) {
-      return <span style={{ textAlign: 'center' }}>{children}</span>
+      return <div style={{ textAlign: 'center' }}>{children}</div>
     },
   },
 
