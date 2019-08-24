@@ -103,7 +103,7 @@ class PostFooter extends Component<IProps> {
             <Action
               name="Edit"
               icon={{ name: 'edit', group: 'fal' }}
-              active={false /* TODO */}
+              active={false}
               activate={openEditorToCurrentPost}
             />
           </When>

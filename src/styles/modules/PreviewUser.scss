@@ -1,0 +1,20 @@
+.PreviewUser {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  margin-bottom: 0.5rem;
+  
+  .avatar-area {
+    margin-right: 4px;
+
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .username {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+}

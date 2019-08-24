@@ -17,7 +17,6 @@ const pbbRegExp = new RegExp("\\[(" + TAG_NAMES.join("|") + ")([ =][^\\]]*?)?\\]
 
 export interface ParserProps {
   bbcode: string;
-  // TODO implement hooks
   hooks?: ParserHookList;
   done?: (results: ReactNode) => void;
 }
@@ -116,7 +115,7 @@ export default class Parser extends Component<ParserProps> {
     tagLabel = tagLabel.toLowerCase();
 
     if (children) {
-      bbRegExp.exec(children); // TODO no clue why this line is needed tbh
+      bbRegExp.exec(children); // no i don't know why this is needed
       children = this.bb2JSX(children);
     }
 

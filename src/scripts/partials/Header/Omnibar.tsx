@@ -61,7 +61,6 @@ export default class Omnibar extends Component<IProps> {
     ));
 
     return (
-      // TODO bs component?
       <ul className="navbar-nav navbar-breadcrumb">
         {crumbs}
       </ul>

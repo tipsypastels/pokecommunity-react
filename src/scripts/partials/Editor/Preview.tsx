@@ -1,26 +1,35 @@
-import React, { Component } from 'react'
+import React, { useContext } from 'react'
 import Parser from '../../parser/Parser';
+import AppContext from '../../AppContext';
+import PreviewUser from './PreviewUser';
 
 interface IProps {
   content: string;
   setMentions: (mentions: Set<string>) => void;
 }
 
-export default class Preview extends Component<IProps> {
-  // TODO we'll want postbits etc in here like vb previews
-  render() {
-    const mentions: Set<string> = new Set();
+export default function Preview(props: IProps) {
+  const mentions: Set<string> = new Set();
+  
+  const { currentUser } = useContext(AppContext);
+  const userPreview = currentUser 
+    ? (
+      <PreviewUser user={currentUser} />
+    ) : undefined;
 
-    return (
-      <Parser 
-        bbcode={this.props.content}
+  return (
+    <>
+      {userPreview}
+
+      <Parser
+        bbcode={props.content}
         hooks={{
           '@'({ children }) {
             mentions.add(children.toString());
           }
-        }} 
-        done={() => this.props.setMentions(mentions)}
+        }}
+        done={() => props.setMentions(mentions)}
       />
-    );
-  }
+    </>
+  )
 }
