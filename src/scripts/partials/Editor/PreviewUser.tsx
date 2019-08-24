@@ -10,7 +10,7 @@ export default function PreviewUser({ user }: IProps) {
   return (
     <SmartLink to={`/member.php?u=${user.id}`} className="PreviewUser">
       <div className="avatar-area">
-        <img src={user.avatar} />
+        <img src={user.avatar} alt={`${user.username}'s Avatar`}/>
       </div>
 
       <div className="username">

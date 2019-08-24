@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Dropdown, Alert } from 'react-bootstrap';
 import Icon from '../Icon';
 import FileUploader from '../Forms/FileUploader';
-import { fileAllowedAsAttachment, getFileExtension } from '../../helpers/FileHelpers';
 import FileCollection from '../../helpers/FileCollection';
 
 export interface AttachmentMenuProps {
