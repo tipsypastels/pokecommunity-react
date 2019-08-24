@@ -101,5 +101,32 @@
       "ts": "typescript",
       "html": "php"
     }
+  },
+
+  "attachments": {
+    "allowedTypes": [
+      "asm",
+      "bin",
+      "c",
+      "css",
+      "doc",
+      "docx",
+      "gif",
+      "h",
+      "ics",
+      "ips",
+      "jpg",
+      "json",
+      "m4a",
+      "mov",
+      "mp3",
+      "pdf",
+      "png",
+      "psd",
+      "s",
+      "txt",
+      "xlsx",
+      "zip"
+    ]
   }
 }

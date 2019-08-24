@@ -10,6 +10,7 @@
     "node-sass": "^4.12.0",
     "pluralize": "^7.0.0",
     "query-string": "^6.5.0",
+    "randomcolor": "^0.5.4",
     "react": "^16.8.6",
     "react-accessible-accordion": "^3.0.0",
     "react-bootstrap": "^1.0.0-beta.8",

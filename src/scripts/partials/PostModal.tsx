@@ -8,6 +8,12 @@ import AppContext from '../AppContext';
 import Pronoun from './Pronoun';
 import PostModalLayout from './PostModalLayout';
 
+// attachment stuff
+import AttachmentMenu from './PostModal/AttachmentMenu';
+import FileCollection from '../helpers/FileCollection';
+import { attachments } from '../../configs/config.json';
+
+
 // each post/new tracks its content seperately
 // they're cached in here
 // this won't actually persist across reloads etc
@@ -26,7 +32,9 @@ interface IProps {
 interface IState {
   content: string;
   mentions: Set<string>;
+  files: FileCollection;
   loadedDraftIndicator: boolean;
+  lastInvalidFileType: string;
 }
 
 // the key used for localstorage
@@ -37,12 +45,19 @@ export default class PostModal extends Component<IProps, IState> {
 
   constructor(props) {
     super(props);
+
+    const files = new FileCollection([])
+      .setAllowed(attachments.allowedTypes)
+      .onTypeSuccess(() => this.setState({ lastInvalidFileType: null }))
+      .onTypeFailure(type => this.setState({ lastInvalidFileType: type }));
+
     this.state = {
+      files,
       content: '',
       mentions: new Set<string>(),
       loadedDraftIndicator: false,
+      lastInvalidFileType: null,
     }
-
   }
   
   // this can't be inside a state initializer, as getInitialContent can also *change* state, so we need to make sure the component is mounted. trying to set state in a constructor is a memory leak
@@ -67,6 +82,14 @@ export default class PostModal extends Component<IProps, IState> {
         setContent={this.setContentAndResetDraftIndicator}
         setMentions={this.setMentions}
         draftIndicator={this.getDraftIndicator()}
+        topRightMenus={
+          <AttachmentMenu 
+            files={this.state.files}
+            addFiles={this.addFiles}
+            removeFile={this.removeFile}
+            lastInvalidType={this.state.lastInvalidFileType}
+          />
+        }
         submitButton={
           <SubmitButton
             isEditingPost={this.isEditingPost()}
@@ -202,5 +225,16 @@ export default class PostModal extends Component<IProps, IState> {
 
   setMentions = (mentions: Set<string>) => {
     this.setState({ mentions });
+  }
+
+  addFiles = (newFiles: File[]) => {
+    this.setState({ files: this.state.files.with(newFiles) })
+  }
+
+  removeFile = (removingFile: File) => {
+    this.setState({ 
+      files: this.state.files.without(removingFile),
+      lastInvalidFileType: null,
+    });
   }
 }

@@ -24,6 +24,7 @@ interface IProps {
 
   submitButton?: ReactNode;
   draftIndicator?: ReactNode;
+  topRightMenus?: ReactNode;
 }
 
 /**
@@ -68,6 +69,8 @@ export default function PostModalLayout(props: IProps) {
 
         <div className="flex-grows" />
 
+        {props.topRightMenus}
+
         <div className={ifLayoutsAreAvailable}>
           <LayoutSwitcher
             layout={layout}
@@ -77,14 +80,6 @@ export default function PostModalLayout(props: IProps) {
 
         {props.submitButton}
       </Modal.Header>
-
-      {/*
-          doing it this way is fine, but it means you're rendering two 
-          <Preview /> elements which is what does the actual bbcode parsing
-          this may be inefficient, and if you ever experience lag when using this menu you may want to add a method to *this* component to do the parsing and pass it down as a prop - so it only gets done once
-
-          alternatively you could give the parser a way to memoize strings so parsing the same thing twice is instant, maybe? look into this if possible.
-        */}
 
       <div className={unlessLayoutsAreAvailable}>
         <TabbedLayout

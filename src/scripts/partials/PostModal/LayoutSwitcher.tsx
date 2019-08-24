@@ -16,7 +16,7 @@ export default class LayoutSwitcher extends Component<IProps> {
     return (
       <Dropdown>
         <Dropdown.Toggle variant="link" id="layout-dropdown">
-          <Icon name="cog" />
+          <Icon name="window-restore" />
         </Dropdown.Toggle>
 
         <Dropdown.Menu alignRight>

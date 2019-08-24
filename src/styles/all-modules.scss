@@ -4,6 +4,7 @@
   */
 
 @import './modules//Action.scss';
+@import './modules//AttachmentMenu.scss';
 @import './modules//Block.scss';
 @import './modules//DefaultBanner.scss';
 @import './modules//Docs/BBCodeTag.scss';
@@ -11,6 +12,8 @@
 @import './modules//Editor/Toolbar.scss';
 @import './modules//Editor.scss';
 @import './modules//Footer.scss';
+@import './modules//Forms/FileDropper.scss';
+@import './modules//Forms/FileUploader.scss';
 @import './modules//Header/CommunityMenu.scss';
 @import './modules//Header/Omnibar/Tools/GuestUserMenu.scss';
 @import './modules//Header/Omnibar/Tools/SupporterMenu.scss';

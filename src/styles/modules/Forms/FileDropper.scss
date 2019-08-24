@@ -1,0 +1,29 @@
+$file-dropper-background-color: #EAEFF4; // TODO move to themes
+$file-dropper-text-color: #99a9c4;
+
+.FileDropper {
+  background-color: $file-dropper-background-color;
+  color: darken($file-dropper-text-color, 20%);
+  padding: 0.5rem;
+  
+  &:not(.disabled) {
+    cursor: pointer;
+  }
+
+  .contents {
+    border-radius: 4px;
+    border: 4px dashed darken($file-dropper-background-color, 5%);
+    text-align: center;
+    padding: 1rem 2rem;
+    white-space: nowrap;
+  }
+
+  &.highlight {
+    color: white;
+    background-color: lighten($primary-color, 10%);
+
+    .contents {
+      border-color: $primary-color;
+    }
+  }
+}
