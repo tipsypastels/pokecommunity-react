@@ -36,6 +36,10 @@ export const baseTitle = 'The PokéCommunity Forums';
 export default class Page extends Component<IProps> {
   static contextType = AppContext;
 
+  static defaultProps = {
+    newBanner: null,
+  };
+
   async componentDidMount() {
     this.setTitle();
     await this.whoAmI();
