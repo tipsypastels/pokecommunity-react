@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import PollInterface, { PollOptionInterface } from '../types/PollInterface';
+import PollInterface from '../types/PollInterface';
 import PollOption from './Poll/PollOption';
 import Block from './Block';
 import Icon from './Icon';

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { PollOptionInterface } from '../../types/PollInterface';
 import pluralize from 'pluralize';
 import { Form } from 'react-bootstrap';
@@ -102,7 +102,7 @@ export default function PollOption(props: IProps) {
           </div>
         </div>
       </label>
-      
+
       {whoVoted}
     </li>
   )
