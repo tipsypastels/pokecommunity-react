@@ -6,7 +6,7 @@ import Icon from '../Icon';
 
 import Block from '../Block';
 import Stat from '../Stat';
-import ThreadPoll from './ThreadPoll';
+import Poll from '../Poll';
 import ThreadHeaderSelectPosts from './ThreadHeaderSelectPosts';
 
 import PollInterface from '../../types/PollInterface';
@@ -88,7 +88,7 @@ export default class ThreadHeader extends Component<IProps> {
           </div>
         </Block.Header>
 
-        {this.props.poll && <ThreadPoll poll={this.props.poll} />}
+        {this.props.poll && <Poll poll={this.props.poll} />}
 
         <Block.Footer>
           <div className="flex">

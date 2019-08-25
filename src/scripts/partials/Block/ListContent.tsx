@@ -6,11 +6,17 @@ interface IProps {
   children: ReactNode;
   className?: string;
   listItems: ReactNode[];
+  noTigerStripe?: boolean;
 }
 
 /* alternative to Content */
 const ListContent = (props: IProps) => (
-  <div className={`BlockContent BlockListContent ${props.className || ''}`}>
+  <div className={`
+    BlockContent 
+    BlockListContent 
+    ${props.className || ''}
+    ${props.noTigerStripe && 'no-tiger-stripe'}
+  `}>
     <div className="children">
       {props.children}
     </div>

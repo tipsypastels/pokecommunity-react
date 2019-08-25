@@ -96,6 +96,23 @@
   // The color of the post moderation icons in the mod menu
   $posts-mod-color: $secondary-color;
 
+  // ==================================
+  // PART 5 Polls
+  // ==================================
+
+  // The color of poll options. Colors will loop if all of them are used. Colors will be slightly lightened when not selected.
+  $poll-vote-colors: (
+    #dc3545,
+    #fd7e14,
+    #ffc107,
+    #28a745,
+    #20c997,
+    #17a2b8,
+    #007bff,
+    #6f42c1,
+    #6610f2,
+  );
+
   // --- IMPORTANT ---
   // Do not remove this line or add anything below it.
   // This should always be the final element in your theme declaration.

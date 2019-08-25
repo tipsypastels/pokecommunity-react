@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const pollStatusName = (isPublic: number) => (
-  ['Open', 'Secret'][isPublic]
+  ['Secret', 'Open'][isPublic]
 )
 
 class ThreadPoll extends Component<IProps> {

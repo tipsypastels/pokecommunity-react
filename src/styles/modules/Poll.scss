@@ -1,0 +1,104 @@
+.Poll {
+  .children h2 {
+    font-weight: 200;
+    margin-bottom: 0;
+  }
+
+  .toggle-who-voted {
+    color: $link-color;
+    margin-left: 0.25rem;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin: 0.5rem 0.25rem;
+      
+      &.votable * {
+        cursor: pointer;
+      }
+      
+      @for $i from 1 to length($poll-vote-colors) {
+        &:nth-child(#{$i}) .votes-bar {
+          background: repeating-linear-gradient(
+            45deg,
+            nth($poll-vote-colors, $i),
+            nth($poll-vote-colors, $i) 10px,
+            darken(nth($poll-vote-colors, $i), 3%) 10px,
+            darken(nth($poll-vote-colors, $i), 3%) 20px,
+          );
+        }
+      }
+
+      label {
+        width: 100%;
+        margin-bottom: 0;
+        display: flex;
+        align-items: center;
+
+        .bar-borders {
+          border: 2px solid $divider-color;
+          position: relative;
+          border-radius: 6px;
+          padding: 0.25rem 0.5rem;
+          height: 32px;
+          width: 100%;
+          
+          .votes-bar, .false-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+    
+            display: flex;
+            align-items: center;
+    
+            .text {
+              width: 100%;
+              display: flex;
+    
+              .title {
+                margin: 0 1rem;
+              }
+    
+              .title, .number, .percentage {
+                font-weight: bold;
+              }
+            }
+          }
+    
+          .votes-bar {
+            overflow: hidden;
+            transition: 0.25s ease-in-out;
+            border-radius: 6px;
+    
+            .text {
+              color: white;
+    
+              &, * {
+                white-space: nowrap;
+              }
+            }
+          }
+        }
+      }
+
+      .who-voted {
+        margin: 0 0.5rem;
+
+        strong {
+          margin-right: 0.25rem;
+        }
+
+        a:not(:last-child):after {
+          content: ', ';
+        }
+      }
+    }    
+  }
+}

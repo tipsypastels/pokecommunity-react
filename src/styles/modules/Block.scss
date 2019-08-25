@@ -35,6 +35,14 @@
       padding: 5px 20px;
     }
 
+    &:not(.no-tiger-stripe) {
+      ul {
+        li:nth-child(odd) {
+          background-color: $background-color-shaded; 
+        }
+      }
+    }
+
     & > ul {
       margin: 0;
       padding: 0;
@@ -42,10 +50,6 @@
 
       li {
         padding: 3px 20px;
-
-        &:nth-child(odd) {
-          background-color: #fafafa; // TODO etc 
-        }
       }
     }
   }
