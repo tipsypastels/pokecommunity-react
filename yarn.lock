@@ -8036,6 +8036,12 @@ react-scripts@3.0.1:
   optionalDependencies:
     fsevents "2.0.6"
 
+react-slidedown@^2.4.4:
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/react-slidedown/-/react-slidedown-2.4.4.tgz#3cfc4413f4692a38c305679160d59d965d3c7492"
+  dependencies:
+    tslib "^1.9.0"
+
 react-syntax-highlighter@^11.0.2:
   version "11.0.2"
   resolved "https://registry.yarnpkg.com/react-syntax-highlighter/-/react-syntax-highlighter-11.0.2.tgz#4e3f376e752b20d2f54e4c55652fd663149e4029"

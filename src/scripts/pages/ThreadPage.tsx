@@ -11,6 +11,7 @@ import FloatingActions from '../partials/Thread/FloatingActions';
 
 import ThreadInterface from '../types/ThreadInterface';
 import PostInterface from '../types/PostInterface';
+import DailyArticleInterface from '../types/DailyArticleInterface';
 
 import { threadBreadcrumbs } from '../types/BreadcrumbInterface';
 import { pageNumber } from '../helpers/PageHelpers';
@@ -20,6 +21,7 @@ import PostModal from '../partials/PostModal';
 import ModerationModal from '../partials/Thread/ModerationModal';
 
 import newcoreApi from '../bridge/newcoreApi';
+import { getDailyArticle } from '../bridge/dailyApi';
 
 interface IParams {
   id: string;
@@ -35,6 +37,7 @@ interface IState {
   moderationOpen: boolean;
   error: PageError;
   selectedPosts: Set<number>;
+  linkedDailyArticle?: DailyArticleInterface;
 }
 
 export default class ThreadPage extends Component<IProps, IState> {
@@ -73,13 +76,33 @@ export default class ThreadPage extends Component<IProps, IState> {
         url: `/threads/${this.props.match.params.id}`,
       });
 
-      this.setState({ thread: response.data });
+      this.setState({ thread: response.data }, async () => {
+        await this.getLinkedDailyArticle();
+      });
     } catch (e) {
       if (e.toString().match(/404/)) {
         this.setState({ error: 404 });
       } else {
         this.setState({ error: 500 });
       }
+    }
+  }
+
+  async getLinkedDailyArticle(): Promise<DailyArticleInterface> {
+    console.log('thread loaded... querying for daily article...');
+
+    const { thread } = this.state;
+    if (!thread || !thread.contentMeta || !thread.contentMeta.dailyArticle) {
+      return;
+    }
+
+    try {
+      const linkedDailyArticle = 
+        await getDailyArticle(thread.contentMeta.dailyArticle);
+
+      this.setState({ linkedDailyArticle })
+    } catch {
+      this.setState({ linkedDailyArticle: null });
     }
   }
 
@@ -199,6 +222,7 @@ export default class ThreadPage extends Component<IProps, IState> {
           && thread.contentMeta.thumbnail
           && thread.contentMeta.thumbnail.small
         }
+        linkedDailyArticle={this.state.linkedDailyArticle}
         openEditor={this.openEditorToNew}
         openModeration={this.openModerationModal}
         selectPostsByFilter={this.selectPostsByFilter}

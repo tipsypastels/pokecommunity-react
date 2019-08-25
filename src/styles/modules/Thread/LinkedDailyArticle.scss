@@ -1,0 +1,57 @@
+// this isn't a theme var, but it should be in a constants file probs
+$daily-color: rgba(255, 129, 0, 1);
+
+.MobileLinkedDailyArticle {
+  background-color: $daily-color;
+  color: white;
+  text-align: center;
+  display: block;
+}
+
+.LinkedDailyArticle {
+  .article {
+    display: flex;
+    align-items: center;
+
+    a:not(.btn) { color: inherit; }
+  
+    .thumbnail {
+      margin-right: 1rem;
+      border-radius: 6px;
+      box-shadow: 2px 2px 2px mix(black, transparent, 30%);
+    }
+  
+    .info {
+      .tagline {
+        font-weight: bold;
+        color: $daily-color;
+      }
+  
+      .title {
+        font-size: 150%;
+        margin-bottom: 3px;
+      }
+  
+      .excerpt {
+        p {
+          margin-bottom: 0;
+        }
+      }
+  
+      .metadata {
+        margin-top: 0.25rem;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+  
+        .author {
+          color: $byline-color;
+        }
+  
+        .date {
+          color: $primary-color;
+          margin-left: 0.5rem;
+        }
+      }
+    }
+  }
+}
