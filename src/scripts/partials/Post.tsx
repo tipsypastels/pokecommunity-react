@@ -120,7 +120,8 @@ class Post extends Component<PostProps, IState> {
   getPostLayout(): PostLayout {
     const { currentUser } = this.context;
     if (currentUser) {
-      return currentUser.profileFields.postLayout;
+      return currentUser.profileFields 
+        && currentUser.profileFields.postLayout;
     }
     
     return DEFAULT_POST_LAYOUT;
