@@ -3,4 +3,4 @@ enum PostLayout {
   Side = 'side', // the bad one
 }
 export default PostLayout;
-export const DEFAULT_POST_LAYOUT = PostLayout.Side;
+export const DEFAULT_POST_LAYOUT = PostLayout.Top;
