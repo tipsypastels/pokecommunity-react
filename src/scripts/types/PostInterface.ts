@@ -1,5 +1,6 @@
 import PostUserInterface from './PostUserInterface';
 import StaffPostGroupInterface from './StaffPostGroupInterface';
+import DeletionLogInterface from './DeletionLogInterface';
 
 export default interface PostInterface {
   id: number;
@@ -12,6 +13,7 @@ export default interface PostInterface {
   visible: number;
 
   staffPostGroup?: StaffPostGroupInterface;
+  deletion?: DeletionLogInterface;
 
   canEdit: boolean;
 

@@ -219,8 +219,8 @@ export default class ThreadPage extends Component<IProps, IState> {
         forumTitle={thread.forum.title}
         forumIcon={thread.forum.icon}
         threadIcon={thread.contentMeta
-          && thread.contentMeta.thumbnail
-          && thread.contentMeta.thumbnail.small
+          && thread.contentMeta
+          && thread.contentMeta.smallThumbnail
         }
         linkedDailyArticle={this.state.linkedDailyArticle}
         openEditor={this.openEditorToNew}
@@ -249,6 +249,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         selectPost={this.selectPost}
         deselectPost={this.deselectPost}
         checkPostSelected={this.checkPostSelected}
+        setPost={this.setPost}
         openEditor={this.openEditorToEdit}
         {...post}
       />
@@ -281,6 +282,21 @@ export default class ThreadPage extends Component<IProps, IState> {
 
   closeModerationModal = () => {
     this.setState({ moderationOpen: false });
+  }
+
+  setPost = (index: number, post: PostInterface, callback?: (thread: ThreadInterface) => void) => {
+    let { thread } = this.state;
+    if (!thread) {
+      return;
+    }
+
+    thread = { ...thread };
+    thread.posts[index] = post;
+    this.setState({ thread }, () => {
+      if (callback) {
+        callback(thread);
+      }
+    });
   }
 
   /**

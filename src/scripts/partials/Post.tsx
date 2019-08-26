@@ -25,6 +25,7 @@ export interface PostProps extends PostInterface {
   deselectPost: (postid: number) => void;
   checkPostSelected: (postid: number) => boolean;
   openEditor: (post: PostInterface) => void;
+  setPost: (index: number, post: PostInterface) => void;
 }
 
 export type PostActionModal = null | 'share';

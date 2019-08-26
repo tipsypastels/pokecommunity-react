@@ -1,0 +1,32 @@
+.DeletedPost {
+  .BlockHeader {
+    a {
+      display: flex;
+      align-items: center;
+
+      .avatar {
+        width: 40px;
+        height: 40px;
+        margin-right: 0.25rem;
+      }
+  
+      .username {
+        color: $byline-color;
+        font-size: 0.95rem;
+      }
+    }
+  }
+
+  .deletion-message {
+    color: $byline-color;
+    font-size: 0.9rem;
+
+    a {
+      color: inherit;
+    }
+
+    .reason {
+      font-style: italic;
+    }
+  }
+}

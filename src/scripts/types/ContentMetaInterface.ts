@@ -4,9 +4,7 @@ export default interface ContentMetaInterface {
   excerpt?: string;
   dailyArticle: number;
 
-  thumbnail?: {
-    small?: string;
-    medium?: string;
-    large?: string;
-  }
+  smallThumbnail: string;
+  mediumThumbnail: string;
+  largeThumbnail: string;  
 }
