@@ -22,6 +22,7 @@ import ModerationModal from '../partials/Thread/ModerationModal';
 
 import newcoreApi from '../bridge/newcoreApi';
 import { getDailyArticle } from '../bridge/dailyApi';
+import PostVisibility from '../types/PostVisibility';
 
 interface IParams {
   id: string;
@@ -313,7 +314,7 @@ export default class ThreadPage extends Component<IProps, IState> {
 
     return [...selectedPosts].map(postid => {
       const post = posts.find(post => post.id === postid);
-      if (!post) {
+      if (!post || post.visible !== PostVisibility.Published) {
         return '';
       }
 
