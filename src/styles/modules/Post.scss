@@ -1,10 +1,47 @@
 .Post {
+  @media screen and (min-width: 768px) {
+    &.layout-side {
+      display: flex;
+
+      .BlockHeader {
+        width: 250px;
+
+        display: flex;
+        flex-direction: column;
+
+        .PostHeader {
+          flex-grow: 1;
+
+          display: flex;
+          flex-direction: column;
+    
+          .username-usertitle, .minibio {
+            margin-bottom: 1rem;
+          }
+    
+          .statistics {
+            order: 999;
+          }
+        }
+      }
+
+      .BlockContent {
+        flex-grow: 1;
+
+        display: flex;
+        flex-direction: column;
+
+        .PostContent {
+          flex-grow: 1;
+        }
+      }
+    }
+  }
+
   & > .post-overflow-menu {
     padding: 0.25rem;
-
     background-color: #0069d9; // TODO colours etc
     color: mix(white, transparent, 85%);
-
     user-select: none;
     
     @media screen and (min-width: 768px) {

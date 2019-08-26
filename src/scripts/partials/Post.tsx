@@ -16,6 +16,7 @@ import SharePostModal from './Post/ActionModals/SharePostModal';
 
 import AppContext from '../AppContext';
 import SmartLink from './SmartLink';
+import PostLayout, { DEFAULT_POST_LAYOUT } from '../types/PostLayout';
 
 export interface PostProps extends PostInterface {
   thread: ThreadInterface;
@@ -66,7 +67,7 @@ class Post extends Component<PostProps, IState> {
     const { actionModalOpen } = this.state;
     
     return (
-      <Block className="Post">
+      <Block className={`Post layout-${this.getPostLayout()}`}>
         <SharePostModal
           postid={id}
           user={user}
@@ -114,6 +115,15 @@ class Post extends Component<PostProps, IState> {
         {this.getOverflowMenu()}
       </Block>
     )
+  }
+
+  getPostLayout(): PostLayout {
+    const { currentUser } = this.context;
+    if (currentUser) {
+      return currentUser.profileFields.postLayout;
+    }
+    
+    return DEFAULT_POST_LAYOUT;
   }
 
   getSignature() {

@@ -7,8 +7,7 @@ import MiniBiographyInterface from '../../types/MiniBiographyInterface';
 import { lastActionHistory, yearsSince } from '../../helpers/DateHelpers';
 
 const genderToIcon = (gender: string) => {
-  gender = gender.toLowerCase();
-  return gender === 'Other' ? 'genderless' : gender;
+  return gender === 'other' ? 'genderless' : gender;
 }
 
 const onlineToIcon = (lastOnline) => {
@@ -33,7 +32,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.birthday) {
     birthday = (
       <div>
-        <Icon fw name="calendar-alt" />
+        <Icon fw name="calendar-alt" mr={1} />
         Age {yearsSince(props.birthday)}
       </div>
     );
@@ -42,7 +41,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.gender) {
     gender = (
       <div>
-        <Icon fw name={genderToIcon(props.gender)} />
+        <Icon fw name={genderToIcon(props.gender)} mr={1} />
         {props.gender}
       </div>
     );
@@ -51,7 +50,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.location) {
     location = (
       <div>
-        <Icon fw name="globe" />
+        <Icon fw name="globe" mr={1} />
         {props.location}
       </div>
     );
@@ -60,7 +59,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.lastOnline) {
     lastOnline = (
       <div>
-        <Icon fw {...onlineToIcon(props.lastOnline)} />
+        <Icon fw {...onlineToIcon(props.lastOnline)} mr={1} />
         {lastActionHistory('Seen', props.lastOnline)}
       </div>
     );
@@ -69,7 +68,7 @@ const PostMiniBiography = (props: IProps) => {
   if (props.lastPosted) {
     lastPosted = (
       <div>
-        <Icon fw name="comment-lines" />
+        <Icon fw name="comment-lines" mr={1} />
         {lastActionHistory('Posted', props.lastPosted)}
       </div>
     );
