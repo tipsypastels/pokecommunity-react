@@ -86,9 +86,12 @@ class Post extends Component<PostProps, IState> {
 
         <Block.Content>
           <PostContent
+            id={id}
             content={content}
             created={created}
             index={index}
+            everEdited={this.props.everEdited}
+            edits={this.props.edits}
           />
 
           {this.getSignature()}
