@@ -3,6 +3,7 @@ import { Navbar } from 'react-bootstrap';
 import { When } from 'react-if';
 import { Link } from 'react-router-dom';
 
+import { SearchScopeProps } from './Omnibar/Tools/SearchPrompt';
 import { BreadcrumbInterface } from '../../types/BreadcrumbInterface';
 import Icon from '../Icon';
 
@@ -12,7 +13,7 @@ import OmnibarTools from './Omnibar/OmnibarTools';
 import logo from '../../../images/common/brand-transparent.png';
 import SmartLink from '../SmartLink';
 
-interface IProps {
+interface IProps extends SearchScopeProps {
   breadcrumbs?: BreadcrumbInterface[];
 }
 
@@ -44,7 +45,7 @@ export default class Omnibar extends Component<IProps> {
 
           <div className="mr-auto" />
 
-          <OmnibarTools />
+          <OmnibarTools searchScope={this.props.searchScope} />
         </Navbar.Collapse>
       </Navbar>
     );

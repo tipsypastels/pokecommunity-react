@@ -1,0 +1,23 @@
+.SearchPrompt {
+  .dropdown-menu {
+    min-width: 450px;
+    max-width: 100%;
+    padding: 0.25rem;
+
+    .search-label {
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .search-menu {
+      .scope-options {
+        width: 100%;
+      }
+
+      input, select, .scope-options {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}

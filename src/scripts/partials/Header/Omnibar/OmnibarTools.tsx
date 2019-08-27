@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import { Nav } from 'react-bootstrap';
 
 import AppContext from '../../../AppContext';
@@ -7,42 +7,50 @@ import UserMenu from './Tools/UserMenu';
 import GuestUserMenu from './Tools/GuestUserMenu';
 import Notifications from './Tools/Notifications';
 import Messages from './Tools/Messages';
-import SearchPrompt from './Tools/SearchPrompt';
+import SearchPrompt, { SearchScopeProps } from './Tools/SearchPrompt';
 import HelpMenu from './Tools/HelpMenu';
 import SupporterMenu from './Tools/SupporterMenu';
 
-// rewrite how this works
-type ToolList = (any)[];
+const TOOLS = {
+  'donations': SupporterMenu,
+  'help': HelpMenu,
+  'search': SearchPrompt,
+  'messages': Messages,
+  'notifications': Notifications,
+  'user': UserMenu,
+  'guest': GuestUserMenu,
+}
 
-const loggedinTools: ToolList = [
-  SupporterMenu,
-  HelpMenu,
-  SearchPrompt,
-  Messages,
-  Notifications,
-  UserMenu,
-];
+interface ToolOptions {
+  if?: any;
+  props?: object;
+}
 
-const loggedoutTools: ToolList = [
-  SupporterMenu,
-  HelpMenu,
-  GuestUserMenu,
-];
+export default function OmnibarTools(props: SearchScopeProps) {
+  const { currentUser } = useContext(AppContext);
 
-export default class OmnibarTools extends Component {
-  static contextType = AppContext;
+  function tool(name: keyof typeof TOOLS, opts: ToolOptions = {}) {
+    if ('if' in opts && !opts.if) {
+      return null;
+    }
 
-  render() {
-    const relevantTools = this.context.currentUser
-      ? loggedinTools
-      : loggedoutTools;
-
-    return (
-      <Nav className="navbar-user-tools">
-        {relevantTools.map(Tool => (
-          <Tool key={Tool.name} />
-        ))}
-      </Nav>
-    );
+    const Component = TOOLS[name];
+    return <Component {...(opts.props || {})} />
   }
+
+  // TODO mod menu
+  return (
+    <Nav className="navbar-user-tools">
+      {tool('donations')}
+      {tool('help')}
+      {tool('search', { 
+        props: { searchScope: props.searchScope },
+        if: currentUser,
+      })}
+      {tool('messages', { if: currentUser })}
+      {tool('notifications', { if: currentUser })}
+      {tool('user', { if: currentUser })}
+      {tool('guest', { if: !currentUser })}
+    </Nav>
+  )
 }

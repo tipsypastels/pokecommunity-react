@@ -108,16 +108,22 @@ export default class ThreadPage extends Component<IProps, IState> {
   }
 
   render() {
+    const { thread } = this.state;
+
     return (
       <Page
         name="Thread"
-        loading={!this.state.thread}
-        newBanner={this.state.thread && this.getBanner()}
+        loading={!thread}
+        newBanner={thread && this.getBanner()}
         appCurrentBanner={this.props.appCurrentBanner}
         setAppBanner={this.props.setAppBanner}
-        breadcrumbs={this.state.thread && this.getBreadcrumbs()}
+        breadcrumbs={thread && this.getBreadcrumbs()}
         htmlTitle={this.getHtmlTitle()}
         error={this.state.error}
+        searchScope={thread && ({
+          threadName: thread.title,
+          forumName: thread.forum.title,
+        })}
       >
         {this.state.thread &&
           <div>

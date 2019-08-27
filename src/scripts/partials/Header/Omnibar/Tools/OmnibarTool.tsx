@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react'
 import { Dropdown, NavItem, Nav } from 'react-bootstrap';
 import Icon from '../../../Icon';
-import { camelCase, kebabCase } from '../../../../helpers/StringHelpers';
+import { kebabCase, upperCamelCase } from '../../../../helpers/StringHelpers';
 
 interface IProps {
   name: string;
@@ -10,7 +10,7 @@ interface IProps {
 }
 
 export default function OmnibarTool(props: IProps) {
-  const className = camelCase(props.name);
+  const className = upperCamelCase(props.name);
   const id = kebabCase(props.name);
   
   return (

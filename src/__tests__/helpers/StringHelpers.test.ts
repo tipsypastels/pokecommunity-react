@@ -1,4 +1,4 @@
-import { toWords, camelCase, underScore, kebabCase } from '../../scripts/helpers/StringHelpers';
+import { toWords, camelCase, underScore, kebabCase, upperCamelCase } from '../../scripts/helpers/StringHelpers';
 
 /**
  * It shouldn't be necessary to test every permuatation of every combination, because most of them just call toWords internally and replace spaces. Test toWords itself and camelCase because that one is slightly more complex. Others can be tested only with a single input.
@@ -39,3 +39,7 @@ test('underScore on a sentence', () => {
 test('kebabCase on a sentence', () => {
   expect(kebabCase('hello world')).toBe('hello-world');
 });
+
+test('upperCamelCase on a sentence', () => {
+  expect(upperCamelCase('hello world')).toBe('HelloWorld');
+})

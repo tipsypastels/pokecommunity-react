@@ -13,6 +13,7 @@ import Loading from '../partials/PagePartials/Loading';
 import { BreadcrumbInterface } from '../types/BreadcrumbInterface';
 import AppContext from '../AppContext';
 import newcoreApi from '../bridge/newcoreApi';
+import { SearchScopeProps } from '../partials/Header/Omnibar/Tools/SearchPrompt';
 
 export type PageError = null | 404 | 500;
 
@@ -21,7 +22,7 @@ export interface PageProps {
   setAppBanner: (banner: string) => void;
 }
 
-interface IProps extends PageProps {
+interface IProps extends PageProps, SearchScopeProps {
   name: string;
   loading: boolean;
   children: ReactNode;
@@ -58,7 +59,11 @@ export default class Page extends Component<IProps> {
     return (
       <div className={`Page ${this.props.name}Page ${readyClass}`}>
         <CommunityMenu />
-        <Omnibar breadcrumbs={this.props.breadcrumbs} />
+        <Omnibar 
+          breadcrumbs={this.props.breadcrumbs} 
+          searchScope={this.props.searchScope} 
+        />
+        
         {this.getBanner()}
         {this.getContent()}
         <Footer />

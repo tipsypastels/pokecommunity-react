@@ -8,6 +8,10 @@ export function camelCase(input: string): string {
   });
 }
 
+export function upperCamelCase(input: string): string {
+  return input[0].toUpperCase() + camelCase(input.slice(1));
+}
+
 export function underScore(input: string): string {
   return toWords(input).replace(/\s/g, '_').toLowerCase();
 }
