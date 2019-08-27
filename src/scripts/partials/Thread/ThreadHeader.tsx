@@ -69,7 +69,7 @@ export default function ThreadHeader(props: IProps) {
             </h2>
 
             {!props.threadOpen && (
-              <Badge variant="dark" className="ml-1">
+              <Badge variant="secondary" className="ml-1">
                 Closed
               </Badge>
             )}
