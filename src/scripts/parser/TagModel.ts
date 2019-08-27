@@ -53,6 +53,10 @@ export default class TagModel {
     return this.tag.pc3Only;
   }
 
+  get secret() {
+    return this.tag.secret;
+  }
+
   render(props: TagRenderProps) {
     return this.tag.render(props);
   }
@@ -76,5 +80,9 @@ export default class TagModel {
 
       return results;
     })());
+  }
+
+  get publicAliases() {
+    return this.aliases.filter(x => !TAGS[x].secret);
   }
 }

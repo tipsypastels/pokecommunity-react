@@ -12,6 +12,10 @@ export default class BBCodeTag extends Component<IProps> {
   render() {
     const { tag } = this.props;
 
+    if (tag.secret) {
+      return null;
+    }
+
     return (
       <Block className="BBCodeTag">
         <Block.Header>
@@ -85,7 +89,7 @@ export default class BBCodeTag extends Component<IProps> {
   }
 
   getAliases() {
-    const { aliases } = this.props.tag;
+    const { publicAliases: aliases } = this.props.tag;
 
     if (!aliases || aliases.length === 0) {
       return null;
@@ -103,6 +107,7 @@ export default class BBCodeTag extends Component<IProps> {
 
     for (let i = 0; i < aliases.length; i++) {
       const alias = aliases[i];
+
       results.push(alias);
 
       if (i < aliases.length - 1) {
