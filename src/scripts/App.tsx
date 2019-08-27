@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import UserInterface from './types/UserInterface';
 import { getCurrentTheme } from './bridge/Theme';
@@ -60,19 +60,21 @@ class App extends Component<{}, IState> {
           <ThemePickerModal show={this.state.themePickerOpen} />
 
           <Router>
-            {Object.keys(POKECOMM3_ROUTES).map(path => {
-              const Component = POKECOMM3_ROUTES[path];
+            <Switch>
+              {Object.keys(POKECOMM3_ROUTES).map(path => {
+                const Component = POKECOMM3_ROUTES[path];
 
-              return (
-                <Route key={path} path={path} exact render={route => (
-                  <Component
-                    appCurrentBanner={this.state.banner}
-                    setAppBanner={this.setAppBanner}
-                    {...route}
-                  />
-                )} />
-              );
-            })}
+                return (
+                  <Route key={path} path={path} exact render={route => (
+                    <Component
+                      appCurrentBanner={this.state.banner}
+                      setAppBanner={this.setAppBanner}
+                      {...route}
+                    />
+                  )} />
+                );
+              })}
+            </Switch>
           </Router>
         </div>
       </AppContext.Provider>
