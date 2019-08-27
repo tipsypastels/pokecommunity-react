@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'react-bootstrap';
+import { Button, Badge } from 'react-bootstrap';
 import { When } from 'react-if';
 
 import Icon from '../Icon';
@@ -22,6 +22,7 @@ interface IProps {
   repliesCount: number;
   canReply: boolean;
   canModerate: boolean;
+  threadOpen: number;
   username: string;
   created: number;
   poll: PollInterface;
@@ -61,9 +62,18 @@ export default function ThreadHeader(props: IProps) {
             {forumTitle}
           </span>
 
-          <h2 className="thread-title">
-            {title}
-          </h2>
+
+          <div className="flex flex-v-center">
+            <h2 className="thread-title">
+              {title}
+            </h2>
+
+            {!props.threadOpen && (
+              <Badge variant="dark" className="ml-1">
+                Closed
+              </Badge>
+            )}
+          </div>
 
           <div className="thread-starter-and-created text-small">
             <span className="thread-starter">
@@ -99,11 +109,22 @@ export default function ThreadHeader(props: IProps) {
 
       <Block.Footer>
         <div className="flex">
-          <When condition={props.canReply}>
-            <Button color="primary" onClick={props.openEditor}>
-              Reply to Thread
-            </Button>
-          </When>
+          {(() => {
+            if (props.canReply) {
+              return (
+                <Button variant="primary" onClick={props.openEditor}>
+                  Reply to Thread
+                </Button>
+              );
+            } else if (!props.threadOpen) {
+              return (
+                <Button variant="secondary" disabled>
+                  <Icon name="lock" mr={1} />
+                  Thread Closed
+                </Button>
+              );
+            }
+          })()}
 
           <div className="flex-grows" />
 

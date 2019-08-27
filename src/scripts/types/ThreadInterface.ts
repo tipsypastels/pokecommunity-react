@@ -14,7 +14,7 @@ export default interface ThreadInterface {
   created: number;
 
   open: number;
-  sticky: boolean;
+  sticky: number;
   visible: number;
   views: number;
 

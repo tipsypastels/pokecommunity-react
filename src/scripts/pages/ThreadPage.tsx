@@ -220,6 +220,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         repliesCount={thread.repliesCount}
         canReply={thread.canReply}
         canModerate={thread.canModerate}
+        threadOpen={thread.open}
         username={thread.username}
         created={thread.created}
         poll={thread.poll}
@@ -264,11 +265,12 @@ export default class ThreadPage extends Component<IProps, IState> {
   }
 
   getQuickReply() {
-    if (this.state.thread && this.state.thread.canReply) {
-      return (
-        <QuickReply openEditor={this.openEditorToNew} />
-      )
-    }
+    const { thread } = this.state;
+    return <QuickReply
+      threadOpen={thread.open}
+      canReply={thread.canReply}
+      openEditor={this.openEditorToNew}
+    />
   }
 
   openEditorToNew = () => {
