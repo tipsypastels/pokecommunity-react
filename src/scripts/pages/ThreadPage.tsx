@@ -90,8 +90,6 @@ export default class ThreadPage extends Component<IProps, IState> {
   }
 
   async getLinkedDailyArticle(): Promise<DailyArticleInterface> {
-    console.log('thread loaded... querying for daily article...');
-
     const { thread } = this.state;
     if (!thread || !thread.contentMeta || !thread.contentMeta.dailyArticle) {
       return;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 import Post, { PostProps } from '../Post';
 import DeletedPost from './DeletedPost';

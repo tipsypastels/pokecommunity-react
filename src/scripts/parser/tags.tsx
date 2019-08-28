@@ -281,7 +281,7 @@ end[/code]`,
     example: '[img]https://www.pokecommunity.com/uploads/imageshare/31_1557635579569237794.png[/img]',
 
     render({ children }) {
-      return <img src={children.toString()} />
+      return <img src={children.toString()} alt="" />
     },
   },
 
