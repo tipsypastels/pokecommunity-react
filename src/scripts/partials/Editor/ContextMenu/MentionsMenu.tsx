@@ -144,7 +144,9 @@ export default class MentionsMenu extends Component<IProps, IState> {
 
     const mentionedName = this.getMentionedNameWithoutSymbol();
     return users
-      .filter(user => user.username.startsWith(mentionedName))
+      .filter(user => 
+        user.username.toLowerCase().startsWith(mentionedName.toLowerCase())
+      )
       .slice(0, MAX_MENTIONABLE_USERS_TO_SHOW_AT_ONCE);
   }
 

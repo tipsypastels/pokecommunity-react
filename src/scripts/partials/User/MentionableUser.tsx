@@ -10,6 +10,10 @@ interface IProps extends MinimalUserInterface {
 }
 
 const MentionableUser = (props: IProps) => {
+  // we don't use completedPartOfName directly because it might not have the same case as the real name. so instead we slice based on its length
+  const completedPartOfName = props.username
+    .slice(0, props.completedPartOfName.length);
+
   const autocompletablePartOfName = props.username
     .slice(props.completedPartOfName.length);
 
@@ -27,7 +31,7 @@ const MentionableUser = (props: IProps) => {
       
       <span className="username">
         <strong>
-          {props.completedPartOfName}
+          {completedPartOfName}
         </strong>
 
         <span>
