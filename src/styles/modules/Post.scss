@@ -39,10 +39,11 @@
   }
 
   & > .post-overflow-menu {
-    padding: 0.25rem;
+    padding: 0.25rem 0.5rem;
     background-color: #0069d9; // TODO colours etc
     color: mix(white, transparent, 85%);
     user-select: none;
+    text-align: right;
     
     @media screen and (min-width: 768px) {
       display: flex;

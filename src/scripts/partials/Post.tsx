@@ -162,6 +162,12 @@ class Post extends Component<PostProps, IState> {
 
     return (
       <div className="post-overflow-menu">
+        <div className="close-overflow d-none d-md-block" onClick={() => this.setOverflow(false)}>
+          <Icon name="times" />
+        </div>
+
+        <div className="flex-grows" />
+
         <When condition={currentUser.id !== user.id}>
           <SmartLink to={`/settings.php?do=addlist&userlist=ignore&u=${user.id}`} className="overflow-action">
             <Icon name="user-minus" fw />
@@ -187,12 +193,6 @@ class Post extends Component<PostProps, IState> {
             Delete Post
           </SmartLink>
         </When>
-
-        <div className="flex-grows" />
-
-        <div className="close-overflow d-none d-md-block" onClick={() => this.setOverflow(false)}>
-          <Icon name="times" />
-        </div>
       </div>
     );
   }
