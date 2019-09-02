@@ -228,6 +228,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         openEditor={this.openEditorToNew}
         openModeration={this.openModerationModal}
         selectPostsByFilter={this.selectPostsByFilter}
+        prefix={thread.prefix}
       />
     );
   }

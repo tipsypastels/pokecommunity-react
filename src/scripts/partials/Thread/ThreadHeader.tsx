@@ -15,6 +15,8 @@ import DailyArticleInterface from '../../types/DailyArticleInterface';
 
 import { standardDateTime } from '../../helpers/DateHelpers';
 import LinkedDailyArticle from './LinkedDailyArticle';
+import PrefixInterface from '../../types/PrefixInterface';
+import Prefix from './Prefix';
 
 interface IProps {
   title: string;
@@ -27,6 +29,7 @@ interface IProps {
   created: number;
   poll: PollInterface;
   forumTitle: string;
+  prefix?: PrefixInterface;
 
   forumIcon?: string;
   threadIcon?: string;
@@ -47,6 +50,7 @@ export default function ThreadHeader(props: IProps) {
     forumIcon,
     threadIcon,
     linkedDailyArticle,
+    prefix,
   } = props;
 
   return (
@@ -65,6 +69,7 @@ export default function ThreadHeader(props: IProps) {
 
           <div className="flex flex-v-center">
             <h2 className="thread-title">
+              <Prefix prefix={prefix} />
               {title}
             </h2>
 

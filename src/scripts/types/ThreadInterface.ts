@@ -3,6 +3,7 @@ import ForumInterface from './ForumInterface';
 import PollInterface from './PollInterface';
 import ContentMetaInterface from './ContentMetaInterface';
 import UserInterface from './UserInterface';
+import PrefixInterface from './PrefixInterface';
 
 export default interface ThreadInterface {
   id: number;
@@ -19,6 +20,7 @@ export default interface ThreadInterface {
   views: number;
 
   poll?: PollInterface;
+  prefix?: PrefixInterface;
   contentMeta?: ContentMetaInterface;
 
   user?: UserInterface;
