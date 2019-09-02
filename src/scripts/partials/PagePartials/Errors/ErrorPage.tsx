@@ -21,12 +21,20 @@ export default function ErrorPage(props: IProps) {
       </div>
 
       <div className="image-container d-none d-md-block">
-        <img src={props.image} title={props.imageTitle} />
+        <img 
+          src={props.image} 
+          title={props.imageTitle} 
+          alt={props.imageTitle}
+        />
       </div>
 
       {props.imageSmall && (
         <div className="d-block d-md-none text-center">
-          <img src={props.imageSmall} title={props.imageTitle} />
+          <img 
+            src={props.imageSmall} 
+            title={props.imageTitle}
+            alt={props.imageTitle} 
+          />
         </div>
       )}
     </Container>

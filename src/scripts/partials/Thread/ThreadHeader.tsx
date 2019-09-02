@@ -66,7 +66,6 @@ export default function ThreadHeader(props: IProps) {
             {forumTitle}
           </span>
 
-
           <div className="flex flex-v-center">
             <h2 className="thread-title">
               <Prefix prefix={prefix} />

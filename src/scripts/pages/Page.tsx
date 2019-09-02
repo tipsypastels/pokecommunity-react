@@ -6,8 +6,6 @@ import CommunityMenu from '../partials/Header/CommunityMenu';
 import Omnibar from '../partials/Header/Omnibar';
 import Footer from '../partials/Footer';
 
-import Err404 from '../partials/PagePartials/Errors/Err404';
-import Err500 from '../partials/PagePartials/Errors/Err500';
 import Loading from '../partials/PagePartials/Loading';
 
 import { BreadcrumbInterface } from '../types/BreadcrumbInterface';
