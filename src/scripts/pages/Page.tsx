@@ -12,10 +12,8 @@ import Loading from '../partials/PagePartials/Loading';
 
 import { BreadcrumbInterface } from '../types/BreadcrumbInterface';
 import AppContext from '../AppContext';
-import newcoreApi from '../bridge/newcoreApi';
+import newcoreApi, { NewcoreErrorCode, ERROR_PAGES } from '../bridge/newcoreApi';
 import { SearchScopeProps } from '../partials/Header/Omnibar/Tools/SearchPrompt';
-
-export type PageError = null | 404 | 500;
 
 export interface PageProps {
   appCurrentBanner: string | null;
@@ -29,7 +27,7 @@ interface IProps extends PageProps, SearchScopeProps {
   newBanner?: string;
   breadcrumbs?: BreadcrumbInterface[];
   htmlTitle?: string;
-  error: PageError;
+  error: NewcoreErrorCode;
 }
 
 export const baseTitle = 'The PokéCommunity Forums';
@@ -95,7 +93,12 @@ export default class Page extends Component<IProps> {
   }
 
   getBanner() {
-    const { appCurrentBanner } = this.props;
+    const { appCurrentBanner, error } = this.props;
+
+    // error pages don't have banners
+    if (error) {
+      return null;
+    }
 
     if (appCurrentBanner) {
       return (
@@ -110,21 +113,19 @@ export default class Page extends Component<IProps> {
   }
 
   getContent() {
-    if (this.props.error === 404) {
-      return <Err404 />;
+    const { error, loading, children } = this.props;
+
+    if (error) {
+      return ERROR_PAGES[error];
     }
 
-    if (this.props.error === 500) {
-      return <Err500 />;
-    }
-
-    if (this.props.loading) {
+    if (loading) {
       return <Loading />;
     }
 
     return (
       <Container fluid>
-        {this.props.children}
+        {children}
       </Container>
     )
   }

@@ -1,33 +1,33 @@
-import React, { Component } from 'react'
-import { Container, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import SmartLink from '../../SmartLink';
+import ErrorPage from './ErrorPage';
 
-//TODO: link to error page doesn't seem to work, unknown if window.history.back() will actually pull back to the proper place.
+import NotFoundImage from '../../../../images/errors/notfound.png';
+import NotFoundImageSmall from '../../../../images/errors/notfound_small.png';
 
-export default class Err404 extends Component {
-  render() {
-    return (
-      <Container fluid className="Err404">
-        <div className="error-message">
-          <img src="https://i.imgur.com/9hUsWtN.png" alt="Red made an error!" className="error-image" />
-
-          <div className="error-text">
-            <div>
-              <div className="main-text">
-                Red couldn't find the page you were looking for!
-                </div>
-              <div>
-                Try <span className="link" onClick={() => window.history.back()}>going back</span> a page, or <a href="/search.php">search</a> for what you were looking for. If you think we should know what went wrong, feel free to <a href="/sendmessage.php">contact us</a>!
-                  </div>
-            </div>
-            <Link to="/">
-              <Button variant="primary" className="error-home">
-                Go Home
-                </Button>
-            </Link>
-          </div>
+export default function Err404() {
+  return (
+    <ErrorPage 
+      title="Huh?" 
+      subtitle="We're not sure what you're looking for, but it's not here." image={NotFoundImage}
+      imageSmall={NotFoundImageSmall}
+      imageTitle="Psyduck is as confused as you are..."
+    >
+      <div className="links">
+        <div className="lead">
+          One of these links might help you out:
         </div>
-      </Container>
-    )
-  }
+        
+        <ul>
+          <li><SmartLink to="/">Home</SmartLink></li>
+          <li><SmartLink to="/search.php">Search</SmartLink></li>
+          <li><SmartLink to="/faq.php">Help</SmartLink></li>
+        </ul>
+      </div>
+
+      <div className="contact">
+        <span className="lead">Think this might be a mistake?</span> Post a thread in <SmartLink to="forumdisplay.php?fn=support">Feedback & Support</SmartLink> or drop a message on our <a href="https://discord.gg/hpQpnzX">Discord server</a>!
+      </div>
+    </ErrorPage>
+  );
 }

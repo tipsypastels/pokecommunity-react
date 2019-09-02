@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import queryString from 'query-string';
 
-import Page, { PageProps, PageError } from './Page';
+import Page, { PageProps } from './Page';
 import ThreadHeader from '../partials/Thread/ThreadHeader';
 import Viewing from '../partials/Viewing';
 import QuickReply from '../partials/Thread/QuickReply';
@@ -20,7 +20,7 @@ import PostWrapper from '../partials/Post/PostWrapper';
 import PostModal from '../partials/PostModal';
 import ModerationModal from '../partials/Thread/ModerationModal';
 
-import newcoreApi from '../bridge/newcoreApi';
+import newcoreApi, { handleNewcoreError, NewcoreErrorCode } from '../bridge/newcoreApi';
 import { getDailyArticle } from '../bridge/dailyApi';
 import PostVisibility from '../types/PostVisibility';
 
@@ -36,7 +36,7 @@ interface IState {
   editorOpen: boolean;
   editedPost?: PostInterface;
   moderationOpen: boolean;
-  error: PageError;
+  error: NewcoreErrorCode;
   selectedPosts: Set<number>;
   linkedDailyArticle?: DailyArticleInterface;
 }
@@ -81,11 +81,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         await this.getLinkedDailyArticle();
       });
     } catch (e) {
-      if (e.toString().match(/404/)) {
-        this.setState({ error: 404 });
-      } else {
-        this.setState({ error: 500 });
-      }
+      handleNewcoreError(e, error => this.setState({ error }));
     }
   }
 

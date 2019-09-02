@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react';
-import Page, { PageProps, PageError } from '../Page';
+import Page, { PageProps } from '../Page';
 import TagModel from '../../parser/TagModel';
 import BBCodeTag from '../../partials/Docs/BBCodeTag';
 import Block from '../../partials/Block';
@@ -7,11 +7,12 @@ import { Form, Jumbotron, Button } from 'react-bootstrap';
 import { TagList } from '../../parser/tags';
 import { filterTags } from '../../parser/tagFunctions';
 import BBCodePlayground from '../../partials/BBCodePlayground';
+import { NewcoreErrorCode } from '../../bridge/newcoreApi';
 
 type IProps = PageProps;
 
 interface IState {
-  error: PageError;
+  error: NewcoreErrorCode;
   filter: string;
   playgroundOpen: boolean;
 }

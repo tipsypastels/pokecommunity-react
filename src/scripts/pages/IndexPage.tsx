@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 
-import Page, { PageProps, PageError } from './Page';
+import Page, { PageProps } from './Page';
 import BulletinBoard from '../partials/Index/BulletinBoard';
 
 import CategoryInterface from '../types/CategoryInterface';
 import Category from '../partials/Index/Category';
+import { NewcoreErrorCode } from '../bridge/newcoreApi';
 
 type IProps = PageProps;
 
 interface IState {
-  error: PageError;
+  error: NewcoreErrorCode;
   categories: CategoryInterface[];
 }
 

@@ -1,0 +1,43 @@
+.ErrorPage {
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2rem;
+
+  .text-container {
+    width: 500px;
+    max-width: 100%;
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    h3 {
+      font-size: 1.65rem;
+      font-weight: 500;
+    }
+
+    .links {
+      .lead {
+        margin-top: 1rem;
+        margin-bottom: 0.25rem;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+    }
+
+    .contact {
+      margin-top: 1rem;
+    }
+  }
+
+  .image-container {
+    img {
+      max-height: 500px;
+    }
+  }
+}
