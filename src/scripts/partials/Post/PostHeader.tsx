@@ -10,6 +10,7 @@ import PostUserInterface from '../../types/PostUserInterface';
 import SmartLink from '../SmartLink';
 
 import { yearsSince, userIsNew } from '../../helpers/DateHelpers';
+import Parser from '../../parser/Parser';
 
 interface IProps {
   user: PostUserInterface;
@@ -79,7 +80,7 @@ export default class PostHeader extends Component<IProps, IState> {
     let usertitle = null;
     if (user.usertitle) {
       usertitle = (
-        <h2 dangerouslySetInnerHTML={{ __html: user.usertitle }} />
+        <Parser bbcode={user.usertitle} />
       );
     }
 
