@@ -17,8 +17,8 @@ const communityMenuElemements: CommunityMenuElementProps[] = [
   },
   {
     className: "cmenu-seventh-gen",
-    name: "Seventh Gen",
-    link: "/forumdisplay.php?f=400",
+    name: "Sword & Shield",
+    link: "/forumdisplay.php?fn=pokemon-sword-shield",
   },
   {
     className: "cmenu-daily",
