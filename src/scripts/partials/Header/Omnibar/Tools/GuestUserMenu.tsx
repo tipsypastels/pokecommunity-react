@@ -7,6 +7,8 @@ import newcoreApi from '../../../../bridge/newcoreApi';
 
 import SmartLink from '../../../SmartLink';
 
+import Cookies from 'js-cookie';
+
 interface IState {
   email: string;
   password: string;
@@ -106,8 +108,13 @@ export default class GuestUserMenu extends Component<{}, IState> {
         data: { email, password }
       });
 
-      const user = response.data;
+      const { user, access, refresh } = response.data;
+
       this.context.setCurrentUser(user);
+      
+      Cookies.set('access', access);
+      Cookies.set('refresh', refresh);
+      
     } catch(e) {
       console.error(e);
     }

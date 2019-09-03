@@ -140,7 +140,7 @@ export default class Page extends Component<IProps> {
         withCredentials: true,
       });
 
-      const user = response.data;
+      const { user } = response.data;
       this.context.setCurrentUser(user);
     } catch (e) {
       // KEEP it's fine to ignore this error, doesn't need to display to the user unless they're specifically trying to login/register imo
