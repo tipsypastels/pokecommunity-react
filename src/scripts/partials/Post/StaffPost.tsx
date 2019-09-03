@@ -6,6 +6,7 @@ interface IProps {
   color: string;
   icon?: string;
   former: boolean;
+  className?: string;
 }
 
 function iconFor(icon?: string) {
@@ -28,8 +29,8 @@ function iconFor(icon?: string) {
   }
 }
 
-const StaffPost = ({ title, color, icon, former }: IProps) => (
-  <div className="StaffPost" style={{ backgroundColor: color }}>
+const StaffPost = ({ title, color, icon, former, className }: IProps) => (
+  <div className={`StaffPost ${className}`} style={{ backgroundColor: color }}>
     {iconFor(icon)} {former && 'Former'} {title} Post
   </div>
 )

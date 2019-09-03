@@ -7,7 +7,7 @@ import Preview from '../../Editor/Preview';
 
 export default class ColumnsLayout extends Component<LayoutItemProps> {
   render() {
-    const { content, setContent, setMentions } = this.props;
+    const { content, setContent, setMentions, staffPostGroup } = this.props;
 
     return (
       <Modal.Body className="ColumnsLayout">
@@ -23,6 +23,7 @@ export default class ColumnsLayout extends Component<LayoutItemProps> {
             <Preview
               content={content}
               setMentions={setMentions}
+              staffPostGroup={staffPostGroup}
             />
           </Col>
         </Row>

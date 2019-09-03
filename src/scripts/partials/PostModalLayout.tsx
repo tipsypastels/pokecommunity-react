@@ -3,6 +3,7 @@ import { Modal } from 'react-bootstrap';
 import LayoutSwitcher from './PostModal/LayoutSwitcher';
 import TabbedLayout from './PostModal/LayoutItems/TabbedLayout';
 import LayoutContainer from './PostModal/LayoutContainer';
+import UsergroupInterface from '../types/UsergroupInterface';
 
 export type EditorLayout = 'columns' | 'rows' | 'tabbed';
 
@@ -18,6 +19,7 @@ interface IProps {
   content: string;
   setContent: (content: string, callback?: () => void) => void;
   setMentions: (mentions: Set<string>) => void;
+  staffPostGroup?: UsergroupInterface;
 
   show: boolean;
   close: () => void;
@@ -86,6 +88,7 @@ export default function PostModalLayout(props: IProps) {
           content={props.content}
           setContent={props.setContent}
           setMentions={props.setMentions}
+          staffPostGroup={props.staffPostGroup}
         />
       </div>
 
@@ -95,6 +98,7 @@ export default function PostModalLayout(props: IProps) {
           content={props.content}
           setContent={props.setContent}
           setMentions={props.setMentions}
+          staffPostGroup={props.staffPostGroup}
         />
       </div>
     </Modal>

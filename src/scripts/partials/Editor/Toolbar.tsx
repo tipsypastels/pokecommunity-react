@@ -2,7 +2,6 @@ import React, { Component, ReactNode } from 'react';
 import { Dropdown } from 'react-bootstrap';
 
 import Icon from '../Icon';
-import StaffPostOptions from './StaffPostOptions';
 import { ContextMenuOptions } from './ContextMenu';
 import TextareaTransformer from '../../helpers/Editor/TextareaTransformer';
 
@@ -85,12 +84,6 @@ export default class Toolbar extends Component<IProps> {
           <button title="Wrap text in a spoiler" onClick={tag('spoiler')}>
             <Icon name="eye-slash" />
           </button>
-        </div>
-
-        <div className="flex-grows" />
-
-        <div className="tool-group">
-          <StaffPostOptions />
         </div>
       </div>
     );

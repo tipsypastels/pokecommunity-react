@@ -7,7 +7,7 @@ import { LayoutItemProps } from '../LayoutContainer';
 
 export default class TabbedLayout extends Component<LayoutItemProps> {
   render() {
-    const { content, setContent } = this.props;
+    const { content, setContent, staffPostGroup } = this.props;
 
     return (
       <Tab.Container id="tabbed-layout" defaultActiveKey="write">
@@ -24,6 +24,7 @@ export default class TabbedLayout extends Component<LayoutItemProps> {
               <Preview 
                 content={content}
                 setMentions={this.props.setMentions} 
+                staffPostGroup={staffPostGroup}
               />
             </Tab.Pane>
           </Tab.Content>

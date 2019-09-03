@@ -12,6 +12,8 @@ import PostModalLayout from './PostModalLayout';
 import AttachmentMenu from './PostModal/AttachmentMenu';
 import FileCollection from '../helpers/FileCollection';
 import { attachments } from '../../configs/config.json';
+import StaffPostOptions from './PostModal/StaffPostOptions';
+import UsergroupInterface from '../types/UsergroupInterface';
 
 
 // each post/new tracks its content seperately
@@ -35,6 +37,7 @@ interface IState {
   files: FileCollection;
   loadedDraftIndicator: boolean;
   lastInvalidFileType: string;
+  staffPostGroup: UsergroupInterface;
 }
 
 // the key used for localstorage
@@ -57,6 +60,7 @@ export default class PostModal extends Component<IProps, IState> {
       mentions: new Set<string>(),
       loadedDraftIndicator: false,
       lastInvalidFileType: null,
+      staffPostGroup: null,
     }
   }
   
@@ -81,14 +85,22 @@ export default class PostModal extends Component<IProps, IState> {
         content={this.state.content}
         setContent={this.setContentAndResetDraftIndicator}
         setMentions={this.setMentions}
+        staffPostGroup={this.state.staffPostGroup}
         draftIndicator={this.getDraftIndicator()}
         topRightMenus={
-          <AttachmentMenu 
-            files={this.state.files}
-            addFiles={this.addFiles}
-            removeFile={this.removeFile}
-            lastInvalidType={this.state.lastInvalidFileType}
-          />
+          <React.Fragment>
+            <AttachmentMenu 
+              files={this.state.files}
+              addFiles={this.addFiles}
+              removeFile={this.removeFile}
+              lastInvalidType={this.state.lastInvalidFileType}
+            />
+  
+            <StaffPostOptions
+              staffPostGroup={this.state.staffPostGroup}
+              setStaffPostGroup={this.setStaffPostGroup}
+            />
+          </React.Fragment>
         }
         submitButton={
           <SubmitButton
@@ -236,5 +248,9 @@ export default class PostModal extends Component<IProps, IState> {
       files: this.state.files.without(removingFile),
       lastInvalidFileType: null,
     });
+  }
+
+  setStaffPostGroup = (staffPostGroup: UsergroupInterface) => {
+    this.setState({ staffPostGroup });
   }
 }
