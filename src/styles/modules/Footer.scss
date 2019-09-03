@@ -1,14 +1,12 @@
 //TODO switch out colors
-$internal-links:
-(
+$internal-links: (
   link-staff: rgb(0, 233, 132),
   link-rules: rgb(255, 144, 0),
   link-about: rgb(252, 53, 0),
   link-contact: rgb(0, 191, 239),
 );
 
-$social-links:
-(
+$social-links: (
   social-facebook: rgb(59, 89, 152),
   social-twitter: rgb(85, 172, 238),
   social-instagram: rgb(233, 89, 80),
@@ -44,6 +42,18 @@ $social-links:
       text-align: left;
       margin-top: 8px;
       width: 200px;
+
+      display: flex;
+      align-items: center;
+
+      .label {
+        flex-grow: 1;
+      }
+
+      .theme-mascot {
+        height: 32px;
+        width: 32px;
+      }
     }
 
     .display-text {

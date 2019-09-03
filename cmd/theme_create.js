@@ -38,16 +38,21 @@ const questions = [
     name: 'bridge',
     message: 'Does this theme already exist as a PC 2.0 theme? If so, enter its theme id number. If not, just press enter:'
   },
+  {
+    type: 'input',
+    name: 'mascotImage',
+    message: 'Optionally, add a mascot image URL. This is typically a Pokemon menu sprite of the "mascot" Pokemon of this theme. You can find such images here https://archives.bulbagarden.net/wiki/Category:Generation_VI_menu_sprites',
+  },
 ];
 
-inquirer.prompt(questions).then(({ name, author, variant, image, bridge }) => {
+inquirer.prompt(questions).then(({ name, author, variant, image, bridge, mascotImage }) => {
   let jsonChanged = false;
 
   const slug = slugify(name).toLowerCase();
 
   if (!(slug in THEME_CONFIG.themes)) {
     jsonChanged = true;
-    THEME_CONFIG.themes[slug] = { name, variant, image, author };
+    THEME_CONFIG.themes[slug] = { name, variant, image, author, mascotImage };
     console.log('Configured theme settings...');
   }
 
