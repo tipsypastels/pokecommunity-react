@@ -1,6 +1,12 @@
 $reaction-size: 48px;
 $reaction-hover-size: 64px;
 
+@each $name, $url in $reaction-images {
+  .reaction.reaction-#{$name} {
+    background-image: url(#{$url});
+  }
+}
+
 .ReactionsPopover {
   max-width: unset;
     
@@ -14,6 +20,8 @@ $reaction-hover-size: 64px;
       transition: 0.25s ease-in-out;
       
       .reaction {
+        background-size: cover;
+
         width: $reaction-size;
         height: $reaction-size;
     

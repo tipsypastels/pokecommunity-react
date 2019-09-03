@@ -44,7 +44,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "create:theme": "node cmd/theme_create.js",
-    "css:modules:bundle": "node cmd/bundle_css_modules.js"
+    "css:modules:bundle": "node cmd/bundle_css_modules.js",
+    "css:themes:regen": "node cmd/regen_css_themes.js"
   },
   "eslintConfig": {
     "extends": "react-app"

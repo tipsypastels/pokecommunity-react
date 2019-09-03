@@ -116,6 +116,19 @@
     #6610f2,
   );
 
+  // ==================================
+  // PART 6 Post Content
+  // ==================================
+
+  // The relative URLS used for reactions. If your theme adds custom reactions images, I recommend putting them in in a similar place, but in a folder named after your theme rather than "defaults".
+  $reaction-images: (
+    like:     '/static-images/reactions/defaults/like.png',
+    love:     '/static-images/reactions/defaults/love.png',
+    laugh:    '/static-images/reactions/defaults/laugh.png',
+    surprise: '/static-images/reactions/defaults/surprise.png',
+    sad:      '/static-images/reactions/defaults/sad.png',
+    angry:    '/static-images/reactions/defaults/angry.png',
+  );
 
   // --- IMPORTANT ---
   // Do not remove this line or add anything below it.
