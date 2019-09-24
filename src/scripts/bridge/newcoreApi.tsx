@@ -35,7 +35,7 @@ const MOCK_DATA_PROVIDERS = {
 function findMockDataForUrl(url: string) {
   for (let name in MOCK_DATA_PROVIDERS) {
     if (MOCK_DATA_PROVIDERS[name].exec(url)) {
-      console.warn(`The request for ${url} returned an error. Returning preset mock ${name} data. This will not happen in development mode.`);
+      console.log(`Using mock data for ${name} ${url}.`);
 
       return MOCK_DATA[name];
     }
