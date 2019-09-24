@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import LazyAsyncDropdown from './LazyAsyncDropdown';
 import AppContext from '../../../../AppContext';
 import ClickableNotification from './ClickableNotification';
+import Action from '../../../Action';
 
 export default function Messages() {
   const [{ messages }, appDispatch] = useContext(AppContext);
@@ -16,6 +17,21 @@ export default function Messages() {
       setCurrent={messages => {
         appDispatch({ type: 'SET_MESSAGES', messages });
       }}
+      additionalControls={
+        <React.Fragment>
+          <Action 
+            name="Inbox"
+            icon="inbox"
+            href="/private.php"
+          />
+
+          <Action
+            name="New Message"
+            icon="pencil"
+            href="/private.php?do=newpm"
+          />
+        </React.Fragment>
+      }
       emptyState={{
         title: 'No Messages',
         icon: 'envelope',
