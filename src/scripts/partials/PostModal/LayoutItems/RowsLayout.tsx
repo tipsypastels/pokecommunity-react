@@ -32,7 +32,9 @@ export default class RowsLayout extends Component<LayoutItemProps> {
       <Modal.Footer>
         <Preview 
           content={this.props.content}
-          setMentions={this.props.setMentions} 
+          setMentions={this.props.setMentions}
+          staffPostGroup={this.props.staffPostGroup}
+
         />
       </Modal.Footer>
     );
