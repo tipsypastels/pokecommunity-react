@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from 'react';
+import React, { useContext } from 'react';
 import { NavItem, Dropdown, Nav } from 'react-bootstrap';
 
 import Icon, { IconProps } from '../../../Icon';
@@ -11,129 +11,119 @@ export interface UserMenuItem {
   icon: string | IconProps;
 }
 
-export default class UserMenu extends Component {
-  static contextType = AppContext;
+export default function UserMenu() {
+  const [{ currentUser }] = useContext(AppContext);
 
-  render() {
-    return (
-      <Dropdown
-        alignRight
-        as={NavItem}
-        className="UserMenu"
-        id="user-menu"
+  let avatar;
+  if (currentUser.avatar) {
+    avatar = (
+      <img
+        className="avatar d-none d-md-block"
+        src={currentUser.avatar}
+        alt="You"
+      />
+    )
+  }
+
+  const menuUserbit = (
+    <React.Fragment>
+      {currentUser.username}
+      {avatar}
+    </React.Fragment>
+  );
+
+  const menuItems: UserMenuItem[] = [
+    {
+      name: 'Profile',
+      link: `/member.php?u=${currentUser.id}`,
+      icon: 'user',
+    },
+    {
+      name: 'Dashboard',
+      link: '/dashboard',
+      icon: 'tachometer',
+    },
+    {
+      name: 'Settings',
+      link: '/settings',
+      icon: 'sliders-v-square'
+    },
+    {
+      name: 'Friends',
+      link: '/settings/friends',
+      icon: { name: 'address-book', group: 'far' },
+    },
+    {
+      name: 'Followed',
+      link: '/subscription.php',
+      icon: 'bookmark',
+    },
+    {
+      name: 'Updates',
+      link: '/search.php?do=getnew&and=subscribe',
+      icon: { name: 'check', mask: 'fas fa-heart', transform: 'shrink-8 up-.5' }
+    },
+    {
+      name: 'Edit Avatar',
+      link: '/settings/editavatar',
+      icon: { name: 'portrait', group: 'far' },
+    },
+    {
+      name: 'Edit Flair',
+      link: '/settings/postflair',
+      icon: 'fire',
+    },
+    {
+      name: 'Edit Profile',
+      link: '/settings/profile',
+      icon: { name: 'address-card', group: 'fal' },
+    },
+  ];
+
+  return (
+    <Dropdown
+      alignRight
+      as={NavItem}
+      className="UserMenu"
+      id="user-menu"
+    >
+      <Dropdown.Toggle
+        className="user-menu-toggle"
+        id="user-menu-toggle"
+        as={Nav.Link}
       >
-        <Dropdown.Toggle 
-          className="user-menu-toggle" 
-          id="user-menu-toggle" 
-          as={Nav.Link}
-        >
-          {this.getMenuUserbit()}
-        </Dropdown.Toggle>
-        
-        <Dropdown.Menu>
-          <Dropdown.Header>
-            {this.getMenuItems().map((item: UserMenuItem) => (
-              <SmartLink 
-                key={item.name} 
-                to={item.link} 
-                className="user-menu-item"
-              >
-                <Icon.Maybe from={item.icon} />
+        {menuUserbit}
+      </Dropdown.Toggle>
 
-                <span>
-                  {item.name}
-                </span>
-              </SmartLink>
-            ))}
-          </Dropdown.Header>
-
-          <Dropdown.Divider />
-
-          <Dropdown.Header>
-            <a href="#TODO logout" className="sign-out">
-              <Icon name="sign-out" fw />
+      <Dropdown.Menu>
+        <Dropdown.Header>
+          {menuItems.map((item: UserMenuItem) => (
+            <SmartLink
+              key={item.name}
+              to={item.link}
+              className="user-menu-item"
+            >
+              <Icon.Maybe from={item.icon} />
 
               <span>
-                Sign Out
+                {item.name}
               </span>
-            </a>
-          </Dropdown.Header>
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  }
+            </SmartLink>
+          ))}
+        </Dropdown.Header>
 
-  getMenuUserbit(): ReactNode {
-    const { currentUser } = this.context;
-    
-    let avatar;
-    if (currentUser.avatar) {
-      avatar = (
-        <img 
-          className="avatar d-none d-md-block" 
-          src={currentUser.avatar} 
-          alt="You"
-        />
-      )
-    }
+        <Dropdown.Divider />
 
-    return (
-      <React.Fragment>
-        {currentUser.username}
-        {avatar}
-      </React.Fragment>
-    );
-  }
+        <Dropdown.Header>
+          <a href="#TODO logout" className="sign-out">
+            <Icon name="sign-out" fw />
 
-  getMenuItems(): UserMenuItem[] {
-    const { currentUser } = this.context;
-
-    return [
-      {
-        name: 'Profile',
-        link: `/member.php?u=${currentUser.id}`,
-        icon: 'user',
-      },
-      {
-        name: 'Dashboard',
-        link: '/dashboard',
-        icon: 'tachometer',
-      },
-      {
-        name: 'Settings',
-        link: '/settings',
-        icon: 'sliders-v-square'
-      },
-      {
-        name: 'Friends',
-        link: '/settings/friends',
-        icon: { name: 'address-book', group: 'far' },
-      },
-      {
-        name: 'Followed',
-        link: '/subscription.php',
-        icon: 'bookmark',
-      },
-      {
-        name: 'Updates',
-        link: '/search.php?do=getnew&and=subscribe',
-        icon: { name: 'check', mask: 'fas fa-heart', transform: 'shrink-8 up-.5' }
-      },
-      {
-        name: 'Edit Avatar',
-        link: '/settings/editavatar',
-        icon: { name: 'portrait', group: 'far' },
-      },
-      {
-        name: 'Edit Flair',
-        link: '/settings/postflair',
-        icon: 'fire',
-      },
-      {
-        name: 'Edit Profile',
-        link: '/settings/profile',
-        icon: { name: 'address-card', group: 'fal' },
-      },
-    ]
-  }
+            <span>
+              Sign Out
+            </span>
+          </a>
+        </Dropdown.Header>
+      </Dropdown.Menu>
+    </Dropdown>
+  );
 }

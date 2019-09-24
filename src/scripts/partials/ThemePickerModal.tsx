@@ -5,11 +5,7 @@ import { Modal, Nav } from 'react-bootstrap';
 import { themes } from '../../configs/themes.json';
 
 export default function ThemePickerModal() {
-  const { 
-    themePickerOpen, 
-    setThemePickerOpen, 
-    setTheme, 
-  } = useContext(AppContext);
+  const [{ themePickerOpen }, appDispatch] = useContext(AppContext);
   
   const [filter, setFilter] = useState<string>(null);
 
@@ -31,7 +27,7 @@ export default function ThemePickerModal() {
     <Modal
       dialogClassName="ThemePickerModal modal-dialog-centered"
       show={themePickerOpen}
-      onHide={() => setThemePickerOpen(false)}
+      onHide={() => appDispatch({ type: 'CLOSE_THEME_PICKER' })}
     >
       <Modal.Header closeButton>
         <Modal.Title>
@@ -75,8 +71,7 @@ export default function ThemePickerModal() {
 
             return (
               <div key={slug} className="theme" onClick={() => {
-                setTheme(slug);
-                setThemePickerOpen(false);
+                appDispatch({ type: 'SET_THEME', theme: slug });
               }}>
                 <img
                   alt={`Preview of ${theme.name}`}

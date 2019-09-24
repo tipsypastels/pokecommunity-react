@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap';
 import SubmitButton from './PostModal/SubmitButton';
 import ThreadInterface from '../types/ThreadInterface';
 import PostInterface from '../types/PostInterface';
-import AppContext from '../AppContext';
 import Pronoun from './Pronoun';
 import PostModalLayout from './PostModalLayout';
 
@@ -44,8 +43,6 @@ interface IState {
 const lsKey = (key: string) => `pokecomm3_draft_${key}`;
 
 export default class PostModal extends Component<IProps, IState> {
-  static contextType = AppContext;
-
   constructor(props) {
     super(props);
 

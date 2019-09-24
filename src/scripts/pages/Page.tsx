@@ -26,12 +26,7 @@ interface IProps extends SearchScopeProps {
 export const baseTitle = 'The PokéCommunity Forums';
 
 export default function Page(props: IProps) {
-  const { 
-    banner, 
-    setBanner,
-    currentUser,
-    setCurrentUser,
-  } = useContext(AppContext);
+  const [{ banner, currentUser }, appDispatch] = useContext(AppContext);
 
   useEffect(() => {
     if (props.htmlTitle) {
@@ -46,8 +41,8 @@ export default function Page(props: IProps) {
       return;
     }
 
-    setBanner(props.newBanner);
-  }, [banner, setBanner, props.newBanner, props.loading]);
+    appDispatch({ type: 'SET_BANNER', banner: props.newBanner });
+  }, [banner, appDispatch, props.newBanner, props.loading]);
 
   useEffect(() => {
     if (currentUser) {
@@ -65,12 +60,12 @@ export default function Page(props: IProps) {
         });
 
         const { user } = response.data;
-        setCurrentUser(user);
+        appDispatch({ type: 'SIGN_IN', user });
       } catch (e) {
-        setCurrentUser(null);
+        appDispatch({ type: 'SIGN_OUT' });
       }
     })();
-  }, [props.name, currentUser, setCurrentUser]);
+  }, [props.name, currentUser, appDispatch]);
 
   const readyClass = props.loading
     ? 'is-loading'
@@ -122,122 +117,3 @@ export default function Page(props: IProps) {
     </div>
   );
 }
-
-// export default class Page extends Component<IProps> {
-//   static contextType = AppContext;
-
-//   static defaultProps = {
-//     newBanner: null,
-//   };
-
-//   async componentDidMount() {
-//     this.setTitle();
-//     await this.whoAmI();
-//   }
-
-//   componentDidUpdate() {
-//     this.setTitle();
-//     this.setAppCurrentBanner();
-//   }
-
-//   render() {
-//     const readyClass = this.props.loading
-//       ? 'is-loading'
-//       : 'is-ready';
-
-//     return (
-//       <div className={`Page ${this.props.name}Page ${readyClass}`}>
-//         <CommunityMenu />
-//         <Omnibar 
-//           breadcrumbs={this.props.breadcrumbs} 
-//           searchScope={this.props.searchScope} 
-//         />
-        
-//         {this.getBanner()}
-//         {this.getContent()}
-//         <Footer />
-//       </div>
-//     )
-//   }
-
-//   setAppCurrentBanner() {
-//     const {
-//       setAppBanner,
-//       appCurrentBanner,
-//       newBanner,
-//       loading
-//     } = this.props;
-
-//     if (loading || appCurrentBanner === newBanner) {
-//       return;
-//     }
-
-//     setAppBanner(newBanner);
-//   }
-
-//   setTitle() {
-//     if (this.props.htmlTitle) {
-//       document.title = [this.props.htmlTitle, baseTitle].join(' - ');
-//     } else {
-//       document.title = baseTitle;
-//     }
-//   }
-
-  // getBanner() {
-  //   const { appCurrentBanner, error } = this.props;
-
-  //   // error pages don't have banners
-  //   if (error) {
-  //     return null;
-  //   }
-
-  //   if (appCurrentBanner) {
-  //     return (
-  //       <div
-  //         className="forum-banner"
-  //         dangerouslySetInnerHTML={{ __html: appCurrentBanner }}
-  //       />
-  //     )
-  //   }
-
-  //   return <DefaultBanner />
-  // }
-
-//   getContent() {
-//     const { error, loading, children } = this.props;
-
-//     if (error) {
-//       return ERROR_PAGES[error];
-//     }
-
-//     if (loading) {
-//       return <Loading />;
-//     }
-
-//     return (
-//       <Container fluid>
-//         {children}
-//       </Container>
-//     )
-//   }
-
-//   async whoAmI() {
-//     if (this.context.currentUser) {
-//       return;
-//     }
-
-//     try {
-//       const response = await newcoreApi({
-//         method: 'get',
-//         url: '/auth/whoami',
-//         withCredentials: true,
-//       });
-
-//       const { user } = response.data;
-//       this.context.setCurrentUser(user);
-//     } catch (e) {
-//       // KEEP it's fine to ignore this error, doesn't need to display to the user unless they're specifically trying to login/register imo
-//       this.context.setCurrentUser(null);
-//     }
-//   }
-// }

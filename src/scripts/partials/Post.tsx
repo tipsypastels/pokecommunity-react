@@ -121,7 +121,7 @@ class Post extends Component<PostProps, IState> {
   }
 
   getPostLayout(): PostLayout {
-    const { currentUser } = this.context;
+    const [{ currentUser }] = this.context;
     if (currentUser) {
       return currentUser.profileFields 
         && currentUser.profileFields.postLayout;
@@ -152,7 +152,7 @@ class Post extends Component<PostProps, IState> {
   }
 
   getOverflowMenu() {
-    const { currentUser } = this.context;
+    const [{ currentUser }] = this.context;
 
     if (!this.state.overflowActive || !currentUser) {
       return null;

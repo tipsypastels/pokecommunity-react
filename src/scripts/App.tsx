@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import UserInterface from './types/UserInterface';
@@ -27,38 +27,84 @@ export const POKECOMM3_ROUTES = {
   '/docs/bbcode': BBCodePage,
 };
 
-export default function App() {
-  const [theme, _setTheme] = useState<string>(getCurrentTheme);
-  const [themePickerOpen, setThemePickerOpen] = useState(false);
-  const [banner, setBanner] = useState<string>(null);
-  const [currentUser, setCurrentUser] = useState<UserInterface>(null);
-  const [notifications, setNotifications] = useState<NotificationInterface[]>([]);
-  const [messages, setMessages] = useState<NotificationInterface[]>([]);
+export type AppState = {
+  theme: string;
+  themePickerOpen: boolean;
+  banner: string;
+  currentUser: UserInterface;
+  notifications: NotificationInterface[];
+  messages: NotificationInterface[];
+}
 
-  function setTheme(theme: string) {
-    _setTheme(theme);
-    localStorage.setItem(themeLocalstorageKey, theme);
+export type AppAction =
+  | { type: 'SET_THEME', theme: string }
+  | { type: 'OPEN_THEME_PICKER' }
+  | { type: 'CLOSE_THEME_PICKER' }
+  | { type: 'SET_BANNER', banner: string }
+  | { type: 'SIGN_IN', user: UserInterface }
+  | { type: 'SIGN_OUT' }
+  | { type: 'SET_NOTIFICATIONS', notifications: NotificationInterface[] }
+  | { type: 'APPEND_NOTIFICATIONS', notifications: NotificationInterface[] }
+  | { type: 'SET_MESSAGES', messages: NotificationInterface[] }
+  | { type: 'APPEND_MESSAGES', messages: NotificationInterface[] }
+
+function appReducer(state: AppState, action: AppAction): AppState {
+  switch(action.type) {
+    case 'SET_THEME': {
+      localStorage.setItem(themeLocalstorageKey, action.theme);
+      return { ...state, theme: action.theme, themePickerOpen: false };
+    }
+    case 'OPEN_THEME_PICKER': {
+      return { ...state, themePickerOpen: true };
+    }
+    case 'CLOSE_THEME_PICKER': {
+      return { ...state, themePickerOpen: false };
+    }
+    case 'SET_BANNER': {
+      return { ...state, banner: action.banner };
+    }
+    case 'SIGN_IN': {
+      return { ...state, currentUser: action.user };
+    }
+    case 'SIGN_OUT': {
+      return { ...state, currentUser: null };
+    }
+    case 'SET_NOTIFICATIONS': {
+      return { ...state, notifications: action.notifications };
+    }
+    case 'APPEND_NOTIFICATIONS': {
+      return { ...state, 
+        notifications: state.notifications.concat(action.notifications),
+      }
+    }
+    case 'SET_MESSAGES': {
+      return { ...state, messages: action.messages };
+    }
+    case 'APPEND_MESSAGES': {
+      return { ...state,
+        messages: state.messages.concat(action.messages),
+      }
+    }
+    default: return state;
   }
+}
+
+export default function App() {
+  const [appState, appDispatch] = useReducer(appReducer, {
+    theme: getCurrentTheme(),
+    themePickerOpen: false,
+    banner: null,
+    currentUser: null,
+    notifications: [],
+    messages: [],
+  });
 
   useEffect(() => {
-    document.body.dataset.theme = theme;
-  }, [theme]);
+    document.body.dataset.theme = appState.theme;
+  }, [appState.theme]);
 
   return (
-    <AppContext.Provider value={{
-      currentUser,
-      setCurrentUser,
-      theme,
-      setTheme,
-      themePickerOpen,
-      setThemePickerOpen,
-      banner,
-      setBanner,
-      notifications,
-      setNotifications,
-      messages,
-      setMessages,
-    }}>
+    <AppContext.Provider value={[appState, appDispatch]}>
       <div className="App">
         <ThemePickerModal />
 

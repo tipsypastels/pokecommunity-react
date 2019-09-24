@@ -7,7 +7,6 @@ import { SearchScopeProps } from './Omnibar/Tools/SearchPrompt';
 import { BreadcrumbInterface } from '../../types/BreadcrumbInterface';
 import Icon from '../Icon';
 
-import AppContext from '../../AppContext';
 import OmnibarTools from './Omnibar/OmnibarTools';
 
 import logo from '../../../images/common/brand-transparent.png';
@@ -18,8 +17,6 @@ interface IProps extends SearchScopeProps {
 }
 
 export default class Omnibar extends Component<IProps> {
-  static contextType = AppContext;
-
   render() {
     return (
       <Navbar className="Omnibar" variant="dark" fixed="top" expand>

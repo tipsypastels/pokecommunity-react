@@ -11,7 +11,7 @@ interface IProps {
 }
 
 export default function StaffPostOptions(props: IProps) {
-  const { currentUser } = useContext(AppContext);
+  const [{ currentUser }] = useContext(AppContext);
 
   if (!currentUser || !currentUser.usergroups || !currentUser.usergroups.length) {
     return null;

@@ -14,7 +14,7 @@ interface IProps {
 export default function Preview(props: IProps) {
   const mentions: Set<string> = new Set();
   
-  const { currentUser } = useContext(AppContext);
+  const [{ currentUser }] = useContext(AppContext);
   const userPreview = currentUser 
     ? (
       <PreviewUser user={currentUser} />

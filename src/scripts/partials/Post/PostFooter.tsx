@@ -117,7 +117,7 @@ class PostFooter extends Component<IProps> {
               deactivate={() => deselectPost(id)}
             />
           </When>
-          <When condition={!!this.context.currentUser}>
+          <When condition={!!this.context[0].currentUser}>
             <Action
               name="More"
               icon={{ name: 'ellipsis-h', group: 'fal' }}

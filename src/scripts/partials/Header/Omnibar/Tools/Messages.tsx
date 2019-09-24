@@ -4,7 +4,7 @@ import AppContext from '../../../../AppContext';
 import ClickableNotification from './ClickableNotification';
 
 export default function Messages() {
-  const { messages, setMessages } = useContext(AppContext);
+  const [{ messages }, appDispatch] = useContext(AppContext);
 
   return (
     <LazyAsyncDropdown
@@ -13,7 +13,9 @@ export default function Messages() {
       refreshUrl="/messages"
       markAsReadUrl="/messages/mark-as-read"
       current={messages}
-      setCurrent={setMessages}
+      setCurrent={messages => {
+        appDispatch({ type: 'SET_MESSAGES', messages });
+      }}
       emptyState={{
         title: 'No Messages',
         icon: 'envelope',

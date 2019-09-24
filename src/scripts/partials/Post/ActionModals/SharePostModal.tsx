@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
-import AppContext from '../../../AppContext';
 import UserInterface from '../../../types/UserInterface';
 import Icon from '../../Icon';
 import SmartLink from '../../SmartLink';
@@ -15,86 +14,69 @@ interface IProps {
   closeModal: () => void;
 }
 
-interface IState {
-  copied: boolean;
-}
+export default function SharePostModal({ postid, user, show, closeModal }: IProps) {
+  const [copied, setCopied] = useState(false);
 
-export default class SharePostModal extends Component<IProps, IState> {
-  static contextType = AppContext;
+  // TODO this doesn't actually exist, need it
+  const link = `https://pokecommunity.com/posts/${postid}`;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      copied: false,
-    };
-  }
+  const copyText = copied
+    ? 'Copied to clipboard!'
+    : 'Copy Link';
 
-  render() {
-    const { postid, show, closeModal } = this.props;
-
-    // TODO this doesn't actually exist, need it
-    const link = `https://pokecommunity.com/posts/${postid}`;
-
-    return (
-      <Modal 
-        dialogClassName="SharePostModal modal-dialog-centered"
-        show={show}
-        onHide={closeModal}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>
-            Share <Pronoun of={this.props.user} /> post
+  return (
+    <Modal
+      dialogClassName="SharePostModal modal-dialog-centered"
+      show={show}
+      onHide={closeModal}
+    >
+      <Modal.Header closeButton>
+        <Modal.Title>
+          Share <Pronoun of={user} /> post
           </Modal.Title>
-        </Modal.Header>
-        
-        <Modal.Body className="share-options-list">
-          <CopyToClipboard
-            text={link}
-            onCopy={() => this.setState({ copied: true })}
-          >
-            <div className="share-option copy-link">
-              <Icon name="link" fw />
-              <span>
-                {this.getCopyText()}
-              </span>
-            </div>
-          </CopyToClipboard>
+      </Modal.Header>
 
-          <SmartLink to={`/servicepanel.php?do=newbuzzentry&p=${postid}`} className="share-option promote-post">
-            <Icon name="microphone" fw />
+      <Modal.Body className="share-options-list">
+        <CopyToClipboard
+          text={link}
+          onCopy={() => setCopied(true)}
+        >
+          <div className="share-option copy-link">
+            <Icon name="link" fw />
             <span>
-              Promote Post
+              {copyText}
             </span>
-          </SmartLink>
+          </div>
+        </CopyToClipboard>
 
-          {/* These two should always be a href, as external links */}
-          <a 
-            className="share-option to-twitter"
-            href={`https://twitter.com/home?status=${link}`} 
-          >
-            <Icon name="twitter" group="fab" fw />
-            <span>
-              Post to Twitter
-            </span>
-          </a>
+        <SmartLink to={`/servicepanel.php?do=newbuzzentry&p=${postid}`} className="share-option promote-post">
+          <Icon name="microphone" fw />
+          <span>
+            Promote Post
+          </span>
+        </SmartLink>
 
-          <a
-            className="share-option to-facebook"
-            href={`https://www.facebook.com/sharer/sharer.php?u=${link}`}
-          >
-            <Icon name="facebook" group="fab" fw />
-            <span>
-              Post to Facebook
-            </span>
-          </a>
-        </Modal.Body>
-      </Modal>
-    )
-  }
+        {/* These two should always be a href, as external links */}
+        <a
+          className="share-option to-twitter"
+          href={`https://twitter.com/home?status=${link}`}
+        >
+          <Icon name="twitter" group="fab" fw />
+          <span>
+            Post to Twitter
+          </span>
+        </a>
 
-  getCopyText() {
-    return this.state.copied
-      ? 'Copied to clipboard!'
-      : 'Copy Link';
-  }
+        <a
+          className="share-option to-facebook"
+          href={`https://www.facebook.com/sharer/sharer.php?u=${link}`}
+        >
+          <Icon name="facebook" group="fab" fw />
+          <span>
+            Post to Facebook
+          </span>
+        </a>
+      </Modal.Body>
+    </Modal>
+  );
 }

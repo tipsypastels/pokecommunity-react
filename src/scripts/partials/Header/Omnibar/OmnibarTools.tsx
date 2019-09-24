@@ -27,7 +27,7 @@ interface ToolOptions {
 }
 
 export default function OmnibarTools(props: SearchScopeProps) {
-  const { currentUser } = useContext(AppContext);
+  const [{ currentUser }] = useContext(AppContext);
 
   function tool(name: keyof typeof TOOLS, opts: ToolOptions = {}) {
     if ('if' in opts && !opts.if) {

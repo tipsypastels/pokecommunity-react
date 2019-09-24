@@ -12,7 +12,7 @@ interface IProps {
 }
 
 export function useCurrentUsersVote(poll: PollInterface) {
-  const { currentUser } = useContext(AppContext);
+  const [{ currentUser }] = useContext(AppContext);
   return (
     currentUser && 
       poll.options.find(option => (
@@ -25,7 +25,7 @@ export function useCurrentUsersVote(poll: PollInterface) {
 }
 
 export default function Poll({ poll }: IProps) {
-  const { currentUser } = useContext(AppContext);
+  const [{ currentUser }] = useContext(AppContext);
 
   // TODO vote permissions
   const hasVotePermissions = !!currentUser;

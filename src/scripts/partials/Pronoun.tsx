@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { useContext } from 'react';
 import UserInterface from '../types/UserInterface';
 import AppContext from '../AppContext';
 
@@ -7,19 +7,19 @@ interface IProps {
   equality?: string;
 }
 
-// it'd be nice to have this as a function but there's no good way to use context then afaik
-export default class Pronoun extends Component<IProps> {
-  static contextType = AppContext;
-  static defaultProps = { equality: 'your' } 
+export default function Pronoun({ of: user, equality }: IProps) {
+  const [{ currentUser }] = useContext(AppContext);
+  let result;
 
-  render() {
-    const { currentUser } = this.context;
-    const { of: user, equality } = this.props;
-
-    if (currentUser && currentUser.id === user.id) {
-      return equality;
+  if (!currentUser || currentUser.id !== user.id) {
+    if (user.username.endsWith('s')) {
+      result = `${user.username}'`;
     } else {
-      return `${user.username}'s`;
+      result = `${user.username}'s`;
     }
+  } else {
+    result = equality || 'your';
   }
+
+  return <>{result}</>;
 }
