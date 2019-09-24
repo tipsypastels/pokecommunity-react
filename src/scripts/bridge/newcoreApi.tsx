@@ -42,25 +42,27 @@ function findMockDataForUrl(url: string) {
   }
 }
 
-export type NewcoreErrorCode = null | 404 | 500 | 503;
-
-export function handleNewcoreError(e: Error, callback?: (err: NewcoreErrorCode) => void) {
-  const code = (function(errorMsg) {
-    switch(true) {
-      case !!errorMsg.toString().match(/404/): return 404;
-      case errorMsg.includes('Network Error'): return 503;
-      default: return 500;
-    }
-  })(e.toString());
-
-  if (callback) {
-    callback(code);
-  }
-  return code;
-}
-
 export const ERROR_PAGES = {
   404: <Err404 />,
   500: <Err500 />,
   503: <Err503 />,
 };
+
+export type NewcoreErrorCode = keyof typeof ERROR_PAGES;
+
+export function handleNewcoreError(e: Error, callback?: (err: NewcoreErrorCode) => void) {
+  const errorMessage = e.toString();
+  let code: NewcoreErrorCode = 500;
+
+  if (errorMessage.match(/404/)) {
+    code = 404;
+  } else if (errorMessage.includes('Network Error')) {
+    code = 503;
+  }
+
+  if (callback) {
+    callback(code);
+  }
+  
+  return code;
+}
