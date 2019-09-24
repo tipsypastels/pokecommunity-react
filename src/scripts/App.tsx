@@ -44,9 +44,7 @@ export type AppAction =
   | { type: 'SIGN_IN', user: UserInterface }
   | { type: 'SIGN_OUT' }
   | { type: 'SET_NOTIFICATIONS', notifications: NotificationInterface[] }
-  | { type: 'APPEND_NOTIFICATIONS', notifications: NotificationInterface[] }
   | { type: 'SET_MESSAGES', messages: NotificationInterface[] }
-  | { type: 'APPEND_MESSAGES', messages: NotificationInterface[] }
 
 function appReducer(state: AppState, action: AppAction): AppState {
   switch(action.type) {
@@ -72,18 +70,8 @@ function appReducer(state: AppState, action: AppAction): AppState {
     case 'SET_NOTIFICATIONS': {
       return { ...state, notifications: action.notifications };
     }
-    case 'APPEND_NOTIFICATIONS': {
-      return { ...state, 
-        notifications: state.notifications.concat(action.notifications),
-      }
-    }
     case 'SET_MESSAGES': {
       return { ...state, messages: action.messages };
-    }
-    case 'APPEND_MESSAGES': {
-      return { ...state,
-        messages: state.messages.concat(action.messages),
-      }
     }
     default: return state;
   }
