@@ -61,7 +61,23 @@ export function standardDate(date: Datelike) {
 // format: May 07, 2019 at 10:22 PM
 export function standardDateTime(date: Datelike) {
   date = resolveDate(date);
-  return strftime('%B %d, %Y at %I:%M %p', date);
+  return strftime('%B %d, %Y at %l:%M %p', date);
+}
+
+// format: 10:22 PM
+export function standardTime(date: Datelike) {
+  date = resolveDate(date);
+  return strftime('%l:%M %p', date);
+}
+
+export function notificationDateFormat(date: Datelike) {
+  date = resolveDate(date);
+
+  if (isToday(date)) {
+    return strftime('%l:%M %p', date);
+  }
+
+  return strftime('%b %d, %Y %l:%M %p', date);
 }
 
 export function yearsSince(date: Datelike) {
@@ -75,4 +91,8 @@ export function userIsNew(user: UserInterface): boolean {
   const daysDiff = Math.ceil(timeDiff / MS_PER_DAY);
 
   return daysDiff <= 7;
+}
+
+export function isToday(date: Datelike): boolean {
+  return numericDateDiff(date, new Date()) === 0;
 }

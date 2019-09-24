@@ -1,0 +1,44 @@
+.ClickableNotification {
+  display: flex;
+
+  &:not(:last-child) {
+    margin-bottom: 2px;
+  }
+
+  &.unread { // TODO colours
+    background-color: rgba(216, 238, 255, 0.3);
+  }
+
+  .avatar-area {
+    margin-right: 8px;
+
+    .avatar {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  .content-area {
+    flex-grow: 1;
+
+    // TODO not working
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      .title {
+        flex-grow: 1;
+      }
+
+      .time {
+        color: $primary-color;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

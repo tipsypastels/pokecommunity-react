@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import UserInterface from './types/UserInterface';
-import { Notification } from './partials/Header/Omnibar/Tools/Notifications';
+import NotificationInterface from './types/NotificationInterface';
 
 interface AppContextProps {
   currentUser?: UserInterface;
@@ -15,8 +15,11 @@ interface AppContextProps {
   banner: string;
   setBanner: (banner: string) => void;
 
-  notifications: Notification[];
-  setNotifications: (list: Notification[]) => void;
+  notifications: NotificationInterface[];
+  setNotifications: (list: NotificationInterface[]) => void;
+
+  messages: NotificationInterface[];
+  setMessages: (list: NotificationInterface[]) => void;
 }
 
 export default createContext<Partial<AppContextProps>>({});

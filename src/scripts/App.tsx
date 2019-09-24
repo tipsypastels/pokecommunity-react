@@ -10,10 +10,8 @@ import ThreadPage from './pages/ThreadPage';
 import BBCodePage from './pages/docs/BBCodePage';
 
 import ThemePickerModal from './partials/ThemePickerModal';
-
 import { themeLocalstorageKey } from '../configs/themes.json';
-
-import { Notification } from './partials/Header/Omnibar/Tools/Notifications';
+import NotificationInterface from './types/NotificationInterface';
 
 import '../styles/fa/css/all.min.scss';
 import '../styles/base/utilities.scss';
@@ -34,7 +32,8 @@ export default function App() {
   const [themePickerOpen, setThemePickerOpen] = useState(false);
   const [banner, setBanner] = useState<string>(null);
   const [currentUser, setCurrentUser] = useState<UserInterface>(null);
-  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [notifications, setNotifications] = useState<NotificationInterface[]>([]);
+  const [messages, setMessages] = useState<NotificationInterface[]>([]);
 
   function setTheme(theme: string) {
     _setTheme(theme);
@@ -57,6 +56,8 @@ export default function App() {
       setBanner,
       notifications,
       setNotifications,
+      messages,
+      setMessages,
     }}>
       <div className="App">
         <ThemePickerModal />

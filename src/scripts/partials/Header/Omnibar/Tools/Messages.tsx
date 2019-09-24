@@ -1,24 +1,26 @@
-import React, { Component } from 'react';
-import { Dropdown, NavItem, Nav } from 'react-bootstrap';
+import React, { useContext } from 'react';
+import LazyAsyncDropdown from './LazyAsyncDropdown';
+import AppContext from '../../../../AppContext';
+import ClickableNotification from './ClickableNotification';
 
-import Icon from '../../../Icon';
+export default function Messages() {
+  const { messages, setMessages } = useContext(AppContext);
 
-export default class Messages extends Component {
-  render() {
-    return (
-      <Dropdown 
-        alignRight 
-        as={NavItem}
-        className="Messages"
-        id="messages-menu" 
-      >
-        <Dropdown.Toggle id="messages-menu-toggle" as={Nav.Link}>
-          <Icon name="envelope" group="fal" size="lg" fw />
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item>Hello there!</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    )
-  }
+  return (
+    <LazyAsyncDropdown
+      title="Messages"
+      icon="envelope"
+      refreshUrl="/messages"
+      markAsReadUrl="/messages/mark-as-read"
+      current={messages}
+      setCurrent={setMessages}
+      emptyState={{
+        title: 'No Messages',
+        icon: 'envelope',
+        description: 'You’ll receive notifications when other members send you messages or post to your profile.',
+      }}
+    >
+      {notif => <ClickableNotification {...notif} />}
+    </LazyAsyncDropdown>
+  )
 }

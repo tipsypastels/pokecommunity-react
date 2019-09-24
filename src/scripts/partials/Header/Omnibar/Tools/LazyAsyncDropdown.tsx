@@ -6,7 +6,8 @@ import Action from '../../../Action';
 
 interface IProps<T> {
   title: string;
-  responseKey: string;
+  icon: string;
+
   refreshUrl: string;
   markAsReadUrl: string;
 
@@ -14,6 +15,7 @@ interface IProps<T> {
   setCurrent: (list: T[]) => void;
 
   additionalControls?: ReactNode;
+  children: (item: T) => ReactNode;
   
   emptyState: { 
     icon: string, 
@@ -28,15 +30,13 @@ export default function LazyAsyncDropdown<T extends { id: number }>(props: IProp
   
   async function getContentAnd({ paginate }: { paginate?: boolean } = {}): Promise<T[]> {
     try {
-      const response = await newcoreApi({
+      const { data } = await newcoreApi({
         method: 'get',
         url: props.refreshUrl 
           + (paginate ? `/?page=${pagesLoaded + 1}` : ''),
       });
 
-      console.log(response);
-      return [];
-      // return data[props.responseKey];
+      return data;
     } catch(e) {
       console.error(e);
     }
@@ -86,13 +86,11 @@ export default function LazyAsyncDropdown<T extends { id: number }>(props: IProp
           />
         </Dropdown.Header>
 
-        {props.current.map(entry => {
-          return (
-            <Dropdown.Item key={entry.id}>
-              {entry.id}
-            </Dropdown.Item>
-          );
-        })}
+        {props.current.map(item => (
+          <React.Fragment key={item.id}>
+            {props.children(item)}
+          </React.Fragment>
+        ))}
       </React.Fragment>
     );
 
@@ -108,7 +106,7 @@ export default function LazyAsyncDropdown<T extends { id: number }>(props: IProp
         id={`${props.title.toLowerCase()}-menu-toggle`} 
         as={Nav.Link}
       >
-        <Icon name="bell" group="fal" size="lg" fw />
+        <Icon name={props.icon} group="fal" size="lg" fw />
       </Dropdown.Toggle>
 
       <Dropdown.Menu>

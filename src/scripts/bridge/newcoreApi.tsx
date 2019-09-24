@@ -29,6 +29,7 @@ export default function newcoreApi(params: AxiosRequestConfig) {
 // each entry in this map is a key in the json file MOCK_DATA.json. the value is a regex against which the axios url will be matched 
 const MOCK_DATA_PROVIDERS = {
   'notifications': /^\/notifications\/?$/,
+  'messages': /^\/messages\/?$/,
   'thread': /^\/threads\/\d+\/?/,
 }
 

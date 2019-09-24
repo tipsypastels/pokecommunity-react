@@ -1,7 +1,89 @@
 {
-  "notifications": {
-    "a": 1
-  },
+  "notifications": [
+    {
+      "id": 1,
+      "url": "/threads/40",
+      "action": "liked your post",
+      "content": "geese are second class citizens",
+      "fromUser": {
+        "username": "An IRL Duck",
+        "id": 1,
+        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+      },
+      "forUser": {
+        "username": "You",
+        "id": 0,
+        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+      },
+      "read": 0,
+      "seen": 0,
+      "archived": 0,
+      "created": 1569310326236
+    },
+    {
+      "id": 2,
+      "url": "/threads/40",
+      "action": "liked your post",
+      "content": "geese are second class citizens",
+      "fromUser": {
+        "username": "An IRL Duck",
+        "id": 1,
+        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+      },
+      "forUser": {
+        "username": "You",
+        "id": 0,
+        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+      },
+      "read": 0,
+      "seen": 0,
+      "archived": 0,
+      "created": 25
+    }
+  ],
+
+  "messages": [
+    {
+      "id": 1,
+      "url": "/messages/40",
+      "action": "sent you a message",
+      "content": "geese are second class citizens",
+      "fromUser": {
+        "username": "An IRL Duck",
+        "id": 1,
+        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+      },
+      "forUser": {
+        "username": "You",
+        "id": 0,
+        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+      },
+      "read": 0,
+      "seen": 0,
+      "archived": 0,
+      "created": 1569310326236
+    },
+    {
+      "id": 2,
+      "url": "/messages/40",
+      "action": "sent you a message",
+      "content": "where can i download shiny gold",
+      "fromUser": {
+        "username": "An IRL Duck",
+        "id": 1,
+        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+      },
+      "forUser": {
+        "username": "You",
+        "id": 0,
+        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+      },
+      "read": 0,
+      "seen": 0,
+      "archived": 0,
+      "created": 25
+    }
+  ],
 
   "thread": {
     "onLoadRan": true,

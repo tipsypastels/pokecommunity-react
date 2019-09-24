@@ -1,7 +1,8 @@
 .LazyAsyncDropdown {
   .dropdown-menu {
-    width: 400px;
-    
+    width: 500px;
+    max-width: 100vw;
+
     .empty-state {
       padding: 20px 30px;
   

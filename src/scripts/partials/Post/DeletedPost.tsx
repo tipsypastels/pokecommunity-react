@@ -24,7 +24,7 @@ export default function DeletedPost(props: PostProps) {
         if (data) {
           setPost(index, data);
         }
-      })()
+      })();
     }
   }, [fullView, id, setPost, index])
 
