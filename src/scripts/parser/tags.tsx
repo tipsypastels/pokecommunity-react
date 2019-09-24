@@ -156,6 +156,7 @@ end[/code]`,
 
     note: <>You don't need to set the language if you don't need syntax highlighting.</>,
     pc3Only: true,
+    noParse: true,
 
     render({ value, children }) {
       return (
@@ -317,6 +318,7 @@ end[/code]`,
     allowsYouTo: 'skip bbcode parsing inside the tag',
     usage: '[noparse]bbcode[/noparse]',
     example: '[noparse][b]not getting parsed![/b][/noparse]',
+    noParse: true,
 
     render({ children }) {
       return children;

@@ -67,6 +67,8 @@ export default class Parser extends Component<ParserProps> {
 
   private addBBCodeLevels(bbcode: string) {
     while (bbcode !== (bbcode = bbcode.replace(pbbRegExp, (match: string, tagLabel: string, value: string, children: string) => {
+      console.log(match);
+
       match = match.replace(/\[/g, "<");
       match = match.replace(/\]/g, ">");
       return this.updateTagDepths(match);
@@ -114,9 +116,13 @@ export default class Parser extends Component<ParserProps> {
   private processBBCodeMatch(key, [full, depth, tagLabel, value, children]) {
     tagLabel = tagLabel.toLowerCase();
 
+    const tag = resolveTag(tagLabel);
+
     if (children) {
       bbRegExp.exec(children); // no i don't know why this is needed
-      children = this.bb2JSX(children);
+      children = tag.noParse
+        ? this.unprocess(children)
+        : this.bb2JSX(children);
     }
 
     if (value) {
@@ -124,7 +130,6 @@ export default class Parser extends Component<ParserProps> {
         .replace(/"$/, '');
     }
 
-    const tag = resolveTag(tagLabel);
     // in case an alias was used, we need the real label of the tag
     const realLabel = resolveLabel(tag);
     const cssClass = tag.cssClass || realLabel;
@@ -141,5 +146,9 @@ export default class Parser extends Component<ParserProps> {
         </span>
       </React.Fragment>
     );
+  }
+
+  private unprocess(tagContent: string) {
+    return tagContent.replace(/<bbcl=[0-9]+ \/\*>/gi, "").replace(/<bbcl=[0-9]+ /gi, "[").replace(/>/gi, "]");
   }
 }

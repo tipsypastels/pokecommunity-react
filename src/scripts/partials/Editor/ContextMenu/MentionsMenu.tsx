@@ -173,7 +173,7 @@ export default class MentionsMenu extends Component<IProps, IState> {
     const users = this.getRelevantUsers();
     const user = users[this.state.selectionIndex];
 
-    if (!user) {
+    if (!user || !user.username) {
       return false;
     }
 
