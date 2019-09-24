@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import queryString from 'query-string';
 
-import Page, { PageProps } from './Page';
+import Page from './Page';
 import ThreadHeader from '../partials/Thread/ThreadHeader';
 import Viewing from '../partials/Viewing';
 import QuickReply from '../partials/Thread/QuickReply';
@@ -29,7 +29,7 @@ interface IParams {
   page?: string;
 }
 
-type IProps = RouteComponentProps<IParams> & PageProps;
+type IProps = RouteComponentProps<IParams>;
 
 interface IState {
   thread?: ThreadInterface;
@@ -109,8 +109,6 @@ export default class ThreadPage extends Component<IProps, IState> {
         name="Thread"
         loading={!thread}
         newBanner={thread && this.getBanner()}
-        appCurrentBanner={this.props.appCurrentBanner}
-        setAppBanner={this.props.setAppBanner}
         breadcrumbs={thread && this.getBreadcrumbs()}
         htmlTitle={this.getHtmlTitle()}
         error={this.state.error}

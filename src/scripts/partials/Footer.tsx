@@ -8,7 +8,7 @@ import Icon from './Icon';
 import { ReactComponent as FooterLogo } from '../../images/common/logo.php.svg';
 
 export default function Footer() {
-  const { theme, openThemePicker } = useContext(AppContext);
+  const { theme, setThemePickerOpen } = useContext(AppContext);
 
   return (
     <footer className="Footer">
@@ -27,7 +27,7 @@ export default function Footer() {
           <Button
             className="theme-button"
             variant="light"
-            onClick={openThemePicker}
+            onClick={() => setThemePickerOpen(true)}
           >
             <div className="label">
               Change Theme

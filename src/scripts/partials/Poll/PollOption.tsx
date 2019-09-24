@@ -53,7 +53,7 @@ export default function PollOption(props: IProps) {
         <span className="count">
           <span className="number">{votes}</span> {pluralize('vote', votes)}
         </span> / <span className="percentage">
-          {perecentage}%
+          {Math.round(perecentage * 100) / 100}%
         </span>
       </div>
     </>

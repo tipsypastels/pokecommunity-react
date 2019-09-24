@@ -33,6 +33,9 @@ export default function Poll({ poll }: IProps) {
 
   const currentUsersVote = useCurrentUsersVote(poll);
 
+  const totalVotes = poll.options
+    .reduce((acc, cur) => acc + cur.votes.length, 0);
+
   // if they have permission to vote and haven't already voted
   const canVote = hasVotePermissions && !currentUsersVote;
 
@@ -45,7 +48,7 @@ export default function Poll({ poll }: IProps) {
         key={option.title}
         option={option}
         index={index}
-        totalVotes={poll.voters}
+        totalVotes={totalVotes}
         canVote={canVote}
         selected={selectedIndex === index}
         select={() => setSelectedIndex(index)}

@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from 'react';
-import Page, { PageProps } from '../Page';
+import Page from '../Page';
 import TagModel from '../../parser/TagModel';
 import BBCodeTag from '../../partials/Docs/BBCodeTag';
 import Block from '../../partials/Block';
@@ -9,15 +9,13 @@ import { filterTags } from '../../parser/tagFunctions';
 import BBCodePlayground from '../../partials/BBCodePlayground';
 import { NewcoreErrorCode } from '../../bridge/newcoreApi';
 
-type IProps = PageProps;
-
 interface IState {
   error: NewcoreErrorCode;
   filter: string;
   playgroundOpen: boolean;
 }
 
-export default class BBCodePage extends Component<IProps, IState> {
+export default class BBCodePage extends Component<{}, IState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,8 +30,6 @@ export default class BBCodePage extends Component<IProps, IState> {
       <Page
         name="Index"
         loading={false}
-        appCurrentBanner={this.props.appCurrentBanner}
-        setAppBanner={this.props.setAppBanner}
         error={this.state.error}
       >
         {this.getPlayground()}

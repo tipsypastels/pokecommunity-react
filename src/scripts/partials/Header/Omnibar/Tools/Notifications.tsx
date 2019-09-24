@@ -1,24 +1,39 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 
-import { Dropdown, NavItem, Nav } from 'react-bootstrap';
-import Icon from '../../../Icon';
+import MinimalUserInterface from '../../../../types/MinimalUserInterface';
+import LazyAsyncDropdown from './LazyAsyncDropdown';
+import AppContext from '../../../../AppContext';
 
-export default class Notifications extends Component {
-  render() {
-    return (
-      <Dropdown 
-        alignRight 
-        as={NavItem}
-        className="Notifications"
-        id="notifications-menu" 
-      >
-        <Dropdown.Toggle id="notifications-menu-toggle" as={Nav.Link}>
-          <Icon name="bell" group="fal" size="lg" fw />
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item>Hello there!</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    );
-  }
+export interface Notification {
+  id: number;
+  forUser: MinimalUserInterface;
+  fromUser: MinimalUserInterface;
+  category: string;
+  type: string;
+  content: number;
+  read: number;
+  archived: number;
+  seen: number;
+  date: string;
+  time: string;
+}
+
+export default function Notifications() {
+  const { notifications, setNotifications } = useContext(AppContext);
+
+  return (
+    <LazyAsyncDropdown
+      title="Notifications"
+      responseKey="notifications"
+      refreshUrl="/notifications"
+      markAsReadUrl="/notifications/mark-as-read"
+      current={notifications}
+      setCurrent={setNotifications}
+      emptyState={{
+        title: 'No Notifications',
+        icon: 'comments',
+        description: 'You’ll receive notifications when other members respond to or like your posts, when you receive friend requests.',
+      }}
+    />
+  );
 }

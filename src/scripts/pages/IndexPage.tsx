@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 
-import Page, { PageProps } from './Page';
+import Page from './Page';
 import BulletinBoard from '../partials/Index/BulletinBoard';
 
 import CategoryInterface from '../types/CategoryInterface';
 import Category from '../partials/Index/Category';
 import { NewcoreErrorCode } from '../bridge/newcoreApi';
 
-type IProps = PageProps;
-
 interface IState {
   error: NewcoreErrorCode;
   categories: CategoryInterface[];
 }
 
-export default class IndexPage extends Component<IProps, IState>
+export default class IndexPage extends Component<{}, IState>
 {
   constructor(props) {
     super(props);
@@ -29,8 +27,6 @@ export default class IndexPage extends Component<IProps, IState>
       <Page
         name="Index"
         loading={false}
-        appCurrentBanner={this.props.appCurrentBanner}
-        setAppBanner={this.props.setAppBanner}
         error={this.state.error}
       >
         <div>

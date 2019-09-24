@@ -47,8 +47,8 @@ export default function OmnibarTools(props: SearchScopeProps) {
         props: { searchScope: props.searchScope },
         if: currentUser,
       })}
-      {tool('messages', { if: currentUser })}
-      {tool('notifications', { if: currentUser })}
+      {tool('notifications', { if: true })}
+      {tool('messages', { if: true })}
       {tool('user', { if: currentUser })}
       {tool('guest', { if: !currentUser })}
     </Nav>

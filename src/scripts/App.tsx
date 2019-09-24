@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import UserInterface from './types/UserInterface';
@@ -13,17 +13,12 @@ import ThemePickerModal from './partials/ThemePickerModal';
 
 import { themeLocalstorageKey } from '../configs/themes.json';
 
+import { Notification } from './partials/Header/Omnibar/Tools/Notifications';
+
 import '../styles/fa/css/all.min.scss';
 import '../styles/base/utilities.scss';
 import '../styles/base/buttons.scss';
 import '../styles/all-themes.scss';
-
-interface IState {
-  theme: string;
-  themePickerOpen: boolean;
-  banner?: string;
-  currentUser?: UserInterface;
-}
 
 export const POKECOMM3_ROUTES = {
   // FORUMS
@@ -34,84 +29,54 @@ export const POKECOMM3_ROUTES = {
   '/docs/bbcode': BBCodePage,
 };
 
-class App extends Component<{}, IState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      theme: getCurrentTheme(),
-      themePickerOpen: false,
-      banner: null,
-      currentUser: null,
-    }
-  }
+export default function App() {
+  const [theme, _setTheme] = useState<string>(getCurrentTheme);
+  const [themePickerOpen, setThemePickerOpen] = useState(false);
+  const [banner, setBanner] = useState<string>(null);
+  const [currentUser, setCurrentUser] = useState<UserInterface>(null);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
 
-  componentDidMount() {
-    document.body.dataset.theme = this.state.theme;
-  }
-
-  componentDidUpdate() {
-    document.body.dataset.theme = this.state.theme;
-  }
-
-  render() {
-    return (
-      <AppContext.Provider value={this.getContextFromState()}>
-        <div className="App">
-          <ThemePickerModal show={this.state.themePickerOpen} />
-
-          <Router>
-            <Switch>
-              {Object.keys(POKECOMM3_ROUTES).map(path => {
-                const Component = POKECOMM3_ROUTES[path];
-
-                return (
-                  <Route key={path} path={path} exact render={route => (
-                    <Component
-                      appCurrentBanner={this.state.banner}
-                      setAppBanner={this.setAppBanner}
-                      {...route}
-                    />
-                  )} />
-                );
-              })}
-            </Switch>
-          </Router>
-        </div>
-      </AppContext.Provider>
-    );
-  }
-
-  openThemePicker = () => {
-    this.setState({ themePickerOpen: true });
-  }
-
-  closeThemePicker = () => {
-    this.setState({ themePickerOpen: false });
-  }
-
-  setTheme = (theme: string) => {
-    this.setState({ theme });
+  function setTheme(theme: string) {
+    _setTheme(theme);
     localStorage.setItem(themeLocalstorageKey, theme);
   }
 
-  setAppBanner = (banner: string) => {
-    this.setState({ banner });
-  }
+  useEffect(() => {
+    document.body.dataset.theme = theme;
+  }, [theme]);
 
-  setCurrentUser = (currentUser: UserInterface) => {
-    this.setState({ currentUser });
-  }
+  return (
+    <AppContext.Provider value={{
+      currentUser,
+      setCurrentUser,
+      theme,
+      setTheme,
+      themePickerOpen,
+      setThemePickerOpen,
+      banner,
+      setBanner,
+      notifications,
+      setNotifications,
+    }}>
+      <div className="App">
+        <ThemePickerModal />
 
-  getContextFromState() {
-    return {
-      currentUser:      this.state.currentUser,
-      setCurrentUser:   this.setCurrentUser,
-      theme:            this.state.theme,
-      openThemePicker:  this.openThemePicker,
-      closeThemePicker: this.closeThemePicker,
-      setTheme:         this.setTheme,
-    };
-  }
+        <Router>
+          <Switch>
+            {Object.keys(POKECOMM3_ROUTES).map(path => {
+              const Component = POKECOMM3_ROUTES[path];
+
+              return (
+                <Route 
+                  key={path} 
+                  path={path} 
+                  exact component={Component}
+                />
+              );
+            })}
+          </Switch>
+        </Router>
+      </div>
+    </AppContext.Provider>
+  );
 }
-
-export default App;
