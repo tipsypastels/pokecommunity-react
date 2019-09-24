@@ -28,15 +28,17 @@ export default function LazyAsyncDropdown<T extends { id: number }>(props: IProp
   
   async function getContentAnd({ paginate }: { paginate?: boolean } = {}): Promise<T[]> {
     try {
-      const { data } = await newcoreApi({
+      const response = await newcoreApi({
         method: 'get',
         url: props.refreshUrl 
           + (paginate ? `/?page=${pagesLoaded + 1}` : ''),
       });
-      
-      return data[props.responseKey];
+
+      console.log(response);
+      return [];
+      // return data[props.responseKey];
     } catch(e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
