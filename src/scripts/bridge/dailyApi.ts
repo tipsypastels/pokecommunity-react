@@ -4,7 +4,7 @@ import DailyArticleInterface from '../types/DailyArticleInterface';
 export async function getDailyArticle(id: number) {
   const { data } = await axios({
     method: 'get',
-    url: `https://daily.pokecommunity.com/wp-json/wp/v2/posts/22686?_embed`
+    url: `https://daily.pokecommunity.com/wp-json/wp/v2/posts/${id}?_embed`
   });
 
   const article: DailyArticleInterface = {
