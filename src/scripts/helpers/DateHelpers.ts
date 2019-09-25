@@ -93,6 +93,38 @@ export function userIsNew(user: UserInterface): boolean {
   return daysDiff <= 7;
 }
 
-export function isToday(date: Datelike): boolean {
-  return numericDateDiff(date, new Date()) === 0;
+export function isPast(date: Datelike, today = new Date()): boolean {
+  return numericDateDiff(date, today) > 0;
+}
+
+export function isFuture(date: Datelike, today = new Date()): boolean {
+  return numericDateDiff(date, today) < 0;
+}
+
+export function isToday(date: Datelike, today = new Date()): boolean {
+  return numericDateDiff(date, today) === 0;
+}
+
+// returns { current, prev, next } of date objects, each for the first millisecond of the month. used in DatePicker
+export function getSurroundingMonths(date = new Date()) {
+  date = resolveDate(date);
+
+  const dateMonth = date.getMonth();
+  const dateYear  = date.getFullYear();
+
+  // dont worry about looping over! it does that automatically :D
+  const current = new Date(dateYear, dateMonth, 1);
+  const prev    = new Date(dateYear, dateMonth - 1, 1);
+  const next    = new Date(dateYear, dateMonth + 1, 1);
+
+  return { current, prev, next };
+}
+
+export function daysInMonth(date: Datelike): number {
+  date = resolveDate(date);
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+}
+
+export function cloneDate(date: Datelike): Date {
+  return new Date(resolveDate(date).toString());
 }

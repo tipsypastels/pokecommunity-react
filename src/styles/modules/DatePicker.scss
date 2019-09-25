@@ -1,0 +1,111 @@
+.DatePicker {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+
+    .day-picker {
+      flex-basis: 70%;
+    }
+
+    .time-picker {
+      flex-basis: 30%;
+    }
+  }
+
+  .day-picker, .time-picker {
+    padding: 5px 10px;
+  }
+
+  .day-picker {
+    .month-switcher {
+      display: flex;
+      align-items: center;
+  
+      .month-name {
+        flex-grow: 1;
+        font-weight: bold;
+        font-size: 1.05rem;
+        text-align: center;
+
+        .month-icon {
+          color: $primary-color;
+        }
+      }
+
+      .nav {
+        font-size: 1.1rem;
+        
+        &.disabled {
+          color: $divider-color-dark;
+        }
+        
+        &:not(.disabled) {
+          cursor: pointer;
+        }
+        
+        &:hover:not(.disabled) {
+          color: $primary-color;
+        }
+        
+        .icon {
+          padding: 0 10px;
+        }
+      }
+    }
+
+    .month-days {
+      margin-top: 0.5rem;
+      width: 100%;
+      min-height: 200px;
+      
+      th, td {
+        text-align: center;
+        width: 14.285714285714286%; // 100 / 7
+      }
+
+      thead tr {
+        border: 1px solid $divider-color;
+        border-bottom: none;
+      }
+      
+      tbody tr td {
+        border: 1px solid $divider-color;
+        user-select: none;
+
+        &:not(:empty):not(.disabled) {
+          cursor: pointer;
+        }
+
+        &.disabled {
+          color: $divider-color-dark;
+        }
+
+        &.active {
+          background-color: $primary-color;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .time-picker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input[type='time'] {
+      margin-top: 0.5rem;
+      border: 1px solid $divider-color;
+      padding: 4px;
+      border-radius: 4px;
+      outline: none !important;
+      
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}

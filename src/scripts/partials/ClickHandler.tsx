@@ -6,6 +6,7 @@ interface IProps {
 
   onClick?: (e) => void;
   onHoldClick?: (e) => void;
+  onHoldRelease?: (e) => void;
 }
 
 const HOLD_MIN_DURATION_SECONDS = 0.25;
@@ -29,6 +30,8 @@ export default class ClickHandler extends Component<IProps> {
   handleClickEnd = (e, wasLong) => {
     if (!wasLong && this.props.onClick) {
       this.props.onClick(e);
+    } else if (this.props.onHoldRelease) {
+      this.props.onHoldRelease(e);
     }
   }
 }

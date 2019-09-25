@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 
+// layout containers
 import SubmitButton from './PostModal/SubmitButton';
 import ThreadInterface from '../types/ThreadInterface';
 import PostInterface from '../types/PostInterface';
 import Pronoun from './Pronoun';
 import PostModalLayout from './PostModalLayout';
+import SchedulePost from './PostModal/SchedulePost';
 
 // attachment stuff
 import AttachmentMenu from './PostModal/AttachmentMenu';
 import FileCollection from '../helpers/FileCollection';
 import { attachments } from '../../configs/config.json';
+
+// staff post stuff
 import StaffPostOptions from './PostModal/StaffPostOptions';
 import UsergroupInterface from '../types/UsergroupInterface';
 
@@ -37,6 +41,7 @@ interface IState {
   loadedDraftIndicator: boolean;
   lastInvalidFileType: string;
   staffPostGroup: UsergroupInterface;
+  isSchedulingPublishTime: boolean;
 }
 
 // the key used for localstorage
@@ -58,7 +63,8 @@ export default class PostModal extends Component<IProps, IState> {
       loadedDraftIndicator: false,
       lastInvalidFileType: null,
       staffPostGroup: null,
-    }
+      isSchedulingPublishTime: false,
+    };
   }
   
   // this can't be inside a state initializer, as getInitialContent can also *change* state, so we need to make sure the component is mounted. trying to set state in a constructor is a memory leak
@@ -73,6 +79,12 @@ export default class PostModal extends Component<IProps, IState> {
   }
   
   render() {
+    if (this.state.isSchedulingPublishTime) {
+      return <SchedulePost abort={() => { 
+        this.setState({ isSchedulingPublishTime: false });
+      }}/>
+    }
+
     return (
       <PostModalLayout
         className="PostModal"
@@ -103,6 +115,10 @@ export default class PostModal extends Component<IProps, IState> {
           <SubmitButton
             isEditingPost={this.isEditingPost()}
             disabled={!this.canSubmitPost()}
+            canModerate={this.props.thread.canModerate}
+            openScheduler={() => {
+              this.setState({ isSchedulingPublishTime: true });
+            }}
           />
         }
       />

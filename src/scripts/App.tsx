@@ -78,6 +78,7 @@ function appReducer(state: AppState, action: AppAction): AppState {
 }
 
 export default function App() {
+  
   const [appState, appDispatch] = useReducer(appReducer, {
     theme: getCurrentTheme(),
     themePickerOpen: false,
@@ -86,11 +87,15 @@ export default function App() {
     notifications: [],
     messages: [],
   });
-
+  
   useEffect(() => {
     document.body.dataset.theme = appState.theme;
   }, [appState.theme]);
-
+  
+  // return <>
+  //   {mapNumericRange(0, 60, i => <ClockWithMovableHands hours={0} minutes={i} />)}
+  // </>
+  
   return (
     <AppContext.Provider value={[appState, appDispatch]}>
       <div className="App">

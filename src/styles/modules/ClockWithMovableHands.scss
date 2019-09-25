@@ -1,0 +1,46 @@
+.ClockWithMovableHands {
+  border: 8px solid black;
+  border-radius: 50%;
+  padding: 5px;
+
+  width: 80px;
+  height: 80px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    background-color: black;
+    border-radius: 50%;
+
+    position: absolute;
+    left: 50%;
+    margin-left: -4px;
+    
+    top: 50%;
+    margin-top: -4px;
+  }
+
+  .hand {
+    height: 50%;
+    border-radius: 4px;    
+    padding: 4px 2px;
+    background-color: black;
+  }
+
+  .minutes-hand {
+    width: 8px;
+    transform-origin: bottom center;
+  }
+
+  .hours-hand {
+    width: 9px;
+    transform-origin: top center;
+  }
+}

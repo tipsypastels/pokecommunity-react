@@ -67,8 +67,6 @@ export default class Parser extends Component<ParserProps> {
 
   private addBBCodeLevels(bbcode: string) {
     while (bbcode !== (bbcode = bbcode.replace(pbbRegExp, (match: string, tagLabel: string, value: string, children: string) => {
-      console.log(match);
-
       match = match.replace(/\[/g, "<");
       match = match.replace(/\]/g, ">");
       return this.updateTagDepths(match);
