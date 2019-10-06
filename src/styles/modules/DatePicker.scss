@@ -1,4 +1,4 @@
-.DatePicker {
+.DatePickerBrowser {
   display: flex;
   flex-direction: column;
 
@@ -93,8 +93,15 @@
 
   .time-picker {
     display: flex;
+
     flex-direction: column;
     align-items: center;
+    
+    @media screen and (max-width: 768px) {
+      flex-direction: row;
+      justify-content: space-around;
+      margin-top: 1rem;
+    } 
 
     input[type='time'] {
       margin-top: 0.5rem;
@@ -106,6 +113,55 @@
       &::-webkit-scrollbar {
         display: none;
       }
+    }
+
+    .time-local {
+      text-align: right;
+      font-size: 0.85rem;
+      font-style: italic;
+      color: $action-color;
+    }
+  }
+}
+
+.DatePickerMobile {
+  section {
+    &:not(:first-child) {
+      margin-top: 1rem;
+    }
+
+    .title {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      &::before, &::after {
+        content: '';
+        border-top: 1px solid $divider-color;
+        flex: 1 0 20px;
+      }
+      
+      &::before {
+        margin: 0 20px 0 0;
+      }
+
+      &::after {
+        margin: 0 0 0 20px;
+      }
+    }
+
+    input {
+      background-color: lighten(#1D1E22, 8%); // TODO
+      color: mix(white, transparent, 90%);
+      border: none;
+
+      width: 100%;
+      margin-top: 0.5rem;
+      outline: none !important;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
     }
   }
 }
