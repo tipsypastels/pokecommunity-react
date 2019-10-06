@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import { When } from 'react-if';
-
 import Block from './Block';
-import Icon from './Icon';
 
 import PostHeader from './Post/PostHeader';
 import PostContent from './Post/PostContent';
@@ -15,8 +12,8 @@ import PostInterface from '../types/PostInterface';
 import SharePostModal from './Post/ActionModals/SharePostModal';
 
 import AppContext from '../AppContext';
-import SmartLink from './SmartLink';
 import PostLayout, { DEFAULT_POST_LAYOUT } from '../types/PostLayout';
+import ReactionsModal from './Post/ActionModals/ReactionsModal';
 
 export interface PostProps extends PostInterface {
   thread: ThreadInterface;
@@ -29,7 +26,7 @@ export interface PostProps extends PostInterface {
   setPost: (index: number, post: PostInterface) => void;
 }
 
-export type PostActionModal = null | 'share';
+export type PostActionModal = 'share' | 'reactions';
 
 interface IState {
   reactionsOpen: boolean;
@@ -70,6 +67,13 @@ class Post extends Component<PostProps, IState> {
           postid={id}
           user={user}
           show={actionModalOpen === 'share'}
+          closeModal={() => this.setActionModalOpen(null)}
+        />
+
+        <ReactionsModal
+          postid={id}
+          show={actionModalOpen === 'reactions'}
+          canModerate={thread.canModerate}
           closeModal={() => this.setActionModalOpen(null)}
         />
 

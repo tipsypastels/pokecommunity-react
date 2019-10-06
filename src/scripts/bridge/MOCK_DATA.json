@@ -85,6 +85,51 @@
     }
   ],
 
+  "reactions": {
+    "like": [
+      {
+        "user": {
+          "id": 210532,
+          "username": "Rainbow",
+          "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+        },
+        "created": 1
+      },
+      {
+        "user": {
+          "id": 1,
+          "username": "hackdeoxys",
+          "avatar": "https://i.imgur.com/cOoDBwg.png"
+        },
+        "created": 1
+      },
+        {
+          "user": {
+            "id": 67163,
+            "username": "Nina",
+            "avatar": "https://www.pokecommunity.com/customavatars/thumbs/avatar67163_92.gif"
+          },
+          "created": 1
+        },
+        {
+          "user": {
+            "id": 3002,
+            "username": "Hiroshizzle ok this joke is old",
+            "avatar": "https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2017/09/eggs.jpg?itok=YUMuf5rC"
+          },
+          "created": 1
+        }
+    ],
+    "angry": [{
+      "user": {
+        "id": 5,
+        "username": "Laslow",
+        "avatar": "https://www.pokecommunity.com/customavatars/thumbs/avatar5_12.gif"
+      },
+      "created": 1
+    }]
+  },
+
   "thread": {
     "onLoadRan": true,
     "id": 40,
@@ -135,6 +180,10 @@
         "staffPostType": "0",
         "staffPostGroup": null,
         "deletion": null,
+        "reactions": {
+          "like": [{ "userId": 210532, "created": 1 }],
+          "angry": [{ "userId": 5, "created": "1" }]
+        },
         "edits": [
           {
             "id": 169,

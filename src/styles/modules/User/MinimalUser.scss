@@ -1,0 +1,21 @@
+.MinimalUser {
+  display: flex;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  .avatar {
+    height: 36px;
+    width: 36px;
+    margin-right: 4px;
+    border-radius: 50%;
+  }
+
+  .username {
+    text-decoration: none;
+    color: $block-header-divider-color;
+    font-size: 110%;
+  }
+}

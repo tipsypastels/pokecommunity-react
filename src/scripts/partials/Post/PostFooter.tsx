@@ -122,7 +122,7 @@ class PostFooter extends Component<IProps> {
               deactivate={() => deselectPost(id)}
             />
           </When>
-          <When condition={!!currentUser}>
+          <When condition={true || !!currentUser}>
             <Dropdown alignRight>
               <Dropdown.Toggle 
                 id="post-overflow-dropdown"
@@ -137,9 +137,8 @@ class PostFooter extends Component<IProps> {
                   icon={{ name: 'ellipsis-h', group: 'fal' }}
                 />
               </Dropdown.Toggle>
-
+              
               <Dropdown.Menu>
-
                 {!idObjectsEqual(currentUser, user) && (
                   <Dropdown.Item 
                     {...SmartLink.shim(`/settings.php?do=addlist&userlist=ignore&u=${user.id}`)}
@@ -172,6 +171,13 @@ class PostFooter extends Component<IProps> {
                   >
                     <Icon name="trash-alt" fw mr={1} />
                     Delete Post
+                  </Dropdown.Item>
+                )}
+
+                {true /* TODO */ && (
+                  <Dropdown.Item onClick={() => setActionModalOpen('reactions')}>
+                    <Icon name="hammer-war" fw mr={1} />
+                    Moderate Reactions
                   </Dropdown.Item>
                 )}
               </Dropdown.Menu>

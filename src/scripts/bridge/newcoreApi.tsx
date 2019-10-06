@@ -31,6 +31,7 @@ const MOCK_DATA_PROVIDERS = {
   'notifications': /^\/notifications\/?$/,
   'messages': /^\/messages\/?$/,
   'thread': /^\/threads\/\d+\/?/,
+  'reactions': /^\/reactions\/\d\/?/,
 }
 
 function findMockDataForUrl(url: string) {

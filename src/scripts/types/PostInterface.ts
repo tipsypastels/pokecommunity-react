@@ -2,6 +2,7 @@ import PostUserInterface from './PostUserInterface';
 import StaffPostGroupInterface from './StaffPostGroupInterface';
 import DeletionLogInterface from './DeletionLogInterface';
 import PostEditInterface from './PostEditInterface';
+import { MinimalReactionCollectionInterface } from './ReactionInterface';
 
 export default interface PostInterface {
   id: number;
@@ -22,4 +23,6 @@ export default interface PostInterface {
   edits?: PostEditInterface[];
 
   user: PostUserInterface;
+
+  reactions: MinimalReactionCollectionInterface;
 }
