@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
-import { Dropdown, NavItem, Nav } from 'react-bootstrap';
-import Icon, { IconProps } from '../../../Icon';
+import { Dropdown, NavItem, Nav, Button } from 'react-bootstrap';
+import Icon from '../../../Icon';
 import newcoreApi from '../../../../bridge/newcoreApi';
 import Action from '../../../Action';
 
@@ -25,8 +25,9 @@ interface IProps<T> {
 }
 
 // Used for both notifications and messages menus
-export default function LazyAsyncDropdown<T extends { id: number }>(props: IProps<T>) {
+export default function LazyAsyncDropdown<T extends { id: number, read: number }>(props: IProps<T>) {
   const [pagesLoaded, setPagesLoaded] = useState(1);
+  const [loading, setLoading] = useState(false);
   
   async function getContentAnd({ paginate }: { paginate?: boolean } = {}): Promise<T[]> {
     try {
@@ -46,15 +47,28 @@ export default function LazyAsyncDropdown<T extends { id: number }>(props: IProp
     getContentAnd().then(props.setCurrent);
   }
 
-  async function getNextPageOfNotifs() {
+  function getNextPageOfNotifs() {
+    setLoading(true);
+
     getContentAnd({ paginate: true }).then(content => {
-      props.setCurrent(props.current.concat(content));
-      setPagesLoaded(pagesLoaded + 1);
+      setLoading(false);
+
+      if (content) {
+        props.setCurrent(props.current.concat(content));
+        setPagesLoaded(pagesLoaded + 1);
+      }
     });
   }
 
   async function markAllAsRead() {
-    console.log('marking as read');
+    props.setCurrent(
+      props.current.map(n => ({ ...n, read: 1 }))
+    );
+
+    await newcoreApi({
+      method: 'post',
+      url: props.markAsReadUrl,
+    });
   }
 
   const currentContent = !props.current || props.current.length === 0
@@ -91,6 +105,22 @@ export default function LazyAsyncDropdown<T extends { id: number }>(props: IProp
             {props.children(item)}
           </React.Fragment>
         ))}
+
+        <Dropdown.Header>
+          <Button 
+            className="load-more" 
+            variant="primary"
+            onClick={getNextPageOfNotifs}
+          >
+            {loading
+              ? <Icon
+                name="circle-notch"
+                group="far"
+                className="fa-spin"
+              /> : 'Load More'
+            }
+          </Button>
+        </Dropdown.Header>
       </React.Fragment>
     );
 
