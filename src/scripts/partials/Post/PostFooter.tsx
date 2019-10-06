@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ButtonToolbar, Overlay, Popover } from 'react-bootstrap';
+import { ButtonToolbar, Overlay, Popover, Dropdown } from 'react-bootstrap';
 import { When } from 'react-if';
 
 import Action from '../Action';
@@ -8,18 +8,20 @@ import { PostActionModal } from '../Post';
 import AppContext from '../../AppContext';
 import AddReaction from './ActionModals/AddReaction';
 import { reactionOptions } from '../../../configs/config.json';
+import UserInterface from '../../types/UserInterface';
+import { idObjectsEqual } from '../../helpers/DatabaseHelpers';
+import Icon from '../Icon';
+import SmartLink from '../SmartLink';
 
 interface IProps {
   id: number;
+  user: UserInterface;
 
   canEdit: boolean;
   canSharePosts: boolean;
   canReply: boolean;
   canReactToPosts: boolean;
   
-  overflowActive: boolean;
-  setOverflow: (overflow: boolean) => void;
-
   actionModalOpen: PostActionModal;
   setActionModalOpen: (open: PostActionModal) => void;
 
@@ -40,6 +42,7 @@ class PostFooter extends Component<IProps> {
   render() {
     const { 
       id,
+      user,
       canEdit, 
       canSharePosts, 
       canReply, 
@@ -53,6 +56,8 @@ class PostFooter extends Component<IProps> {
       reactionsOpen,
       setReactionsOpen,
     } = this.props;
+
+    const [{ currentUser }] = this.context;
 
     return (
       <div className="PostFooter flex" ref={this.ref}>
@@ -117,19 +122,64 @@ class PostFooter extends Component<IProps> {
               deactivate={() => deselectPost(id)}
             />
           </When>
-          <When condition={!!this.context[0].currentUser}>
-            <Action
-              name="More"
-              icon={{ name: 'ellipsis-h', group: 'fal' }}
-              active={this.props.overflowActive}
-              activate={() => this.props.setOverflow(true)}
-              deactivate={() => this.props.setOverflow(false)}
-            />
+          <When condition={!!currentUser}>
+            <Dropdown alignRight>
+              <Dropdown.Toggle 
+                id="post-overflow-dropdown"
+                as={({ onClick, children }) => (
+                  <span onClick={onClick}>
+                    {children}
+                  </span>
+                )} 
+              >
+                <Action
+                  name="More"
+                  icon={{ name: 'ellipsis-h', group: 'fal' }}
+                />
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+
+                {!idObjectsEqual(currentUser, user) && (
+                  <Dropdown.Item 
+                    {...SmartLink.shim(`/settings.php?do=addlist&userlist=ignore&u=${user.id}`)}
+                  >
+                    <Icon name="user-minus" fw mr={1} />
+                    Ignore {user.username}
+                  </Dropdown.Item>
+                )}
+
+                {canSharePosts && (
+                  <Dropdown.Item
+                    className="d-block d-md-none"
+                    onClick={() => setActionModalOpen('share')}
+                  >
+                    <Icon name="share-square" fw mr={1} />
+                    Share Post
+                  </Dropdown.Item>
+                )}
+
+                <Dropdown.Item
+                  {...SmartLink.shim(`/report.php?p=${this.props.id}`)}
+                >
+                  <Icon name="exclamation-triangle" fw mr={1} />
+                  Report Post
+                </Dropdown.Item>
+
+                {canEdit && (
+                  <Dropdown.Item
+                    {...SmartLink.shim(`/postings.php?do=deletepost&p=${this.props.id}`)}
+                  >
+                    <Icon name="trash-alt" fw mr={1} />
+                    Delete Post
+                  </Dropdown.Item>
+                )}
+              </Dropdown.Menu>
+            </Dropdown>
           </When>
         </ButtonToolbar>
       </div>
-
-    )
+    );
   }
 }
 

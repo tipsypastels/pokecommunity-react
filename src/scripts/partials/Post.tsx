@@ -32,7 +32,6 @@ export interface PostProps extends PostInterface {
 export type PostActionModal = null | 'share';
 
 interface IState {
-  overflowActive: boolean;
   reactionsOpen: boolean;
   actionModalOpen: PostActionModal;
 }
@@ -43,7 +42,6 @@ class Post extends Component<PostProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      overflowActive: false,
       reactionsOpen: false,
       actionModalOpen: null,
     };
@@ -98,12 +96,11 @@ class Post extends Component<PostProps, IState> {
 
           <PostFooter
             id={id}
+            user={user}
             canEdit={canEdit}
             canSharePosts={thread.canSharePosts}
             canReply={thread.canReply}
             canReactToPosts={thread.canReactToPosts}
-            overflowActive={this.state.overflowActive}
-            setOverflow={this.setOverflow}
             actionModalOpen={actionModalOpen}
             setActionModalOpen={this.setActionModalOpen}
             selectPost={selectPost}
@@ -114,8 +111,6 @@ class Post extends Component<PostProps, IState> {
             setReactionsOpen={this.setReactionsOpen}
           />
         </Block.Content>
-
-        {this.getOverflowMenu()}
       </Block>
     )
   }
@@ -149,56 +144,6 @@ class Post extends Component<PostProps, IState> {
         former={staffPostGroup.former}
       />
     )
-  }
-
-  getOverflowMenu() {
-    const [{ currentUser }] = this.context;
-
-    if (!this.state.overflowActive || !currentUser) {
-      return null;
-    }
-
-    const { user } = this.props;
-
-    return (
-      <div className="post-overflow-menu">
-        <div className="close-overflow d-none d-md-block" onClick={() => this.setOverflow(false)}>
-          <Icon name="times" />
-        </div>
-
-        <div className="flex-grows" />
-
-        <When condition={currentUser.id !== user.id}>
-          <SmartLink to={`/settings.php?do=addlist&userlist=ignore&u=${user.id}`} className="overflow-action">
-            <Icon name="user-minus" fw />
-            Ignore {user.username}
-          </SmartLink>
-        </When>
-
-        <When condition={this.props.thread.canSharePosts}>
-          <div className="overflow-action d-block d-md-none" onClick={() => this.setActionModalOpen('share')}>
-            <Icon name="share-square" fw />
-            Share Post
-          </div>
-        </When>
-
-        <SmartLink to={`/report.php?p=${this.props.id}`} className="overflow-action">
-          <Icon name="exclamation-triangle" fw />
-          Report Post
-        </SmartLink>
-
-        <When condition={this.props.canEdit}>
-          <SmartLink to={`/postings.php?do=deletepost&p=${this.props.id}`} className="overflow-action">
-            <Icon name="trash-alt" fw />
-            Delete Post
-          </SmartLink>
-        </When>
-      </div>
-    );
-  }
-
-  setOverflow = (overflowActive: boolean) => {
-    this.setState({ overflowActive });
   }
 
   setActionModalOpen = (actionModalOpen: PostActionModal) => {
