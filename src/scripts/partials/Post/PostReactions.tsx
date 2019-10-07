@@ -6,7 +6,6 @@ import { Badge } from 'react-bootstrap';
 
 interface IProps {
   reactions: MinimalReactionCollectionInterface;
-  setReactionsOpen: (open: boolean) => void;
   openReactionsModal: () => void;
 }
 

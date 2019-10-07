@@ -5,8 +5,6 @@ import { reactionOptions } from '../../../configs/config.json'
 
 interface IProps {
   reactions: MinimalReactionCollectionInterface;
-  reactionsOpen: boolean;
-  setReactionsOpen: (open: boolean) => void;
   yourReaction: string;
 }
 
@@ -28,12 +26,6 @@ export default function AddReactionButton(props: IProps) {
   }
 
   return (
-    <Action
-      {...activeProps}
-      internalName="react"
-      active={props.reactionsOpen}
-      activate={() => props.setReactionsOpen(true)}
-      deactivate={() => props.setReactionsOpen(false)}
-    />
+    <Action {...activeProps} internalName="react" />
   )
 }

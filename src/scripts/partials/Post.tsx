@@ -29,7 +29,6 @@ export interface PostProps extends PostInterface {
 export type PostActionModal = 'share' | 'reactions';
 
 interface IState {
-  reactionsOpen: boolean;
   actionModalOpen: PostActionModal;
 }
 
@@ -39,7 +38,6 @@ class Post extends Component<PostProps, IState> {
   constructor(props) {
     super(props);
     this.state = {
-      reactionsOpen: false,
       actionModalOpen: null,
     };
   }
@@ -113,8 +111,6 @@ class Post extends Component<PostProps, IState> {
             checkPostSelected={checkPostSelected}
             openEditorToCurrentPost={() => openEditor(this.props)}
             reactions={reactions}
-            reactionsOpen={this.state.reactionsOpen}
-            setReactionsOpen={this.setReactionsOpen}
           />
         </Block.Content>
       </Block>
@@ -154,10 +150,6 @@ class Post extends Component<PostProps, IState> {
 
   setActionModalOpen = (actionModalOpen: PostActionModal) => {
     this.setState({ actionModalOpen });
-  }
-
-  setReactionsOpen = (reactionsOpen: boolean) => {
-    this.setState({ reactionsOpen });
   }
 }
 

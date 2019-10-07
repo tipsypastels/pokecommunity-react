@@ -12,16 +12,7 @@ import Icon from '../Icon';
 import SmartLink from '../SmartLink';
 import { MinimalReactionCollectionInterface } from '../../types/ReactionInterface';
 import ReactionActionsContainer from './ReactionActionsContainer';
-
-// can't be a function bc react is dumb
-class _DropdownTriggerWithoutFormatting extends Component<{
-  onClick: (e) => void;
-  children: ReactNode;
-}> {
-  render() {
-    return <span onClick={this.props.onClick}>{this.props.children}</span>;
-  }
-}
+import DropdownTriggerWithoutFormatting from '../DropdownTriggerWithoutFormatting';
 
 interface IProps {
   id: number;
@@ -42,8 +33,6 @@ interface IProps {
   openEditorToCurrentPost: () => void;
 
   reactions: MinimalReactionCollectionInterface;
-  reactionsOpen: boolean;
-  setReactionsOpen: (open: boolean) => void;
 }
 
 class PostFooter extends Component<IProps> {
@@ -65,8 +54,6 @@ class PostFooter extends Component<IProps> {
       checkPostSelected,
       openEditorToCurrentPost,
       reactions,
-      reactionsOpen,
-      setReactionsOpen,
     } = this.props;
 
     const [{ currentUser }] = this.context;
@@ -77,8 +64,6 @@ class PostFooter extends Component<IProps> {
           {canReactToPosts && (
             <ReactionActionsContainer
               reactions={reactions}
-              reactionsOpen={reactionsOpen}
-              setReactionsOpen={setReactionsOpen}
               overlayRef={this.ref}
               openReactionsModal={() => setActionModalOpen('reactions')}
             />
@@ -117,7 +102,7 @@ class PostFooter extends Component<IProps> {
             <Dropdown alignRight>
               <Dropdown.Toggle 
                 id="post-overflow-dropdown"
-                as={_DropdownTriggerWithoutFormatting} 
+                as={DropdownTriggerWithoutFormatting} 
               >
                 <Action
                   name="More"
