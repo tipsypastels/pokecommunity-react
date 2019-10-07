@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import { MinimalReactionCollectionInterface } from '../../types/ReactionInterface';
 import AddReactionButton from './AddReactionButton';
-import { Overlay, Popover } from 'react-bootstrap';
-import { reactionOptions } from '../../../configs/config.json';
 import AddReaction from './ActionModals/AddReaction';
 import MinimalUserInterface from '../../types/MinimalUserInterface';
 import AppContext from '../../AppContext';
