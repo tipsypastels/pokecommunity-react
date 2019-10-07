@@ -43,32 +43,34 @@ export default function Footer() {
           </Button>
         </div>
 
-        <div className="link-wrapper">
-          <a href="/showgroups.php" className="link-background link-staff">
-            <Icon name="hammer-war" size="lg" className="link-icon" fw />
-          </a>
-          Staff
-        </div>
+        <div className="circle-links">
+          <div className="link-wrapper">
+            <a href="/showgroups.php" className="link-background link-staff">
+              <Icon name="hammer-war" size="lg" className="link-icon" fw />
+            </a>
+            Staff
+          </div>
 
-        <div className="link-wrapper">
-          <a href="/rules" className="link-background link-rules">
-            <Icon name="book" size="lg" className="link-icon" fw />
-          </a>
-          Rules
-        </div>
+          <div className="link-wrapper">
+            <a href="/rules" className="link-background link-rules">
+              <Icon name="book" size="lg" className="link-icon" fw />
+            </a>
+            Rules
+          </div>
 
-        <div className="link-wrapper">
-          <a href="/about" className="link-background link-about">
-            <Icon name="info" size="lg" className="link-icon" fw />
-          </a >
-          About Us
-        </div>
+          <div className="link-wrapper">
+            <a href="/about" className="link-background link-about">
+              <Icon name="info" size="lg" className="link-icon" fw />
+            </a >
+            About Us
+          </div>
 
-        <div className="link-wrapper">
-          <a href="/sendmessage.php" className="link-background link-contact">
-            <Icon name="paper-plane" size="lg" className="link-icon" fw />
-          </a>
-          Contact Us
+          <div className="link-wrapper">
+            <a href="/sendmessage.php" className="link-background link-contact">
+              <Icon name="paper-plane" size="lg" className="link-icon" fw />
+            </a>
+            Contact Us
+          </div>
         </div>
       </div>
 

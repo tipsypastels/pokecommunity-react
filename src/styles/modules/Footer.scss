@@ -15,6 +15,7 @@ $social-links: (
 );
 
 .Footer {
+  margin-top: 6px;
   background-color: #444444;
 
   .footer-branding {
@@ -69,44 +70,61 @@ $social-links: (
     display: flex;
     justify-content: space-around;
     margin: 20px 50px;
-
-    .link-wrapper {
-      font-size: 0.8rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      display: flex;
+    
+    @media screen and (max-width: 768px) {
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: rgb(159, 220, 248);
+    }
 
-      .link-background {
-        background-color: #8b8b8b;
-        border-radius: 50%;
-        height: 50px;
-        width: 50px;
+    .circle-links {
+      display: flex;
+      flex-wrap: wrap;
+      flex-grow: 1;
+      justify-content: space-around;
+
+      .link-wrapper {
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-transform: uppercase;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        margin-bottom: 5px;
+        color: rgb(159, 220, 248);
 
-        @each $name, $color in $internal-links {
-          &.#{$name}:hover {
-            background-color: $color;
-          }
+        @media screen and (max-width: 768px) {
+          flex-basis: 50%;
+          margin-top: 10px;
         }
-        
-        .link-icon {
-          color: white;
-          font-size: 1.7rem;
-          cursor: pointer;
-
-          &:hover {
+  
+        .link-background {
+          background-color: #8b8b8b;
+          border-radius: 50%;
+          height: 50px;
+          width: 50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 5px;
+  
+          @each $name, $color in $internal-links {
+            &.#{$name}:hover {
+              background-color: $color;
+            }
+          }
+          
+          .link-icon {
             color: white;
+            font-size: 1.7rem;
+            cursor: pointer;
+  
+            &:hover {
+              color: white;
+            }
           }
         }
       }
     }
+
   }
   
   .social-links {
@@ -139,6 +157,7 @@ $social-links: (
     align-items: center;
     font-size: 0.8rem;
     color: white;
+    padding: 8px;
     padding-bottom: 30px;
 
     a {
