@@ -7,6 +7,9 @@ interface IProps {
   onClick?: (e) => void;
   onHoldClick?: (e) => void;
   onHoldRelease?: (e) => void;
+
+  onHoverIn?: (e) => void;
+  onHoverOut?: (e) => void;
 }
 
 const HOLD_MIN_DURATION_SECONDS = 0.25;
@@ -17,13 +20,18 @@ const HOLD_MIN_DURATION_SECONDS = 0.25;
 export default class ClickHandler extends Component<IProps> {
   render() {
     return (
-      <ClickNHold
-        time={HOLD_MIN_DURATION_SECONDS}
-        onClickNHold={this.props.onHoldClick}
-        onEnd={this.handleClickEnd}
+      <div 
+        onMouseOver={this.props.onHoverIn}
+        onMouseOut={this.props.onHoverOut}
       >
-        {this.props.children}
-      </ClickNHold>
+        <ClickNHold
+          time={HOLD_MIN_DURATION_SECONDS}
+          onClickNHold={this.props.onHoldClick}
+          onEnd={this.handleClickEnd}
+        >
+          {this.props.children}
+        </ClickNHold>
+      </div>
     )
   }
 

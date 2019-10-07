@@ -14,6 +14,7 @@ import SharePostModal from './Post/ActionModals/SharePostModal';
 import AppContext from '../AppContext';
 import PostLayout, { DEFAULT_POST_LAYOUT } from '../types/PostLayout';
 import ReactionsModal from './Post/ActionModals/ReactionsModal';
+import PostReactions from './Post/PostReactions';
 
 export interface PostProps extends PostInterface {
   thread: ThreadInterface;
@@ -56,7 +57,8 @@ class Post extends Component<PostProps, IState> {
       selectPost,
       deselectPost,
       checkPostSelected,
-      openEditor
+      openEditor,
+      reactions,
     } = this.props;
 
     const { actionModalOpen } = this.state;
@@ -111,9 +113,16 @@ class Post extends Component<PostProps, IState> {
             deselectPost={deselectPost}
             checkPostSelected={checkPostSelected}
             openEditorToCurrentPost={() => openEditor(this.props)}
+            reactions={reactions}
             reactionsOpen={this.state.reactionsOpen}
             setReactionsOpen={this.setReactionsOpen}
           />
+
+          {/* {reactions && (
+            <PostReactions
+              reactions={reactions}
+            />
+          )} */}
         </Block.Content>
       </Block>
     )

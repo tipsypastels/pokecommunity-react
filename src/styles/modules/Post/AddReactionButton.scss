@@ -1,0 +1,10 @@
+.AddReactionButton {
+  &.active {
+    font-weight: bold;
+    color: $primary-color;
+  }
+
+  &.has-reactions {
+    padding-right: 2px;
+  }
+}

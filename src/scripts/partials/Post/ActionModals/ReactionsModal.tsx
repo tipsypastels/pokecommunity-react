@@ -39,7 +39,7 @@ export default function ReactionsModal(props: IProps) {
     content = (
       <Tab.Container
         id="reactions-tabs"
-        defaultActiveKey={reactionOptions[0]}
+        defaultActiveKey={Object.keys(reactionOptions)[0]}
       >
         <Row>
           <Col sm={3}>

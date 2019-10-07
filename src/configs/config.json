@@ -66,14 +66,32 @@
     "Yanone Kaffeesatz"
   ],
   
-  "reactionOptions": [
-    "like", 
-    "love", 
-    "laugh", 
-    "surprise", 
-    "sad", 
-    "angry"
-  ],
+  "reactionOptions": {
+    "like": {
+      "active": "Liked",
+      "fa": "thumbs-up"
+    }, 
+    "love": {
+      "active": "Loved",
+      "fa": "heart"
+    }, 
+    "laugh": {
+      "active": "Laughing",
+      "fa": "grin-squint-tears"
+    }, 
+    "surprise": {
+      "active": "Surprised",
+      "fa": "surprise"
+    }, 
+    "sad": {
+      "active": "Sad",
+      "fa": "sad-tear"
+    }, 
+    "angry": {
+      "active": "Angry",
+      "fa": "angry"
+    }
+  },
 
   "codeBlock": {
     "languages": [

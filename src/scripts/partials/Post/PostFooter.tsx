@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { ButtonToolbar, Overlay, Popover, Dropdown } from 'react-bootstrap';
+import { ButtonToolbar, Dropdown } from 'react-bootstrap';
 import { When } from 'react-if';
 
 import Action from '../Action';
 import { PostActionModal } from '../Post';
 
 import AppContext from '../../AppContext';
-import AddReaction from './ActionModals/AddReaction';
-import { reactionOptions } from '../../../configs/config.json';
 import UserInterface from '../../types/UserInterface';
 import { idObjectsEqual } from '../../helpers/DatabaseHelpers';
 import Icon from '../Icon';
 import SmartLink from '../SmartLink';
+import { MinimalReactionCollectionInterface } from '../../types/ReactionInterface';
+import ReactionActionsContainer from './ReactionActionsContainer';
 
 interface IProps {
   id: number;
@@ -31,6 +31,7 @@ interface IProps {
 
   openEditorToCurrentPost: () => void;
 
+  reactions: MinimalReactionCollectionInterface;
   reactionsOpen: boolean;
   setReactionsOpen: (open: boolean) => void;
 }
@@ -53,6 +54,7 @@ class PostFooter extends Component<IProps> {
       deselectPost,
       checkPostSelected,
       openEditorToCurrentPost,
+      reactions,
       reactionsOpen,
       setReactionsOpen,
     } = this.props;
@@ -62,36 +64,15 @@ class PostFooter extends Component<IProps> {
     return (
       <div className="PostFooter flex" ref={this.ref}>
         <ButtonToolbar className="post-left-actions flex-grows">
-          <When condition={canReactToPosts}>
-            <Action
-              internalName="like"
-              name="Like"
-              icon={{ name: 'thumbs-up', group: 'fal' }}
-              active={false /* TODO */}
-              activate={() => {}}
-              deactivate={() => {}}
-              // TODO this doesn't account for if they've already reacted
-              contextActive={reactionsOpen}
-              openContext={() => setReactionsOpen(true)}
-              closeContext={() => setReactionsOpen(false)}
+          {canReactToPosts && (
+            <ReactionActionsContainer
+              reactions={reactions}
+              reactionsOpen={reactionsOpen}
+              setReactionsOpen={setReactionsOpen}
+              overlayRef={this.ref}
+              openReactionsModal={() => setActionModalOpen('reactions')}
             />
-
-            <Overlay
-              show={reactionsOpen} 
-              onHide={() => setReactionsOpen(false)} 
-              placement="bottom-start" 
-              container={this.ref.current}
-              target={this.ref.current}
-            >
-              <Popover 
-                id="reactions-popover" 
-                className="ReactionsPopover"
-                data-reactions-count={reactionOptions.length}
-              >
-                <AddReaction />
-              </Popover>
-            </Overlay>
-          </When>
+          )}
           <When condition={canSharePosts}>
             <Action
               name="Share"
@@ -135,6 +116,7 @@ class PostFooter extends Component<IProps> {
                 <Action
                   name="More"
                   icon={{ name: 'ellipsis-h', group: 'fal' }}
+                  textClassName="d-none d-md-inline"
                 />
               </Dropdown.Toggle>
               

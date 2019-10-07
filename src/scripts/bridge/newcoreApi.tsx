@@ -32,6 +32,7 @@ const MOCK_DATA_PROVIDERS = {
   'messages': /^\/messages\/?$/,
   'thread': /^\/threads\/\d+\/?/,
   'reactions': /^\/reactions\/\d\/?/,
+  'whoami': /^\/auth\/whoami\/?/,
 }
 
 function findMockDataForUrl(url: string) {

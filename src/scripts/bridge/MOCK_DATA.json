@@ -263,7 +263,6 @@
           "textFields": {
             "onLoadRan": true,
             "userid": 210532,
-            "signature": "[div=text-align:right;font-style:italic;][div=font-weight:bold;]i'm fucked up as it is but we got so much time to kill[/div][div=font-size:0.8rem;]paired with [B]cÍ™Ì²oÒ‰Ì³ÌºÍ“Í‰lÍŸÍ‰Í‡oÌ¸Ì±Ì°Ì°uÌ¨Í™Í™ÌŸrÌ™Í”Ì©Ì¹ÍŽÌ»sÌ•Í™ÍˆÍ”Ì™[/B][/div][/div]",
             "_flair": "{\"userinfo\":{\"rawcss\":\"\"},\"avatar\":{\"rawcss\":\"max-width: 56px;\\r\\nmax-height: 56px;\\r\\n\\r\\nbackground-image: url(https:\\/\\/sig.grumpybumpers.com\\/host\\/tipsypastels_pokemon.gif?_RNG);\\r\\nbackground-size: cover;\\r\\nobject-position: 9999px;\"},\"username\":{\"rawcss\":\"color: rgb(17, 128, 106);\\r\\nfont-style: italic;\"},\"statistics\":{\"rawcss\":\"\"},\"minibio\":{\"rawcss\":\"\"}}",
             "flair": {
               "userinfo": {},
@@ -464,7 +463,6 @@
           "textFields": {
             "onLoadRan": true,
             "userid": 210532,
-            "signature": "[div=text-align:right;font-style:italic;][div=font-weight:bold;]i'm fucked up as it is but we got so much time to kill[/div][div=font-size:0.8rem;]paired with [B]cÍ™Ì²oÒ‰Ì³ÌºÍ“Í‰lÍŸÍ‰Í‡oÌ¸Ì±Ì°Ì°uÌ¨Í™Í™ÌŸrÌ™Í”Ì©Ì¹ÍŽÌ»sÌ•Í™ÍˆÍ”Ì™[/B][/div][/div]",
             "_flair": "{\"userinfo\":{\"rawcss\":\"\"},\"avatar\":{\"rawcss\":\"max-width: 56px;\\r\\nmax-height: 56px;\\r\\n\\r\\nbackground-image: url(https:\\/\\/sig.grumpybumpers.com\\/host\\/tipsypastels_pokemon.gif?_RNG);\\r\\nbackground-size: cover;\\r\\nobject-position: 9999px;\"},\"username\":{\"rawcss\":\"color: rgb(17, 128, 106);\\r\\nfont-style: italic;\"},\"statistics\":{\"rawcss\":\"\"},\"minibio\":{\"rawcss\":\"\"}}",
             "flair": {
               "userinfo": {},
@@ -595,5 +593,158 @@
     "canModerate": true,
     "canReactToPosts": true,
     "canSharePosts": true
+  },
+
+  "whoami": {
+    "user": {
+      "onLoadRan": true,
+      "id": 210532,
+      "username": "Rainbow",
+      "usertitle": "[b][i]i'll lose my mind another thousand times[/i][/b]",
+      "legacyPassword": null,
+      "password": null,
+      "email": "dakotasankey@gmail.com",
+      "avatarRevision": 653,
+      "postCount": 6191,
+      "created": 1273369440,
+      "_birthday": "02-07-1999",
+      "lastOnline": 1569214624,
+      "lastPosted": 1566937620,
+      "betaEnabled": 0,
+      "rankDisplayType": "",
+      "usermetadata": "{\"gt_house\":\"Vestigo\",\"gt_shinybadge\":true}",
+      "friendCode": "",
+      "usergroups": [
+        {
+          "onLoadRan": true,
+          "id": 6,
+          "singularTitle": "Administrator",
+          "pluralTitle": "Administrators",
+          "color": "#f23561",
+          "icon": null,
+          "isStaff": 1
+        },
+        {
+          "onLoadRan": true,
+          "id": 159,
+          "singularTitle": "Developer",
+          "pluralTitle": "Developers & Designers",
+          "color": "#308d5e",
+          "icon": "fas fa-code",
+          "isStaff": 1
+        }
+      ],
+      "textFields": {
+        "onLoadRan": true,
+        "userid": 210532,
+        "_flair": "{\"userinfo\":{\"rawcss\":\"\"},\"avatar\":{\"rawcss\":\"max-width: 56px;\\r\\nmax-height: 56px;\\r\\n\\r\\nbackground-image: url(https:\\/\\/sig.grumpybumpers.com\\/host\\/tipsypastels_pokemon.gif?_RNG);\\r\\nbackground-size: cover;\\r\\nobject-position: 9999px;\"},\"username\":{\"rawcss\":\"color: rgb(17, 128, 106);\\r\\nfont-style: italic;\"},\"statistics\":{\"rawcss\":\"\"},\"minibio\":{\"rawcss\":\"\"}}",
+        "flair": {
+          "userinfo": {},
+          "avatar": {
+            "maxWidth": "56px",
+            "maxHeight": "56px",
+            "backgroundImage": "url(https://sig.grumpybumpers.com/host/tipsypastels_pokemon.gif?0.3884173361904517)",
+            "backgroundSize": "cover",
+            "objectPosition": "9999px"
+          },
+          "username": {
+            "color": "rgb(17, 128, 106)",
+            "fontStyle": "italic"
+          },
+          "statistics": {},
+          "minibio": {}
+        }
+      },
+      "profileFields": {
+        "onLoadRan": true,
+        "userid": 210532,
+        "biography": "this is my biography!",
+        "location": "the deep blue",
+        "postLayout": "top",
+        "gender": "female",
+        "inGameName": "Dakota",
+        "quickSelfIntro": "sass is my coping mechanism",
+        "discordName": ""
+      },
+      "oldUsernames": [
+        {
+          "performed": 1516662011,
+          "userid": 210532,
+          "username": "Rainbow"
+        },
+        {
+          "performed": 1516663068,
+          "userid": 210532,
+          "username": "Soleil"
+        },
+        {
+          "performed": 1548054124,
+          "userid": 210532,
+          "username": "Rainbow"
+        },
+        {
+          "performed": 1548054189,
+          "userid": 210532,
+          "username": "self"
+        },
+        {
+          "performed": 1548054295,
+          "userid": 210532,
+          "username": "Oracle"
+        },
+        {
+          "performed": 1548054324,
+          "userid": 210532,
+          "username": "Leviathan"
+        },
+        {
+          "performed": 1548055387,
+          "userid": 210532,
+          "username": "Flower_Child"
+        },
+        {
+          "performed": 1548149623,
+          "userid": 210532,
+          "username": "Rainbow"
+        },
+        {
+          "performed": 1548754349,
+          "userid": 210532,
+          "username": "null"
+        },
+        {
+          "performed": 1564559961,
+          "userid": 210532,
+          "username": "Rainbow"
+        },
+        {
+          "performed": 1564559987,
+          "userid": 210532,
+          "username": "Rainbowx"
+        },
+        {
+          "performed": 1567089363,
+          "userid": 210532,
+          "username": "Rainbow"
+        },
+        {
+          "performed": 1567089374,
+          "userid": 210532,
+          "username": "Flower_Child"
+        },
+        {
+          "performed": 1567389308,
+          "userid": 210532,
+          "username": "Rainbow"
+        },
+        {
+          "performed": 1568619496,
+          "userid": 210532,
+          "username": "Odd Creature's Relic"
+        }
+      ],
+      "birthday": 918367200,
+      "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+    }
   }
 }

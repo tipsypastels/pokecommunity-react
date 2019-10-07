@@ -49,8 +49,6 @@ export default function Page(props: IProps) {
       return;
     }
 
-    console.log('running whoami');
-
     (async () => {
       try {
         const response = await newcoreApi({

@@ -1,0 +1,30 @@
+.PostReactions {
+  border: 1px solid $primary-color;
+
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  
+  @media screen and (min-width: 768px) {
+    height: 24px;
+  }
+  
+  .reaction {
+    display: none;
+  }
+
+
+  @media screen and (min-width: 768px) {
+    .reaction {
+      display: block;
+      width: 16px;
+      height: 16px;
+      background-size: cover;
+      margin-right: 4px;
+    }
+  }
+
+  .number {
+    color: $primary-color;
+  }
+}

@@ -14,6 +14,7 @@ interface IProps {
   activeName?: string;
   icon?: string | IconProps;
   className?: string;
+  textClassName?: string;
 
   active?: boolean;
   activate?: () => void;
@@ -77,7 +78,11 @@ export default class Action extends Component<IProps> {
     }
 
     if (relevantName) {
-      return <span>{relevantName}</span>
+      return (
+        <span className={this.props.textClassName}>
+          {relevantName}
+        </span>
+      );
     }
   }
 
