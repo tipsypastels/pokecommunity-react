@@ -43,7 +43,10 @@ export default function PostReactions(props: IProps) {
       onClick={props.openReactionsModal}
     >
       {shownReactions.map(reactionOption => (
-        <div className={`reaction reaction-${reactionOption}`} />
+        <div
+          key={reactionOption} 
+          className={`reaction reaction-${reactionOption}`} 
+        />
       ))}
 
       <span className="number">

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import { ButtonToolbar, Dropdown } from 'react-bootstrap';
 import { When } from 'react-if';
 
@@ -12,6 +12,16 @@ import Icon from '../Icon';
 import SmartLink from '../SmartLink';
 import { MinimalReactionCollectionInterface } from '../../types/ReactionInterface';
 import ReactionActionsContainer from './ReactionActionsContainer';
+
+// can't be a function bc react is dumb
+class _DropdownTriggerWithoutFormatting extends Component<{
+  onClick: (e) => void;
+  children: ReactNode;
+}> {
+  render() {
+    return <span onClick={this.props.onClick}>{this.props.children}</span>;
+  }
+}
 
 interface IProps {
   id: number;
@@ -107,11 +117,7 @@ class PostFooter extends Component<IProps> {
             <Dropdown alignRight>
               <Dropdown.Toggle 
                 id="post-overflow-dropdown"
-                as={({ onClick, children }) => (
-                  <span onClick={onClick}>
-                    {children}
-                  </span>
-                )} 
+                as={_DropdownTriggerWithoutFormatting} 
               >
                 <Action
                   name="More"

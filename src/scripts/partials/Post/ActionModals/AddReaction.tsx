@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { reactionOptions } from '../../../../configs/config.json';
 import { OverlayTrigger } from 'react-bootstrap';
 import { Tooltip } from 'react-bootstrap';
