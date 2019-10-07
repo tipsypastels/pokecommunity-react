@@ -80,9 +80,14 @@ export default class PostModal extends Component<IProps, IState> {
   
   render() {
     if (this.state.isSchedulingPublishTime) {
-      return <SchedulePost abort={() => { 
-        this.setState({ isSchedulingPublishTime: false });
-      }}/>
+      return (
+        <SchedulePost
+          abort={() => {
+            this.setState({ isSchedulingPublishTime: false });
+          }} 
+          onSubmit={() => { /* TODO */ }}
+        />
+      )
     }
 
     return (

@@ -4,7 +4,6 @@ enum PostVisibility {
   Drafted   = -1,
   Moderated =  0,
   Published =  1,
-  // is this how this works?
   Deleted   =  2,
 }
 

@@ -1,0 +1,37 @@
+$visibility-colors: (
+  /* rejected */  -3: #e2130d,
+  /* scheduled */ -2: #1584d2,
+  /* drafted */   -1: #40c338,
+  /* moderated */  0: #ffd900,
+  /* deleted */    2: #ff4500,
+);
+
+.PostVisibilityNotice {
+  padding: 2px 10px;
+  color: white;
+
+  display: flex;
+  align-items: center;
+
+  @each $id, $color in $visibility-colors {
+    &.visible-#{$id} {
+      background-color: $color;
+    }
+  }
+
+  &.visible-0 {
+    color: black;
+  }
+
+  .label {
+    flex-grow: 1;
+  }
+
+  .actions .action {
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 0.75rem;
+    }
+  }
+}

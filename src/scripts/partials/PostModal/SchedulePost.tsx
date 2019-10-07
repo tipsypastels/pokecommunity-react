@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import DatePicker from '../DatePicker';
 
-
 interface IProps {
   abort: () => void;
+  onSubmit: (date: Date) => void;
+  initialDate?: Date;
 }
 
 export default function SchedulePost(props: IProps) {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(props.initialDate || new Date());
 
   return (
     <Modal 
@@ -28,10 +29,13 @@ export default function SchedulePost(props: IProps) {
 
       <Modal.Footer>
         <Button variant="link" onClick={props.abort}>
-          Nevermind, return to editing
+          Nevermind
         </Button>
 
-        <Button variant="primary">
+        <Button 
+          variant="primary"
+          onClick={() => props.onSubmit(date)}
+        >
           Schedule
         </Button>
       </Modal.Footer>

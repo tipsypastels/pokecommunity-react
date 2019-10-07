@@ -14,6 +14,8 @@ import SharePostModal from './Post/ActionModals/SharePostModal';
 import AppContext from '../AppContext';
 import PostLayout, { DEFAULT_POST_LAYOUT } from '../types/PostLayout';
 import ReactionsModal from './Post/ActionModals/ReactionsModal';
+import PostVisibilityNotice from './Post/PostVisibilityNotice';
+import { idObjectsEqual } from '../helpers/DatabaseHelpers';
 
 export interface PostProps extends PostInterface {
   thread: ThreadInterface;
@@ -58,10 +60,18 @@ class Post extends Component<PostProps, IState> {
       reactions,
     } = this.props;
 
+    const [{ currentUser }] = this.context;
     const { actionModalOpen } = this.state;
     
     return (
       <Block className={`Post layout-${this.getPostLayout()}`}>
+        <PostVisibilityNotice
+          postid={id}
+          visible={this.props.visible}
+          isAuthor={idObjectsEqual(currentUser, user)}
+          canModerate={thread.canModerate}
+        />
+
         <SharePostModal
           postid={id}
           user={user}
