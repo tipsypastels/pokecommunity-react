@@ -111,6 +111,7 @@ class Post extends Component<PostProps, IState> {
             id={id}
             user={user}
             canEdit={canEdit}
+            canModerate={thread.canModerate}
             canSharePosts={thread.canSharePosts}
             canReply={thread.canReply}
             canReactToPosts={thread.canReactToPosts}

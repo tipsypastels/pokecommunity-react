@@ -1,5 +1,4 @@
 // it's easier to work with svgs because they have a set size but we're not using them anymore, so we just do a bit of monkey patching to make font icons act more like them
-// TODO it might be better to not use fit-content, it doesn't have great support, but i'm not sure what other options are available
 .fa, .fab, .fad, .fal, .far, .fas {
   display: inline-block;
   

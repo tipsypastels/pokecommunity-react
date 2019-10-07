@@ -19,6 +19,7 @@ interface IProps {
   user: UserInterface;
 
   canEdit: boolean;
+  canModerate: boolean;
   canSharePosts: boolean;
   canReply: boolean;
   canReactToPosts: boolean;
@@ -44,6 +45,7 @@ class PostFooter extends Component<IProps> {
       id,
       user,
       canEdit, 
+      canModerate,
       canSharePosts, 
       canReply, 
       canReactToPosts,
@@ -147,7 +149,7 @@ class PostFooter extends Component<IProps> {
                   </Dropdown.Item>
                 )}
 
-                {true /* TODO */ && (
+                {canModerate && (
                   <Dropdown.Item onClick={() => setActionModalOpen('reactions')}>
                     <Icon name="hammer-war" fw mr={1} />
                     Moderate Reactions

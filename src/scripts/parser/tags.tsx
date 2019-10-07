@@ -109,9 +109,9 @@ export const TAGS: TagList = {
 
     render({ value, children }) {
       let url;
-      //todo figure out why reassigning children = children.toString() doesn't work with match
-      if (children.toString().match(urlPattern)) {
-        url = children.toString();
+      let content = children.toString();
+      if (content.match(urlPattern)) {
+        url = content;
       } else {
         url = "";
       }

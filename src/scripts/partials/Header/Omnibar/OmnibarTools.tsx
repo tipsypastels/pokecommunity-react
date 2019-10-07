@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Nav } from 'react-bootstrap';
 
 import AppContext from '../../../AppContext';
+import { hasAnyGlobalPerms } from '../../../helpers/PermissionsHelpers';
 
 import UserMenu from './Tools/UserMenu';
 import GuestUserMenu from './Tools/GuestUserMenu';
@@ -10,10 +11,12 @@ import Messages from './Tools/Messages';
 import SearchPrompt, { SearchScopeProps } from './Tools/SearchPrompt';
 import HelpMenu from './Tools/HelpMenu';
 import SupporterMenu from './Tools/SupporterMenu';
+import ModMenu from './Tools/ModMenu';
 
 const TOOLS = {
   'donations': SupporterMenu,
   'help': HelpMenu,
+  'mod': ModMenu,
   'search': SearchPrompt,
   'messages': Messages,
   'notifications': Notifications,
@@ -43,6 +46,9 @@ export default function OmnibarTools(props: SearchScopeProps) {
     <Nav className="navbar-user-tools">
       {tool('donations')}
       {tool('help')}
+      {tool('mod', {
+        if: hasAnyGlobalPerms(currentUser),
+      })}
       {tool('search', { 
         props: { searchScope: props.searchScope },
         if: currentUser,

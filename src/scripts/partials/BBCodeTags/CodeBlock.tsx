@@ -18,7 +18,6 @@ interface IProps {
   children: ReactNode;
 }
 
-// TODO this doesn't work with newline, figure out a better way of doing it
 export default function CodeBlock(props: IProps) {
   const language = props.language || 'text';
   const langNamePretty = language === 'text'

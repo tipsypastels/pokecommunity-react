@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import UserInterface from './types/UserInterface';
+import CurrentUserInterface from './types/CurrentUserInterface';
 import { getCurrentTheme } from './bridge/Theme';
 import AppContext from './AppContext';
 
@@ -31,7 +31,7 @@ export type AppState = {
   theme: string;
   themePickerOpen: boolean;
   banner: string;
-  currentUser: UserInterface;
+  currentUser: CurrentUserInterface;
   notifications: NotificationInterface[];
   messages: NotificationInterface[];
 }
@@ -41,7 +41,7 @@ export type AppAction =
   | { type: 'OPEN_THEME_PICKER' }
   | { type: 'CLOSE_THEME_PICKER' }
   | { type: 'SET_BANNER', banner: string }
-  | { type: 'SIGN_IN', user: UserInterface }
+  | { type: 'SIGN_IN', user: CurrentUserInterface }
   | { type: 'SIGN_OUT' }
   | { type: 'SET_NOTIFICATIONS', notifications: NotificationInterface[] }
   | { type: 'SET_MESSAGES', messages: NotificationInterface[] }
