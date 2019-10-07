@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Dropdown, NavItem, Nav } from 'react-bootstrap';
 
 import Icon from '../../../Icon';
+import SmartLink from '../../../SmartLink';
 
 export default class SupporterMenu extends Component {
   render() {
@@ -30,11 +31,11 @@ export default class SupporterMenu extends Component {
             </div>
           </Dropdown.Header>
 
-          <Dropdown.Item>
+          <Dropdown.Item {...SmartLink.shim('/donations')}>
             Learn more...
           </Dropdown.Item>
 
-          <Dropdown.Item>
+          <Dropdown.Item {...SmartLink.shim('/donations/donate')}>
             Donate now
           </Dropdown.Item>
         </Dropdown.Menu>
