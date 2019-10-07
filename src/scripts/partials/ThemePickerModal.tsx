@@ -42,7 +42,7 @@ export default function ThemePickerModal() {
               active={filter === null}
               onClick={() => setFilter(null)}
             >
-              All Themes
+              All<span className="d-none d-md-inline"> Themes</span>
             </Nav.Link>
           </Nav.Item>
 
@@ -51,7 +51,7 @@ export default function ThemePickerModal() {
               active={filter === 'light'}
               onClick={() => setFilter('light')}
             >
-              Light Themes
+              Light<span className="d-none d-md-inline"> Themes</span>
             </Nav.Link>
           </Nav.Item>
 
@@ -60,7 +60,7 @@ export default function ThemePickerModal() {
               active={filter === 'dark'}
               onClick={() => setFilter('dark')}
             >
-              Dark Themes
+              Dark<span className="d-none d-md-inline"> Themes</span>
             </Nav.Link>
           </Nav.Item>
         </Nav>
@@ -74,12 +74,21 @@ export default function ThemePickerModal() {
                 appDispatch({ type: 'SET_THEME', theme: slug });
               }}>
                 <img
+                  className="theme-preview"
                   alt={`Preview of ${theme.name}`}
                   src={theme.image}
                 />
 
+                <div className="theme-mascot">
+                  <img 
+                    className="mascot-image"
+                    alt=""
+                    src={theme.mascotImage || `/static-images/qmark_party_icon.png`}
+                  />
+                </div>
+
                 <div className="theme-label">
-                  <strong>{theme.name}</strong> by {theme.author}
+                  <strong>{theme.name}</strong> <span>by {theme.author}</span>
                 </div>
               </div>
             );

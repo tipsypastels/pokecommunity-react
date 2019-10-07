@@ -1,5 +1,4 @@
 .ThemePickerModal {
-  width: 100%;
   max-width: none !important;
 
   @media screen and (min-width: 768px) {
@@ -11,21 +10,54 @@
     flex-wrap: wrap;
 
     .theme {
-      flex-basis: 100%;
-      padding: 0.25rem;
-      box-sizing: border-box;
-      cursor: pointer;
+      @media screen and (max-width: 768px) {
+        flex-basis: 100%;
+        padding: 0.25rem;
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid $divider-color;
+        }
+        .theme-preview {
+          display: none;
+        }
+
+        .theme-mascot {
+          background-color: $divider-color;
+          margin-right: 6px;
+        }
+
+        .theme-label {
+          strong {
+            display: block;
+          }
+
+          span {
+            font-size: 0.9rem;
+          }
+        }
+      }
 
       @media screen and (min-width: 768px) {
         flex-basis: 50%;
-      }
-      
-      img {
-        width: 100%;
-      }
+        padding: 0.25rem;
+        box-sizing: border-box;
+        cursor: pointer;
 
-      .theme-label {
-        text-align: center;
+        .theme-mascot {
+          display: none;
+        }
+        
+        .theme-preview {
+          width: 100%;
+        }
+  
+        .theme-label {
+          text-align: center;
+        }
       }
     }
   }
