@@ -13,7 +13,7 @@
     "randomcolor": "^0.5.4",
     "react": "^16.8.6",
     "react-accessible-accordion": "^3.0.0",
-    "react-bootstrap": "^1.0.0-beta.8",
+    "react-bootstrap": "^1.0.0-beta.14",
     "react-click-n-hold": "^1.0.7",
     "react-copy-to-clipboard": "^5.0.1",
     "react-device-detect": "^1.9.10",

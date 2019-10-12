@@ -2,7 +2,7 @@ import React, { Component, ReactNode } from 'react';
 
 // can't be a function bc react is dumb
 export default class DropdownTriggerWithoutFormatting extends Component<{
-  onClick: (e) => void;
+  onClick?: (e) => void;
   children: ReactNode;
 }> {
   render() {

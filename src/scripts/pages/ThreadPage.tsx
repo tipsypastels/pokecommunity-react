@@ -8,6 +8,7 @@ import Viewing from '../partials/Viewing';
 import QuickReply from '../partials/Thread/QuickReply';
 import Pagination from '../partials/Pagination';
 import FloatingActions from '../partials/Thread/FloatingActions';
+import ToastDisplay from '../partials/Thread/ToastDisplay';
 
 import ThreadInterface from '../types/ThreadInterface';
 import PostInterface from '../types/PostInterface';
@@ -39,6 +40,7 @@ interface IState {
   error: NewcoreErrorCode;
   selectedPosts: Set<number>;
   linkedDailyArticle?: DailyArticleInterface;
+  displayToast: boolean;
 }
 
 export default class ThreadPage extends Component<IProps, IState> {
@@ -67,6 +69,7 @@ export default class ThreadPage extends Component<IProps, IState> {
       editorOpen: false,
       moderationOpen: false,
       selectedPosts: new Set(),
+      displayToast: false,
     };
   }
 
@@ -122,6 +125,7 @@ export default class ThreadPage extends Component<IProps, IState> {
             {this.getNewPostModal()}
             {this.getModerationModal()}
             {this.getFloatingActions()}
+            {this.getToastDisplay()}
             {this.getHeader()}
             {this.getPagination()}
             {this.getPosts()}
@@ -180,6 +184,16 @@ export default class ThreadPage extends Component<IProps, IState> {
         openEditor={this.openEditorToNew}
         selectedPostsCount={this.state.selectedPosts.size}
         deselectPosts={this.deselectAllPosts}
+      />
+    )
+  }
+
+  getToastDisplay() {
+    return (
+      <ToastDisplay
+        selectedPostsCount={this.state.selectedPosts.size}
+        closeToast={this.closeToast}
+        displayToast={this.state.displayToast}
       />
     )
   }
@@ -342,7 +356,7 @@ export default class ThreadPage extends Component<IProps, IState> {
       [...selectedPosts].concat(postid)
     );
 
-    this.setState({ selectedPosts });
+    this.setState({ selectedPosts, displayToast: true });
   }
 
   deselectPost = (postid: number) => {
@@ -372,7 +386,7 @@ export default class ThreadPage extends Component<IProps, IState> {
     }
 
     const selectedPosts = new Set(filtered);
-    this.setState({ selectedPosts });
+    this.setState({ selectedPosts, displayToast: true });
   }
 
   deselectAllPosts = () => {
@@ -407,5 +421,9 @@ export default class ThreadPage extends Component<IProps, IState> {
 
   getQueryParams() {
     return queryString.parse(this.props.location.search);
+  }
+
+  closeToast = () => {
+    this.setState({ displayToast: false })
   }
 }
