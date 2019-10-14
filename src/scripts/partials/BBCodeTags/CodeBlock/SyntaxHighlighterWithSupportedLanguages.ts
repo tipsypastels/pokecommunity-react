@@ -1,7 +1,6 @@
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { codeBlock } from '../../../../configs/config.json'; 
 
-
 const { languages, aliases } = codeBlock;
 
 function langData(name: string) {

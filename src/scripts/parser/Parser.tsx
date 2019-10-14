@@ -52,7 +52,11 @@ export default class Parser extends Component<ParserProps> {
   }
 
   render() {
-    return this.getResults();
+    return (
+      <div className="bbcode-root">
+        {this.getResults()}
+      </div>
+    );
   }
 
   getResults() {
@@ -135,6 +139,14 @@ export default class Parser extends Component<ParserProps> {
     const { hooks } = this.props;
     if (hooks && hooks[realLabel]) {
       hooks[realLabel]({ value, children });
+    }
+
+    if (tag.preventSpanWrap) {
+      return (
+        <React.Fragment key={key}>
+          {tag.render({ value, children })}
+        </React.Fragment>
+      );
     }
 
     return (

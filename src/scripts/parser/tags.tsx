@@ -9,6 +9,8 @@ import SmartLink from "../partials/SmartLink";
 import CodeBlock from "../partials/BBCodeTags/CodeBlock";
 import Spoiler from "../partials/BBCodeTags/Spoiler";
 import { ProgressBar } from "react-bootstrap";
+import BBCodeTabPanel from "../partials/BBCodeTags/Tabs/BBCodeTabPanel";
+import BBCodeTab from "../partials/BBCodeTags/Tabs/BBCodeTab";
 
 export interface TagRenderProps {
   value: string;
@@ -26,6 +28,7 @@ export interface TagDefinition {
   cssClass?: string;
   secret?: boolean;
   
+  preventSpanWrap?: boolean;
   noParse?: boolean;
 
   render: (props: TagRenderProps) => ReactNode;
@@ -425,6 +428,68 @@ end[/code]`,
 
   supporter: usergroup('supporter', 'Supporter', 'community supporter'),
   
+  tabcontent: {
+    name: 'Tab Content',
+    allowsYouTo: 'contain [tabpanel]s',
+    usage: '[tabcontent]...tabpanels here...[/tabcontent]',
+    example: '[tabcontent][tabpanel="my-tab-1"]my tab 1 content[/tabpanel][/tabcontent]',
+
+    render({ children }) {
+      return (
+        <div className="tabpanel">
+          {children}
+        </div>
+      )
+    },
+  },
+
+  tabgroup: {
+    name: 'Tab Group',
+    allowsYouTo: 'contain [tab]s',
+    usage: '[tabgroup]...tabs here...[/tab]',
+    example: '[tabgroup][tab="my-tab-1"]my tab 1 switcher[/tab][/tabgroup]',
+
+    render({ children }) {
+      return (
+        <div className="tabgroup">
+          {children}
+        </div>
+      )
+    }
+  },
+
+  tabpanel: {
+    name: 'Tab Panel',
+    allowsYouTo: 'display content of a tab. See [tab]',
+    usage: '[tabpanel="tab-name"]tab content[/tabpanel]',
+    example: '[tabpanel="my-tab-1"]my tab 1 content[/tabpanel]',
+    preventSpanWrap: true,
+
+    render({ value, children }) {
+      return (
+        <BBCodeTabPanel name={value}>
+          {children}
+        </BBCodeTabPanel>
+      );
+    },
+  },
+
+  tab: {
+    name: 'Tab',
+    allowsYouTo: 'use tabs in bbcode',
+    usage: '[tab="tab-name"]tab switcher title[/tab]',
+    example: '[tab="my-tab-1"]click here to switch to tab 1[/tab]',
+    preventSpanWrap: true,
+
+    render({ value, children }) {
+      return (
+        <BBCodeTab name={value}>
+          {children}
+        </BBCodeTab>
+      );
+    }
+  },
+
   u: {
     name: 'Underline',
     allowsYouTo: 'format text as underlined',
