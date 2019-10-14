@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import queryString from 'query-string';
-import Toast from 'react-bootstrap/Toast';
 
 import Page from './Page';
 import ThreadHeader from '../partials/Thread/ThreadHeader';
@@ -18,6 +17,7 @@ import DailyArticleInterface from '../types/DailyArticleInterface';
 
 import { threadBreadcrumbs } from '../types/BreadcrumbInterface';
 import { pageNumber } from '../helpers/PageHelpers';
+import pluralize from 'pluralize';
 
 import PostWrapper from '../partials/Post/PostWrapper';
 import PostModal from '../partials/PostModal';
@@ -350,8 +350,7 @@ export default class ThreadPage extends Component<IProps, IState> {
     );
 
     this.setState({ selectedPosts });
-
-    this.updateToasts();
+    this.updateSelectionToast();
   }
 
   deselectPost = (postid: number) => {
@@ -362,8 +361,7 @@ export default class ThreadPage extends Component<IProps, IState> {
     selectedPosts.delete(postid);
 
     this.setState({ selectedPosts });
-
-    this.updateToasts();
+    this.updateSelectionToast();
   }
 
   selectPostsByFilter = (callback: (post: PostInterface, selected?: boolean) => boolean) => {
@@ -419,43 +417,25 @@ export default class ThreadPage extends Component<IProps, IState> {
   getQueryParams() {
     return queryString.parse(this.props.location.search);
   }
+  
+  updateSelectionToast() {
+    const [, appDispatch] = this.context;
+    const selectedSize = this.state.selectedPosts.size;
 
-  updateToasts(){
-    const [{ toasts }, appDispatch] = this.context
-
-    if (this.state.selectedPosts.size > 0){
-      const newToast = this.createNewToast()
-
-      const newToasts = [...toasts.filter(toast => toast.props.id !== "selectToast"), newToast]
-
-      appDispatch({ type: 'TOAST', toasts: newToasts });
+    if (selectedSize === 0) {
+      appDispatch({ 
+        type: 'HIDE_TOAST', 
+        slug: 'selected-posts',
+      });
     } else {
-      const newToasts = [...toasts.filter(toast => toast.props.id !== "selectToast")]
+      const toast = {
+        slug: 'selected-posts',
+        title: `You have ${selectedSize} ${pluralize('post', selectedSize)} selected.`,
+        body: `Click the pencil icon to quote ${selectedSize !== 1 ? 'them' : 'it'}.`,
+        icon: 'pencil',
+      };
 
-      appDispatch({ type: 'TOAST', toasts: newToasts });
+      appDispatch({ type: 'SET_TOAST', toast });
     }
-  }
-
-  createNewToast(){
-    const pluralize1 = (this.state.selectedPosts.size > 1) ? "s" : ""
-    const pluralize2 = (this.state.selectedPosts.size > 1) ? "them" : "it"
-    
-    return (
-      <Toast show={true} onClose={() => {this.closeToast("selectToast")}} delay={4000} autohide id="selectToast" key="selectToast">
-        <Toast.Header>
-          <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-          <strong className="mr-auto">Selected Posts</strong>
-        </Toast.Header>
-        <Toast.Body>You have {this.state.selectedPosts.size} post{pluralize1} selected. Open the post editor to quote {pluralize2}.</Toast.Body>
-      </Toast>
-    );
-  }
-
-  closeToast(id){
-    const [{ toasts }, appDispatch] = this.context
-
-    const newToasts = [...toasts.filter(toast => toast.props.id !== id)]
-
-    appDispatch({ type: 'TOAST', toasts: newToasts });
   }
 }
