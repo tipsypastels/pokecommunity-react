@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import AppContext from '../../AppContext';
 import { Toast } from 'react-bootstrap';
 import { TOAST_TIMEOUT } from '../../helpers/Toasts/ToastsContainer';
+import Icon from '../Icon';
 
 export default function ToastDisplay() {
   const [{ toasts }, appDispatch] = useContext(AppContext);
@@ -23,11 +24,7 @@ export default function ToastDisplay() {
           }} 
         >
           <Toast.Header>
-            <img 
-              src="holder.js/20x20?text=%20" 
-              className="rounded mr-2" 
-              alt="" 
-            />
+            <Icon name={toast.icon} mr={1} fw />
 
             <strong className="mr-auto">
               {toast.title}

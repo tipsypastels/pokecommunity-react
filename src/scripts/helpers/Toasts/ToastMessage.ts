@@ -1,10 +1,8 @@
-import { IconProps } from "../../partials/Icon";
-
 export interface ToastMessageOpts {
   slug: string;
   title: string;
   body: string;
-  icon: string | IconProps;
+  icon: string;
   color: string;
   visible?: boolean;
 }
@@ -16,7 +14,7 @@ export default class ToastMessage {
   slug: string;
   title: string;
   body: string;
-  icon: string | IconProps;
+  icon: string;
   color: string;
   visible?: boolean;
 
@@ -27,11 +25,6 @@ export default class ToastMessage {
     this.icon = opts.icon;
     this.color = opts.color;
     this.visible = ('visible' in opts) ? opts.visible : true;
-  }
-
-  // used in ToastController to easily find
-  compareWith(other: this): boolean {
-    return this.slug === other.slug;
   }
 }
 

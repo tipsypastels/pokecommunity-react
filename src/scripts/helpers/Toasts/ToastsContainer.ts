@@ -1,4 +1,3 @@
-import { IconProps } from "../../partials/Icon";
 import ToastMessage, { ToastMessageOrOpts } from "./ToastMessage";
 
 export const TOAST_TIMEOUT = 4000; // 4 seconds

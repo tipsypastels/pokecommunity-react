@@ -1,6 +1,5 @@
 import React, { useEffect, useReducer } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Toast from 'react-bootstrap/Toast';
 
 import CurrentUserInterface from './types/CurrentUserInterface';
 import { getCurrentTheme } from './bridge/Theme';

@@ -432,7 +432,7 @@ export default class ThreadPage extends Component<IProps, IState> {
         slug: 'selected-posts',
         title: `You have ${selectedSize} ${pluralize('post', selectedSize)} selected.`,
         body: `Click the pencil icon to quote ${selectedSize !== 1 ? 'them' : 'it'}.`,
-        icon: 'pencil',
+        icon: 'quote-left',
       };
 
       appDispatch({ type: 'SET_TOAST', toast });
