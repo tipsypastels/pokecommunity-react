@@ -5,6 +5,7 @@ import DefaultBanner from '../partials/Header/DefaultBanner';
 import CommunityMenu from '../partials/Header/CommunityMenu';
 import Omnibar from '../partials/Header/Omnibar';
 import Footer from '../partials/Footer';
+import ToastDisplay from '../partials/Thread/ToastDisplay';
 
 import Loading from '../partials/PagePartials/Loading';
 
@@ -111,6 +112,7 @@ export default function Page(props: IProps) {
       {bannerHTML}
       {contentHTML}
 
+      <ToastDisplay />
       <Footer />
     </div>
   );

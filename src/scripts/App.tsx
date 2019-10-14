@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Toast from 'react-bootstrap/Toast';
 
 import CurrentUserInterface from './types/CurrentUserInterface';
 import { getCurrentTheme } from './bridge/Theme';
@@ -34,6 +35,7 @@ export type AppState = {
   currentUser: CurrentUserInterface;
   notifications: NotificationInterface[];
   messages: NotificationInterface[];
+  toasts: Toast[];
 }
 
 export type AppAction =
@@ -45,6 +47,7 @@ export type AppAction =
   | { type: 'SIGN_OUT' }
   | { type: 'SET_NOTIFICATIONS', notifications: NotificationInterface[] }
   | { type: 'SET_MESSAGES', messages: NotificationInterface[] }
+  | { type: 'TOAST', toasts: Toast[]}
 
 function appReducer(state: AppState, action: AppAction): AppState {
   switch(action.type) {
@@ -73,6 +76,9 @@ function appReducer(state: AppState, action: AppAction): AppState {
     case 'SET_MESSAGES': {
       return { ...state, messages: action.messages };
     }
+    case 'TOAST': {
+      return { ...state, toasts: action.toasts };
+    }
     default: return state;
   }
 }
@@ -86,6 +92,7 @@ export default function App() {
     currentUser: null,
     notifications: [],
     messages: [],
+    toasts: [],
   });
   
   useEffect(() => {

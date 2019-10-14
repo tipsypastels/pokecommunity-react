@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import queryString from 'query-string';
+import Toast from 'react-bootstrap/Toast';
 
 import Page from './Page';
 import ThreadHeader from '../partials/Thread/ThreadHeader';
@@ -8,6 +9,8 @@ import Viewing from '../partials/Viewing';
 import QuickReply from '../partials/Thread/QuickReply';
 import Pagination from '../partials/Pagination';
 import FloatingActions from '../partials/Thread/FloatingActions';
+
+import AppContext from '../AppContext';
 
 import ThreadInterface from '../types/ThreadInterface';
 import PostInterface from '../types/PostInterface';
@@ -42,6 +45,8 @@ interface IState {
 }
 
 export default class ThreadPage extends Component<IProps, IState> {
+  static contextType = AppContext
+
   constructor(props) {
     super(props);
     this.state = this.stateForNewlyLoadedThread();
@@ -67,6 +72,7 @@ export default class ThreadPage extends Component<IProps, IState> {
       editorOpen: false,
       moderationOpen: false,
       selectedPosts: new Set(),
+      
     };
   }
 
@@ -122,6 +128,7 @@ export default class ThreadPage extends Component<IProps, IState> {
             {this.getNewPostModal()}
             {this.getModerationModal()}
             {this.getFloatingActions()}
+            
             {this.getHeader()}
             {this.getPagination()}
             {this.getPosts()}
@@ -343,6 +350,8 @@ export default class ThreadPage extends Component<IProps, IState> {
     );
 
     this.setState({ selectedPosts });
+
+    this.updateToasts();
   }
 
   deselectPost = (postid: number) => {
@@ -353,6 +362,8 @@ export default class ThreadPage extends Component<IProps, IState> {
     selectedPosts.delete(postid);
 
     this.setState({ selectedPosts });
+
+    this.updateToasts();
   }
 
   selectPostsByFilter = (callback: (post: PostInterface, selected?: boolean) => boolean) => {
@@ -407,5 +418,44 @@ export default class ThreadPage extends Component<IProps, IState> {
 
   getQueryParams() {
     return queryString.parse(this.props.location.search);
+  }
+
+  updateToasts(){
+    const [{ toasts }, appDispatch] = this.context
+
+    if (this.state.selectedPosts.size > 0){
+      const newToast = this.createNewToast()
+
+      const newToasts = [...toasts.filter(toast => toast.props.id !== "selectToast"), newToast]
+
+      appDispatch({ type: 'TOAST', toasts: newToasts });
+    } else {
+      const newToasts = [...toasts.filter(toast => toast.props.id !== "selectToast")]
+
+      appDispatch({ type: 'TOAST', toasts: newToasts });
+    }
+  }
+
+  createNewToast(){
+    const pluralize1 = (this.state.selectedPosts.size > 1) ? "s" : ""
+    const pluralize2 = (this.state.selectedPosts.size > 1) ? "them" : "it"
+    
+    return (
+      <Toast show={true} onClose={() => {this.closeToast("selectToast")}} delay={4000} autohide id="selectToast" key="selectToast">
+        <Toast.Header>
+          <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
+          <strong className="mr-auto">Selected Posts</strong>
+        </Toast.Header>
+        <Toast.Body>You have {this.state.selectedPosts.size} post{pluralize1} selected. Open the post editor to quote {pluralize2}.</Toast.Body>
+      </Toast>
+    );
+  }
+
+  closeToast(id){
+    const [{ toasts }, appDispatch] = this.context
+
+    const newToasts = [...toasts.filter(toast => toast.props.id !== id)]
+
+    appDispatch({ type: 'TOAST', toasts: newToasts });
   }
 }
