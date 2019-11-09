@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.22",
     "@types/react-bootstrap": "^0.32.17",
     "axios": "0.18.1",
     "fstream": "1.0.12",

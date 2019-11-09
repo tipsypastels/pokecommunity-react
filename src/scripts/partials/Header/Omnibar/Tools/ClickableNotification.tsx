@@ -1,38 +1,44 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
 import NotificationInterface from '../../../../types/NotificationInterface';
 import { Dropdown } from 'react-bootstrap';
 import SmartLink from '../../../SmartLink';
 import { notificationDateFormat } from '../../../../helpers/DateHelpers';
+import SideBySide from '../../../../designs/layout/SideBySide';
+import Avatar from '../../../../designs/Avatar';
+import Spacing from '../../../../designs/layout/Spacing';
+import Text from '../../../../designs/typography/Text';
 
 export default function ClickableNotification(props: NotificationInterface) {
   return (
     <Dropdown.Item 
-      className={`ClickableNotification ${props.read || 'unread'}`}
       {...SmartLink.shim(props.url)}
     >
-      <div className="avatar-area">
-        <img 
-          className="avatar" 
-          src={props.fromUser.avatar}
-          alt={`${props.fromUser.username}'s Avatar`}
-        />
-      </div>
+      <SideBySide>
+        <Spacing margin={{ right: 'small' }}>
+          <Avatar 
+            for={props.fromUser} 
+            size="smallish" 
+            appearance="square"
+          />
+        </Spacing>
 
-      <div className="content-area">
-        <div className="top-bar">
-          <div className="title">
-            <strong>{props.fromUser.username}</strong> {props.action}
+        <SideBySide.Grow>
+          <SideBySide>
+            <SideBySide.Grow>
+              <strong>{props.fromUser.username}</strong> {props.action}
+            </SideBySide.Grow>
+
+            <Text variant="time">
+              {notificationDateFormat(props.created)}
+            </Text>
+          </SideBySide>
+
+          <div>
+            {props.content}
           </div>
-
-          <div className="time">
-            {notificationDateFormat(props.created)}
-          </div>
-        </div>
-
-        <div className="content">
-          {props.content}
-        </div>
-      </div>
+        </SideBySide.Grow>
+      </SideBySide>
     </Dropdown.Item>
   )
 }

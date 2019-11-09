@@ -1,6 +1,9 @@
 import React from 'react'
 import SmartLink from '../SmartLink';
 import MinimalUserInterface from '../../types/MinimalUserInterface';
+import SideBySide from '../../designs/layout/SideBySide';
+import Avatar from '../../designs/Avatar';
+import Spacing from '../../designs/layout/Spacing';
 
 interface IProps {
   user: MinimalUserInterface;
@@ -8,14 +11,14 @@ interface IProps {
 
 export default function PreviewUser({ user }: IProps) {
   return (
-    <SmartLink to={`/member.php?u=${user.id}`} className="PreviewUser">
-      <div className="avatar-area">
-        <img src={user.avatar} alt={`${user.username}'s Avatar`}/>
-      </div>
+    <Spacing margin={{ bottom: 'small' }}>
+      <SideBySide>
+        <Avatar for={user} size="xsmall" />
 
-      <div className="username">
-        {user.username}
-      </div>
-    </SmartLink>
-  )
+        <strong>
+          {user.username}
+        </strong>
+      </SideBySide>
+    </Spacing>
+  );
 }
