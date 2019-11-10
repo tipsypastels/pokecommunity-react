@@ -12,5 +12,5 @@ interface IProps extends React.HTMLProps<HTMLDivElement> {
 export default function Text({ variant, ...props }: IProps) {
   return (
     <div css={TEXT_VARIANTS[variant]} {...props} />
-  )
+  );
 }

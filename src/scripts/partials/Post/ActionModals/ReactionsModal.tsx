@@ -6,7 +6,7 @@ import { ReactionCollectionInterface } from '../../../types/ReactionInterface';
 import newcoreApi from '../../../bridge/newcoreApi';
 import Icon from '../../Icon';
 import MinimalUser from '../../User/MinimalUser';
-import Action from '../../Action';
+import ModalSheet from '../../../designs/ModalSheet';
 
 interface IProps {
   postid: number;
@@ -84,37 +84,47 @@ export default function ReactionsModal(props: IProps) {
   }
 
   return (
-    <Modal
-      dialogClassName="ReactionsModal modal-dialog-centered modal-dialog-scrollable"
+    <ModalSheet 
+      title="Reactions" 
       show={props.show}
       onHide={props.closeModal}
     >
-      <Modal.Header closeButton>
-        <Modal.Title>
-          Reactions
-        </Modal.Title>
-      </Modal.Header>
+      {content}
+    </ModalSheet>
+  )
 
-      <Modal.Body>
-        {content}
-      </Modal.Body>
+  // return (
+  //   <Modal
+  //     dialogClassName="ReactionsModal modal-dialog-centered modal-dialog-scrollable"
+  //     show={props.show}
+  //     onHide={props.closeModal}
+  //   >
+  //     <Modal.Header closeButton>
+  //       <Modal.Title>
+  //         Reactions
+  //       </Modal.Title>
+  //     </Modal.Header>
 
-      {props.canModerate && (
-        <Modal.Footer>
+  //     <Modal.Body>
+  //       {content}
+  //     </Modal.Body>
 
-          {decidingToRemoveAll ? (
-              <span className="mod-remove-all-confirm">
-                are you sure? <span className="yes" onClick={() => console.log('removing all')}>yes</span> / <span className="no" onClick={() => setDecidingToRemoveAll(false)}>no</span>
-              </span>
-            ) : (
-              <Action
-                name="Remove all reactions"
-                icon="dumpster-fire"
-                activate={() => setDecidingToRemoveAll(true)}
-              />
-          )}
-        </Modal.Footer>
-      )}
-    </Modal>
-  );
+  //     {props.canModerate && (
+  //       <Modal.Footer>
+
+  //         {decidingToRemoveAll ? (
+  //             <span className="mod-remove-all-confirm">
+  //               are you sure? <span className="yes" onClick={() => console.log('removing all')}>yes</span> / <span className="no" onClick={() => setDecidingToRemoveAll(false)}>no</span>
+  //             </span>
+  //           ) : (
+  //             <Action
+  //               name="Remove all reactions"
+  //               icon="dumpster-fire"
+  //               activate={() => setDecidingToRemoveAll(true)}
+  //             />
+  //         )}
+  //       </Modal.Footer>
+  //     )}
+  //   </Modal>
+  // );
 }

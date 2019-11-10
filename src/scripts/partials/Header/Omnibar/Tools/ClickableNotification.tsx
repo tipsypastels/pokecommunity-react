@@ -13,6 +13,11 @@ export default function ClickableNotification(props: NotificationInterface) {
   return (
     <Dropdown.Item 
       {...SmartLink.shim(props.url)}
+      css={{
+        backgroundColor: props.read 
+          ? 'inherit' 
+          : 'rgba(216, 238, 255, 0.3)', // TODO variables
+      }}
     >
       <SideBySide>
         <Spacing margin={{ right: 'small' }}>

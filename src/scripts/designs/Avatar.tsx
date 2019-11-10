@@ -3,20 +3,22 @@ import { jsx } from '@emotion/core';
 import SmartLink from '../partials/SmartLink';
 import MinimalUserInterface from '../types/MinimalUserInterface';
 
-const AVATAR_SIZES = {
+export const AVATAR_SIZES = {
   xsmall: 30, // editor preview
   small: 40, // on viewing lists and the omnibar
   smallish: 48, // notifications
   medium: 70, // not really anything? good intermediate tho
   large: 140, // on posts
-}
+};
+
+export type AvatarSize = keyof typeof AVATAR_SIZES;
 
 type IProps = (
   | { for: MinimalUserInterface, alt?: string, link?: boolean }
   | { url: string, alt: string, link?: string }
 ) & {
   appearance?: 'circle' | 'square';
-  size: keyof typeof AVATAR_SIZES;
+  size: AvatarSize;
   onClick?: (e: React.MouseEvent) => void;
 }
 

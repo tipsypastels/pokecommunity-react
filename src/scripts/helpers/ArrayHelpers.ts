@@ -8,6 +8,10 @@ export function mapNumericRange<T>(min: number, max: number, callback: (cur: num
   return ary;
 }
 
+export function partition<T>(ary: T[], partition: number) {
+  return partitionThenMap(ary, partition, x => x);
+}
+
 export function partitionThenMap<T, R = T>(ary: T[], partition: number, callback: (current: T[], key: number) => R): R[] {
   const result: R[] = [];
 
@@ -17,4 +21,19 @@ export function partitionThenMap<T, R = T>(ary: T[], partition: number, callback
   }
 
   return result;
+}
+
+export function uniqueBy<T, R>(ary: T[], callback: (item: T) => R): T[] {
+  const results = new Map<R, T>();
+
+  // using a map is probably faster than searching an array each loop
+  for (let i = 0; i < ary.length; i++) {
+    const key = callback(ary[i]);
+
+    if (!results.has(key)) {
+      results.set(key, ary[i]);
+    }
+  }
+
+  return [...results.values()];
 }
