@@ -1,5 +1,4 @@
 import React from 'react'
-import SmartLink from '../SmartLink';
 import MinimalUserInterface from '../../types/MinimalUserInterface';
 import SideBySide from '../../designs/layout/SideBySide';
 import Avatar from '../../designs/Avatar';

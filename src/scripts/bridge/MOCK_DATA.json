@@ -8,12 +8,12 @@
       "fromUser": {
         "username": "An IRL Duck",
         "id": 1,
-        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+        "avatar": "https://www.pokecommunity.com/customavatars/avatar210532_718.gif"
       },
       "forUser": {
         "username": "You",
         "id": 0,
-        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+        "avatar": "https://www.pokecommunity.com/customavatars/avatar210532_718.gif"
       },
       "read": 0,
       "seen": 0,
@@ -28,12 +28,12 @@
       "fromUser": {
         "username": "An IRL Duck",
         "id": 1,
-        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+        "avatar": "https://www.pokecommunity.com/customavatars/avatar210532_718.gif"
       },
       "forUser": {
         "username": "You",
         "id": 0,
-        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+        "avatar": "https://www.pokecommunity.com/customavatars/avatar210532_718.gif"
       },
       "read": 0,
       "seen": 0,
@@ -51,12 +51,12 @@
       "fromUser": {
         "username": "An IRL Duck",
         "id": 1,
-        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+        "avatar": "https://www.pokecommunity.com/customavatars/avatar210532_718.gif"
       },
       "forUser": {
         "username": "You",
         "id": 0,
-        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+        "avatar": "https://www.pokecommunity.com/customavatars/avatar210532_718.gif"
       },
       "read": 0,
       "seen": 0,
@@ -71,12 +71,12 @@
       "fromUser": {
         "username": "An IRL Duck",
         "id": 1,
-        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+        "avatar": "https://www.pokecommunity.com/customavatars/avatar210532_718.gif"
       },
       "forUser": {
         "username": "You",
         "id": 0,
-        "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+        "avatar": "https://www.pokecommunity.com/customavatars/avatar210532_718.gif"
       },
       "read": 0,
       "seen": 0,
@@ -91,7 +91,7 @@
         "user": {
           "id": 210532,
           "username": "Rainbow",
-          "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+          "avatar": "https://www.pokecommunity.com/customavatars/avatar210532_718.gif"
         },
         "created": 1
       },
@@ -286,7 +286,7 @@
             "userid": 210532,
             "biography": "this is my biography!",
             "location": "the deep blue",
-            "postLayout": "top",
+            "postLayout": "side",
             "gender": "female",
             "inGameName": "Dakota",
             "quickSelfIntro": "sass is my coping mechanism",
@@ -370,7 +370,7 @@
             }
           ],
           "birthday": 918367200,
-          "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+          "avatar": "https://www.pokecommunity.com/customavatars/avatar210532_718.gif"
         },
         "canEdit": true,
         "everEdited": true
@@ -486,7 +486,7 @@
             "userid": 210532,
             "biography": "this is my biography!",
             "location": "the deep blue",
-            "postLayout": "top",
+            "postLayout": "side",
             "gender": "female",
             "inGameName": "Dakota",
             "quickSelfIntro": "sass is my coping mechanism",
@@ -570,7 +570,7 @@
             }
           ],
           "birthday": 918367200,
-          "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+          "avatar": "https://www.pokecommunity.com/customavatars/avatar210532_718.gif"
         },
         "canEdit": true,
         "everEdited": true
@@ -579,7 +579,6 @@
     "forum": {
       "id": 445,
       "title": "Visibility Tests",
-      "banner": "<div style=\"height: 500px; background-color: red\">\r\n  \r\n</div>",
       "icon": "",
       "canCreateThreads": true,
       "canModerate": true,
@@ -591,7 +590,7 @@
     "totalPages": 1,
     "canReply": true,
     "canModerate": true,
-    "canReactToPosts": true,
+    "canReactsideosts": true,
     "canSharePosts": true
   },
 
@@ -660,7 +659,7 @@
         "userid": 210532,
         "biography": "this is my biography!",
         "location": "the deep blue",
-        "postLayout": "top",
+        "postLayout": "side",
         "gender": "female",
         "inGameName": "Dakota",
         "quickSelfIntro": "sass is my coping mechanism",
@@ -744,7 +743,7 @@
         }
       ],
       "birthday": 918367200,
-      "avatar": "https://development.pokecommunity.com/customavatars/avatar210532_653.gif"
+      "avatar": "https://www.pokecommunity.com/customavatars/avatar210532_718.gif"
     }
   }
 }

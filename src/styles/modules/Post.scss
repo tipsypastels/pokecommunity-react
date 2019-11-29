@@ -18,7 +18,11 @@
           .username-usertitle, .minibio {
             margin-bottom: 1rem;
           }
-    
+
+          .username-usertitle h1, .usertitle {
+            text-align: center;
+          }
+
           .statistics {
             order: 999;
           }

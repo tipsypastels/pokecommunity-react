@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { Component } from 'react';
-import { Navbar, Badge } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 import { When } from 'react-if';
 import { Link } from 'react-router-dom';
 
@@ -34,15 +34,7 @@ export default class Omnibar extends Component<IProps> {
 
           <When condition={typeof this.props.breadcrumbs === 'undefined'}>
             <span className="brand-text d-none d-sm-inline app-title">
-              PokéCommunity
-
-              <Badge variant="dark" css={{
-                marginLeft: 8,
-                fontWeight: 'normal',
-                backgroundColor: 'rgba(227, 66, 26, 0.9)'
-              }}>
-                3.0
-              </Badge>
+              PokéCommunity 3
             </span>
           </When>
         </Navbar.Brand>

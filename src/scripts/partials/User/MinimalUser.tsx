@@ -4,9 +4,22 @@ import MinimalUserInterface from '../../types/MinimalUserInterface';
 interface IProps extends MinimalUserInterface { 
   children?: ReactNode;
   className?: string;
+  wrapChildren?: boolean;
+  childrenIf?: any;
 }
 
 export default function MinimalUser(props: IProps) {
+  const username = (
+    <a className="username" href={`/member.php?u=${props.id}`}>
+      {props.username}
+    </a>
+  );
+
+  let { children } = props;
+  if (('childrenIf' in props) && !props.childrenIf) {
+    children = null;
+  }
+
   return (
     <div
       className={`MinimalUser ${props.className}`} 
@@ -21,13 +34,20 @@ export default function MinimalUser(props: IProps) {
         />
       </a>
 
-      <a className="username" href={`/member.php?u=${props.id}`}>
-        {props.username}
-      </a>
-
-      <div className="flex-grows" />
-
-      {props.children}
+      {props.wrapChildren ? (
+        <div>
+          {username}
+          <div>
+            {children}
+          </div>
+        </div>
+      ) : (
+        <React.Fragment>
+          {username}
+          <div className="flex-grows" />
+          {children}
+        </React.Fragment>
+      )}
     </div>
   );
 }

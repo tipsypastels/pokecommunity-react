@@ -1,7 +1,9 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import { ReactNode, memo } from 'react';
-import { Modal } from 'react-bootstrap';
+import { ReactNode } from 'react';
+import { useMedia } from '../helpers/ResponsivenessHelpers';
+import ModalSheetBrowser from './ModalSheet/ModalSheetBrowser';
+import ModalSheetMobile from './ModalSheet/ModalSheetMobile';
 
 const VARIANT_COLORS = {
   error: 'var(--error-color)',
@@ -15,32 +17,20 @@ interface IProps {
   children: ReactNode;
   show: boolean;
   onHide: () => void;
+  keyboard?: boolean;
+  headerClassName?: string;
+  headerContent?: ReactNode;
+  closeButton?: boolean;
+  bodyContainer?: ReactNode;
 }
+export type ModalSheetProps = IProps;
 
-/**
- * Like a modal, but degrades to a sheet on mobile. Prefer this to bootstrap's <Modal /> whenever possible.
- */
 export default function ModalSheet(props: IProps) {
-  return (
-    <Modal
-      dialogClassName="modal-dialog-centered modal-dialog-scrollable"
-      show={props.show}
-      onHide={props.onHide}
-      css={{
-        // handle bootstrap weirdness
-        paddingRight: 'unset !important',
-        paddingLeft: 'unset !important',
-      }}
-    >
-      <Modal.Header closeButton>
-        <Modal.Title>
-          {props.title}
-        </Modal.Title>
-      </Modal.Header>
+  const isLarge = useMedia('(min-width: 768px)');
 
-      <Modal.Body>
-        {props.children}
-      </Modal.Body>
-    </Modal>
-  );
+  if (isLarge) {
+    return <ModalSheetBrowser {...props} />;
+  }
+
+  return <ModalSheetMobile {...props} />;
 }

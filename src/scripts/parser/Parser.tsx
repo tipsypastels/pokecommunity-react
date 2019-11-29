@@ -19,6 +19,7 @@ export interface ParserProps {
   bbcode: string;
   hooks?: ParserHookList;
   done?: (results: ReactNode) => void;
+  className?: string;
 }
 
 const BBCODE_CACHE: { [key: string]: ReactNode } = {};
@@ -53,7 +54,7 @@ export default class Parser extends Component<ParserProps> {
 
   render() {
     return (
-      <div className="bbcode-root">
+      <div className={`bbcode-root ${this.props.className}`}>
         {this.getResults()}
       </div>
     );
