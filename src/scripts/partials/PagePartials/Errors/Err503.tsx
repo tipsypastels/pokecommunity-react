@@ -8,7 +8,7 @@ export default function Err503() {
   return (
     <ErrorPage 
       title="Uh oh..." 
-      subtitle="We can't seem to connect to PokéCoommunity's server!" 
+      subtitle="We can't seem to connect to PokéCommunity's server!" 
       image={NetworkErrorImage}
       imageSmall={NetworkErrorImageSmall}
       imageTitle="Magneton is here to fix it up!"

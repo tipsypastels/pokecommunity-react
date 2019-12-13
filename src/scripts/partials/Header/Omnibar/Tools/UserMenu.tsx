@@ -4,6 +4,8 @@ import { NavItem, Dropdown, Nav } from 'react-bootstrap';
 import Icon, { IconProps } from '../../../Icon';
 import AppContext from '../../../../AppContext';
 import SmartLink from '../../../SmartLink';
+import Avatar from '../../../../designs/Avatar';
+import SideBySide from '../../../../designs/layout/SideBySide';
 
 export interface UserMenuItem {
   name: string;
@@ -14,22 +16,18 @@ export interface UserMenuItem {
 export default function UserMenu() {
   const [{ currentUser }] = useContext(AppContext);
 
-  let avatar;
-  if (currentUser.avatar) {
-    avatar = (
-      <img
-        className="avatar d-none d-md-block"
-        src={currentUser.avatar}
-        alt="You"
-      />
-    )
-  }
-
   const menuUserbit = (
-    <React.Fragment>
-      {currentUser.username}
-      {avatar}
-    </React.Fragment>
+    <SideBySide>
+      <span className="d-none d-md-inline">
+        {currentUser.username}
+      </span>
+
+      <Avatar
+        for={currentUser}
+        size="small"
+        appearance="square"
+      />
+    </SideBySide>
   );
 
   const menuItems: UserMenuItem[] = [

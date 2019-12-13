@@ -9,12 +9,15 @@ import QuickReply from '../partials/Thread/QuickReply';
 import Pagination from '../partials/Pagination';
 import FloatingActions from '../partials/Thread/FloatingActions';
 
+import AppContext from '../AppContext';
+
 import ThreadInterface from '../types/ThreadInterface';
 import PostInterface from '../types/PostInterface';
 import DailyArticleInterface from '../types/DailyArticleInterface';
 
 import { threadBreadcrumbs } from '../types/BreadcrumbInterface';
 import { pageNumber } from '../helpers/PageHelpers';
+import pluralize from 'pluralize';
 
 import PostWrapper from '../partials/Post/PostWrapper';
 import PostModal from '../partials/PostModal';
@@ -42,6 +45,8 @@ interface IState {
 }
 
 export default class ThreadPage extends Component<IProps, IState> {
+  static contextType = AppContext
+
   constructor(props) {
     super(props);
     this.state = this.stateForNewlyLoadedThread();
@@ -67,6 +72,7 @@ export default class ThreadPage extends Component<IProps, IState> {
       editorOpen: false,
       moderationOpen: false,
       selectedPosts: new Set(),
+      
     };
   }
 
@@ -122,6 +128,7 @@ export default class ThreadPage extends Component<IProps, IState> {
             {this.getNewPostModal()}
             {this.getModerationModal()}
             {this.getFloatingActions()}
+            
             {this.getHeader()}
             {this.getPagination()}
             {this.getPosts()}
@@ -343,6 +350,7 @@ export default class ThreadPage extends Component<IProps, IState> {
     );
 
     this.setState({ selectedPosts });
+    this.updateSelectionToast();
   }
 
   deselectPost = (postid: number) => {
@@ -353,6 +361,7 @@ export default class ThreadPage extends Component<IProps, IState> {
     selectedPosts.delete(postid);
 
     this.setState({ selectedPosts });
+    this.updateSelectionToast();
   }
 
   selectPostsByFilter = (callback: (post: PostInterface, selected?: boolean) => boolean) => {
@@ -407,5 +416,26 @@ export default class ThreadPage extends Component<IProps, IState> {
 
   getQueryParams() {
     return queryString.parse(this.props.location.search);
+  }
+  
+  updateSelectionToast() {
+    const [, appDispatch] = this.context;
+    const selectedSize = this.state.selectedPosts.size;
+
+    if (selectedSize === 0) {
+      appDispatch({ 
+        type: 'HIDE_TOAST', 
+        slug: 'selected-posts',
+      });
+    } else {
+      const toast = {
+        slug: 'selected-posts',
+        title: `You have ${selectedSize} ${pluralize('post', selectedSize)} selected.`,
+        body: `Click the pencil icon to quote ${selectedSize !== 1 ? 'them' : 'it'}.`,
+        icon: 'quote-left',
+      };
+
+      appDispatch({ type: 'SET_TOAST', toast });
+    }
   }
 }

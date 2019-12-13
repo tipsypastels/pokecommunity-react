@@ -80,7 +80,10 @@ export default class PostHeader extends Component<IProps, IState> {
     let usertitle = null;
     if (user.usertitle) {
       usertitle = (
-        <Parser bbcode={user.usertitle} />
+        <Parser 
+          bbcode={user.usertitle} 
+          className="usertitle" 
+        />
       );
     }
 

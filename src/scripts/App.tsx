@@ -13,6 +13,9 @@ import ThemePickerModal from './partials/ThemePickerModal';
 import { themeLocalstorageKey } from '../configs/themes.json';
 import NotificationInterface from './types/NotificationInterface';
 
+import ToastContainer from './helpers/Toasts/ToastsContainer';
+import { ToastMessageOrOpts } from './helpers/Toasts/ToastMessage';
+
 import '../styles/fa/css/all.min.scss';
 import '../styles/base/utilities.scss';
 import '../styles/base/buttons.scss';
@@ -34,6 +37,7 @@ export type AppState = {
   currentUser: CurrentUserInterface;
   notifications: NotificationInterface[];
   messages: NotificationInterface[];
+  toasts: ToastContainer;
 }
 
 export type AppAction =
@@ -45,6 +49,8 @@ export type AppAction =
   | { type: 'SIGN_OUT' }
   | { type: 'SET_NOTIFICATIONS', notifications: NotificationInterface[] }
   | { type: 'SET_MESSAGES', messages: NotificationInterface[] }
+  | { type: 'SET_TOAST', toast: ToastMessageOrOpts }
+  | { type: 'HIDE_TOAST', slug: string }
 
 function appReducer(state: AppState, action: AppAction): AppState {
   switch(action.type) {
@@ -73,6 +79,12 @@ function appReducer(state: AppState, action: AppAction): AppState {
     case 'SET_MESSAGES': {
       return { ...state, messages: action.messages };
     }
+    case 'SET_TOAST': {
+      return { ...state, toasts: state.toasts.with(action.toast) };
+    }
+    case 'HIDE_TOAST': {
+      return { ...state, toasts: state.toasts.without(action.slug) };
+    }
     default: return state;
   }
 }
@@ -86,15 +98,12 @@ export default function App() {
     currentUser: null,
     notifications: [],
     messages: [],
+    toasts: new ToastContainer(),
   });
   
   useEffect(() => {
     document.body.dataset.theme = appState.theme;
   }, [appState.theme]);
-  
-  // return <>
-  //   {mapNumericRange(0, 60, i => <ClockWithMovableHands hours={0} minutes={i} />)}
-  // </>
   
   return (
     <AppContext.Provider value={[appState, appDispatch]}>
