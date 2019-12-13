@@ -8,6 +8,7 @@ import AppContext from './AppContext';
 import IndexPage from './pages/IndexPage';
 import ThreadPage from './pages/ThreadPage';
 import BBCodePage from './pages/docs/BBCodePage';
+import AcknowledgementsPage from './pages/about/AcknowledgementsPage';
 
 import ThemePickerModal from './partials/ThemePickerModal';
 import { themeLocalstorageKey } from '../configs/themes.json';
@@ -26,6 +27,9 @@ export const POKECOMM3_ROUTES = {
   '/':            IndexPage,
   '/threads/:id': ThreadPage,
   
+  // ABOUT
+  '/about/acknowledgements': AcknowledgementsPage,
+
   // DOCS
   '/docs/bbcode': BBCodePage,
 };

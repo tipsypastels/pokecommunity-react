@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@emotion/core": "^10.0.22",
+    "@pc3/shared": "^1.0.2",
     "@types/react-bootstrap": "^0.32.17",
     "axios": "0.18.1",
     "body-scroll-lock": "^2.6.4",

@@ -1160,6 +1160,13 @@
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.2.tgz#54c5a964462be3d4d78af631363c18d6fa91ac26"
 
+"@pc3/shared@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@pc3/shared/-/shared-1.0.2.tgz#3f9a8278fdffc7245e6f8c590387eb8fab362c52"
+  dependencies:
+    randomcolor "^0.5.4"
+    strftime "^0.10.0"
+
 "@popmotion/easing@^1.0.1", "@popmotion/easing@^1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@popmotion/easing/-/easing-1.0.2.tgz#17d925c45b4bf44189e5a38038d149df42d8c0b4"

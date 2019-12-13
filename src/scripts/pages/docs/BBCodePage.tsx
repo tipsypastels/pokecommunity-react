@@ -28,7 +28,7 @@ export default class BBCodePage extends Component<{}, IState> {
   render() {
     return (
       <Page
-        name="Index"
+        name="BBCode"
         loading={false}
         error={this.state.error}
       >
