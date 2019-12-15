@@ -17,10 +17,10 @@ export default function AcknowledgementsPage() {
     return nameList;
   }
 
-  const listCredits = credits.map((row) =>
-    <tr key={row[0]}>
+  const listCredits = credits.map(([role, contributors]) =>
+    <tr key={role}>
       <td>
-        <div className="font-weight-bold text-right">{row[0]}</div>
+        <div className="font-weight-bold text-right">{role}</div>
       </td>
       <td css={css`
             width: 50%;
@@ -29,7 +29,7 @@ export default function AcknowledgementsPage() {
             }
           `}>
         <ul className="list-unstyled">
-          {listNames(row[1])}
+          {listNames(contributors)}
         </ul>
       </td>
     </tr>
