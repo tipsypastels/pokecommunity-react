@@ -5,10 +5,11 @@ import { HTMLProps, ReactNode } from 'react';
 interface IProps extends HTMLProps<HTMLTableElement> {
   title: string;
   subtitle?: string;
+  headerSpan?: number;
   children: ReactNode;
 }
 
-export default function Table({ title, subtitle, children, ...props }: IProps) {
+export default function Table({ title, subtitle, headerSpan, children, ...props }: IProps) {
   return (
     <table 
       css={css`
@@ -30,7 +31,7 @@ export default function Table({ title, subtitle, children, ...props }: IProps) {
             color: #495058;
             background-color: #e9ecef;
             border-color: #dee2e6;
-          `}>
+          `} colSpan={headerSpan}>
             <div>
               {title}
             </div>
